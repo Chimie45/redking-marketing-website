@@ -288,31 +288,19 @@ nav .container {
     line-height: 1.7;
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.stat {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--dark-gray);
+.stats-video {
+    width: 100%;
+    max-width: 1080px;
+    margin: 2rem auto;
     border-radius: 10px;
-    border: 1px solid var(--primary-red);
+    overflow: hidden;
+    border: 2px solid var(--muted-gold);
 }
 
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--muted-gold);
+.stats-video img {
+    width: 100%;
+    height: auto;
     display: block;
-}
-
-.stat-label {
-    color: #ccc;
-    font-size: 0.9rem;
 }
 
 /* Client Logos Section */
