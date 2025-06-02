@@ -45,7 +45,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 2px solid var(--primary-red);
+            border-bottom: 2px solid var(--muted-gold);
         }
 
         nav .container {
@@ -55,10 +55,20 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--muted-gold);
+            display: flex;
+            align-items: center;
             text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            max-width: 250px;
         }
 
         .nav-links {
@@ -107,6 +117,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 3px solid var(--muted-gold);
         }
 
 
@@ -162,6 +173,7 @@
         .services {
             padding: 100px 0;
             background: var(--dark-gray);
+            border-bottom: 2px solid var(--muted-gold);
         }
 
         .section-title {
@@ -213,6 +225,7 @@
         .about {
             padding: 100px 0;
             background: var(--black);
+            border-bottom: 2px solid var(--muted-gold);
         }
 
         .about-content {
@@ -267,6 +280,7 @@
         .contact {
             padding: 100px 0;
             background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
+            border-bottom: 2px solid var(--muted-gold);
         }
 
         .contact-content {
@@ -350,7 +364,7 @@
         footer {
             background: var(--black);
             padding: 3rem 0 1rem;
-            border-top: 2px solid var(--primary-red);
+            border-top: 3px solid var(--muted-gold);
         }
 
         .footer-content {
@@ -394,6 +408,10 @@
                 display: flex;
             }
 
+            .logo img {
+                height: 35px;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -432,7 +450,9 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#home" class="logo">RedKing Marketing</a>
+            <a href="#home" class="logo">
+                <img src="logo.png" alt="RedKing Marketing">
+            </a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
