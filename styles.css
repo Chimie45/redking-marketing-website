@@ -173,6 +173,26 @@ nav .container {
     z-index: 2;
 }
 
+/* Screen reader only - for SEO h1 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.hero-logo {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
