@@ -5,784 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedKing Marketing - Global Gaming Marketing Experts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-red: #DC143C;
-            --dark-red: #B91C1C;
-            --gold: #D4AF37;
-            --dark-gold: #B8860B;
-            --light-gold: #E6C56C;
-            --muted-gold: #C9B037;
-            --black: #000000;
-            --dark-gray: #1a1a1a;
-            --light-gray: #f5f5f5;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: var(--white);
-            background-color: var(--black);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
-        nav {
-            background: var(--black);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--muted-gold);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .social-icons a {
-            color: var(--muted-gold);
-            font-size: 1.2rem;
-            transition: opacity 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            opacity: 0.7;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo:hover {
-            opacity: 0.8;
-        }
-
-        .logo img {
-            height: 45px;
-            width: auto;
-            max-width: 250px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--muted-gold);
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--white);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-            background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-                url('header.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 3px solid var(--muted-gold);
-        }
-
-
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--white);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: var(--muted-gold);
-            font-weight: 300;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--muted-gold);
-            color: var(--black);
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 2px solid var(--muted-gold);
-        }
-
-        .cta-button:hover {
-            background: transparent;
-            color: var(--muted-gold);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 100px 0;
-            background: var(--dark-gray);
-            border-bottom: 2px solid var(--muted-gold);
-        }
-
-        /* Portfolio Grid */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .portfolio-card {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: var(--black);
-            border: 2px solid var(--primary-red);
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
-            border-color: var(--muted-gold);
-        }
-
-        .portfolio-image {
-            position: relative;
-            width: 100%;
-            height: 320px;
-            overflow: hidden;
-        }
-
-        .portfolio-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .portfolio-card:hover .portfolio-image img {
-            transform: scale(1.05);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.95) 100%);
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-card:hover .portfolio-overlay {
-            background: linear-gradient(rgba(0,0,0,0.4) 0%, rgba(0,0,0,1) 100%);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-            padding: 1rem;
-            height: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-card:hover .portfolio-overlay {
-            background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,1) 100%);
-        }
-
-        .portfolio-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .portfolio-text {
-            flex: 1;
-        }
-
-        .portfolio-info h3 {
-            color: var(--muted-gold);
-            font-size: 1.1rem;
-            margin-bottom: 0.2rem;
-            line-height: 1.2;
-        }
-
-        .portfolio-info p {
-            color: #ccc;
-            font-size: 0.8rem;
-            margin-bottom: 0;
-            line-height: 1.2;
-        }
-
-        .view-details {
-            color: var(--muted-gold);
-            font-weight: bold;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            margin-left: 1rem;
-        }
-
-        /* Portfolio Modal */
-        .portfolio-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .portfolio-modal-content {
-            position: relative;
-            background-color: var(--black);
-            margin: 2% auto;
-            padding: 0;
-            border: 2px solid var(--muted-gold);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideIn 0.3s ease;
-        }
-
-        .portfolio-modal-header {
-            position: relative;
-            height: 400px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--black);
-        }
-
-        .portfolio-modal-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: inherit;
-            background-size: cover;
-            background-position: center;
-            filter: blur(10px);
-            opacity: 0.65;
-            z-index: 1;
-        }
-
-        .portfolio-modal-header img {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            z-index: 2;
-            border-radius: 5px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: var(--white);
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            background: rgba(0,0,0,0.7);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .close-modal:hover {
-            background: var(--muted-gold);
-            color: var(--black);
-            transform: rotate(90deg);
-        }
-
-        .portfolio-modal-body {
-            padding: 2rem;
-        }
-
-        .portfolio-modal h2 {
-            color: var(--muted-gold);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .portfolio-modal .client-info {
-            background: var(--dark-gray);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--muted-gold);
-        }
-
-        .portfolio-modal .metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .metric-card {
-            background: var(--dark-gray);
-            padding: 1.5rem;
-            border-radius: 5px;
-            text-align: center;
-            border: 1px solid var(--primary-red);
-        }
-
-        .metric-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--muted-gold);
-            display: block;
-        }
-
-        .metric-label {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--black);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 2px solid var(--primary-red);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--muted-gold);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            color: var(--muted-gold);
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--white);
-        }
-
-        .service-card p {
-            color: #ccc;
-            line-height: 1.6;
-        }
-
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background: var(--black);
-            border-bottom: 2px solid var(--muted-gold);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--muted-gold);
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: #ccc;
-            line-height: 1.7;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 1.5rem;
-            background: var(--dark-gray);
-            border-radius: 10px;
-            border: 1px solid var(--primary-red);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--muted-gold);
-            display: block;
-        }
-
-        /* Client Logos Section */
-        .client-logos {
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        .client-logos h3 {
-            color: var(--muted-gold);
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-
-        .logos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            align-items: center;
-            justify-items: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .logo-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 80px;
-            padding: 1rem;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            opacity: 0.7;
-        }
-
-        .logo-item:hover {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-        .logo-item img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            filter: brightness(0.8);
-            transition: filter 0.3s ease;
-        }
-
-        .logo-item:hover img {
-            filter: brightness(1);
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
-            border-bottom: 2px solid var(--muted-gold);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-info h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--muted-gold);
-        }
-
-        .contact-info p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-
-        .contact-form {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid var(--muted-gold);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--muted-gold);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--dark-gray);
-            border-radius: 5px;
-            background: var(--black);
-            color: var(--white);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--muted-gold);
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: var(--muted-gold);
-            color: var(--black);
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            background: var(--dark-gold);
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--black);
-            padding: 3rem 0 1rem;
-            border-top: 3px solid var(--muted-gold);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--muted-gold);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            line-height: 1.6;
-        }
-
-        .footer-section a:hover {
-            color: var(--muted-gold);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--dark-gray);
-            color: #ccc;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .nav-right {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .logo img {
-                height: 35px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-modal-content {
-                width: 95%;
-                margin: 5% auto;
-            }
-
-            .portfolio-modal-header {
-                height: 200px;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Section spacing */
-        section {
-            scroll-margin-top: 80px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -1189,6 +412,147 @@
             <div class="portfolio-modal-body">
                 <h2>WPT Osaka Marketing Campaign</h2>
                 <div class="client-info">
+                    <strong>Platforms:</strong> Discord & Reddit (/r/lostarkgame)<br>
+                    <strong>Industry:</strong> Gaming (MMORPG)<br>
+                    <strong>Duration:</strong> 9 years of operation<br>
+                    <strong>Services:</strong> Community Management, Social Media Operations, Content Moderation
+                </div>
+                
+                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Project Overview</h3>
+                <p style="color: #ccc; line-height: 1.6; margin-bottom: 2rem;">
+                    Successfully operate and manage the largest independent Lost Ark communities globally, serving as the primary hubs for the MMORPG's international player base. Built and maintained the Lost Ark Global Discord and /r/lostarkgame subreddit over 9 years, establishing these platforms as the go-to destinations for game updates, community discussion, and player support. Work directly with Amazon Games and Smilegate RPG to facilitate communication between developers and the global player community, ensuring timely dissemination of critical game information and fostering positive community engagement across multiple regions and languages.
+                </p>
+
+                <div class="metrics">
+                    <div class="metric-card">
+                        <span class="metric-number">380K</span>
+                        <span class="metric-label">Discord Members</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">280K</span>
+                        <span class="metric-label">Reddit Members</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">9</span>
+                        <span class="metric-label">Years Operation</span>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Results & Impact</h3>
+                <p style="color: #ccc; line-height: 1.6;">
+                    Built the largest independent Lost Ark community ecosystem with over 660,000 combined members across Discord and Reddit. Established direct partnerships with major gaming companies Amazon Games and Smilegate RPG, becoming the official community liaison for global player communications. The 9-year operational track record demonstrates exceptional community building expertise and long-term strategic vision, creating sustainable platforms that serve as essential resources for the global Lost Ark player base and maintain active engagement across diverse international audiences.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="portfolio6" class="portfolio-modal">
+        <div class="portfolio-modal-content">
+            <div class="portfolio-modal-header">
+                <img src="portfolio-6.jpg" alt="Boxing Star Mobile Marketing">
+                <span class="close-modal" onclick="closePortfolioModal('portfolio6')">&times;</span>
+            </div>
+            <div class="portfolio-modal-body">
+                <h2>Boxing Star</h2>
+                <div class="client-info">
+                    <strong>Client:</strong> 4:33 Creative Lab<br>
+                    <strong>Industry:</strong> Mobile Gaming<br>
+                    <strong>Duration:</strong> 1 year 4 months<br>
+                    <strong>Services:</strong> Global User Acquisition, Performance Marketing, Campaign Management
+                </div>
+                
+                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Project Overview</h3>
+                <p style="color: #ccc; line-height: 1.6; margin-bottom: 2rem;">
+                    Led global user acquisition and performance marketing campaigns for Boxing Star, a premium mobile gaming title, as Global UA and Marketing Manager at 4:33 Creative Lab. Created and managed comprehensive mobile performance marketing campaigns across multiple ad networks including Facebook, Unity, Google Ads, and other premium platforms. Developed innovative test plans and experimented with new user acquisition initiatives, analyzing performance data to identify highest impact opportunities. Collaborated closely with creative teams on development of image, video, and playable ads while serving as the primary point of contact for multiple ad network partnerships and third-party relationships.
+                </p>
+
+                <div class="metrics">
+                    <div class="metric-card">
+                        <span class="metric-number">IMGA</span>
+                        <span class="metric-label">Award Nominee</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">Best Team</span>
+                        <span class="metric-label">Marketing Finalist</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">Global</span>
+                        <span class="metric-label">UA Campaigns</span>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Results & Impact</h3>
+                <p style="color: #ccc; line-height: 1.6;">
+                    Boxing Star achieved significant industry recognition under our marketing leadership, earning a nomination for the prestigious IMGA People's Choice Award 2019 and our marketing team was named as a finalist for "Best Marketing Team" at the Mobile Game Awards 2019. The comprehensive user acquisition strategy successfully positioned Boxing Star as a standout title in the competitive mobile gaming market, demonstrating exceptional creativity and execution standards that garnered industry-wide acclaim and established new benchmarks for mobile game marketing excellence.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Modals -->
+    <div id="gallery1" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery1')">&times;</span>
+            <img src="gallery-1.jpg" alt="Campaign Creative">
+            <div class="gallery-modal-title">Campaign Creative</div>
+        </div>
+    </div>
+
+    <div id="gallery2" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery2')">&times;</span>
+            <video controls autoplay>
+                <source src="gallery-2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="gallery-modal-title">Video Campaign</div>
+        </div>
+    </div>
+
+    <div id="gallery3" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery3')">&times;</span>
+            <video controls autoplay>
+                <source src="gallery-3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="gallery-modal-title">Marketing Video</div>
+        </div>
+    </div>
+
+    <div id="gallery4" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery4')">&times;</span>
+            <video controls autoplay>
+                <source src="gallery-4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="gallery-modal-title">Content Creation</div>
+        </div>
+    </div>
+
+    <div id="gallery5" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery5')">&times;</span>
+            <img src="gallery-5.jpg" alt="Social Content">
+            <div class="gallery-modal-title">Social Content</div>
+        </div>
+    </div>
+
+    <div id="gallery6" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery6')">&times;</span>
+            <video controls autoplay>
+                <source src="gallery-6.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="gallery-modal-title">Live Stream</div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
                     <strong>Client:</strong> WPT Global / WPT Japan<br>
                     <strong>Industry:</strong> iGaming<br>
                     <strong>Duration:</strong> 4 months<br>
@@ -1361,304 +725,3 @@
             <div class="portfolio-modal-body">
                 <h2>Lost Ark Global Communities</h2>
                 <div class="client-info">
-                    <strong>Platforms:</strong> Discord & Reddit (/r/lostarkgame)<br>
-                    <strong>Industry:</strong> Gaming (MMORPG)<br>
-                    <strong>Duration:</strong> 9 years of operation<br>
-                    <strong>Services:</strong> Community Management, Social Media Operations, Content Moderation
-                </div>
-                
-                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Project Overview</h3>
-                <p style="color: #ccc; line-height: 1.6; margin-bottom: 2rem;">
-                    Successfully operate and manage the largest independent Lost Ark communities globally, serving as the primary hubs for the MMORPG's international player base. Built and maintained the Lost Ark Global Discord and /r/lostarkgame subreddit over 9 years, establishing these platforms as the go-to destinations for game updates, community discussion, and player support. Work directly with Amazon Games and Smilegate RPG to facilitate communication between developers and the global player community, ensuring timely dissemination of critical game information and fostering positive community engagement across multiple regions and languages.
-                </p>
-
-                <div class="metrics">
-                    <div class="metric-card">
-                        <span class="metric-number">380K</span>
-                        <span class="metric-label">Discord Members</span>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-number">280K</span>
-                        <span class="metric-label">Reddit Members</span>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-number">9</span>
-                        <span class="metric-label">Years Operation</span>
-                    </div>
-                </div>
-
-                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Results & Impact</h3>
-                <p style="color: #ccc; line-height: 1.6;">
-                    Built the largest independent Lost Ark community ecosystem with over 660,000 combined members across Discord and Reddit. Established direct partnerships with major gaming companies Amazon Games and Smilegate RPG, becoming the official community liaison for global player communications. The 9-year operational track record demonstrates exceptional community building expertise and long-term strategic vision, creating sustainable platforms that serve as essential resources for the global Lost Ark player base and maintain active engagement across diverse international audiences.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="portfolio6" class="portfolio-modal">
-        <div class="portfolio-modal-content">
-            <div class="portfolio-modal-header">
-                <img src="portfolio-6.jpg" alt="Boxing Star Mobile Marketing">
-                <span class="close-modal" onclick="closePortfolioModal('portfolio6')">&times;</span>
-            </div>
-            <div class="portfolio-modal-body">
-                <h2>Boxing Star</h2>
-                <div class="client-info">
-                    <strong>Client:</strong> 4:33 Creative Lab<br>
-                    <strong>Industry:</strong> Mobile Gaming<br>
-                    <strong>Duration:</strong> 1 year 4 months<br>
-                    <strong>Services:</strong> Global User Acquisition, Performance Marketing, Campaign Management
-                </div>
-                
-                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Project Overview</h3>
-                <p style="color: #ccc; line-height: 1.6; margin-bottom: 2rem;">
-                    Led global user acquisition and performance marketing campaigns for Boxing Star, a premium mobile gaming title, as Global UA and Marketing Manager at 4:33 Creative Lab. Created and managed comprehensive mobile performance marketing campaigns across multiple ad networks including Facebook, Unity, Google Ads, and other premium platforms. Developed innovative test plans and experimented with new user acquisition initiatives, analyzing performance data to identify highest impact opportunities. Collaborated closely with creative teams on development of image, video, and playable ads while serving as the primary point of contact for multiple ad network partnerships and third-party relationships.
-                </p>
-
-                <div class="metrics">
-                    <div class="metric-card">
-                        <span class="metric-number">IMGA</span>
-                        <span class="metric-label">Award Nominee</span>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-number">Best Team</span>
-                        <span class="metric-label">Marketing Finalist</span>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-number">Global</span>
-                        <span class="metric-label">UA Campaigns</span>
-                    </div>
-                </div>
-
-                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Results & Impact</h3>
-                <p style="color: #ccc; line-height: 1.6;">
-                    Boxing Star achieved significant industry recognition under our marketing leadership, earning a nomination for the prestigious IMGA People's Choice Award 2019 and our marketing team was named as a finalist for "Best Marketing Team" at the Mobile Game Awards 2019. The comprehensive user acquisition strategy successfully positioned Boxing Star as a standout title in the competitive mobile gaming market, demonstrating exceptional creativity and execution standards that garnered industry-wide acclaim and established new benchmarks for mobile game marketing excellence.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gallery Modals -->
-    <div id="gallery1" class="gallery-modal">
-        <div class="gallery-modal-content">
-            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery1')">&times;</span>
-            <img src="gallery-1.jpg" alt="Campaign Creative">
-            <div class="gallery-modal-title">Campaign Creative</div>
-        </div>
-    </div>
-
-    <div id="gallery2" class="gallery-modal">
-        <div class="gallery-modal-content">
-            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery2')">&times;</span>
-            <video controls autoplay>
-                <source src="gallery-2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="gallery-modal-title">Video Campaign</div>
-        </div>
-    </div>
-
-    <div id="gallery3" class="gallery-modal">
-        <div class="gallery-modal-content">
-            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery3')">&times;</span>
-            <video controls autoplay>
-                <source src="gallery-3.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="gallery-modal-title">Marketing Video</div>
-        </div>
-    </div>
-
-    <div id="gallery4" class="gallery-modal">
-        <div class="gallery-modal-content">
-            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery4')">&times;</span>
-            <video controls autoplay>
-                <source src="gallery-4.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="gallery-modal-title">Content Creation</div>
-        </div>
-    </div>
-
-    <div id="gallery5" class="gallery-modal">
-        <div class="gallery-modal-content">
-            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery5')">&times;</span>
-            <img src="gallery-5.jpg" alt="Social Content">
-            <div class="gallery-modal-title">Social Content</div>
-        </div>
-    </div>
-
-    <div id="gallery6" class="gallery-modal">
-        <div class="gallery-modal-content">
-            <span class="close-gallery-modal" onclick="closeGalleryModal('gallery6')">&times;</span>
-            <video controls autoplay>
-                <source src="gallery-6.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="gallery-modal-title">Live Stream</div>
-        </div>
-    </div>
-
-    <script>
-        // Gallery modal functions
-        function openGalleryModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            
-            // Auto-play videos when modal opens
-            const video = modal.querySelector('video');
-            if (video) {
-                video.currentTime = 0;
-                video.play().catch(e => console.log('Video autoplay prevented by browser'));
-            }
-        }
-
-        function closeGalleryModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            // Pause videos when modal closes
-            const video = modal.querySelector('video');
-            if (video) {
-                video.pause();
-                video.currentTime = 0;
-            }
-        }
-
-        // Close gallery modal when clicking outside of content
-        window.addEventListener('click', function(event) {
-            if (event.target.classList.contains('gallery-modal')) {
-                const modalId = event.target.id;
-                closeGalleryModal(modalId);
-            }
-        });
-
-        // Close gallery modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.querySelectorAll('.gallery-modal');
-                modals.forEach(modal => {
-                    if (modal.style.display === 'block') {
-                        closeGalleryModal(modal.id);
-                    }
-                });
-            }
-        });
-
-        // Portfolio modal functions
-        function openPortfolioModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const modalHeader = modal.querySelector('.portfolio-modal-header');
-            const modalImg = modalHeader.querySelector('img');
-            
-            // Set the background image for the blur effect
-            modalHeader.style.backgroundImage = `url(${modalImg.src})`;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePortfolioModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside of it
-        window.addEventListener('click', function(event) {
-            if (event.target.classList.contains('portfolio-modal')) {
-                event.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.querySelectorAll('.portfolio-modal');
-                modals.forEach(modal => {
-                    if (modal.style.display === 'block') {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    }
-                });
-            }
-        });
-
-        // Contact form handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Simple validation
-            if (!data.name || !data.email || !data.message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Simulate form submission (replace with actual form handling)
-            alert('Thank you for your message! We\'ll get back to you within 24 hours.');
-            this.reset();
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Mobile menu toggle (basic functionality)
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Add scroll effect to navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(0, 0, 0, 0.95)';
-                nav.style.backdropFilter = 'blur(10px)';
-            } else {
-                nav.style.background = 'var(--black)';
-                nav.style.backdropFilter = 'none';
-            }
-        });
-
-        // Animate service cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe service cards for animation
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-    </script>
-</body>
-</html>
