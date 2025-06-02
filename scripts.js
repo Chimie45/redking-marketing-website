@@ -139,7 +139,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Animate elements on scroll
+// Animate elements on scroll (only for below-the-fold content)
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -149,7 +149,6 @@ const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
             
             // Animate stats numbers
             if (entry.target.classList.contains('stat-number')) {
@@ -159,18 +158,11 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
-// Observe service cards for fade in only (no transform)
-document.querySelectorAll('.service-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transition = 'opacity 0.6s ease';
-    observer.observe(card);
-});
-
-// Observe portfolio cards for animation
+// No animation for service cards - they should be static
+// Only observe portfolio cards for fade-in (below the fold)
 document.querySelectorAll('.portfolio-card').forEach((card, index) => {
     card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+    card.style.transition = `opacity 0.6s ease ${index * 0.1}s`;
     observer.observe(card);
 });
 
@@ -224,17 +216,7 @@ document.querySelectorAll('img').forEach(img => {
 
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function() {
-    // Fade in hero content
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.opacity = '0';
-        heroContent.style.transform = 'translateY(30px)';
-        setTimeout(() => {
-            heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
-            heroContent.style.opacity = '1';
-            heroContent.style.transform = 'translateY(0)';
-        }, 100);
-    }
+    // No animations for hero content - it should be visible immediately
     
     // Lazy load images
     const lazyImages = document.querySelectorAll('img[data-src]');
@@ -252,11 +234,5 @@ document.addEventListener('DOMContentLoaded', function() {
     lazyImages.forEach(img => imageObserver.observe(img));
 });
 
-// Parallax effect for hero section only
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+// Remove ALL parallax effects
+// No parallax effect - content stays in place
