@@ -610,6 +610,30 @@ nav .container {
     transform: scale(1.1);
 }
 
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
+    padding: 1.5rem 1rem 1rem;
+    height: 70px;
+    display: flex;
+    align-items: flex-end;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,1) 100%);
+}
+
+.gallery-overlay h3 {
+    color: var(--muted-gold);
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
 /* Gallery Modal */
 .gallery-modal {
     display: none;
