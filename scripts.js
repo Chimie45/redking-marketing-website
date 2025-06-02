@@ -159,11 +159,10 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
-// Observe service cards for animation
+// Observe service cards for fade in only (no transform)
 document.querySelectorAll('.service-card').forEach(card => {
     card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    card.style.transition = 'opacity 0.6s ease';
     observer.observe(card);
 });
 
@@ -253,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
     lazyImages.forEach(img => imageObserver.observe(img));
 });
 
-// Parallax effect for hero section
+// Parallax effect for hero section only
 window.addEventListener('scroll', function() {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero');
