@@ -55,6 +55,41 @@
             align-items: center;
         }
 
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-icons a {
+            color: var(--muted-gold);
+            font-size: 1.2rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.7;
+        }
+
         .logo {
             display: flex;
             align-items: center;
@@ -694,6 +729,10 @@
                 display: none;
             }
 
+            .nav-right {
+                display: none;
+            }
+
             .mobile-menu {
                 display: flex;
             }
@@ -749,22 +788,36 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#home" class="logo">
-                <img src="logo.png" alt="RedKing Marketing">
-            </a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#tools">Tools</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-content">
+                <div class="nav-left">
+                    <a href="#home" class="logo">
+                        <img src="logo.png" alt="RedKing Marketing">
+                    </a>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <div class="social-icons">
+                        <a href="https://linkedin.com/company/red-king-marketing" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://instagram.com/Red_King_Marketing" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="mobile-menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -1045,20 +1098,6 @@
                         <p><strong>Specialties:</strong> Gaming • iGaming • Esports</p>
                         <p><strong>Response Time:</strong> 24 hours or less</p>
                     </div>
-                    
-                    <div style="margin-top: 2rem;">
-                        <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Connect With Us</h3>
-                        <div style="display: flex; gap: 1.5rem; align-items: center;">
-                            <a href="https://linkedin.com/company/redkingmarketing" target="_blank" style="color: var(--muted-gold); text-decoration: none; font-size: 1.2rem; transition: opacity 0.3s ease; display: flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-                                <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i>
-                                LinkedIn
-                            </a>
-                            <a href="https://instagram.com/redkingmarketing" target="_blank" style="color: var(--muted-gold); text-decoration: none; font-size: 1.2rem; transition: opacity 0.3s ease; display: flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-                                <i class="fab fa-instagram" style="font-size: 1.5rem;"></i>
-                                Instagram
-                            </a>
-                        </div>
-                    </div>
                 </div>
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
@@ -1122,6 +1161,10 @@
                     <p><a href="#contact">Get Started</a></p>
                     <p>Global Support Available</p>
                     <p>24/7 Response Time</p>
+                    <div style="margin-top: 1rem;">
+                        <p><a href="https://linkedin.com/company/red-king-marketing" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="fab fa-linkedin"></i>LinkedIn</a></p>
+                        <p><a href="https://instagram.com/Red_King_Marketing" target="_blank" style="display: flex; align-items: center; gap: 0.5rem;"><i class="fab fa-instagram"></i>Instagram</a></p>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
