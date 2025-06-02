@@ -320,20 +320,13 @@ nav .container {
     text-align: center;
 }
 
-.client-logos h3 {
-    color: var(--muted-gold);
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    font-weight: 400;
-}
-
 .logos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
-    max-width: 1000px;
+    gap: 3rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -341,10 +334,10 @@ nav .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px;
-    padding: 1rem;
+    height: 60px;
     transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0.7;
+    flex: 0 0 auto;
 }
 
 .logo-item:hover {
@@ -353,7 +346,7 @@ nav .container {
 }
 
 .logo-item img {
-    max-width: 100%;
+    max-width: 120px;
     max-height: 100%;
     width: auto;
     height: auto;
