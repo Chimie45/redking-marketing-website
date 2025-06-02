@@ -232,22 +232,54 @@
             background: linear-gradient(rgba(0,0,0,0.4) 0%, rgba(0,0,0,1) 100%);
         }
 
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.95) 100%);
+            padding: 1rem;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-card:hover .portfolio-overlay {
+            background: linear-gradient(rgba(0,0,0,0.4) 0%, rgba(0,0,0,1) 100%);
+        }
+
+        .portfolio-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .portfolio-text {
+            flex: 1;
+        }
+
         .portfolio-info h3 {
             color: var(--muted-gold);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            line-height: 1.2;
         }
 
         .portfolio-info p {
             color: #ccc;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            margin-bottom: 0;
+            line-height: 1.2;
         }
 
         .view-details {
             color: var(--muted-gold);
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            margin-left: 1rem;
         }
 
         /* Portfolio Modal */
@@ -759,8 +791,10 @@
                         <img src="portfolio-1.jpg" alt="WPT Osaka Marketing Campaign">
                         <div class="portfolio-overlay">
                             <div class="portfolio-info">
-                                <h3>WPT OSAKA 2024</h3>
-                                <p>Complete Marketing Strategy for Live Event</p>
+                                <div class="portfolio-text">
+                                    <h3>WPT OSAKA 2024</h3>
+                                    <p>Complete Marketing Strategy for Live Event</p>
+                                </div>
                                 <span class="view-details">View Details →</span>
                             </div>
                         </div>
@@ -769,11 +803,13 @@
 
                 <div class="portfolio-card" onclick="openPortfolioModal('portfolio2')">
                     <div class="portfolio-image">
-                        <img src="portfolio-2.jpg" alt="Project 2">
+                        <img src="portfolio-2.jpg" alt="GGPoker Web Content">
                         <div class="portfolio-overlay">
                             <div class="portfolio-info">
-                                <h3>iGaming Community Growth</h3>
-                                <p>Community management and user acquisition campaign</p>
+                                <div class="portfolio-text">
+                                    <h3>GGPoker Web Content</h3>
+                                    <p>Multilingual Website Management & Development</p>
+                                </div>
                                 <span class="view-details">View Details →</span>
                             </div>
                         </div>
@@ -782,11 +818,13 @@
 
                 <div class="portfolio-card" onclick="openPortfolioModal('portfolio3')">
                     <div class="portfolio-image">
-                        <img src="portfolio-3.jpg" alt="Project 3">
+                        <img src="portfolio-3.jpg" alt="GTO LAB Digital Marketing">
                         <div class="portfolio-overlay">
                             <div class="portfolio-info">
-                                <h3>Marketing Excellence Award</h3>
-                                <p>Award-winning campaign for esports organization</p>
+                                <div class="portfolio-text">
+                                    <h3>GTO LAB</h3>
+                                    <p>Digital Marketing & Content Management</p>
+                                </div>
                                 <span class="view-details">View Details →</span>
                             </div>
                         </div>
@@ -798,8 +836,10 @@
                         <img src="portfolio-4.jpg" alt="Project 4">
                         <div class="portfolio-overlay">
                             <div class="portfolio-info">
-                                <h3>Website Development & SEO</h3>
-                                <p>Complete website overhaul with SEO optimization</p>
+                                <div class="portfolio-text">
+                                    <h3>Website Development & SEO</h3>
+                                    <p>Complete website overhaul with SEO optimization</p>
+                                </div>
                                 <span class="view-details">View Details →</span>
                             </div>
                         </div>
@@ -811,8 +851,10 @@
                         <img src="portfolio-5.jpg" alt="Project 5">
                         <div class="portfolio-overlay">
                             <div class="portfolio-info">
-                                <h3>Social Media Campaign</h3>
-                                <p>Viral marketing campaign across multiple platforms</p>
+                                <div class="portfolio-text">
+                                    <h3>Social Media Campaign</h3>
+                                    <p>Viral marketing campaign across multiple platforms</p>
+                                </div>
                                 <span class="view-details">View Details →</span>
                             </div>
                         </div>
@@ -824,8 +866,10 @@
                         <img src="portfolio-6.jpg" alt="Project 6">
                         <div class="portfolio-overlay">
                             <div class="portfolio-info">
-                                <h3>PPC Optimization Report</h3>
-                                <p>Data-driven PPC campaign optimization and reporting</p>
+                                <div class="portfolio-text">
+                                    <h3>PPC Optimization Report</h3>
+                                    <p>Data-driven PPC campaign optimization and reporting</p>
+                                </div>
                                 <span class="view-details">View Details →</span>
                             </div>
                         </div>
@@ -1023,37 +1067,46 @@
     <div id="portfolio2" class="portfolio-modal">
         <div class="portfolio-modal-content">
             <div class="portfolio-modal-header">
-                <img src="portfolio-2.jpg" alt="Project 2">
+                <img src="portfolio-2.jpg" alt="GGPoker Web Content">
                 <span class="close-modal" onclick="closePortfolioModal('portfolio2')">&times;</span>
             </div>
             <div class="portfolio-modal-body">
-                <h2>iGaming Community Growth</h2>
+                <h2>GGPoker Web Content</h2>
                 <div class="client-info">
-                    <strong>Client:</strong> [Client Name]<br>
+                    <strong>Client:</strong> NSUS Lab Korea<br>
                     <strong>Industry:</strong> iGaming<br>
-                    <strong>Duration:</strong> 12 months<br>
-                    <strong>Services:</strong> Community Management, Social Media, User Acquisition
+                    <strong>Duration:</strong> 4 years<br>
+                    <strong>Services:</strong> Social Media, Marketing, Landing Pages, Banners, Website Development, Project Management
                 </div>
                 
                 <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Project Overview</h3>
                 <p style="color: #ccc; line-height: 1.6; margin-bottom: 2rem;">
-                    [Add your project description here]
+                    Led the comprehensive design and management of multilingual websites for GGPoker's global network, including GGPoker.com, PlayGG.ro, PokerOK, and regional domains across Europe, Asia, and the Americas. Managed front-end development using HTML/CSS, collaborated with design teams for cohesive visual assets, and handled live website operations including content updates, promotional banners, and seasonal events. Utilized various CMS tools (WordPress, Wix, WPML, Weglot) to ensure accuracy and timely updates across multiple regions while maintaining localization and consistency for different markets.
                 </p>
 
                 <div class="metrics">
                     <div class="metric-card">
-                        <span class="metric-number">100K+</span>
-                        <span class="metric-label">Active Users</span>
+                        <span class="metric-number">150+</span>
+                        <span class="metric-label">Landing Pages</span>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-number">500%</span>
-                        <span class="metric-label">Community Growth</span>
+                        <span class="metric-number">13</span>
+                        <span class="metric-label">Languages</span>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-number">45%</span>
-                        <span class="metric-label">Engagement Rate</span>
+                        <span class="metric-number">120%</span>
+                        <span class="metric-label">CTR Increase</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">10+</span>
+                        <span class="metric-label">Global Domains</span>
                     </div>
                 </div>
+
+                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Results & Impact</h3>
+                <p style="color: #ccc; line-height: 1.6;">
+                    Successfully optimized the web signup flow across all platforms, significantly improving user conversion rates. Monitored website performance and implemented data-driven improvements that increased overall traffic and user engagement. The multilingual approach and localized content strategy helped establish GGPoker's presence across diverse global markets, contributing to the platform's international growth and user acquisition success.
+                </p>
             </div>
         </div>
     </div>
@@ -1061,33 +1114,46 @@
     <div id="portfolio3" class="portfolio-modal">
         <div class="portfolio-modal-content">
             <div class="portfolio-modal-header">
-                <img src="portfolio-3.jpg" alt="Project 3">
+                <img src="portfolio-3.jpg" alt="GTO LAB Digital Marketing">
                 <span class="close-modal" onclick="closePortfolioModal('portfolio3')">&times;</span>
             </div>
             <div class="portfolio-modal-body">
-                <h2>Marketing Excellence Award</h2>
+                <h2>GTO LAB</h2>
                 <div class="client-info">
-                    <strong>Client:</strong> [Client Name]<br>
-                    <strong>Industry:</strong> Esports<br>
-                    <strong>Award:</strong> [Award Name & Year]<br>
-                    <strong>Services:</strong> Campaign Strategy, Content Creation, Influencer Management
+                    <strong>Client:</strong> GTO LAB<br>
+                    <strong>Industry:</strong> Educational Software<br>
+                    <strong>Duration:</strong> 5 months (Feb 2025 - Present)<br>
+                    <strong>Services:</strong> Digital Marketing, Content Strategy, Community Management, SEO, Influencer Partnerships
                 </div>
                 
-                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Campaign Overview</h3>
+                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Project Overview</h3>
                 <p style="color: #ccc; line-height: 1.6; margin-bottom: 2rem;">
-                    [Add campaign description and what made it award-worthy]
+                    Leading comprehensive digital marketing campaigns across Meta, Google, YouTube, and Twitter/X Ads to drive user acquisition and retention for educational software platform. Managing content strategy including coaching videos, blogs, and social media to enhance brand engagement. Implementing SEO strategies, growing Discord and social media communities, and leading influencer partnerships. Developing go-to-market strategies and analyzing performance data to refine approaches and improve ROI across multiple markets and languages.
                 </p>
 
                 <div class="metrics">
                     <div class="metric-card">
-                        <span class="metric-number">500K</span>
-                        <span class="metric-label">New Followers</span>
+                        <span class="metric-number">75+</span>
+                        <span class="metric-label">Hours Coaching Videos</span>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-number">300%</span>
-                        <span class="metric-label">Sponsorship Value</span>
+                        <span class="metric-number">10</span>
+                        <span class="metric-label">Languages</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">450%</span>
+                        <span class="metric-label">ROAS</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">100%+</span>
+                        <span class="metric-label">User Growth</span>
                     </div>
                 </div>
+
+                <h3 style="color: var(--muted-gold); margin-bottom: 1rem;">Results & Impact</h3>
+                <p style="color: #ccc; line-height: 1.6;">
+                    Successfully doubled the user base while maintaining exceptional return on ad spend of 450%. Managed extensive multilingual content library and built engaged communities across multiple platforms. The integrated approach of paid advertising, organic content, and community building has established GTO LAB as a leading educational platform in the competitive software market.
+                </p>
             </div>
         </div>
     </div>
