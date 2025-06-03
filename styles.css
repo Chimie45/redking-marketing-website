@@ -711,25 +711,26 @@ nav .container {
     font-weight: 600;
 }
 
-/* Gallery Modal (for single image/video) */
+/* Gallery Modal (for single image/video AND iframe) */
 .gallery-modal {
     display: none;
     position: fixed;
-    z-index: 2000; /* Same as portfolio modal */
+    z-index: 2000; 
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.95); /* Very dark overlay */
+    background-color: rgba(0,0,0,0.95); 
     animation: fadeIn 0.3s ease;
-    overflow-y: auto; /* Allow scroll if content overflows */
+    overflow-y: auto; 
 }
 
 .gallery-modal-content {
     position: relative;
-    margin: 2% auto; /* Give some space from top/bottom */
+    margin: 2% auto; 
     max-width: 90%;
-    max-height: 90vh; /* Max height for the content area */
+    width: 90%; /* Ensure it has a width for iframe child */
+    max-height: 90vh; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -737,10 +738,18 @@ nav .container {
     animation: slideIn 0.3s ease;
 }
 
+/* Specific for iframe modal content to ensure iframe takes space */
+.gallery-modal-content.iframe-modal-content {
+    height: 85vh; /* Give a specific height for iframe parent */
+    width: 85vw; /* Give a specific width */
+    max-width: 1200px; /* Optional max width */
+}
+
+
 .gallery-modal-content img,
 .gallery-modal-content video {
     max-width: 100%;
-    max-height: 80vh; /* Max height for the media itself, leaving space for title/controls */
+    max-height: 80vh; 
     width: auto;
     height: auto;
     object-fit: contain;
@@ -748,10 +757,18 @@ nav .container {
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
+.gallery-iframe {
+    width: 100%;
+    height: 100%; /* Fill the .iframe-modal-content */
+    border: none;
+    border-radius: 5px; /* Match other modal content */
+}
+
+
 .close-gallery-modal {
     position: absolute;
     top: 20px;
-    right: 30px; /* Adjusted for consistency */
+    right: 30px; 
     color: var(--white);
     font-size: 2.5rem;
     font-weight: bold;
@@ -764,8 +781,8 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10; /* Above modal content */
-    line-height: 1; /* Center the X */
+    z-index: 10; 
+    line-height: 1; 
 }
 
 .close-gallery-modal:hover {
