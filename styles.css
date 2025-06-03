@@ -785,7 +785,6 @@ nav .container {
 .contact {
     padding: 100px 0;
     background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
-    /* border-bottom: 2px solid var(--muted-gold); No border needed if it's the last main section */
 }
 
 .contact-content {
@@ -797,19 +796,30 @@ nav .container {
 
 .contact-info h2 {
     font-size: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Reduced margin */
     color: var(--muted-gold);
 }
 
 .contact-info p {
     font-size: 1.1rem;
-    margin-bottom: 1.5rem; /* Consistent spacing */
+    margin-bottom: 1rem; /* Reduced margin */
     line-height: 1.7;
-    color: var(--white); /* Ensure good contrast on red background */
+    color: var(--white); 
 }
 .contact-info strong {
-    color: var(--light-gold); /* Lighter gold for emphasis */
+    color: var(--light-gold); 
 }
+
+.contact-icon-wrapper {
+    text-align: left; /* Align to left like other text */
+    margin: 1.5rem 0; /* Space around the icon */
+}
+
+.contact-icon-wrapper .fas.fa-crown {
+    font-size: 2.5rem; /* Adjust size as needed */
+    color: var(--muted-gold);
+}
+
 
 .contact-form {
     background: rgba(0, 0, 0, 0.35); /* Slightly more opaque */
