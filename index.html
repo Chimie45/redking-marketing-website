@@ -356,39 +356,54 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>RedKing Marketing</h3>
+            <div class="footer-main">
+                <div class="footer-column footer-about">
+                    <img src="logo.png" alt="RedKing Marketing" class="footer-logo">
                     <p>Global gaming marketing experts specializing in Asia, Americas, and beyond. We turn gaming brands into market leaders through data-driven strategies and cultural expertise.</p>
+                    <div class="footer-social-icons">
+                        <a href="https://linkedin.com/company/red-king-marketing" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/Red_King_Marketing" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <p><a href="#services">PPC & Paid Advertising</a></p>
-                    <p><a href="#services">SEO & Content Marketing</a></p>
-                    <p><a href="#services">Social Media Management</a></p>
-                    <p><a href="#services">Gaming Consultation</a></p>
+
+                <div class="footer-column footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <p><a href="#portfolio">Portfolio</a></p>
-                    <p><a href="#blog">Blog & Insights</a></p>
-                    <p><a href="#about">About Us</a></p>
+
+                <div class="footer-column footer-contact">
+                    <h4>Contact Info</h4>
+                    <address>
+                        Seoul, South Korea<br>
+                        {Optional: Street Address}<br>
+                    </address>
+                    <p><a href="tel:+1234567890">P: +1 (234) 567-890</a> (Placeholder)</p>
+                    <p><a href="mailto:info@redkingmarketing.com">E: info@redkingmarketing.com</a> (Placeholder)</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Connect</h3>
-                    <p><a href="#contact">Get Started</a></p>
-                    <p>Global Support Available</p>
-                    <p>24/7 Response Time</p>
-                    <div style="margin-top: 1rem;">
-                        <p><a href="https://linkedin.com/company/red-king-marketing" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><i class="fab fa-linkedin"></i>LinkedIn</a></p>
-                        <p><a href="https://instagram.com/Red_King_Marketing" target="_blank" style="display: flex; align-items: center; gap: 0.5rem;"><i class="fab fa-instagram"></i>Instagram</a></p>
-                    </div>
+
+                <div class="footer-column footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2025 RedKing Marketing. All rights reserved. | Gaming Marketing Experts</p>
+                <p>&copy; <span id="currentYear"></span> RedKing Marketing. All Rights Reserved.</p>
+                <ul class="footer-legal-links">
+                    <li><a href="#privacy">Privacy Policy</a></li> <li><a href="#terms">Terms of Service</a></li>   </ul>
             </div>
         </div>
     </footer>
