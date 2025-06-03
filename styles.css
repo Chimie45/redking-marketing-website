@@ -40,7 +40,7 @@ html {
 
 /* Section Spacing */
 section {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 80px; /* Adjust if nav height changes */
 }
 
 .section-title {
@@ -59,6 +59,12 @@ nav {
     top: 0;
     z-index: 1000;
     border-bottom: 2px solid var(--muted-gold);
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease; /* For scroll effect */
+}
+
+nav.nav--scrolled { /* Class added by JS on scroll */
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
 }
 
 nav .container {
@@ -137,9 +143,10 @@ nav .container {
 }
 
 .mobile-menu {
-    display: none;
+    display: none; /* Hidden by default, shown in media query */
     flex-direction: column;
     cursor: pointer;
+    padding: 5px; /* Easier to tap */
 }
 
 .mobile-menu span {
@@ -148,29 +155,43 @@ nav .container {
     background: var(--white);
     margin: 3px 0;
     transition: 0.3s;
+    border-radius: 1px;
 }
+
+/* Mobile menu active state (X icon) */
+.mobile-menu.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-6px, 6px);
+}
+.mobile-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+.mobile-menu.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-6px, -6px);
+}
+
 
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('header.jpg');
+        url('header.jpg'); /* Ensure header.jpg is in the correct path */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed; /* This creates the parallax-like effect */
     min-height: 100vh;
     display: flex;
     align-items: center;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* If any child elements might overflow */
     border-bottom: 3px solid var(--muted-gold);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
+    padding: 20px; /* Add some padding for smaller screens */
 }
 
 /* Screen reader only - for SEO h1 */
@@ -193,7 +214,7 @@ nav .container {
     margin-bottom: 1.5rem;
 }
 
-.hero h1 {
+.hero h1 { /* This is the .sr-only h1, so visual styles might not be needed unless it becomes visible */
     font-size: 3.5rem;
     margin-bottom: 1rem;
     color: var(--white);
@@ -236,7 +257,7 @@ nav .container {
 }
 
 /* Services Section */
-.services {
+.services { /* Also used by Portfolio section */
     padding: 100px 0;
     background: var(--dark-gray);
     border-bottom: 2px solid var(--muted-gold);
@@ -249,26 +270,34 @@ nav .container {
     margin-top: 3rem;
 }
 
-.service-card {
+.service-card { /* Also used by Blog section */
     background: var(--black);
     padding: 2rem;
     border-radius: 10px;
     text-align: center;
     border: 2px solid var(--primary-red);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative; /* For potential future pseudo-elements or absolutely positioned children */
 }
 
 .service-card:hover {
     border-color: var(--muted-gold);
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+    transform: translateY(-5px); /* Subtle lift effect */
 }
 
 .service-icon {
-    font-size: 3rem;
+    font-size: 3rem; /* For emoji icons */
     color: var(--muted-gold);
     margin-bottom: 1rem;
 }
+
+/* If using Font Awesome icons for services: */
+/* .service-card .fa-icon-class { 
+    font-size: 3rem; 
+    color: var(--muted-gold);
+    margin-bottom: 1rem;
+} */
 
 .service-card h3 {
     font-size: 1.5rem;
@@ -282,7 +311,7 @@ nav .container {
 }
 
 /* About Section */
-.about {
+.about { /* Also used by Gallery section */
     padding: 100px 0;
     background: var(--black);
     border-bottom: 2px solid var(--muted-gold);
@@ -290,12 +319,12 @@ nav .container {
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Default for larger screens */
     gap: 4rem;
     align-items: center;
 }
 
-.about-text h2 {
+.about-text h2 { /* This is "Why Choose RedKing?" */
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: var(--muted-gold);
@@ -308,7 +337,7 @@ nav .container {
     line-height: 1.7;
 }
 
-.stats-video {
+.stats-video { /* Container for the animated GIF/image */
     width: 100%;
     max-width: 650px;
     margin: 2rem auto;
@@ -335,7 +364,7 @@ nav .container {
     align-items: center;
     gap: 3rem;
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 1200px; /* Or adjust as needed */
     margin: 0 auto;
 }
 
@@ -343,10 +372,10 @@ nav .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
+    height: 60px; /* Adjust as needed */
     transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0.7;
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* Prevent shrinking if not enough space */
 }
 
 .logo-item:hover {
@@ -355,23 +384,23 @@ nav .container {
 }
 
 .logo-item img {
-    max-width: 120px;
+    max-width: 120px; /* Adjust as needed */
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: brightness(0.8);
+    filter: brightness(0.8) grayscale(0.2); /* Slightly desaturated and dimmed */
     transition: filter 0.3s ease;
 }
 
 .logo-item:hover img {
-    filter: brightness(1);
+    filter: brightness(1) grayscale(0);
 }
 
-/* Portfolio Section */
+/* Portfolio Section - Uses .services for padding/background */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted minmax for potentially smaller cards */
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -381,7 +410,7 @@ nav .container {
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     background: var(--black);
     border: 2px solid var(--primary-red);
 }
@@ -395,19 +424,19 @@ nav .container {
 .portfolio-image {
     position: relative;
     width: 100%;
-    height: 320px;
+    height: 320px; /* Fixed height for consistency */
     overflow: hidden;
 }
 
 .portfolio-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    object-fit: cover; /* Ensures image covers the area, might crop */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother zoom */
 }
 
 .portfolio-card:hover .portfolio-image img {
-    transform: scale(1.05);
+    transform: scale(1.08); /* Slightly larger zoom */
 }
 
 .portfolio-overlay {
@@ -416,22 +445,23 @@ nav .container {
     left: 0;
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-    padding: 1rem;
-    height: 80px;
+    padding: 1.5rem 1rem; /* Increased padding */
+    height: auto; /* Auto height based on content */
+    min-height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, height 0.3s ease;
 }
 
 .portfolio-card:hover .portfolio-overlay {
-    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,1) 100%);
 }
 
 .portfolio-info {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-end; /* Align items to the bottom */
 }
 
 .portfolio-text {
@@ -440,25 +470,31 @@ nav .container {
 
 .portfolio-info h3 {
     color: var(--muted-gold);
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
-    line-height: 1.2;
+    font-size: 1.2rem; /* Slightly larger */
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
 }
 
 .portfolio-info p {
     color: #ccc;
-    font-size: 0.8rem;
+    font-size: 0.85rem; /* Slightly larger */
     margin-bottom: 0;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .view-details {
     color: var(--muted-gold);
     font-weight: bold;
-    font-size: 0.75rem;
+    font-size: 0.8rem; /* Slightly larger */
     white-space: nowrap;
     margin-left: 1rem;
+    transition: color 0.3s ease;
 }
+
+.portfolio-card:hover .view-details {
+    color: var(--gold); /* Brighter gold on hover */
+}
+
 
 /* Portfolio Modal */
 .portfolio-modal {
@@ -469,50 +505,55 @@ nav .container {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0,0,0,0.92); /* Slightly more opaque */
     animation: fadeIn 0.3s ease;
+    overflow-y: auto; /* Allow modal itself to scroll if content is too long */
 }
 
 .portfolio-modal-content {
     position: relative;
     background-color: var(--black);
-    margin: 2% auto;
-    padding: 0;
+    margin: 3% auto; /* Adjusted margin */
+    padding: 0; /* Padding will be in header/body */
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
     width: 90%;
     max-width: 1000px;
-    max-height: 90vh;
-    overflow-y: auto;
+    /* max-height: 90vh; /* Removed to allow content to define height and modal to scroll */
     animation: slideIn 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .portfolio-modal-header {
     position: relative;
-    height: 400px;
+    height: 400px; /* Or adjust as needed */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--black);
+    background: var(--black); /* Fallback background */
+    background-size: cover; /* For the blurred background image */
+    background-position: center; /* For the blurred background image */
+    border-top-left-radius: 8px; /* Match content radius */
+    border-top-right-radius: 8px; /* Match content radius */
 }
 
-.portfolio-modal-header::before {
+.portfolio-modal-header::before { /* Blur effect layer */
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: inherit;
+    background-image: inherit; /* Inherits from .portfolio-modal-header JS-set background */
     background-size: cover;
     background-position: center;
-    filter: blur(10px);
-    opacity: 0.65;
+    filter: blur(12px) brightness(0.7); /* Increased blur */
+    opacity: 1; /* Opacity is fine, brightness controls darkness */
     z-index: 1;
 }
 
-.portfolio-modal-header img {
+.portfolio-modal-header img { /* The actual sharp image */
     position: relative;
     max-width: 90%;
     max-height: 90%;
@@ -532,7 +573,7 @@ nav .container {
     font-size: 2rem;
     font-weight: bold;
     cursor: pointer;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.6);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -540,7 +581,8 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 10; /* Above blur and image */
+    line-height: 1; /* Ensure X is centered */
 }
 
 .close-modal:hover {
@@ -550,43 +592,55 @@ nav .container {
 }
 
 .portfolio-modal-body {
-    padding: 2rem;
+    padding: 2.5rem; /* Increased padding */
 }
 
 .portfolio-modal h2 {
     color: var(--muted-gold);
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 2.2rem; /* Slightly larger */
+    margin-bottom: 1.5rem;
 }
 
 .portfolio-modal .client-info {
     background: var(--dark-gray);
-    padding: 1rem;
+    padding: 1.5rem; /* Increased padding */
     border-radius: 5px;
-    margin-bottom: 2rem;
-    border-left: 4px solid var(--muted-gold);
+    margin-bottom: 2.5rem;
+    border-left: 5px solid var(--muted-gold);
+    font-size: 0.95rem;
+    color: #ddd;
 }
+.portfolio-modal .client-info strong {
+    color: var(--white);
+}
+
 
 .portfolio-modal .metrics {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjusted minmax */
+    gap: 1.5rem;
+    margin: 2.5rem 0;
 }
 
 .metric-card {
     background: var(--dark-gray);
     padding: 1.5rem;
-    border-radius: 5px;
+    border-radius: 8px; /* Slightly more rounded */
     text-align: center;
     border: 1px solid var(--primary-red);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.metric-card:hover {
+    border-color: var(--muted-gold);
+    transform: scale(1.03);
 }
 
 .metric-number {
-    font-size: 2rem;
+    font-size: 2.2rem; /* Slightly larger */
     font-weight: bold;
     color: var(--muted-gold);
     display: block;
+    margin-bottom: 0.25rem;
 }
 
 .metric-label {
@@ -594,7 +648,7 @@ nav .container {
     font-size: 0.9rem;
 }
 
-/* Gallery Section */
+/* Gallery Section - uses .about for padding/background */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -608,12 +662,12 @@ nav .container {
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 250px;
-    background: var(--dark-gray);
+    height: 250px; /* Or adjust as needed */
+    background: var(--dark-gray); /* Fallback for images/videos */
 }
 
 .gallery-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02); /* Combined effect */
     box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
 }
 
@@ -622,7 +676,7 @@ nav .container {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
 }
 
 .gallery-item:hover img,
@@ -637,7 +691,8 @@ nav .container {
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
     padding: 1.5rem 1rem 1rem;
-    height: 70px;
+    height: auto; /* Adjust to content */
+    min-height: 70px;
     display: flex;
     align-items: flex-end;
     transition: all 0.3s ease;
@@ -654,24 +709,25 @@ nav .container {
     font-weight: 600;
 }
 
-/* Gallery Modal */
+/* Gallery Modal (for single image/video) */
 .gallery-modal {
     display: none;
     position: fixed;
-    z-index: 2000;
+    z-index: 2000; /* Same as portfolio modal */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.95);
+    background-color: rgba(0,0,0,0.95); /* Very dark overlay */
     animation: fadeIn 0.3s ease;
+    overflow-y: auto; /* Allow scroll if content overflows */
 }
 
 .gallery-modal-content {
     position: relative;
-    margin: 2% auto;
+    margin: 2% auto; /* Give some space from top/bottom */
     max-width: 90%;
-    max-height: 90vh;
+    max-height: 90vh; /* Max height for the content area */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -682,7 +738,7 @@ nav .container {
 .gallery-modal-content img,
 .gallery-modal-content video {
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 80vh; /* Max height for the media itself, leaving space for title/controls */
     width: auto;
     height: auto;
     object-fit: contain;
@@ -693,12 +749,12 @@ nav .container {
 .close-gallery-modal {
     position: absolute;
     top: 20px;
-    right: 40px;
+    right: 30px; /* Adjusted for consistency */
     color: var(--white);
     font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.6);
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -706,6 +762,8 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    z-index: 10; /* Above modal content */
+    line-height: 1; /* Center the X */
 }
 
 .close-gallery-modal:hover {
@@ -725,13 +783,14 @@ nav .container {
 .contact {
     padding: 100px 0;
     background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
-    border-bottom: 2px solid var(--muted-gold);
+    /* border-bottom: 2px solid var(--muted-gold); No border needed if it's the last main section */
 }
 
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Default for larger screens */
     gap: 4rem;
+    align-items: start; /* Align items to the start for better form layout */
 }
 
 .contact-info h2 {
@@ -742,13 +801,17 @@ nav .container {
 
 .contact-info p {
     font-size: 1.1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Consistent spacing */
     line-height: 1.7;
+    color: var(--white); /* Ensure good contrast on red background */
+}
+.contact-info strong {
+    color: var(--light-gold); /* Lighter gold for emphasis */
 }
 
 .contact-form {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 2rem;
+    background: rgba(0, 0, 0, 0.35); /* Slightly more opaque */
+    padding: 2.5rem; /* Increased padding */
     border-radius: 10px;
     border: 1px solid var(--muted-gold);
 }
@@ -765,7 +828,8 @@ nav .container {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select { /* Added select here */
     width: 100%;
     padding: 12px;
     border: 2px solid var(--dark-gray);
@@ -773,19 +837,34 @@ nav .container {
     background: var(--black);
     color: var(--white);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--muted-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3); /* Focus indicator */
 }
 
 .form-group textarea {
     height: 120px;
     resize: vertical;
 }
+
+/* Style for the select dropdown arrow (browser default, but can be customized with more effort) */
+.form-group select {
+    appearance: none; /* Remove default arrow on some browsers */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23C9B037%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px auto;
+    padding-right: 30px; /* Make space for arrow */
+}
+
 
 .submit-btn {
     background: var(--muted-gold);
@@ -803,25 +882,26 @@ nav .container {
 .submit-btn:hover {
     background: var(--dark-gold);
     transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
 /* Footer */
 footer {
     background: var(--black);
-    padding: 3rem 0 1rem;
+    padding: 3rem 0 1.5rem; /* Adjusted padding */
     border-top: 3px solid var(--muted-gold);
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 2.5rem; /* Increased gap */
+    margin-bottom: 2.5rem;
 }
 
 .footer-section h3 {
     color: var(--muted-gold);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem; /* Increased margin */
     font-size: 1.3rem;
 }
 
@@ -829,18 +909,29 @@ footer {
 .footer-section a {
     color: #ccc;
     text-decoration: none;
-    line-height: 1.6;
+    line-height: 1.7; /* Slightly more line height */
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem; /* Spacing for list items */
+}
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-section li {
+    margin-bottom: 0.5rem;
 }
 
 .footer-section a:hover {
     color: var(--muted-gold);
+    text-decoration: underline;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid var(--dark-gray);
-    color: #ccc;
+    color: #aaa; /* Slightly lighter gray */
+    font-size: 0.9rem;
 }
 
 /* Animations */
@@ -849,69 +940,119 @@ footer {
     to { opacity: 1; }
 }
 
-@keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
+@keyframes slideIn { /* Used by modals */
+    from { transform: translateY(-30px); opacity: 0; } /* Softer slide */
     to { transform: translateY(0); opacity: 1; }
 }
 
+/* CSS for scroll-triggered animations */
+/* Elements start hidden and slightly offset */
+.portfolio-card, .service-card, .about-text > *, .client-logos, 
+.gallery-item, .blog .service-card, .contact-info > *, .contact-form > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* When .element--in-view class is added by JS */
+.element--in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) { /* Tablet breakpoint */
+    .about-content,
+    .contact-content {
+        grid-template-columns: 1fr; /* Stack on tablets */
+        gap: 3rem;
+    }
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) { /* Mobile breakpoint */
     .nav-links {
+        display: none; /* Hidden by default, shown by JS toggle */
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* Adjust based on nav height */
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.98); /* Dark background for dropdown */
+        padding: 1rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--muted-gold);
+        z-index: -1; /* Below main nav content initially */
+    }
+
+    .nav-links.nav-links--active { /* Class toggled by JS */
+        display: flex;
+        z-index: 999; /* Ensure it's above other nav content when active */
+    }
+
+
+    .nav-right { /* Hide social icons on mobile nav by default */
+        /* display: none;  -- This was hiding the mobile menu icon too */
+    }
+    .nav-right .social-icons { /* Specifically hide social icons in nav-right */
         display: none;
     }
 
-    .nav-right {
-        display: none;
-    }
 
     .mobile-menu {
-        display: flex;
+        display: flex; /* Show hamburger */
+        z-index: 1001; /* Ensure it's clickable */
     }
 
     .logo img {
         height: 35px;
     }
 
-    .hero h1 {
+    .hero h1 { /* sr-only, but if it were visible */
         font-size: 2.5rem;
     }
 
     .hero .subtitle {
         font-size: 1.2rem;
     }
-
-    .about-content,
-    .contact-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+    .hero p {
+        font-size: 1rem;
     }
 
-    .stats {
-        grid-template-columns: 1fr;
+    .section-title {
+        font-size: 2rem;
     }
 
-    .portfolio-grid {
-        grid-template-columns: 1fr;
+    .services-grid,
+    .portfolio-grid, /* Already adjusted above, but can be more specific here */
+    .gallery-grid,
+    .footer-content {
+        grid-template-columns: 1fr; /* Stack all grids on mobile */
     }
-
+    
     .portfolio-modal-content {
         width: 95%;
         margin: 5% auto;
     }
 
     .portfolio-modal-header {
-        height: 200px;
+        height: 250px; /* Adjust for smaller screens */
+    }
+    .portfolio-modal h2 {
+        font-size: 1.8rem;
+    }
+    .metric-card {
+        padding: 1rem;
+    }
+    .metric-number {
+        font-size: 1.8rem;
     }
 
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section-title {
-        font-size: 2rem;
+    .contact-form {
+        padding: 1.5rem;
     }
 }
+
