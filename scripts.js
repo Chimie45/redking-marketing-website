@@ -1,45 +1,132 @@
-// Gallery modal functions
+// Store slide indexes for each gallery slideshow
+let gallerySlideIndexes = {
+    'gallery5': 1
+    // Add other gallery IDs here if they become slideshows
+};
+
+// Gallery modal functions (modified to include slideshow logic)
 function openGalleryModal(modalId) {
     const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Modal not found:', modalId);
+        return;
+    }
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
-    // Auto-play videos when modal opens
     const video = modal.querySelector('video');
     if (video) {
         video.currentTime = 0;
-        video.play().catch(e => console.log('Video autoplay prevented by browser'));
+        video.play().catch(e => console.log('Video autoplay prevented by browser:', e));
+    }
+
+    // If the modal is a slideshow, initialize it
+    if (modalId === 'gallery5') { // Check if it's our specific slideshow
+        // Ensure the slide index is reset or set to 1 when opening
+        gallerySlideIndexes[modalId] = 1; 
+        showGallerySlide(gallerySlideIndexes[modalId], modalId);
     }
 }
 
 function closeGalleryModal(modalId) {
     const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Modal not found for closing:', modalId);
+        return;
+    }
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     
-    // Pause videos when modal closes
     const video = modal.querySelector('video');
     if (video) {
         video.pause();
         video.currentTime = 0;
+    }
+    // No specific action needed for slideshow on close, as slides are just hidden/shown
+}
+
+// Slideshow specific functions
+function plusSlides(n, galleryId) {
+    // gallerySlideIndexes[galleryId] is already updated by showGallerySlide if it goes out of bounds
+    showGallerySlide(gallerySlideIndexes[galleryId] += n, galleryId);
+}
+
+function currentGallerySlide(n, galleryId) {
+    showGallerySlide(gallerySlideIndexes[galleryId] = n, galleryId);
+}
+
+function showGallerySlide(n, galleryId) {
+    let i;
+    const slideshowContainer = document.getElementById(galleryId + '-slideshow');
+    // It's possible this function is called for a modal that isn't a slideshow,
+    // or before the slideshow elements are fully confirmed.
+    if (!slideshowContainer) {
+        // This is not an error if the modal is not a slideshow (e.g. gallery1, gallery2 etc.)
+        // console.warn('Slideshow container not found for gallery:', galleryId);
+        return; 
+    }
+
+    const slides = slideshowContainer.getElementsByClassName("gallery-slide");
+    const dotsContainer = document.getElementById(galleryId + '-dots');
+    let dots = [];
+    if (dotsContainer) {
+        dots = dotsContainer.getElementsByClassName("dot");
+    }
+
+    if (slides.length === 0) {
+        // This would be an issue if slideshowContainer exists but has no slides.
+        // console.warn('No slides found in slideshow container for gallery:', galleryId);
+        return;
+    }
+
+    if (n > slides.length) { gallerySlideIndexes[galleryId] = 1 }
+    if (n < 1) { gallerySlideIndexes[galleryId] = slides.length }
+    
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    if (dots.length > 0) { // Check if dots exist
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+    }
+    
+    slides[gallerySlideIndexes[galleryId] - 1].style.display = "block";
+    if (dots.length > 0) { // Check if dots exist
+        dots[gallerySlideIndexes[galleryId] - 1].className += " active";
     }
 }
 
 // Portfolio modal functions
 function openPortfolioModal(modalId) {
     const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Portfolio modal not found:', modalId);
+        return;
+    }
     const modalHeader = modal.querySelector('.portfolio-modal-header');
     const modalImg = modalHeader.querySelector('img');
     
     // Set the background image for the blur effect
-    modalHeader.style.backgroundImage = `url(${modalImg.src})`;
+    if (modalImg && modalImg.src) {
+        modalHeader.style.backgroundImage = `url(${modalImg.src})`;
+    } else if (modalImg) {
+        console.warn('Portfolio modal image source not found for background blur:', modalId);
+    } else {
+        console.warn('Portfolio modal image not found for background blur:', modalId);
+    }
     
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
 
 function closePortfolioModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Portfolio modal not found for closing:', modalId);
+        return;
+    }
+    modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
@@ -47,12 +134,18 @@ function closePortfolioModal(modalId) {
 window.addEventListener('click', function(event) {
     if (event.target.classList.contains('gallery-modal')) {
         const modalId = event.target.id;
-        closeGalleryModal(modalId);
+        // Check if the modal is actually displayed before trying to close it
+        if (document.getElementById(modalId) && document.getElementById(modalId).style.display === 'block') {
+            closeGalleryModal(modalId);
+        }
     }
     
     if (event.target.classList.contains('portfolio-modal')) {
-        event.target.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        // Check if the modal is actually displayed
+        if (event.target.style.display === 'block') {
+            event.target.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     }
 });
 
@@ -71,168 +164,221 @@ document.addEventListener('keydown', function(event) {
         const portfolioModals = document.querySelectorAll('.portfolio-modal');
         portfolioModals.forEach(modal => {
             if (modal.style.display === 'block') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                // Use the specific close function if available, otherwise just hide
+                if (typeof closePortfolioModal === 'function') {
+                    closePortfolioModal(modal.id);
+                } else {
+                    modal.style.display = 'none';
+                }
             }
         });
+        // Ensure body overflow is reset if any modal was closed
+        if (document.querySelectorAll('.gallery-modal[style*="display: block"]').length === 0 &&
+            document.querySelectorAll('.portfolio-modal[style*="display: block"]').length === 0) {
+            document.body.style.overflow = 'auto';
+        }
     }
 });
 
 // Contact form handling
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
-    
-    // Simple validation
-    if (!data.name || !data.email || !data.message) {
-        alert('Please fill in all required fields.');
-        return;
-    }
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-    
-    // Simulate form submission (replace with actual form handling)
-    alert('Thank you for your message! We\'ll get back to you within 24 hours.');
-    this.reset();
-});
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        if (!data.name || !data.email || !data.message) {
+            // Consider using a custom, non-blocking notification instead of alert
+            console.warn('Form validation: Please fill in all required fields.');
+            // Example: display a message in a specific div
+            // document.getElementById('form-message').textContent = 'Please fill in all required fields.';
+            return;
+        }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+            console.warn('Form validation: Please enter a valid email address.');
+            // document.getElementById('form-message').textContent = 'Please enter a valid email address.';
+            return;
+        }
+        
+        console.log('Form submitted (simulated):', data);
+        // document.getElementById('form-message').textContent = 'Thank you for your message! We\'ll get back to you within 24 hours.';
+        this.reset();
+    });
+} else {
+    console.warn("Contact form with ID 'contactForm' not found.");
+}
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        const href = this.getAttribute('href');
+        // Ensure it's a valid internal link and not just "#"
+        if (href.length > 1 && href.startsWith('#')) {
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start' 
+                });
+            }
         }
     });
 });
 
 // Mobile menu toggle
-document.querySelector('.mobile-menu').addEventListener('click', function() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    
-    // Add animation to hamburger menu
-    this.classList.toggle('active');
-});
+const mobileMenuIcon = document.querySelector('.mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuIcon && navLinks) {
+    mobileMenuIcon.addEventListener('click', function() {
+        // Toggle a class on nav-links for display and on mobile-menu for active state
+        navLinks.classList.toggle('nav-links--active'); // You'll need to define this class in CSS
+        this.classList.toggle('active'); 
+        
+        // Example CSS for .nav-links--active:
+        // .nav-links--active { display: flex; flex-direction: column; position: absolute; top: 70px; left:0; right:0; background: var(--black); padding: 1rem; gap: 1rem; }
+        // Also, ensure .nav-links initial display is none for mobile in CSS if it's not already.
+    });
+} else {
+    console.warn("Mobile menu icon or nav links not found.");
+}
+
 
 // Add scroll effect to navigation
 window.addEventListener('scroll', function() {
     const nav = document.querySelector('nav');
-    if (window.scrollY > 100) {
-        nav.style.background = 'rgba(0, 0, 0, 0.95)';
-        nav.style.backdropFilter = 'blur(10px)';
-    } else {
-        nav.style.background = 'var(--black)';
-        nav.style.backdropFilter = 'none';
+    if (nav) {
+        if (window.scrollY > 100) {
+            nav.classList.add('nav--scrolled'); // Define .nav--scrolled in CSS
+            // nav.style.background = 'rgba(0, 0, 0, 0.95)';
+            // nav.style.backdropFilter = 'blur(10px)';
+        } else {
+            nav.classList.remove('nav--scrolled');
+            // nav.style.background = 'var(--black)';
+            // nav.style.backdropFilter = 'none';
+        }
     }
 });
+// CSS for .nav--scrolled:
+// nav.nav--scrolled { background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); }
+
 
 // Animate elements on scroll (only for below-the-fold content)
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -50px 0px' // Start animation a bit before fully in view
 };
 
-const observer = new IntersectionObserver(function(entries) {
+const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
+            entry.target.classList.add('element--in-view'); // Add a class to trigger animation
             
-            // Animate stats numbers
-            if (entry.target.classList.contains('stat-number')) {
-                animateValue(entry.target);
+            // If you still want to animate numbers specifically when they come into view
+            if (entry.target.classList.contains('metric-number')) { // Assuming numbers are in portfolio modals
+                 // This logic might need adjustment if numbers are animated on modal open instead of scroll
+                // animateValue(entry.target); // This was the original call
             }
+            observer.unobserve(entry.target); // Animate only once
         }
     });
 }, observerOptions);
 
-// No animation for service cards - they should be static
-// Only observe portfolio cards for fade-in (below the fold)
-document.querySelectorAll('.portfolio-card').forEach((card, index) => {
-    card.style.opacity = '0';
-    card.style.transition = `opacity 0.6s ease ${index * 0.1}s`;
-    observer.observe(card);
+// Apply observer to elements you want to animate
+// Example: Portfolio cards (already in your HTML)
+document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *').forEach((el, index) => {
+    el.style.opacity = '0'; // Initial state for fade-in
+    el.style.transform = 'translateY(20px)'; // Initial state for slide-up
+    // Apply a transition in CSS for .element--in-view
+    // Example CSS: 
+    // .element--in-view { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+    // You can add staggered delays using el.style.transitionDelay = `${index * 0.1}s`;
+    // but it's often better to handle complex staggers with CSS or more specific JS.
+    animatedElementsObserver.observe(el);
 });
+// CSS for animations:
+// selector-for-animated-element { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+// selector-for-animated-element.element--in-view { opacity: 1; transform: translateY(0); }
 
-// Observe stats for animation
-document.querySelectorAll('.stat').forEach(stat => {
-    stat.style.opacity = '0';
-    stat.style.transform = 'translateY(20px)';
-    stat.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(stat);
-});
 
-// Animate stat numbers
+// Animate stat numbers (this function might be better called when modals open, rather than on scroll)
 function animateValue(element) {
-    const finalValue = element.textContent;
+    const finalValueText = element.textContent;
     
-    // Check if the value is a number
-    if (!/^\d+/.test(finalValue)) {
-        return; // Skip animation for non-numeric values
-    }
+    // Extract numeric part, handling '+' or '%'
+    let numericPart = finalValueText.replace(/[^\d.-]/g, ''); // Get numbers, decimal, minus
+    if (numericPart === '') return; // No number to animate
+
+    const numericValue = parseFloat(numericPart);
+    if (isNaN(numericValue)) return;
+
+    const suffix = finalValueText.substring(numericPart.length); // Get suffix like '+', '%'
     
-    const numericValue = parseInt(finalValue);
     const duration = 2000; // 2 seconds
-    const increment = numericValue / (duration / 16); // 60fps
+    const frameDuration = 16; // approx 60fps
+    const totalFrames = duration / frameDuration;
+    const increment = numericValue / totalFrames;
     let currentValue = 0;
     
+    element.textContent = (numericValue < 1 && numericValue > 0 ? '0' : '0') + suffix; // Start display at 0 or 0.0
+
     const timer = setInterval(() => {
         currentValue += increment;
-        if (currentValue >= numericValue) {
+        if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue)) {
             currentValue = numericValue;
             clearInterval(timer);
         }
         
-        // Handle special cases
-        if (finalValue.includes('+')) {
-            element.textContent = Math.floor(currentValue) + '+';
-        } else if (finalValue.includes('%')) {
-            element.textContent = Math.floor(currentValue) + '%';
+        // Format based on original precision if it was a decimal
+        let displayValue;
+        if (numericPart.includes('.')) {
+            const decimalPlaces = (numericPart.split('.')[1] || '').length;
+            displayValue = currentValue.toFixed(decimalPlaces);
         } else {
-            element.textContent = Math.floor(currentValue);
+            displayValue = Math.floor(currentValue);
         }
-    }, 16);
+        element.textContent = displayValue + suffix;
+
+    }, frameDuration);
 }
 
-// Add loading state for images
+// Add loading state for images (error handling)
 document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('error', function() {
-        this.style.display = 'none';
-        console.error('Failed to load image:', this.src);
-    });
+    if (!img.complete || img.naturalWidth === 0) { // Check if already loaded or broken
+        img.addEventListener('error', function() {
+            this.style.display = 'none'; // Or set a placeholder
+            console.error('Failed to load image:', this.src);
+        });
+    }
 });
 
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function() {
-    // No animations for hero content - it should be visible immediately
-    
-    // Lazy load images
+    // Lazy load images (if you decide to implement data-src)
     const lazyImages = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    lazyImages.forEach(img => imageObserver.observe(img));
-});
+    if (lazyImages.length > 0) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, { threshold: 0.1 }); // Load when 10% visible
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
 
-// Remove ALL parallax effects
-// No parallax effect - content stays in place
+    // Example: If you want to animate numbers in portfolio modals when they open
+    // You would call animateValue from within openPortfolioModal for each .metric-number
+    // For example, inside openPortfolioModal, after modal.style.display = 'block';
+    // const metricNumbers = modal.querySelectorAll('.metric-number');
+    // metricNumbers.forEach(num => animateValue(num));
+});
