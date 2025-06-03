@@ -948,7 +948,7 @@ footer {
 /* CSS for scroll-triggered animations */
 /* Elements start hidden and slightly offset */
 .portfolio-card, .service-card, .about-text > *, .client-logos, 
-.gallery-item, .blog .service-card, .contact-info > *, .contact-form > * {
+.gallery-item, #blog .service-card, .contact-info > *, .contact-form > * { /* Corrected .blog .service-card */
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -958,6 +958,104 @@ footer {
 .element--in-view {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Slideshow container for Gallery Modals */
+.slideshow-container {
+  position: relative;
+  max-width: 100%; /* Ensure it fits within the modal content area */
+  margin: auto;
+}
+
+.gallery-slide {
+  display: none; /* Hide all slides by default */
+  text-align: center; /* Center images if they are smaller than container */
+}
+
+.gallery-slide img {
+  max-width: 100%;
+  max-height: 75vh; /* Adjust as needed, similar to single gallery image */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px; /* Consistent with other modal images */
+}
+
+/* Next & previous buttons for slideshow */
+.prev-slide, .next-slide {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px; /* Adjust to vertically center */
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
+  z-index: 15; /* Ensure they are above slides */
+}
+
+/* Position the "next button" to the right */
+.next-slide {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev-slide:hover, .next-slide:hover {
+  background-color: rgba(212, 175, 55, 0.8); /* Muted gold on hover */
+  color: var(--black);
+}
+
+/* Dots/bullets/indicators */
+.dots-container { /* This class was in my example but not used in your HTML for dots, using direct style on div */
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* Styling for the div containing dots in HTML */
+#gallery5-dots {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #717171; /* Darker gray for inactive dots */
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active, .dot:hover { /* Combined active and hover for dots */
+  background-color: var(--muted-gold); /* Muted gold for active/hover dot */
+}
+
+/* Fading animation for slides */
+.fade {
+  animation-name: fade;
+  animation-duration: 0.5s; /* Reduced duration for quicker transition */
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* Adjust gallery modal content for slideshow (gallery5 specific if needed) */
+#gallery5 .gallery-modal-content {
+    /* max-height: 90vh; /* Already there, ensure it accommodates title/dots */
+}
+
+#gallery5 .gallery-modal-title {
+    /* margin-top: 1.5rem; /* Already there, ensure spacing is good */
 }
 
 
@@ -985,26 +1083,25 @@ footer {
         padding: 1rem;
         gap: 1rem;
         border-bottom: 1px solid var(--muted-gold);
-        z-index: -1; /* Below main nav content initially */
+        z-index: 998; /* Below nav but above page content, ensure mobile-menu icon is higher */
     }
 
     .nav-links.nav-links--active { /* Class toggled by JS */
         display: flex;
-        z-index: 999; /* Ensure it's above other nav content when active */
     }
 
 
-    .nav-right { /* Hide social icons on mobile nav by default */
-        /* display: none;  -- This was hiding the mobile menu icon too */
+    .nav-right { 
+        /* Keep .nav-right itself displayed for mobile-menu */
     }
-    .nav-right .social-icons { /* Specifically hide social icons in nav-right */
+    .nav-right .social-icons { /* Specifically hide social icons in nav-right for mobile */
         display: none;
     }
 
 
     .mobile-menu {
         display: flex; /* Show hamburger */
-        z-index: 1001; /* Ensure it's clickable */
+        z-index: 1001; /* Ensure it's clickable and above nav-links dropdown */
     }
 
     .logo img {
@@ -1027,7 +1124,7 @@ footer {
     }
 
     .services-grid,
-    .portfolio-grid, /* Already adjusted above, but can be more specific here */
+    .portfolio-grid, 
     .gallery-grid,
     .footer-content {
         grid-template-columns: 1fr; /* Stack all grids on mobile */
@@ -1053,6 +1150,16 @@ footer {
 
     .contact-form {
         padding: 1.5rem;
+    }
+
+    /* Slideshow adjustments for mobile */
+    .prev-slide, .next-slide {
+        font-size: 16px;
+        padding: 12px;
+    }
+    .dot {
+        height: 12px;
+        width: 12px;
     }
 }
 
