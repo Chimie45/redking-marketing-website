@@ -118,6 +118,10 @@ function openPortfolioModal(modalId) {
     
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+
+    // Animate metric numbers when portfolio modal opens
+    const metricNumbers = modal.querySelectorAll('.metric-number');
+    metricNumbers.forEach(num => animateValue(num));
 }
 
 function closePortfolioModal(modalId) {
@@ -143,7 +147,8 @@ window.addEventListener('click', function(event) {
     if (event.target.classList.contains('portfolio-modal')) {
         // Check if the modal is actually displayed
         if (event.target.style.display === 'block') {
-            event.target.style.display = 'none';
+            // event.target.style.display = 'none'; // Handled by closePortfolioModal
+            closePortfolioModal(event.target.id); // Use the specific close function
             document.body.style.overflow = 'auto';
         }
     }
@@ -152,11 +157,13 @@ window.addEventListener('click', function(event) {
 // Close modals with Escape key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
+        let aModalWasOpen = false;
         // Close gallery modals
         const galleryModals = document.querySelectorAll('.gallery-modal');
         galleryModals.forEach(modal => {
             if (modal.style.display === 'block') {
                 closeGalleryModal(modal.id);
+                aModalWasOpen = true;
             }
         });
         
@@ -164,17 +171,12 @@ document.addEventListener('keydown', function(event) {
         const portfolioModals = document.querySelectorAll('.portfolio-modal');
         portfolioModals.forEach(modal => {
             if (modal.style.display === 'block') {
-                // Use the specific close function if available, otherwise just hide
-                if (typeof closePortfolioModal === 'function') {
-                    closePortfolioModal(modal.id);
-                } else {
-                    modal.style.display = 'none';
-                }
+                closePortfolioModal(modal.id);
+                aModalWasOpen = true;
             }
         });
-        // Ensure body overflow is reset if any modal was closed
-        if (document.querySelectorAll('.gallery-modal[style*="display: block"]').length === 0 &&
-            document.querySelectorAll('.portfolio-modal[style*="display: block"]').length === 0) {
+        
+        if (aModalWasOpen) {
             document.body.style.overflow = 'auto';
         }
     }
@@ -206,6 +208,7 @@ if (contactForm) {
         
         console.log('Form submitted (simulated):', data);
         // document.getElementById('form-message').textContent = 'Thank you for your message! We\'ll get back to you within 24 hours.';
+        alert('Thank you for your message! We\'ll get back to you within 24 hours.'); // Kept alert as per original
         this.reset();
     });
 } else {
@@ -221,6 +224,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const targetElement = document.querySelector(href);
             if (targetElement) {
                 e.preventDefault();
+                // Also close mobile menu if open
+                if (navLinks && navLinks.classList.contains('nav-links--active')) {
+                    navLinks.classList.remove('nav-links--active');
+                    if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
+                }
                 targetElement.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start' 
@@ -236,13 +244,8 @@ const navLinks = document.querySelector('.nav-links');
 
 if (mobileMenuIcon && navLinks) {
     mobileMenuIcon.addEventListener('click', function() {
-        // Toggle a class on nav-links for display and on mobile-menu for active state
-        navLinks.classList.toggle('nav-links--active'); // You'll need to define this class in CSS
+        navLinks.classList.toggle('nav-links--active'); 
         this.classList.toggle('active'); 
-        
-        // Example CSS for .nav-links--active:
-        // .nav-links--active { display: flex; flex-direction: column; position: absolute; top: 70px; left:0; right:0; background: var(--black); padding: 1rem; gap: 1rem; }
-        // Also, ensure .nav-links initial display is none for mobile in CSS if it's not already.
     });
 } else {
     console.warn("Mobile menu icon or nav links not found.");
@@ -254,89 +257,67 @@ window.addEventListener('scroll', function() {
     const nav = document.querySelector('nav');
     if (nav) {
         if (window.scrollY > 100) {
-            nav.classList.add('nav--scrolled'); // Define .nav--scrolled in CSS
-            // nav.style.background = 'rgba(0, 0, 0, 0.95)';
-            // nav.style.backdropFilter = 'blur(10px)';
+            nav.classList.add('nav--scrolled'); 
         } else {
             nav.classList.remove('nav--scrolled');
-            // nav.style.background = 'var(--black)';
-            // nav.style.backdropFilter = 'none';
         }
     }
 });
-// CSS for .nav--scrolled:
-// nav.nav--scrolled { background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); }
 
 
 // Animate elements on scroll (only for below-the-fold content)
 const observerOptions = {
-    threshold: 0.1,
+    threshold: 0.1, // Trigger when 10% of the element is visible
     rootMargin: '0px 0px -50px 0px' // Start animation a bit before fully in view
 };
 
 const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('element--in-view'); // Add a class to trigger animation
-            
-            // If you still want to animate numbers specifically when they come into view
-            if (entry.target.classList.contains('metric-number')) { // Assuming numbers are in portfolio modals
-                 // This logic might need adjustment if numbers are animated on modal open instead of scroll
-                // animateValue(entry.target); // This was the original call
-            }
+            entry.target.classList.add('element--in-view'); 
             observer.unobserve(entry.target); // Animate only once
         }
     });
 }, observerOptions);
 
 // Apply observer to elements you want to animate
-// Example: Portfolio cards (already in your HTML)
-document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *').forEach((el, index) => {
-    el.style.opacity = '0'; // Initial state for fade-in
-    el.style.transform = 'translateY(20px)'; // Initial state for slide-up
-    // Apply a transition in CSS for .element--in-view
-    // Example CSS: 
-    // .element--in-view { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
-    // You can add staggered delays using el.style.transitionDelay = `${index * 0.1}s`;
-    // but it's often better to handle complex staggers with CSS or more specific JS.
+document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *').forEach((el) => {
+    // el.style.opacity = '0'; // REMOVED: Initial state for fade-in, should be handled by CSS if animation is desired
+    // el.style.transform = 'translateY(20px)'; // REMOVED: Initial state for slide-up, should be handled by CSS
     animatedElementsObserver.observe(el);
 });
-// CSS for animations:
-// selector-for-animated-element { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-// selector-for-animated-element.element--in-view { opacity: 1; transform: translateY(0); }
 
 
-// Animate stat numbers (this function might be better called when modals open, rather than on scroll)
+// Animate stat numbers 
 function animateValue(element) {
+    if (!element) return; // Guard clause
     const finalValueText = element.textContent;
     
-    // Extract numeric part, handling '+' or '%'
-    let numericPart = finalValueText.replace(/[^\d.-]/g, ''); // Get numbers, decimal, minus
-    if (numericPart === '') return; // No number to animate
+    let numericPart = finalValueText.replace(/[^\d.-]/g, ''); 
+    if (numericPart === '') return; 
 
     const numericValue = parseFloat(numericPart);
     if (isNaN(numericValue)) return;
 
-    const suffix = finalValueText.substring(numericPart.length); // Get suffix like '+', '%'
+    const suffix = finalValueText.substring(numericPart.length); 
     
-    const duration = 2000; // 2 seconds
-    const frameDuration = 16; // approx 60fps
+    const duration = 1500; // 1.5 seconds
+    const frameDuration = 16; 
     const totalFrames = duration / frameDuration;
     const increment = numericValue / totalFrames;
     let currentValue = 0;
     
-    element.textContent = (numericValue < 1 && numericValue > 0 ? '0' : '0') + suffix; // Start display at 0 or 0.0
+    element.textContent = (numericValue < 1 && numericValue > 0 && numericValue !== 0 ? '0.0' : '0') + suffix; 
 
     const timer = setInterval(() => {
         currentValue += increment;
-        if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue)) {
+        if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue) || numericValue === 0) {
             currentValue = numericValue;
             clearInterval(timer);
         }
         
-        // Format based on original precision if it was a decimal
         let displayValue;
-        if (numericPart.includes('.')) {
+        if (numericPart.includes('.') && !Number.isInteger(numericValue) ) { // Animate decimals only if original was decimal
             const decimalPlaces = (numericPart.split('.')[1] || '').length;
             displayValue = currentValue.toFixed(decimalPlaces);
         } else {
@@ -349,17 +330,21 @@ function animateValue(element) {
 
 // Add loading state for images (error handling)
 document.querySelectorAll('img').forEach(img => {
-    if (!img.complete || img.naturalWidth === 0) { // Check if already loaded or broken
+    // Check if image is already loaded (e.g. from cache) or has an error
+    if (!img.complete) { // Only add listener if not yet complete
         img.addEventListener('error', function() {
             this.style.display = 'none'; // Or set a placeholder
             console.error('Failed to load image:', this.src);
         });
+    } else if (img.naturalWidth === 0 && img.src) { // Already completed but failed to load (e.g. broken link)
+         img.style.display = 'none';
+         console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
 });
 
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function() {
-    // Lazy load images (if you decide to implement data-src)
+    // Lazy load images (if you decide to implement data-src in HTML)
     const lazyImages = document.querySelectorAll('img[data-src]');
     if (lazyImages.length > 0) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -371,14 +356,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     imageObserver.unobserve(img);
                 }
             });
-        }, { threshold: 0.1 }); // Load when 10% visible
+        }, { threshold: 0.1 }); 
         
         lazyImages.forEach(img => imageObserver.observe(img));
     }
 
-    // Example: If you want to animate numbers in portfolio modals when they open
-    // You would call animateValue from within openPortfolioModal for each .metric-number
-    // For example, inside openPortfolioModal, after modal.style.display = 'block';
-    // const metricNumbers = modal.querySelectorAll('.metric-number');
-    // metricNumbers.forEach(num => animateValue(num));
+    // Animate numbers in portfolio modals when they open - moved to openPortfolioModal
 });
