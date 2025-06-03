@@ -247,10 +247,10 @@
                 Explore our work through images, videos, and resources showcasing successful campaigns and creative executions across the gaming industry.
             </p>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openGalleryModal('gallery1')">
-                    <img src="gallery-1.jpg" alt="Gallery Item 1">
+                <div class="gallery-item" onclick="openIframeModal('gallery1', 'fngm.html')"> <!-- Changed onclick -->
+                    <img src="gallery-1.jpg" alt="FN Game Masters Website"> <!-- Updated alt text -->
                     <div class="gallery-overlay">
-                        <h3>Gallery1</h3>
+                        <h3>FN Game Masters</h3> <!-- Updated title -->
                     </div>
                 </div>
                 
@@ -413,6 +413,8 @@
         </div>
     </footer>
 
+    <!-- Portfolio Modals (Reordered to match cards) -->
+    <!-- ... (portfolio modals remain the same) ... -->
     <div id="portfolio4" class="portfolio-modal">
         <div class="portfolio-modal-content">
             <div class="portfolio-modal-header">
@@ -671,10 +673,13 @@
         </div>
     </div>
 
-    <div id="gallery1" class="gallery-modal">
-        <div class="gallery-modal-content">
+    <!-- Gallery Modals -->
+    <div id="gallery1" class="gallery-modal"> <!-- This modal will now contain an iframe -->
+        <div class="gallery-modal-content iframe-modal-content">
             <span class="close-gallery-modal" onclick="closeGalleryModal('gallery1')">&times;</span>
-            <img src="gallery-1.jpg" alt="Campaign Creative">
+            <iframe class="gallery-iframe" src="" frameborder="0" allowfullscreen></iframe>
+            <!-- Title can be removed or kept if you want a title above the iframe -->
+            <!-- <h3 class="gallery-modal-title">FN Game Masters</h3> -->
         </div>
     </div>
 
