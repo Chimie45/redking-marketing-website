@@ -949,8 +949,10 @@ footer {
 /* Elements start hidden and slightly offset */
 .portfolio-card, .service-card, .about-text > *, .client-logos, 
 .gallery-item, #blog .service-card, .contact-info > *, .contact-form > * { /* Corrected .blog .service-card */
-    opacity: 0;
-    transform: translateY(20px);
+    /* opacity: 0; */ /* Original hiding rule - Commented out for debugging */
+    /* transform: translateY(20px); */ /* Original offset rule - Commented out for debugging */
+    opacity: 1; /* Make visible by default for debugging */
+    transform: translateY(0); /* No offset by default for debugging */
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
