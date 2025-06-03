@@ -901,8 +901,8 @@ nav .container {
 
 .site-footer .footer-main {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr; /* About (2fr), Links (1fr), Contact/Newsletter (1fr) */
-    gap: 40px; /* Increased gap */
+    grid-template-columns: 2fr 1.5fr 1.5fr; /* About (2fr), Links (1.5fr), Contact/Newsletter (1.5fr) - Adjusted for better balance */
+    gap: 30px; /* Adjusted gap */
     margin-bottom: 40px;
 }
 
@@ -946,28 +946,29 @@ nav .container {
 }
 
 .site-footer .footer-links-wrapper {
-    /* Column 3 in the new 3-column layout (effectively 2nd visual group after about) */
+    /* This is now the second main column */
 }
 
 .site-footer .footer-links-columns {
-    display: grid; /* Use grid for two columns of links */
-    grid-template-columns: 1fr 1fr;
-    gap: 15px; /* Gap between the two internal columns of links */
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* Two columns for links */
+    gap: 10px; /* Gap between the two internal columns of links */
 }
 
 .site-footer .footer-links-columns ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    list-style: none !important; /* Ensure no bullets */
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .site-footer .footer-links-wrapper li { 
     margin-bottom: 12px; /* Increased spacing */
+    list-style-type: none !important; /* Ensure no bullets on li */
 }
 
 .site-footer .footer-links-wrapper a {
     color: #ccc;
-    text-decoration: none;
+    text-decoration: none !important; /* Ensure no underline */
     transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
@@ -977,7 +978,7 @@ nav .container {
 }
 
 .site-footer .footer-contact-newsletter {
-    /* Column 4 in the new 3-column layout (effectively 3rd visual group) */
+    /* This is now the third main column */
 }
 .site-footer .footer-contact {
     margin-bottom: 35px; /* More space between contact and newsletter */
@@ -1067,13 +1068,13 @@ nav .container {
 }
 .site-footer .footer-legal-links a { 
     color: #aaa;
-    text-decoration: none;
+    text-decoration: none !important; /* Ensure no underline */
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 .site-footer .footer-legal-links a:hover {
     color: var(--muted-gold);
-    text-decoration: underline;
+    text-decoration: underline !important; /* Underline on hover only */
 }
 
 
