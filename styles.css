@@ -890,49 +890,51 @@ nav .container {
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* Footer New Styles */
+/* Footer New Styles V2 */
 .site-footer {
     background-color: var(--black);
     color: #ccc;
-    padding: 50px 0 20px;
+    padding: 60px 0 30px; /* Increased top/bottom padding */
     border-top: 3px solid var(--muted-gold);
     font-size: 0.95rem;
 }
 
 .site-footer .footer-main {
     display: grid;
-    /* Adjusted to a 4-column conceptual layout for easier spanning */
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 30px;
-    margin-bottom: 30px;
+    grid-template-columns: 2fr 1fr 1fr; /* About (2fr), Links (1fr), Contact/Newsletter (1fr) */
+    gap: 40px; /* Increased gap */
+    margin-bottom: 40px;
 }
 
 .site-footer .footer-column h4 {
     color: var(--muted-gold);
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+    font-size: 1.25rem; /* Slightly larger heading */
+    margin-bottom: 25px; /* More space below heading */
     font-weight: 600;
+    text-transform: uppercase; /* Uppercase for a more formal look */
+    letter-spacing: 0.5px;
 }
 
 .site-footer .footer-logo {
-    max-height: 50px;
-    margin-bottom: 20px;
-}
-
-.site-footer .footer-about {
-    grid-column: span 2; /* Make About Us span 2 columns */
+    max-height: 50px; /* Or adjust as needed */
+    margin-bottom: 25px;
 }
 
 .site-footer .footer-about p {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     line-height: 1.7;
+    color: #b3b3b3; /* Slightly lighter than default #ccc for better readability */
+}
+
+.site-footer .footer-social-icons {
+    margin-top: 10px; /* Add some space above social icons */
 }
 
 .site-footer .footer-social-icons a {
     color: #ccc;
-    font-size: 1.5rem;
-    margin-right: 15px;
-    transition: color 0.3s ease;
+    font-size: 1.6rem; /* Larger icons */
+    margin-right: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 .site-footer .footer-social-icons a:last-child {
     margin-right: 0;
@@ -940,93 +942,99 @@ nav .container {
 
 .site-footer .footer-social-icons a:hover {
     color: var(--muted-gold);
+    transform: scale(1.1);
 }
 
 .site-footer .footer-links-wrapper {
-    /* This is now column 3 */
+    /* Column 3 in the new 3-column layout (effectively 2nd visual group after about) */
 }
 
 .site-footer .footer-links-columns {
-    display: flex;
-    gap: 20px; /* Gap between the two internal columns of links */
+    display: grid; /* Use grid for two columns of links */
+    grid-template-columns: 1fr 1fr;
+    gap: 15px; /* Gap between the two internal columns of links */
 }
 
 .site-footer .footer-links-columns ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    flex: 1; /* Each internal column takes equal space */
 }
 
-
-.site-footer .footer-links-wrapper li, /* Applied to all li in footer-links-wrapper */
-.site-footer .footer-legal-links a { /* Applied to a in footer-legal-links */
-    margin-bottom: 10px;
+.site-footer .footer-links-wrapper li { 
+    margin-bottom: 12px; /* Increased spacing */
 }
 
-.site-footer .footer-links-wrapper a,
-.site-footer .footer-legal-links a {
+.site-footer .footer-links-wrapper a {
     color: #ccc;
     text-decoration: none;
     transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
-.site-footer .footer-links-wrapper a:hover,
-.site-footer .footer-legal-links a:hover {
+.site-footer .footer-links-wrapper a:hover {
     color: var(--muted-gold);
     padding-left: 5px;
 }
 
 .site-footer .footer-contact-newsletter {
-    /* This is now column 4 */
+    /* Column 4 in the new 3-column layout (effectively 3rd visual group) */
 }
 .site-footer .footer-contact {
-    margin-bottom: 30px; /* Space between contact and newsletter */
+    margin-bottom: 35px; /* More space between contact and newsletter */
 }
 
 .site-footer .footer-contact address {
     font-style: normal;
     line-height: 1.7;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    color: #b3b3b3;
 }
 .site-footer .footer-contact p {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 .site-footer .footer-contact a {
     color: #ccc;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 .site-footer .footer-contact a:hover {
     color: var(--muted-gold);
+    text-decoration: underline;
 }
 
 .site-footer .newsletter-form {
     display: flex;
-    margin-top: 10px;
+    margin-top: 15px; /* More space above form */
 }
 
 .site-footer .newsletter-form input[type="email"] {
     flex-grow: 1;
-    padding: 10px;
+    padding: 12px; /* Increased padding */
     border: 1px solid var(--dark-gray);
     border-radius: 4px 0 0 4px;
     background-color: var(--dark-gray);
     color: var(--white);
     font-size: 0.9rem;
 }
+.site-footer .newsletter-form input[type="email"]::placeholder {
+    color: #888;
+}
 .site-footer .newsletter-form input[type="email"]:focus {
     outline: none;
     border-color: var(--muted-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
 }
 
 .site-footer .newsletter-form button {
-    padding: 10px 15px;
+    padding: 12px 18px; /* Increased padding */
     background-color: var(--muted-gold);
     color: var(--black);
     border: none;
     border-radius: 0 4px 4px 0;
     cursor: pointer;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     transition: background-color 0.3s ease;
 }
 
@@ -1036,29 +1044,36 @@ nav .container {
 
 .site-footer .footer-bottom {
     text-align: center;
-    padding-top: 30px; /* Increased padding */
-    margin-top: 30px; /* Added margin for separation */
+    padding-top: 30px; 
+    margin-top: 40px; /* Increased margin */
     border-top: 1px solid var(--dark-gray);
     display: flex;
-    flex-direction: column; /* Stack copyright and legal links on all screens by default */
+    flex-direction: column; 
     align-items: center;
-    gap: 15px; /* Increased gap */
+    gap: 15px; 
 }
 
 .site-footer .footer-bottom p {
     margin: 0;
     font-size: 0.9rem;
+    color: #aaa;
 }
 
 .site-footer .footer-legal-links {
-    display: flex; /* Keep them inline with each other */
-    gap: 20px; /* Space between Privacy and Terms */
-    list-style: none; /* Ensure no bullets if it was a ul */
+    display: flex; 
+    gap: 25px; /* Increased space */
     padding: 0;
     margin: 0;
 }
-.site-footer .footer-legal-links a { /* Target the <a> tags directly */
-    margin-bottom: 0; /* Reset margin if it was on li */
+.site-footer .footer-legal-links a { 
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+.site-footer .footer-legal-links a:hover {
+    color: var(--muted-gold);
+    text-decoration: underline;
 }
 
 
@@ -1200,30 +1215,30 @@ nav .container {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
     .site-footer .footer-main {
-        grid-template-columns: repeat(2, 1fr); /* Two columns for tablet */
+        grid-template-columns: 1fr 1fr; /* Two columns for tablet */
     }
     .site-footer .footer-about {
         grid-column: span 2; /* About takes full width on tablet */
-        text-align: center;
+        text-align: center; /* Center align for full width */
     }
      .site-footer .footer-social-icons {
         justify-content: center;
     }
     .site-footer .footer-links-wrapper {
-        grid-column: span 2; /* Quick links take full width */
-        text-align: center;
+        grid-column: span 1; /* Each takes one of the two columns */
+        text-align: left; /* Revert to left for two-column layout */
     }
     .site-footer .footer-links-columns {
-        justify-content: center; /* Center the two internal columns */
+        justify-content: flex-start; /* Align internal link columns to start */
     }
     .site-footer .footer-contact-newsletter {
-        grid-column: span 2; /* Contact/Newsletter take full width */
-        text-align: center;
+        grid-column: span 1; /* Each takes one of the two columns */
+        text-align: left; /* Revert to left */
     }
     .site-footer .newsletter-form {
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: none; /* Allow full width within its column */
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
