@@ -901,7 +901,8 @@ nav .container {
 
 .site-footer .footer-main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Adjusted to a 4-column conceptual layout for easier spanning */
+    grid-template-columns: repeat(4, 1fr); 
     gap: 30px;
     margin-bottom: 30px;
 }
@@ -918,6 +919,10 @@ nav .container {
     margin-bottom: 20px;
 }
 
+.site-footer .footer-about {
+    grid-column: span 2; /* Make About Us span 2 columns */
+}
+
 .site-footer .footer-about p {
     margin-bottom: 20px;
     line-height: 1.7;
@@ -929,33 +934,54 @@ nav .container {
     margin-right: 15px;
     transition: color 0.3s ease;
 }
+.site-footer .footer-social-icons a:last-child {
+    margin-right: 0;
+}
 
 .site-footer .footer-social-icons a:hover {
     color: var(--muted-gold);
 }
 
-.site-footer .footer-links ul,
-.site-footer .footer-legal-links ul {
-    list-style: none;
-    padding: 0;
+.site-footer .footer-links-wrapper {
+    /* This is now column 3 */
 }
 
-.site-footer .footer-links li,
-.site-footer .footer-legal-links li {
+.site-footer .footer-links-columns {
+    display: flex;
+    gap: 20px; /* Gap between the two internal columns of links */
+}
+
+.site-footer .footer-links-columns ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1; /* Each internal column takes equal space */
+}
+
+
+.site-footer .footer-links-wrapper li, /* Applied to all li in footer-links-wrapper */
+.site-footer .footer-legal-links a { /* Applied to a in footer-legal-links */
     margin-bottom: 10px;
 }
 
-.site-footer .footer-links a,
+.site-footer .footer-links-wrapper a,
 .site-footer .footer-legal-links a {
     color: #ccc;
     text-decoration: none;
     transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
-.site-footer .footer-links a:hover,
+.site-footer .footer-links-wrapper a:hover,
 .site-footer .footer-legal-links a:hover {
     color: var(--muted-gold);
     padding-left: 5px;
+}
+
+.site-footer .footer-contact-newsletter {
+    /* This is now column 4 */
+}
+.site-footer .footer-contact {
+    margin-bottom: 30px; /* Space between contact and newsletter */
 }
 
 .site-footer .footer-contact address {
@@ -1010,12 +1036,13 @@ nav .container {
 
 .site-footer .footer-bottom {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 30px; /* Increased padding */
+    margin-top: 30px; /* Added margin for separation */
     border-top: 1px solid var(--dark-gray);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack copyright and legal links on all screens by default */
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* Increased gap */
 }
 
 .site-footer .footer-bottom p {
@@ -1024,11 +1051,14 @@ nav .container {
 }
 
 .site-footer .footer-legal-links {
-    display: flex;
-    gap: 15px;
+    display: flex; /* Keep them inline with each other */
+    gap: 20px; /* Space between Privacy and Terms */
+    list-style: none; /* Ensure no bullets if it was a ul */
+    padding: 0;
+    margin: 0;
 }
-.site-footer .footer-legal-links li {
-    margin-bottom: 0;
+.site-footer .footer-legal-links a { /* Target the <a> tags directly */
+    margin-bottom: 0; /* Reset margin if it was on li */
 }
 
 
@@ -1162,21 +1192,35 @@ nav .container {
 /* Responsive Design */
 @media (max-width: 992px) { /* Tablet breakpoint */
     .about-content,
-    .contact-content,
-    .site-footer .footer-main { /* Stack footer columns on tablet */
-        grid-template-columns: 1fr 1fr; /* Two columns for tablet */
+    .contact-content {
+        grid-template-columns: 1fr; /* Stack on tablets */
+        gap: 3rem;
     }
     .portfolio-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
-     .site-footer .footer-about, .site-footer .footer-newsletter {
-        grid-column: span 2; /* Make about and newsletter full width on 2-col layout */
+    .site-footer .footer-main {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for tablet */
+    }
+    .site-footer .footer-about {
+        grid-column: span 2; /* About takes full width on tablet */
         text-align: center;
     }
-    .site-footer .footer-social-icons {
+     .site-footer .footer-social-icons {
         justify-content: center;
     }
-     .site-footer .newsletter-form {
+    .site-footer .footer-links-wrapper {
+        grid-column: span 2; /* Quick links take full width */
+        text-align: center;
+    }
+    .site-footer .footer-links-columns {
+        justify-content: center; /* Center the two internal columns */
+    }
+    .site-footer .footer-contact-newsletter {
+        grid-column: span 2; /* Contact/Newsletter take full width */
+        text-align: center;
+    }
+    .site-footer .newsletter-form {
         max-width: 400px;
         margin-left: auto;
         margin-right: auto;
@@ -1241,12 +1285,21 @@ nav .container {
     .site-footer .footer-main { /* Stack all grids on mobile */
         grid-template-columns: 1fr; 
     }
-    .site-footer .footer-about, .site-footer .footer-newsletter { /* Reset span for single column */
+    .site-footer .footer-about,
+    .site-footer .footer-links-wrapper,
+    .site-footer .footer-contact-newsletter { /* Reset span for single column */
         grid-column: auto;
         text-align: left; /* Revert to left align for single column */
     }
      .site-footer .footer-social-icons {
         justify-content: flex-start; /* Revert for single column */
+    }
+    .site-footer .footer-links-columns {
+        flex-direction: column; /* Stack internal link columns */
+        gap: 0;
+    }
+    .site-footer .footer-links-columns ul {
+        margin-bottom: 10px; /* Add some space between stacked link lists */
     }
      .site-footer .newsletter-form {
         max-width: none; /* Allow full width */
