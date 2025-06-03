@@ -424,11 +424,16 @@ nav .container {
 .portfolio-image {
     position: relative;
     width: 100%;
-    height: 320px; /* Fixed height for consistency */
+    height: 0; /* Set height to 0 for aspect ratio hack */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (9 / 16 * 100) */
     overflow: hidden;
+    background-color: var(--dark-gray); /* Fallback background */
 }
 
 .portfolio-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensures image covers the area, might crop */
