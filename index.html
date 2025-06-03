@@ -270,9 +270,8 @@
                 </div>
                 
                 <div class="gallery-item" onclick="openGalleryModal('gallery5')">
-                    <img src="gallery-5.jpg" alt="Gallery Item 5">
-                    <div class="gallery-overlay">
-                        <h3>Gallery5</h3>
+                    <img src="himekacup.jpg" alt="WPT Osaka Highlights Thumbnail"> <div class="gallery-overlay">
+                        <h3>WPT Osaka Highlights</h3>
                     </div>
                 </div>
                 
@@ -692,7 +691,33 @@
     <div id="gallery5" class="gallery-modal">
         <div class="gallery-modal-content">
             <span class="close-gallery-modal" onclick="closeGalleryModal('gallery5')">&times;</span>
-            <img src="gallery-5.jpg" alt="Social Content">
+            <div class="slideshow-container" id="gallery5-slideshow">
+                <div class="gallery-slide fade">
+                    <img src="himekacup.jpg" alt="Himeka Cup">
+                </div>
+                <div class="gallery-slide fade">
+                    <img src="osakamain.jpg" alt="Osaka Main Event">
+                </div>
+                <div class="gallery-slide fade">
+                    <img src="osaka1.jpg" alt="Osaka Event Image 1">
+                </div>
+                <div class="gallery-slide fade">
+                    <img src="osaka2.jpg" alt="Osaka Event Image 2">
+                </div>
+                <div class="gallery-slide fade">
+                    <img src="osaka3.jpg" alt="Osaka Event Image 3">
+                </div>
+                <a class="prev-slide" onclick="plusSlides(-1, 'gallery5')">&#10094;</a>
+                <a class="next-slide" onclick="plusSlides(1, 'gallery5')">&#10095;</a>
+            </div>
+            <div style="text-align:center; margin-top:15px;" id="gallery5-dots">
+                <span class="dot" onclick="currentGallerySlide(1, 'gallery5')"></span>
+                <span class="dot" onclick="currentGallerySlide(2, 'gallery5')"></span>
+                <span class="dot" onclick="currentGallerySlide(3, 'gallery5')"></span>
+                <span class="dot" onclick="currentGallerySlide(4, 'gallery5')"></span>
+                <span class="dot" onclick="currentGallerySlide(5, 'gallery5')"></span>
+            </div>
+            <h3 class="gallery-modal-title" style="margin-top: 15px;">WPT Osaka Highlights</h3>
         </div>
     </div>
 
