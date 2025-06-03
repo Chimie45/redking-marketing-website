@@ -287,17 +287,11 @@ nav .container {
 }
 
 .service-icon {
-    font-size: 3rem; /* For emoji icons */
+    font-size: 2.8rem; /* Adjusted for Font Awesome */
     color: var(--muted-gold);
     margin-bottom: 1rem;
+    line-height: 1; /* Ensure icon vertical alignment */
 }
-
-/* If using Font Awesome icons for services: */
-/* .service-card .fa-icon-class { 
-    font-size: 3rem; 
-    color: var(--muted-gold);
-    margin-bottom: 1rem;
-} */
 
 .service-card h3 {
     font-size: 1.5rem;
@@ -450,9 +444,9 @@ nav .container {
     left: 0;
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-    padding: 1.5rem 1rem; /* Increased padding */
+    padding: 1rem; /* Adjusted padding */
     height: auto; /* Auto height based on content */
-    min-height: 80px;
+    min-height: 70px; /* Minimum height */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -471,28 +465,29 @@ nav .container {
 
 .portfolio-text {
     flex: 1;
+    margin-right: 0.5rem; /* Add some space between text and arrow */
 }
 
 .portfolio-info h3 {
     color: var(--muted-gold);
-    font-size: 1.2rem; /* Slightly larger */
-    margin-bottom: 0.3rem;
-    line-height: 1.3;
+    font-size: 0.9rem; /* Reduced font size */
+    margin-bottom: 0.1rem; /* Reduced margin */
+    line-height: 1.2;
 }
 
 .portfolio-info p {
     color: #ccc;
-    font-size: 0.85rem; /* Slightly larger */
-    margin-bottom: 0;
-    line-height: 1.3;
+    font-size: 0.8rem; /* Reduced font size */
+    margin-bottom: 0.1rem; /* Reduced margin */
+    line-height: 1.2;
 }
 
 .view-details {
     color: var(--muted-gold);
     font-weight: bold;
-    font-size: 0.8rem; /* Slightly larger */
+    font-size: 0.8rem; 
     white-space: nowrap;
-    margin-left: 1rem;
+    /* margin-left: 1rem; /* Removed as text block has margin-right now */
     transition: color 0.3s ease;
 }
 
@@ -666,14 +661,16 @@ nav .container {
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     height: 250px; /* Or adjust as needed */
     background: var(--dark-gray); /* Fallback for images/videos */
+    border: 2px solid transparent; /* Initial transparent border */
 }
 
 .gallery-item:hover {
     transform: translateY(-5px) scale(1.02); /* Combined effect */
     box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    border-color: var(--muted-gold); /* Gold border on hover */
 }
 
 .gallery-item img,
@@ -1231,7 +1228,8 @@ nav .container {
         grid-column: span 1; /* Each takes one column on tablet */
         text-align: left; /* Revert to left for two-column layout */
     }
-    .site-footer .footer-about { /* If you want About to span full width on tablet */
+    .site-footer .footer-about { 
+        /* If you want About to span full width on tablet, uncomment below */
          /* grid-column: span 2; */
          /* text-align: center; */
     }
