@@ -890,49 +890,53 @@ nav .container {
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* Footer New Styles V2 */
+/* Footer New Styles V2 - Adjusted for 4 columns */
 .site-footer {
     background-color: var(--black);
     color: #ccc;
-    padding: 60px 0 30px; /* Increased top/bottom padding */
+    padding: 60px 0 30px; 
     border-top: 3px solid var(--muted-gold);
     font-size: 0.95rem;
 }
 
 .site-footer .footer-main {
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1.5fr; /* About (2fr), Links (1.5fr), Contact/Newsletter (1.5fr) - Adjusted for better balance */
-    gap: 30px; /* Adjusted gap */
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    gap: 30px; 
     margin-bottom: 40px;
 }
 
 .site-footer .footer-column h4 {
     color: var(--muted-gold);
-    font-size: 1.25rem; /* Slightly larger heading */
-    margin-bottom: 25px; /* More space below heading */
+    font-size: 1.25rem; 
+    margin-bottom: 25px; 
     font-weight: 600;
-    text-transform: uppercase; /* Uppercase for a more formal look */
+    text-transform: uppercase; 
     letter-spacing: 0.5px;
 }
 
 .site-footer .footer-logo {
-    max-height: 50px; /* Or adjust as needed */
+    max-height: 50px; 
     margin-bottom: 25px;
+}
+
+.site-footer .footer-about {
+    /* Takes 1st column by default */
 }
 
 .site-footer .footer-about p {
     margin-bottom: 25px;
     line-height: 1.7;
-    color: #b3b3b3; /* Slightly lighter than default #ccc for better readability */
+    color: #b3b3b3; 
 }
 
 .site-footer .footer-social-icons {
-    margin-top: 10px; /* Add some space above social icons */
+    margin-top: 10px; 
 }
 
 .site-footer .footer-social-icons a {
     color: #ccc;
-    font-size: 1.6rem; /* Larger icons */
+    font-size: 1.6rem; 
     margin-right: 18px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -946,7 +950,7 @@ nav .container {
 }
 
 .site-footer .footer-links-wrapper {
-    /* This is now the second main column */
+    /* Takes 2nd column */
 }
 
 .site-footer .footer-links-columns {
@@ -977,12 +981,14 @@ nav .container {
     padding-left: 5px;
 }
 
-.site-footer .footer-contact-newsletter {
-    /* This is now the third main column */
-}
 .site-footer .footer-contact {
-    margin-bottom: 35px; /* More space between contact and newsletter */
+    /* Takes 3rd column */
+    margin-bottom: 0; /* Reset margin if it was for stacking */
 }
+.site-footer .footer-newsletter {
+    /* Takes 4th column */
+}
+
 
 .site-footer .footer-contact address {
     font-style: normal;
@@ -1218,23 +1224,22 @@ nav .container {
     .site-footer .footer-main {
         grid-template-columns: 1fr 1fr; /* Two columns for tablet */
     }
-    .site-footer .footer-about {
-        grid-column: span 2; /* About takes full width on tablet */
-        text-align: center; /* Center align for full width */
+    .site-footer .footer-about,
+    .site-footer .footer-links-wrapper,
+    .site-footer .footer-contact,
+    .site-footer .footer-newsletter {
+        grid-column: span 1; /* Each takes one column on tablet */
+        text-align: left; /* Revert to left for two-column layout */
+    }
+    .site-footer .footer-about { /* If you want About to span full width on tablet */
+         /* grid-column: span 2; */
+         /* text-align: center; */
     }
      .site-footer .footer-social-icons {
-        justify-content: center;
-    }
-    .site-footer .footer-links-wrapper {
-        grid-column: span 1; /* Each takes one of the two columns */
-        text-align: left; /* Revert to left for two-column layout */
+        justify-content: flex-start; /* Revert for two-column layout */
     }
     .site-footer .footer-links-columns {
         justify-content: flex-start; /* Align internal link columns to start */
-    }
-    .site-footer .footer-contact-newsletter {
-        grid-column: span 1; /* Each takes one of the two columns */
-        text-align: left; /* Revert to left */
     }
     .site-footer .newsletter-form {
         max-width: none; /* Allow full width within its column */
@@ -1303,7 +1308,8 @@ nav .container {
     }
     .site-footer .footer-about,
     .site-footer .footer-links-wrapper,
-    .site-footer .footer-contact-newsletter { /* Reset span for single column */
+    .site-footer .footer-contact,
+    .site-footer .footer-newsletter { /* Reset span for single column */
         grid-column: auto;
         text-align: left; /* Revert to left align for single column */
     }
