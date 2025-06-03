@@ -4,7 +4,26 @@ let gallerySlideIndexes = {
     // Add other gallery IDs here if they become slideshows
 };
 
-// Gallery modal functions (modified to include slideshow logic)
+// Function to open a gallery modal that contains an iframe
+function openIframeModal(modalId, iframeSrc) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Iframe modal not found:', modalId);
+        return;
+    }
+    const iframe = modal.querySelector('.gallery-iframe');
+    if (!iframe) {
+        console.error('Iframe element not found in modal:', modalId);
+        return;
+    }
+
+    iframe.src = iframeSrc; // Set the source for the iframe
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+
+// Gallery modal functions (modified to include slideshow and iframe logic)
 function openGalleryModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) {
@@ -22,10 +41,10 @@ function openGalleryModal(modalId) {
 
     // If the modal is a slideshow, initialize it
     if (modalId === 'gallery5') { // Check if it's our specific slideshow
-        // Ensure the slide index is reset or set to 1 when opening
         gallerySlideIndexes[modalId] = 1; 
         showGallerySlide(gallerySlideIndexes[modalId], modalId);
     }
+    // Note: Iframe modals are opened by openIframeModal directly
 }
 
 function closeGalleryModal(modalId) {
@@ -42,12 +61,16 @@ function closeGalleryModal(modalId) {
         video.pause();
         video.currentTime = 0;
     }
-    // No specific action needed for slideshow on close, as slides are just hidden/shown
+
+    // If it's an iframe modal, clear the src to stop loading/playing
+    const iframe = modal.querySelector('.gallery-iframe');
+    if (iframe) {
+        iframe.src = ''; // Clear the source
+    }
 }
 
 // Slideshow specific functions
 function plusSlides(n, galleryId) {
-    // gallerySlideIndexes[galleryId] is already updated by showGallerySlide if it goes out of bounds
     showGallerySlide(gallerySlideIndexes[galleryId] += n, galleryId);
 }
 
@@ -58,11 +81,7 @@ function currentGallerySlide(n, galleryId) {
 function showGallerySlide(n, galleryId) {
     let i;
     const slideshowContainer = document.getElementById(galleryId + '-slideshow');
-    // It's possible this function is called for a modal that isn't a slideshow,
-    // or before the slideshow elements are fully confirmed.
     if (!slideshowContainer) {
-        // This is not an error if the modal is not a slideshow (e.g. gallery1, gallery2 etc.)
-        // console.warn('Slideshow container not found for gallery:', galleryId);
         return; 
     }
 
@@ -74,8 +93,6 @@ function showGallerySlide(n, galleryId) {
     }
 
     if (slides.length === 0) {
-        // This would be an issue if slideshowContainer exists but has no slides.
-        // console.warn('No slides found in slideshow container for gallery:', galleryId);
         return;
     }
 
@@ -85,14 +102,14 @@ function showGallerySlide(n, galleryId) {
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-    if (dots.length > 0) { // Check if dots exist
+    if (dots.length > 0) { 
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
     }
     
     slides[gallerySlideIndexes[galleryId] - 1].style.display = "block";
-    if (dots.length > 0) { // Check if dots exist
+    if (dots.length > 0) { 
         dots[gallerySlideIndexes[galleryId] - 1].className += " active";
     }
 }
@@ -107,7 +124,6 @@ function openPortfolioModal(modalId) {
     const modalHeader = modal.querySelector('.portfolio-modal-header');
     const modalImg = modalHeader.querySelector('img');
     
-    // Set the background image for the blur effect
     if (modalImg && modalImg.src) {
         modalHeader.style.backgroundImage = `url(${modalImg.src})`;
     } else if (modalImg) {
@@ -119,7 +135,6 @@ function openPortfolioModal(modalId) {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 
-    // Animate metric numbers when portfolio modal opens
     const metricNumbers = modal.querySelectorAll('.metric-number');
     metricNumbers.forEach(num => animateValue(num));
 }
@@ -138,18 +153,14 @@ function closePortfolioModal(modalId) {
 window.addEventListener('click', function(event) {
     if (event.target.classList.contains('gallery-modal')) {
         const modalId = event.target.id;
-        // Check if the modal is actually displayed before trying to close it
         if (document.getElementById(modalId) && document.getElementById(modalId).style.display === 'block') {
             closeGalleryModal(modalId);
         }
     }
     
     if (event.target.classList.contains('portfolio-modal')) {
-        // Check if the modal is actually displayed
         if (event.target.style.display === 'block') {
-            // event.target.style.display = 'none'; // Handled by closePortfolioModal
-            closePortfolioModal(event.target.id); // Use the specific close function
-            document.body.style.overflow = 'auto';
+            closePortfolioModal(event.target.id); 
         }
     }
 });
@@ -158,7 +169,6 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         let aModalWasOpen = false;
-        // Close gallery modals
         const galleryModals = document.querySelectorAll('.gallery-modal');
         galleryModals.forEach(modal => {
             if (modal.style.display === 'block') {
@@ -167,7 +177,6 @@ document.addEventListener('keydown', function(event) {
             }
         });
         
-        // Close portfolio modals
         const portfolioModals = document.querySelectorAll('.portfolio-modal');
         portfolioModals.forEach(modal => {
             if (modal.style.display === 'block') {
@@ -192,23 +201,20 @@ if (contactForm) {
         const data = Object.fromEntries(formData);
         
         if (!data.name || !data.email || !data.message) {
-            // Consider using a custom, non-blocking notification instead of alert
             console.warn('Form validation: Please fill in all required fields.');
-            // Example: display a message in a specific div
-            // document.getElementById('form-message').textContent = 'Please fill in all required fields.';
+            alert('Please fill in all required fields.'); // Kept alert as per original for now
             return;
         }
         
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
             console.warn('Form validation: Please enter a valid email address.');
-            // document.getElementById('form-message').textContent = 'Please enter a valid email address.';
+            alert('Please enter a valid email address.'); // Kept alert as per original for now
             return;
         }
         
         console.log('Form submitted (simulated):', data);
-        // document.getElementById('form-message').textContent = 'Thank you for your message! We\'ll get back to you within 24 hours.';
-        alert('Thank you for your message! We\'ll get back to you within 24 hours.'); // Kept alert as per original
+        alert('Thank you for your message! We\'ll get back to you within 24 hours.'); 
         this.reset();
     });
 } else {
@@ -219,12 +225,10 @@ if (contactForm) {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        // Ensure it's a valid internal link and not just "#"
         if (href.length > 1 && href.startsWith('#')) {
             const targetElement = document.querySelector(href);
             if (targetElement) {
                 e.preventDefault();
-                // Also close mobile menu if open
                 if (navLinks && navLinks.classList.contains('nav-links--active')) {
                     navLinks.classList.remove('nav-links--active');
                     if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
@@ -265,32 +269,32 @@ window.addEventListener('scroll', function() {
 });
 
 
-// Animate elements on scroll (only for below-the-fold content)
+// Animate elements on scroll
 const observerOptions = {
-    threshold: 0.1, // Trigger when 10% of the element is visible
-    rootMargin: '0px 0px -50px 0px' // Start animation a bit before fully in view
+    threshold: 0.1, 
+    rootMargin: '0px 0px -50px 0px' 
 };
 
 const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('element--in-view'); 
-            observer.unobserve(entry.target); // Animate only once
+            observer.unobserve(entry.target); 
         }
     });
 }, observerOptions);
 
-// Apply observer to elements you want to animate
 document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *').forEach((el) => {
-    // el.style.opacity = '0'; // REMOVED: Initial state for fade-in, should be handled by CSS if animation is desired
-    // el.style.transform = 'translateY(20px)'; // REMOVED: Initial state for slide-up, should be handled by CSS
+    // Initial styles (opacity: 0, transform: translateY(20px)) are now handled by CSS directly
+    // for elements NOT having the .element--in-view class.
+    // The CSS should define the "before animation" state, and .element--in-view defines the "after animation" state.
     animatedElementsObserver.observe(el);
 });
 
 
 // Animate stat numbers 
 function animateValue(element) {
-    if (!element) return; // Guard clause
+    if (!element) return; 
     const finalValueText = element.textContent;
     
     let numericPart = finalValueText.replace(/[^\d.-]/g, ''); 
@@ -301,7 +305,7 @@ function animateValue(element) {
 
     const suffix = finalValueText.substring(numericPart.length); 
     
-    const duration = 1500; // 1.5 seconds
+    const duration = 1500; 
     const frameDuration = 16; 
     const totalFrames = duration / frameDuration;
     const increment = numericValue / totalFrames;
@@ -317,7 +321,7 @@ function animateValue(element) {
         }
         
         let displayValue;
-        if (numericPart.includes('.') && !Number.isInteger(numericValue) ) { // Animate decimals only if original was decimal
+        if (numericPart.includes('.') && !Number.isInteger(numericValue) ) { 
             const decimalPlaces = (numericPart.split('.')[1] || '').length;
             displayValue = currentValue.toFixed(decimalPlaces);
         } else {
@@ -330,13 +334,12 @@ function animateValue(element) {
 
 // Add loading state for images (error handling)
 document.querySelectorAll('img').forEach(img => {
-    // Check if image is already loaded (e.g. from cache) or has an error
-    if (!img.complete) { // Only add listener if not yet complete
+    if (!img.complete) { 
         img.addEventListener('error', function() {
-            this.style.display = 'none'; // Or set a placeholder
+            this.style.display = 'none'; 
             console.error('Failed to load image:', this.src);
         });
-    } else if (img.naturalWidth === 0 && img.src) { // Already completed but failed to load (e.g. broken link)
+    } else if (img.naturalWidth === 0 && img.src) { 
          img.style.display = 'none';
          console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
@@ -344,7 +347,12 @@ document.querySelectorAll('img').forEach(img => {
 
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function() {
-    // Lazy load images (if you decide to implement data-src in HTML)
+    // Set current year in footer
+    const currentYearSpan = document.getElementById('currentYear');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+    
     const lazyImages = document.querySelectorAll('img[data-src]');
     if (lazyImages.length > 0) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -360,6 +368,4 @@ document.addEventListener('DOMContentLoaded', function() {
         
         lazyImages.forEach(img => imageObserver.observe(img));
     }
-
-    // Animate numbers in portfolio modals when they open - moved to openPortfolioModal
 });
