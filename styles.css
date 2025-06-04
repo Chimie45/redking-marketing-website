@@ -1258,6 +1258,332 @@ nav .container {
     /* margin-top: 1.5rem; /* Already there, ensure spacing is good */
 }
 
+/* Our Team Page Specific Styles */
+.page-header {
+    min-height: 40vh; 
+    background-attachment: scroll; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.page-header .hero-content h1 {
+    font-size: 3rem; 
+    color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+}
+
+.page-header .hero-content .subtitle {
+    font-size: 1.3rem;
+    color: var(--white);
+    font-weight: 300;
+}
+
+.mission-statement-section {
+    padding: 80px 0;
+    background-color: var(--black); 
+}
+
+.mission-statement-section .mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mission-statement-section .mission-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #e0e0e0; 
+    margin-bottom: 0; 
+}
+
+.team-section {
+    padding: 80px 0;
+    background-color: var(--dark-gray); 
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.team-member-card {
+    background: var(--black);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border: 2px solid var(--primary-red);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer; /* Make card clickable */
+}
+
+.team-member-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.25);
+    border-color: var(--muted-gold);
+}
+
+.team-member-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 4px solid var(--muted-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.team-member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-member-info h3 {
+    font-size: 1.6rem;
+    color: var(--muted-gold);
+    margin-bottom: 0.25rem;
+}
+
+.team-member-title {
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.team-member-bio {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    min-height: 60px; 
+}
+
+.team-member-social {
+    margin-top: auto; 
+    padding-top: 1rem;
+}
+
+.team-member-social a {
+    color: #ccc;
+    font-size: 1.3rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.team-member-social a:hover {
+    color: var(--muted-gold);
+}
+
+/* Team Member Modal Styles */
+.team-modal {
+    display: none;
+    position: fixed;
+    z-index: 3000; /* Higher than other modals if needed */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    padding: 20px; /* Add padding for smaller screens */
+}
+
+.team-modal-content {
+    background-color: var(--black);
+    margin: 5% auto;
+    padding: 30px;
+    border: 2px solid var(--muted-gold);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    text-align: center;
+    position: relative;
+    animation: slideIn 0.3s ease;
+}
+
+.close-team-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(0,0,0,0.4);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.close-team-modal:hover {
+    background: var(--muted-gold);
+    color: var(--black);
+}
+
+.team-modal-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 4px solid var(--muted-gold);
+}
+
+.team-modal-content h2 {
+    font-size: 2rem;
+    color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+}
+
+.team-modal-title { /* For title within modal */
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.team-modal-bio {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.7;
+    text-align: left; /* Or center if preferred */
+    margin-bottom: 1.5rem;
+}
+.team-modal-bio p {
+    margin-bottom: 1em;
+}
+.team-modal-bio p:last-child {
+    margin-bottom: 0;
+}
+
+
+.team-member-social-modal a { /* Social links inside modal */
+    color: #ccc;
+    font-size: 1.5rem;
+    margin: 0 0.75rem;
+    transition: color 0.3s ease;
+}
+.team-member-social-modal a:hover {
+    color: var(--muted-gold);
+}
+
+
+.awards-section {
+    padding: 80px 0;
+    background-color: var(--black);
+}
+
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.award-item {
+    background: var(--dark-gray);
+    padding: 2rem;
+    border-radius: 8px;
+    border-left: 5px solid var(--muted-gold);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.award-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.award-icon {
+    font-size: 2.5rem;
+    color: var(--muted-gold);
+    margin-bottom: 1rem;
+}
+
+.award-item h4 {
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.award-item p {
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.jobs-section {
+    padding: 80px 0;
+    background-color: var(--dark-gray);
+}
+
+.jobs-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #ccc;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+}
+
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.job-posting {
+    background: var(--black);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--muted-gold);
+    transition: box-shadow 0.3s ease;
+}
+
+.job-posting:hover {
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+}
+
+.job-posting h3 {
+    font-size: 1.6rem;
+    color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+}
+
+.job-location {
+    font-size: 0.95rem;
+    color: #bbb;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.job-description {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.job-apply-button {
+    padding: 10px 25px;
+    font-size: 1rem;
+}
+
 
 /* Responsive Design */
 @media (max-width: 992px) { /* Tablet breakpoint */
@@ -1432,6 +1758,38 @@ nav .container {
     .dot {
         height: 12px;
         width: 12px;
+    }
+
+    /* Our Team Page Responsive Adjustments */
+    .page-header {
+        min-height: 30vh;
+    }
+    .page-header .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    .page-header .hero-content .subtitle {
+        font-size: 1.1rem;
+    }
+    .mission-statement-section .mission-content p {
+        font-size: 1.1rem;
+    }
+    .team-member-card {
+        padding: 1.5rem 1rem;
+    }
+    .team-member-image {
+        width: 120px;
+        height: 120px;
+    }
+    .team-modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .team-modal-img {
+        width: 120px;
+        height: 120px;
+    }
+    .team-modal-content h2 {
+        font-size: 1.8rem;
     }
 }
 
