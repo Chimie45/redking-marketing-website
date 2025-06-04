@@ -1236,8 +1236,8 @@ nav .container {
 
 /* Our Team Page Specific Styles */
 .page-header#team-header { 
-    min-height: 100vh; 
-    background-attachment: fixed; 
+    min-height: 100vh; /* Match homepage hero height */
+    background-attachment: fixed; /* Match homepage hero attachment */
 }
 
 .page-header .hero-content h1 {
@@ -1390,7 +1390,7 @@ nav .container {
 
 .team-modal-header {
     position: relative;
-    height: 280px; /* Adjusted height for a wider feel */
+    height: 280px; /* Adjusted height */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1420,13 +1420,13 @@ nav .container {
 .team-modal-img-main { 
     position: relative;
     z-index: 2; 
-    width: 180px; /* Set fixed width */
+    width: 180px; /* Set fixed width for 1:1 */
     height: 180px; /* Set fixed height for 1:1 */
-    object-fit: cover; 
-    border-radius: 8px; /* Slightly rounded corners, not circular */
+    object-fit: cover; /* Ensure it fills the square, cropping if necessary */
+    border-radius: 8px; /* Slightly rounded corners */
     border: none; /* No gold border */
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    max-width: 70%; /* Ensure it doesn't get too large in the header */
+    max-width: 70%; 
     max-height: 70%;
 }
 
