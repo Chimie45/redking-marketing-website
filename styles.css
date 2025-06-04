@@ -1235,13 +1235,10 @@ nav .container {
 
 
 /* Our Team Page Specific Styles */
-.page-header {
-    min-height: 40vh; 
-    background-attachment: scroll; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.page-header#team-header { /* More specific selector for team page header */
+    min-height: 100vh; /* Match homepage hero height */
+    background-attachment: fixed; /* Match homepage hero attachment */
+    /* Other hero styles like background-size, position are already on .hero */
 }
 
 .page-header .hero-content h1 {
@@ -1265,13 +1262,13 @@ nav .container {
 }
 
 .mission-statement-header h2 { /* For "Our Mission" title inside header */
-    font-size: 1.8rem !important; /* Override .section-title if needed */
+    font-size: 1.8rem !important; 
     margin-bottom: 1rem !important;
     color: var(--gold) !important;
 }
 
 .mission-statement-header p {
-    font-size: 1.1rem; /* Adjusted size for readability in header */
+    font-size: 1.1rem; 
     line-height: 1.7;
     color: #e0e0e0; 
     margin-bottom: 0; 
@@ -1394,7 +1391,7 @@ nav .container {
 
 .team-modal-header {
     position: relative;
-    height: 250px; /* Adjusted height for a wider feel */
+    height: 300px; /* Adjust height as needed for 1:1 image display */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1424,12 +1421,11 @@ nav .container {
 .team-modal-img-main { 
     position: relative;
     z-index: 2; 
-    width: auto; 
-    height: 180px; 
-    aspect-ratio: 16 / 9; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    border: 3px solid var(--gold);
+    width: 180px; /* Set width for 1:1 */
+    height: 180px; /* Set height for 1:1 */
+    object-fit: cover; /* Cover ensures it fills, might crop if not square */
+    border-radius: 8px; /* Rectangular corners */
+    border: none; /* Removed gold border */
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     max-width: 80%; 
 }
@@ -1785,8 +1781,8 @@ nav .container {
     }
 
     /* Our Team Page Responsive Adjustments */
-    .page-header {
-        min-height: 30vh;
+    .page-header#team-header { /* More specific selector */
+        min-height: 50vh; /* Adjust if 100vh is too much with mission text */
     }
     .page-header .hero-content h1 {
         font-size: 2.2rem;
@@ -1794,7 +1790,7 @@ nav .container {
     .page-header .hero-content .subtitle {
         font-size: 1.1rem;
     }
-    .mission-statement-header p { /* Adjust mission statement in header for mobile */
+    .mission-statement-header p { 
         font-size: 1rem;
         line-height: 1.6;
     }
@@ -1807,14 +1803,17 @@ nav .container {
     }
     .team-modal-content {
         width: 95%;
-        padding: 20px 15px; /* Adjust padding for modal content on mobile */
+        padding: 20px 15px; 
     }
     .team-modal-header {
         height: 200px; 
     }
     .team-modal-img-main {
-        height: 120px; /* Adjust modal image size for mobile */
-        /* width will be auto due to aspect-ratio */
+        height: 120px; 
+        /* width will be auto due to object-fit: contain and max-width */
+        max-width: 90%;
+        border-radius: 5px; /* Match portfolio modal images */
+        border: none; /* Remove gold border */
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
