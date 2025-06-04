@@ -947,13 +947,11 @@ nav .container {
     grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
     gap: 30px; 
     margin-bottom: 40px;
-    /* align-items: end; /* Removed this for default (stretch/start) alignment */
+    /* align-items: end; /* Reverted this for default (stretch/start) alignment */
 }
 
 .site-footer .footer-column {
-    /* display: flex; */ /* Removed flex for default block flow */
-    /* flex-direction: column; */
-    /* justify-content: flex-end; */
+    /* Reverted flex properties for default block flow */
 }
 
 .site-footer .footer-column h4 {
