@@ -741,7 +741,7 @@ nav .container {
 /* Specific for iframe modal content to ensure iframe takes space */
 .gallery-modal-content.iframe-modal-content {
     height: 85vh; /* Give a specific height for iframe parent */
-    width: 85vw; /* Give a specific width */
+    width: 85vw;  /* Give a specific width */
     max-width: 1200px; /* Optional max width */
 }
 
@@ -804,50 +804,69 @@ nav .container {
     background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
 }
 
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Default for larger screens */
-    gap: 4rem;
-    align-items: start; /* Align items to the start for better form layout */
+.contact-content-wrapper { /* New wrapper for single column flow */
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* Space between info and form */
+    max-width: 900px; /* Optional: constrain width of this section */
+    margin: 0 auto; /* Center it */
+}
+
+.contact-info {
+    text-align: center; /* Center the heading and paragraphs */
 }
 
 .contact-info h2 {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem; /* Reduced margin */
+    margin-bottom: 1.5rem; 
     color: var(--muted-gold);
 }
 
 .contact-info p {
     font-size: 1.1rem;
-    margin-bottom: 1rem; /* Reduced margin */
+    margin-bottom: 1rem; 
     line-height: 1.7;
     color: var(--white); 
-}
-.contact-info strong { /* This style was for the removed bullet points, can be removed or repurposed */
-    color: var(--light-gold); 
+    max-width: 700px; /* Constrain paragraph width */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-icon-wrapper {
-    text-align: center; /* Centered the icon */
-    margin: 2rem 0; /* Adjusted space around the icon */
+    text-align: center; 
+    margin: 2rem 0; 
 }
 
 .contact-icon-wrapper .fas.fa-crown {
-    font-size: 3rem; /* Slightly larger crown */
+    font-size: 3rem; 
     color: var(--muted-gold);
 }
 
-
 .contact-form {
-    background: rgba(0, 0, 0, 0.35); /* Slightly more opaque */
-    padding: 2.5rem; /* Increased padding */
+    background: rgba(0, 0, 0, 0.35); 
+    padding: 2.5rem; 
     border-radius: 10px;
     border: 1px solid var(--muted-gold);
+    width: 100%; /* Form takes full width of its parent */
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
+.contact-form .form-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 2rem; /* Gap between columns */
+    margin-bottom: 1.5rem; /* Space before submit button */
 }
+
+.contact-form .form-column-left,
+.contact-form .form-column-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Gap between form groups within a column */
+}
+.contact-form .form-group {
+    margin-bottom: 0; /* Remove default bottom margin as gap is handled by column */
+}
+
 
 .form-group label {
     display: block;
@@ -858,7 +877,7 @@ nav .container {
 
 .form-group input,
 .form-group textarea,
-.form-group select { /* Added select here */
+.form-group select { 
     width: 100%;
     padding: 12px;
     border: 2px solid var(--dark-gray);
@@ -874,24 +893,23 @@ nav .container {
 .form-group select:focus {
     outline: none;
     border-color: var(--muted-gold);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3); /* Focus indicator */
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3); 
 }
 
 .form-group textarea {
-    height: 120px;
+    height: 165px; /* Adjusted to better fill column with select above */
     resize: vertical;
 }
 
-/* Style for the select dropdown arrow (browser default, but can be customized with more effort) */
 .form-group select {
-    appearance: none; /* Remove default arrow on some browsers */
+    appearance: none; 
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23C9B037%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px auto;
-    padding-right: 30px; /* Make space for arrow */
+    padding-right: 30px; 
 }
 
 
@@ -905,7 +923,8 @@ nav .container {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%;
+    width: 100%; /* Make button full width */
+    margin-top: 1rem; /* Add some space above the button */
 }
 
 .submit-btn:hover {
@@ -1238,9 +1257,12 @@ nav .container {
 /* Responsive Design */
 @media (max-width: 992px) { /* Tablet breakpoint */
     .about-content,
-    .contact-content {
-        grid-template-columns: 1fr; /* Stack on tablets */
-        gap: 3rem;
+    .contact-content-wrapper .form-columns { /* Target form columns for stacking */
+        grid-template-columns: 1fr; 
+        gap: 0; /* Remove gap for stacked form elements, rely on form-group margin */
+    }
+    .contact-content-wrapper .form-column-right .form-group textarea {
+        height: 120px; /* Reset height for stacked layout if needed */
     }
     .portfolio-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1256,12 +1278,11 @@ nav .container {
         text-align: left; /* Revert to left for two-column layout */
     }
     .site-footer .footer-about { 
-        /* If you want About to span full width on tablet, uncomment below */
-         /* grid-column: span 2; */
-         /* text-align: center; */
+         grid-column: span 2; /* About takes full width on tablet */
+         text-align: center; 
     }
      .site-footer .footer-social-icons {
-        justify-content: flex-start; /* Revert for two-column layout */
+        justify-content: center;
     }
     .site-footer .footer-links-columns {
         justify-content: flex-start; /* Align internal link columns to start */
@@ -1373,6 +1394,18 @@ nav .container {
     .contact-form {
         padding: 1.5rem;
     }
+     .contact-form .form-columns { /* Stack form columns on mobile */
+        grid-template-columns: 1fr;
+        gap: 0; /* Rely on form-group margins */
+    }
+    .contact-form .form-column-left .form-group,
+    .contact-form .form-column-right .form-group {
+        margin-bottom: 1.5rem; /* Add back margin for stacked form groups */
+    }
+     .contact-form .form-column-right .form-group:last-child {
+        margin-bottom: 0; /* Remove margin from last group in right column if stacked */
+    }
+
 
     .site-footer .footer-bottom {
         flex-direction: column;
