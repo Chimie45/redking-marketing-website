@@ -314,7 +314,8 @@
 
     <section id="contact" class="contact">
         <div class="container">
-            <div class="contact-content">
+            <!-- contact-content will now be a single column flow for info and form -->
+            <div class="contact-content-wrapper"> 
                 <div class="contact-info">
                     <h2>Ready to Dominate?</h2>
                     <p>Let's discuss how RedKing Marketing can elevate your gaming brand to the next level. With our global expertise and proven track record, we'll create campaigns that turn players into profits.</p>
@@ -323,34 +324,41 @@
                         <i class="fas fa-crown"></i>
                     </div>
                 </div>
+
                 <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name *</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company">
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service Interest</label>
-                        <select id="service" name="service" style="width: 100%; padding: 12px; border: 2px solid var(--dark-gray); border-radius: 5px; background: var(--black); color: var(--white); font-size: 1rem;">
-                            <option value="">Select a service</option>
-                            <option value="ppc">PPC & Paid Advertising</option>
-                            <option value="seo">SEO & Content Marketing</option>  
-                            <option value="social">Social Media Management</option>
-                            <option value="consultation">Gaming Industry Consultation</option>
-                            <option value="community">Community Management</option>
-                            <option value="strategy">Marketing Strategy</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your project and goals..." required></textarea>
+                    <div class="form-columns">
+                        <div class="form-column-left">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                        </div>
+                        <div class="form-column-right">
+                            <div class="form-group">
+                                <label for="service">Service Interest</label>
+                                <select id="service" name="service">
+                                    <option value="">Select a service</option>
+                                    <option value="ppc">PPC & Paid Advertising</option>
+                                    <option value="seo">SEO & Content Marketing</option>  
+                                    <option value="social">Social Media Management</option>
+                                    <option value="consultation">Gaming Industry Consultation</option>
+                                    <option value="community">Community Management</option>
+                                    <option value="strategy">Marketing Strategy</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" placeholder="Tell us about your project and goals..." required></textarea>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
@@ -676,8 +684,6 @@
         <div class="gallery-modal-content iframe-modal-content">
             <span class="close-gallery-modal" onclick="closeGalleryModal('gallery1')">&times;</span>
             <iframe class="gallery-iframe" src="" frameborder="0" allowfullscreen></iframe>
-            <!-- Title can be removed or kept if you want a title above the iframe -->
-            <!-- <h3 class="gallery-modal-title">FN Game Masters</h3> -->
         </div>
     </div>
 
@@ -740,7 +746,7 @@
                 <span class="dot" onclick="currentGallerySlide(4, 'gallery5')"></span>
                 <span class="dot" onclick="currentGallerySlide(5, 'gallery5')"></span>
             </div>
-            <h3 class="gallery-modal-title" style="margin-top: 15px;">WPT Osaka Materials</h3> <!-- Updated title -->
+            <h3 class="gallery-modal-title" style="margin-top: 15px;">WPT Osaka Materials</h3> 
         </div>
     </div>
 
