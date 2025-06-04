@@ -763,7 +763,7 @@ nav .container {
 }
 
 
-.close-gallery-modal { /* Shared by gallery and team modals if class is reused */
+.close-gallery-modal { 
     position: absolute;
     top: 20px;
     right: 30px; 
@@ -1142,16 +1142,14 @@ nav .container {
 }
 
 /* CSS for scroll-triggered animations */
-/* Elements start hidden and slightly offset */
 .portfolio-card, .service-card, .about-text > *, .client-logos, 
 .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, 
-.team-member-card, .award-item, .job-posting, .mission-content { /* Added Our Team elements */
-    opacity: 1; /* Make visible by default for debugging/current state */
-    transform: translateY(0); /* No offset by default for debugging */
+.team-member-card, .award-item, .job-posting, .mission-content { 
+    opacity: 1; 
+    transform: translateY(0); 
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* When .element--in-view class is added by JS */
 .element--in-view {
     opacity: 1;
     transform: translateY(0);
@@ -1378,59 +1376,62 @@ nav .container {
 
 .team-modal-content {
     background-color: var(--black);
-    margin: 3% auto; /* Centered with margin */
-    padding: 0; /* Header will have its own padding/structure */
+    margin: 3% auto; 
+    padding: 0; 
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
     width: 90%;
-    max-width: 750px; /* Max width for the modal */
+    max-width: 750px; 
     position: relative;
     animation: slideIn 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden; /* To contain the ::before pseudo-element */
+    overflow: hidden; 
 }
 
 .team-modal-header {
     position: relative;
-    height: 300px; /* Adjust height as needed */
+    height: 250px; /* Adjusted height for a wider feel */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-gray); /* Fallback */
+    background-color: var(--dark-gray); 
     background-size: cover;
     background-position: center;
-    border-top-left-radius: 8px; /* Match content radius */
+    border-top-left-radius: 8px; 
     border-top-right-radius: 8px;
 }
 
-.team-modal-header::before { /* Blur effect layer */
+.team-modal-header::before { 
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: inherit; /* Inherits from .team-modal-header JS-set background */
+    background-image: inherit; 
     background-size: cover;
     background-position: center;
     filter: blur(10px) brightness(0.6);
-    transform: scale(1.1); /* Ensure blur covers edges */
+    transform: scale(1.1); 
     z-index: 1;
 }
 
-.team-modal-img-main { /* The main, sharp profile image */
+.team-modal-img-main { 
     position: relative;
-    width: 180px; /* Size of the sharp image */
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--gold);
+    z-index: 2; 
+    width: auto; /* Let height control for 16:9 */
+    height: 180px; /* Set a height */
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    object-fit: cover; /* Will crop 1:1 to fit 16:9 */
+    border-radius: 8px; /* Rectangular */
+    border: 3px solid var(--gold);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 2; /* Above the blur */
+    max-width: 80%; /* Don't let it get too wide */
 }
 
-.close-team-modal { /* Reusing .close-modal styles, but can be specific if needed */
+
+.close-team-modal { 
     position: absolute;
     top: 15px;
     right: 20px;
@@ -1446,7 +1447,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10; /* Ensure it's above header content */
+    z-index: 10; 
     line-height: 1;
 }
 .close-team-modal:hover {
@@ -1456,7 +1457,7 @@ nav .container {
 
 
 .team-modal-body {
-    padding: 2rem;
+    padding: 2rem; /* Adjusted padding */
     text-align: center;
 }
 
@@ -1464,7 +1465,7 @@ nav .container {
     font-size: 2.2rem;
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
-    margin-top: 0; /* Reset top margin if any */
+    margin-top: 0; 
 }
 
 .team-modal-title { 
@@ -1474,10 +1475,9 @@ nav .container {
     font-weight: 500;
 }
 
-.team-metrics { /* Specific class for team modal metrics */
-    margin: 2rem 0; /* Space around metrics block */
+.team-metrics { 
+    margin: 2rem 0; 
 }
-/* .metric-card, .metric-number, .metric-label are reused from portfolio styles */
 
 
 .team-modal-bio {
@@ -1497,7 +1497,7 @@ nav .container {
 
 .team-member-social-modal a { 
     color: #ccc;
-    font-size: 1.8rem; /* Larger social icons in modal */
+    font-size: 1.8rem; 
     margin: 0 0.75rem;
     transition: color 0.3s ease;
 }
@@ -1611,39 +1611,39 @@ nav .container {
 /* Responsive Design */
 @media (max-width: 992px) { /* Tablet breakpoint */
     .about-content,
-    .contact-content-wrapper .form-columns { /* Target form columns for stacking */
+    .contact-content-wrapper .form-columns { 
         grid-template-columns: 1fr; 
-        gap: 0; /* Remove gap for stacked form elements, rely on form-group margin */
+        gap: 0; 
     }
     .contact-content-wrapper .form-column-right .form-group textarea {
-        height: 120px; /* Reset height for stacked layout if needed */
+        height: 120px; 
     }
     .portfolio-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
     .site-footer .footer-main {
-        grid-template-columns: 1fr 1fr; /* Two columns for tablet */
-        align-items: start; /* Reset alignment for tablet */
+        grid-template-columns: 1fr 1fr; 
+        align-items: start; 
     }
     .site-footer .footer-about,
     .site-footer .footer-links-wrapper,
     .site-footer .footer-contact,
     .site-footer .footer-newsletter {
-        grid-column: span 1; /* Each takes one column on tablet */
-        text-align: left; /* Revert to left for two-column layout */
+        grid-column: span 1; 
+        text-align: left; 
     }
     .site-footer .footer-about { 
-         grid-column: span 2; /* About takes full width on tablet */
+         grid-column: span 2; 
          text-align: center; 
     }
      .site-footer .footer-social-icons {
         justify-content: center;
     }
     .site-footer .footer-links-columns {
-        justify-content: flex-start; /* Align internal link columns to start */
+        justify-content: flex-start; 
     }
     .site-footer .newsletter-form {
-        max-width: none; /* Allow full width within its column */
+        max-width: none; 
         margin-left: 0;
         margin-right: 0;
     }
@@ -1651,42 +1651,39 @@ nav .container {
 
 @media (max-width: 768px) { /* Mobile breakpoint */
     .nav-links {
-        display: none; /* Hidden by default, shown by JS toggle */
+        display: none; 
         flex-direction: column;
         position: absolute;
-        top: 70px; /* Adjust based on nav height */
+        top: 70px; 
         left: 0;
         right: 0;
-        background: rgba(0,0,0,0.98); /* Dark background for dropdown */
+        background: rgba(0,0,0,0.98); 
         padding: 1rem;
         gap: 1rem;
         border-bottom: 1px solid var(--muted-gold);
-        z-index: 998; /* Below nav but above page content, ensure mobile-menu icon is higher */
+        z-index: 998; 
     }
 
-    .nav-links.nav-links--active { /* Class toggled by JS */
+    .nav-links.nav-links--active { 
         display: flex;
     }
 
 
-    .nav-right { 
-        /* Keep .nav-right itself displayed for mobile-menu */
-    }
-    .nav-right .social-icons { /* Specifically hide social icons in nav-right for mobile */
+    .nav-right .social-icons { 
         display: none;
     }
 
 
     .mobile-menu {
-        display: flex; /* Show hamburger */
-        z-index: 1001; /* Ensure it's clickable and above nav-links dropdown */
+        display: flex; 
+        z-index: 1001; 
     }
 
     .logo img {
         height: 35px;
     }
 
-    .hero h1 { /* sr-only, but if it were visible */
+    .hero h1 { 
         font-size: 2.5rem;
     }
 
@@ -1704,28 +1701,28 @@ nav .container {
     .services-grid,
     .portfolio-grid, 
     .gallery-grid,
-    .site-footer .footer-main { /* Stack all grids on mobile */
+    .site-footer .footer-main { 
         grid-template-columns: 1fr; 
     }
     .site-footer .footer-about,
     .site-footer .footer-links-wrapper,
     .site-footer .footer-contact,
-    .site-footer .footer-newsletter { /* Reset span for single column */
+    .site-footer .footer-newsletter { 
         grid-column: auto;
-        text-align: left; /* Revert to left align for single column */
+        text-align: left; 
     }
      .site-footer .footer-social-icons {
-        justify-content: flex-start; /* Revert for single column */
+        justify-content: flex-start; 
     }
     .site-footer .footer-links-columns {
-        flex-direction: column; /* Stack internal link columns */
+        flex-direction: column; 
         gap: 0;
     }
     .site-footer .footer-links-columns ul {
-        margin-bottom: 10px; /* Add some space between stacked link lists */
+        margin-bottom: 10px; 
     }
      .site-footer .newsletter-form {
-        max-width: none; /* Allow full width */
+        max-width: none; 
     }
     
     .portfolio-modal-content {
@@ -1734,7 +1731,7 @@ nav .container {
     }
 
     .portfolio-modal-header {
-        height: 250px; /* Adjust for smaller screens */
+        height: 250px; 
     }
     .portfolio-modal h2 {
         font-size: 1.8rem;
@@ -1749,16 +1746,16 @@ nav .container {
     .contact-form {
         padding: 1.5rem;
     }
-     .contact-form .form-columns { /* Stack form columns on mobile */
+     .contact-form .form-columns { 
         grid-template-columns: 1fr;
-        gap: 0; /* Rely on form-group margins */
+        gap: 0; 
     }
     .contact-form .form-column-left .form-group,
     .contact-form .form-column-right .form-group {
-        margin-bottom: 1.5rem; /* Add back margin for stacked form groups */
+        margin-bottom: 1.5rem; 
     }
      .contact-form .form-column-right .form-group:last-child {
-        margin-bottom: 0; /* Remove margin from last group in right column if stacked */
+        margin-bottom: 0; 
     }
 
 
@@ -1805,19 +1802,20 @@ nav .container {
     }
     .team-modal-content {
         width: 95%;
-        padding: 20px; /* Add padding to modal content on mobile */
+        padding: 20px; 
     }
     .team-modal-header {
-        height: 200px; /* Adjust modal header height for mobile */
+        height: 200px; 
     }
     .team-modal-img-main {
-        width: 120px; /* Adjust modal image size for mobile */
-        height: 120px;
+        width: auto; /* Let height and aspect-ratio control */
+        height: 120px; /* Adjust modal image size for mobile */
+        max-width: 90%; /* Ensure it doesn't overflow header */
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
     }
-    .team-modal .metrics { /* Adjust team modal metrics for mobile */
+    .team-modal .metrics { 
         grid-template-columns: 1fr; /* Stack metric cards */
         gap: 1rem;
     }
