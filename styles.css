@@ -519,7 +519,6 @@ nav .container {
     border-radius: 10px;
     width: 90%;
     max-width: 1000px;
-    /* max-height: 90vh; /* Removed to allow content to define height and modal to scroll */
     animation: slideIn 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
@@ -549,7 +548,7 @@ nav .container {
     background-size: cover;
     background-position: center;
     filter: blur(12px) brightness(0.7); /* Increased blur */
-    opacity: 1; /* Opacity is fine, brightness controls darkness */
+    opacity: 1; 
     z-index: 1;
 }
 
@@ -565,7 +564,7 @@ nav .container {
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-.close-modal {
+.close-modal { /* Shared by portfolio and team modals */
     position: absolute;
     top: 15px;
     right: 20px;
@@ -581,8 +580,8 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10; /* Above blur and image */
-    line-height: 1; /* Ensure X is centered */
+    z-index: 10; 
+    line-height: 1; 
 }
 
 .close-modal:hover {
@@ -592,18 +591,18 @@ nav .container {
 }
 
 .portfolio-modal-body {
-    padding: 2.5rem; /* Increased padding */
+    padding: 2.5rem; 
 }
 
 .portfolio-modal h2 {
     color: var(--muted-gold);
-    font-size: 2.2rem; /* Slightly larger */
+    font-size: 2.2rem; 
     margin-bottom: 1.5rem;
 }
 
 .portfolio-modal .client-info {
     background: var(--dark-gray);
-    padding: 1.5rem; /* Increased padding */
+    padding: 1.5rem; 
     border-radius: 5px;
     margin-bottom: 2.5rem;
     border-left: 5px solid var(--muted-gold);
@@ -615,17 +614,17 @@ nav .container {
 }
 
 
-.portfolio-modal .metrics {
+.portfolio-modal .metrics { /* Also used by team modal metrics */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjusted minmax */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
     gap: 1.5rem;
     margin: 2.5rem 0;
 }
 
-.metric-card {
+.metric-card { /* Shared by portfolio and team modal metrics */
     background: var(--dark-gray);
     padding: 1.5rem;
-    border-radius: 8px; /* Slightly more rounded */
+    border-radius: 8px; 
     text-align: center;
     border: 1px solid var(--primary-red);
     transition: border-color 0.3s ease, transform 0.3s ease;
@@ -635,15 +634,15 @@ nav .container {
     transform: scale(1.03);
 }
 
-.metric-number {
-    font-size: 2.2rem; /* Slightly larger */
+.metric-number { /* Shared by portfolio and team modal metrics */
+    font-size: 2.2rem; 
     font-weight: bold;
     color: var(--muted-gold);
     display: block;
     margin-bottom: 0.25rem;
 }
 
-.metric-label {
+.metric-label { /* Shared by portfolio and team modal metrics */
     color: #ccc;
     font-size: 0.9rem;
 }
@@ -662,15 +661,15 @@ nav .container {
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    height: 250px; /* Or adjust as needed */
-    background: var(--dark-gray); /* Fallback for images/videos */
-    border: 2px solid transparent; /* Initial transparent border */
+    height: 250px; 
+    background: var(--dark-gray); 
+    border: 2px solid transparent; 
 }
 
 .gallery-item:hover {
-    transform: translateY(-5px) scale(1.02); /* Combined effect */
+    transform: translateY(-5px) scale(1.02); 
     box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-    border-color: var(--muted-gold); /* Gold border on hover */
+    border-color: var(--muted-gold); 
 }
 
 .gallery-item img,
@@ -693,7 +692,7 @@ nav .container {
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
     padding: 1.5rem 1rem 1rem;
-    height: auto; /* Adjust to content */
+    height: auto; 
     min-height: 70px;
     display: flex;
     align-items: flex-end;
@@ -729,7 +728,7 @@ nav .container {
     position: relative;
     margin: 2% auto; 
     max-width: 90%;
-    width: 90%; /* Ensure it has a width for iframe child */
+    width: 90%; 
     max-height: 90vh; 
     display: flex;
     flex-direction: column;
@@ -738,11 +737,10 @@ nav .container {
     animation: slideIn 0.3s ease;
 }
 
-/* Specific for iframe modal content to ensure iframe takes space */
 .gallery-modal-content.iframe-modal-content {
-    height: 85vh; /* Give a specific height for iframe parent */
-    width: 85vw;  /* Give a specific width */
-    max-width: 1200px; /* Optional max width */
+    height: 85vh; 
+    width: 85vw;  
+    max-width: 1200px; 
 }
 
 
@@ -759,13 +757,13 @@ nav .container {
 
 .gallery-iframe {
     width: 100%;
-    height: 100%; /* Fill the .iframe-modal-content */
+    height: 100%; 
     border: none;
-    border-radius: 5px; /* Match other modal content */
+    border-radius: 5px; 
 }
 
 
-.close-gallery-modal {
+.close-gallery-modal { /* Shared by gallery and team modals if class is reused */
     position: absolute;
     top: 20px;
     right: 30px; 
@@ -800,15 +798,15 @@ nav .container {
 
 /* Contact Section */
 .contact {
-    padding: 80px 0; /* Reduced padding */
+    padding: 80px 0; 
     background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
 }
 
 .contact-content-wrapper { 
     display: flex;
     flex-direction: column;
-    gap: 2.5rem; /* Adjusted space between info and form */
-    max-width: 850px; /* Slightly reduced max-width for a tighter look */
+    gap: 2.5rem; 
+    max-width: 850px; 
     margin: 0 auto; 
 }
 
@@ -818,7 +816,7 @@ nav .container {
 
 .contact-icon-wrapper { 
     text-align: center; 
-    margin-bottom: 1.5rem; /* Space below icon */
+    margin-bottom: 1.5rem; 
 }
 
 .contact-icon-wrapper .fas.fa-crown {
@@ -837,7 +835,7 @@ nav .container {
     margin-bottom: 1rem; 
     line-height: 1.7;
     color: var(--white); 
-    max-width: 100%; /* Allow paragraphs to take full width of .contact-info */
+    max-width: 100%; 
     margin-left: auto;
     margin-right: auto;
 }
@@ -897,7 +895,7 @@ nav .container {
 }
 
 .form-group textarea {
-    height: 165px; /* Adjusted to better fill column with select above */
+    height: 165px; 
     resize: vertical;
 }
 
@@ -923,8 +921,8 @@ nav .container {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%; /* Make button full width */
-    margin-top: 1rem; /* Add some space above the button */
+    width: 100%; 
+    margin-top: 1rem; 
 }
 
 .submit-btn:hover {
@@ -1146,10 +1144,9 @@ nav .container {
 /* CSS for scroll-triggered animations */
 /* Elements start hidden and slightly offset */
 .portfolio-card, .service-card, .about-text > *, .client-logos, 
-.gallery-item, #blog .service-card, .contact-info > *, .contact-form > * { /* Corrected .blog .service-card */
-    /* opacity: 0; */ /* Original hiding rule - Commented out for debugging */
-    /* transform: translateY(20px); */ /* Original offset rule - Commented out for debugging */
-    opacity: 1; /* Make visible by default for debugging */
+.gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, 
+.team-member-card, .award-item, .job-posting, .mission-content { /* Added Our Team elements */
+    opacity: 1; /* Make visible by default for debugging/current state */
     transform: translateY(0); /* No offset by default for debugging */
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
@@ -1163,61 +1160,51 @@ nav .container {
 /* Slideshow container for Gallery Modals */
 .slideshow-container {
   position: relative;
-  max-width: 100%; /* Ensure it fits within the modal content area */
+  max-width: 100%; 
   margin: auto;
 }
 
 .gallery-slide {
-  display: none; /* Hide all slides by default */
-  text-align: center; /* Center images if they are smaller than container */
+  display: none; 
+  text-align: center; 
 }
 
 .gallery-slide img {
   max-width: 100%;
-  max-height: 75vh; /* Adjust as needed, similar to single gallery image */
+  max-height: 75vh; 
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 5px; /* Consistent with other modal images */
+  border-radius: 5px; 
 }
 
-/* Next & previous buttons for slideshow */
 .prev-slide, .next-slide {
   cursor: pointer;
   position: absolute;
   top: 50%;
   width: auto;
   padding: 16px;
-  margin-top: -22px; /* Adjust to vertically center */
+  margin-top: -22px; 
   color: white;
   font-weight: bold;
   font-size: 20px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
-  background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
-  z-index: 15; /* Ensure they are above slides */
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 15; 
 }
 
-/* Position the "next button" to the right */
 .next-slide {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
 .prev-slide:hover, .next-slide:hover {
-  background-color: rgba(212, 175, 55, 0.8); /* Muted gold on hover */
+  background-color: rgba(212, 175, 55, 0.8); 
   color: var(--black);
 }
 
-/* Dots/bullets/indicators */
-.dots-container { /* This class was in my example but not used in your HTML for dots, using direct style on div */
-  text-align: center;
-  padding: 10px 0;
-}
-
-/* Styling for the div containing dots in HTML */
 #gallery5-dots {
   text-align: center;
   margin-top: 15px;
@@ -1228,20 +1215,19 @@ nav .container {
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  background-color: #717171; /* Darker gray for inactive dots */
+  background-color: #717171; 
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
 }
 
-.dot.active, .dot:hover { /* Combined active and hover for dots */
-  background-color: var(--muted-gold); /* Muted gold for active/hover dot */
+.dot.active, .dot:hover { 
+  background-color: var(--muted-gold); 
 }
 
-/* Fading animation for slides */
 .fade {
   animation-name: fade;
-  animation-duration: 0.5s; /* Reduced duration for quicker transition */
+  animation-duration: 0.5s; 
 }
 
 @keyframes fade {
@@ -1249,14 +1235,6 @@ nav .container {
   to {opacity: 1}
 }
 
-/* Adjust gallery modal content for slideshow (gallery5 specific if needed) */
-#gallery5 .gallery-modal-content {
-    /* max-height: 90vh; /* Already there, ensure it accommodates title/dots */
-}
-
-#gallery5 .gallery-modal-title {
-    /* margin-top: 1.5rem; /* Already there, ensure spacing is good */
-}
 
 /* Our Team Page Specific Styles */
 .page-header {
@@ -1321,7 +1299,7 @@ nav .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer; /* Make card clickable */
+    cursor: pointer; 
 }
 
 .team-member-card:hover {
@@ -1387,7 +1365,7 @@ nav .container {
 .team-modal {
     display: none;
     position: fixed;
-    z-index: 3000; /* Higher than other modals if needed */
+    z-index: 3000; 
     left: 0;
     top: 0;
     width: 100%;
@@ -1395,23 +1373,64 @@ nav .container {
     background-color: rgba(0,0,0,0.9);
     animation: fadeIn 0.3s ease;
     overflow-y: auto;
-    padding: 20px; /* Add padding for smaller screens */
+    padding: 20px; 
 }
 
 .team-modal-content {
     background-color: var(--black);
-    margin: 5% auto;
-    padding: 30px;
+    margin: 3% auto; /* Centered with margin */
+    padding: 0; /* Header will have its own padding/structure */
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
     width: 90%;
-    max-width: 700px;
-    text-align: center;
+    max-width: 750px; /* Max width for the modal */
     position: relative;
     animation: slideIn 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden; /* To contain the ::before pseudo-element */
 }
 
-.close-team-modal {
+.team-modal-header {
+    position: relative;
+    height: 300px; /* Adjust height as needed */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark-gray); /* Fallback */
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 8px; /* Match content radius */
+    border-top-right-radius: 8px;
+}
+
+.team-modal-header::before { /* Blur effect layer */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit; /* Inherits from .team-modal-header JS-set background */
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px) brightness(0.6);
+    transform: scale(1.1); /* Ensure blur covers edges */
+    z-index: 1;
+}
+
+.team-modal-img-main { /* The main, sharp profile image */
+    position: relative;
+    width: 180px; /* Size of the sharp image */
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--gold);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 2; /* Above the blur */
+}
+
+.close-team-modal { /* Reusing .close-modal styles, but can be specific if needed */
     position: absolute;
     top: 15px;
     right: 20px;
@@ -1419,50 +1438,54 @@ nav .container {
     font-size: 2rem;
     font-weight: bold;
     cursor: pointer;
-    background: rgba(0,0,0,0.4);
-    width: 35px;
-    height: 35px;
+    background: rgba(0,0,0,0.6);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    z-index: 10; /* Ensure it's above header content */
     line-height: 1;
 }
-
 .close-team-modal:hover {
     background: var(--muted-gold);
     color: var(--black);
 }
 
-.team-modal-img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1.5rem;
-    border: 4px solid var(--muted-gold);
+
+.team-modal-body {
+    padding: 2rem;
+    text-align: center;
 }
 
-.team-modal-content h2 {
-    font-size: 2rem;
+.team-modal-body h2 {
+    font-size: 2.2rem;
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
+    margin-top: 0; /* Reset top margin if any */
 }
 
-.team-modal-title { /* For title within modal */
-    font-size: 1.1rem;
+.team-modal-title { 
+    font-size: 1.2rem;
     color: var(--white);
     margin-bottom: 1.5rem;
     font-weight: 500;
 }
 
+.team-metrics { /* Specific class for team modal metrics */
+    margin: 2rem 0; /* Space around metrics block */
+}
+/* .metric-card, .metric-number, .metric-label are reused from portfolio styles */
+
+
 .team-modal-bio {
     font-size: 1rem;
     color: #ccc;
     line-height: 1.7;
-    text-align: left; /* Or center if preferred */
-    margin-bottom: 1.5rem;
+    text-align: left; 
+    margin-bottom: 2rem;
 }
 .team-modal-bio p {
     margin-bottom: 1em;
@@ -1472,9 +1495,9 @@ nav .container {
 }
 
 
-.team-member-social-modal a { /* Social links inside modal */
+.team-member-social-modal a { 
     color: #ccc;
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Larger social icons in modal */
     margin: 0 0.75rem;
     transition: color 0.3s ease;
 }
@@ -1782,14 +1805,21 @@ nav .container {
     }
     .team-modal-content {
         width: 95%;
-        padding: 20px;
+        padding: 20px; /* Add padding to modal content on mobile */
     }
-    .team-modal-img {
-        width: 120px;
+    .team-modal-header {
+        height: 200px; /* Adjust modal header height for mobile */
+    }
+    .team-modal-img-main {
+        width: 120px; /* Adjust modal image size for mobile */
         height: 120px;
     }
-    .team-modal-content h2 {
+    .team-modal-body h2 {
         font-size: 1.8rem;
+    }
+    .team-modal .metrics { /* Adjust team modal metrics for mobile */
+        grid-template-columns: 1fr; /* Stack metric cards */
+        gap: 1rem;
     }
 }
 
