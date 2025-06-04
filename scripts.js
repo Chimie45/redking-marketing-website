@@ -147,6 +147,28 @@ function closePortfolioModal(modalId) {
     document.body.style.overflow = 'auto';
 }
 
+// Team Member Modal Functions
+function openTeamModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Team modal not found:', modalId);
+        return;
+    }
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeTeamModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Team modal not found for closing:', modalId);
+        return;
+    }
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+
 // Close modals when clicking outside of content
 window.addEventListener('click', function(event) {
     if (event.target.classList.contains('gallery-modal')) {
@@ -159,6 +181,12 @@ window.addEventListener('click', function(event) {
     if (event.target.classList.contains('portfolio-modal')) {
         if (event.target.style.display === 'block') {
             closePortfolioModal(event.target.id); 
+        }
+    }
+
+    if (event.target.classList.contains('team-modal')) { // Added for team modals
+        if (event.target.style.display === 'block') {
+            closeTeamModal(event.target.id);
         }
     }
 });
@@ -182,6 +210,14 @@ document.addEventListener('keydown', function(event) {
                 aModalWasOpen = true;
             }
         });
+
+        const teamModals = document.querySelectorAll('.team-modal'); // Added for team modals
+        teamModals.forEach(modal => {
+            if (modal.style.display === 'block') {
+                closeTeamModal(modal.id);
+                aModalWasOpen = true;
+            }
+        });
         
         if (aModalWasOpen) {
             document.body.style.overflow = 'auto';
@@ -189,7 +225,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Contact form handling
+// Contact form handling (Updated for Cloudflare Worker)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     let formMessageDiv = document.getElementById('form-submission-message');
@@ -201,12 +237,9 @@ if (contactForm) {
         formMessageDiv.style.borderRadius = '5px';
         formMessageDiv.style.textAlign = 'center';
         formMessageDiv.style.display = 'none'; // Initially hidden
-        // Insert after the parent of the form, which is .contact-form
-        // or before the submit button if you want it inside the form.
-        // For now, let's put it after the form wrapper.
-        if (contactForm.parentNode.parentNode) { // Assuming .contact-form is wrapped
+        if (contactForm.parentNode.parentNode) { 
              contactForm.parentNode.parentNode.insertBefore(formMessageDiv, contactForm.parentNode.nextSibling);
-        } else { // Fallback if structure is different
+        } else { 
             contactForm.parentNode.insertBefore(formMessageDiv, contactForm.nextSibling);
         }
     }
@@ -382,6 +415,15 @@ if (newsletterForm) {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
+        // Check if the link is to a different page or an anchor on the current page
+        const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1);
+        const targetPath = href.split('#')[0];
+
+        if (targetPath && targetPath !== currentPath && targetPath !== '') {
+            // It's a link to a different page, let the browser handle it
+            return;
+        }
+
         if (href.length > 1 && href.startsWith('#')) {
             const targetElement = document.querySelector(href);
             if (targetElement) {
@@ -441,7 +483,7 @@ const animatedElementsObserver = new IntersectionObserver(function(entries, obse
     });
 }, observerOptions);
 
-document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *').forEach((el) => {
+document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content').forEach((el) => {
     animatedElementsObserver.observe(el);
 });
 
@@ -522,4 +564,38 @@ document.addEventListener('DOMContentLoaded', function() {
         
         lazyImages.forEach(img => imageObserver.observe(img));
     }
+
+    // Update smooth scrolling to handle links on different pages
+    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            const [path, hash] = href.split('#');
+            const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+
+            if (hash) { // If there's a hash
+                if (path === '' || path === currentPage) { // Anchor on the current page
+                    e.preventDefault();
+                    const targetElement = document.getElementById(hash);
+                    if (targetElement) {
+                        if (navLinks && navLinks.classList.contains('nav-links--active')) {
+                            navLinks.classList.remove('nav-links--active');
+                            if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
+                        }
+                        // Recalculate nav height for scroll offset, as it might change if fixed
+                        const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; // Extra 20px buffer
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+                // If path is different, browser will handle navigation to new page,
+                // and standard anchor behavior will scroll to hash on that page.
+            }
+            // If no hash, it's a normal link, let browser handle it.
+        });
+    });
 });
