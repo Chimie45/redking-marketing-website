@@ -44,7 +44,6 @@ function openGalleryModal(modalId) {
         gallerySlideIndexes[modalId] = 1; 
         showGallerySlide(gallerySlideIndexes[modalId], modalId);
     }
-    // Note: Iframe modals are opened by openIframeModal directly
 }
 
 function closeGalleryModal(modalId) {
@@ -62,10 +61,9 @@ function closeGalleryModal(modalId) {
         video.currentTime = 0;
     }
 
-    // If it's an iframe modal, clear the src to stop loading/playing
     const iframe = modal.querySelector('.gallery-iframe');
     if (iframe) {
-        iframe.src = ''; // Clear the source
+        iframe.src = ''; 
     }
 }
 
@@ -191,31 +189,93 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Contact form handling
+// Contact form handling (Updated for Cloudflare Worker)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    let formMessageDiv = document.getElementById('form-submission-message');
+    if (!formMessageDiv) {
+        formMessageDiv = document.createElement('div');
+        formMessageDiv.id = 'form-submission-message';
+        formMessageDiv.style.marginTop = '15px'; 
+        formMessageDiv.style.padding = '10px';
+        formMessageDiv.style.borderRadius = '5px';
+        formMessageDiv.style.textAlign = 'center';
+        formMessageDiv.style.display = 'none'; // Initially hidden
+        contactForm.parentNode.insertBefore(formMessageDiv, contactForm.nextSibling); 
+    }
+
+
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+        formMessageDiv.textContent = ''; 
+        formMessageDiv.style.display = 'none'; 
+
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+
         const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
+        const data = Object.fromEntries(formData.entries()); 
         
         if (!data.name || !data.email || !data.message) {
-            console.warn('Form validation: Please fill in all required fields.');
-            alert('Please fill in all required fields.'); // Kept alert as per original for now
+            formMessageDiv.textContent = 'Please fill in all required fields.';
+            formMessageDiv.style.backgroundColor = 'var(--primary-red)';
+            formMessageDiv.style.color = 'var(--white)';
+            formMessageDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
             return;
         }
         
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
-            console.warn('Form validation: Please enter a valid email address.');
-            alert('Please enter a valid email address.'); // Kept alert as per original for now
+            formMessageDiv.textContent = 'Please enter a valid email address.';
+            formMessageDiv.style.backgroundColor = 'var(--primary-red)';
+            formMessageDiv.style.color = 'var(--white)';
+            formMessageDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
             return;
         }
-        
-        console.log('Form submitted (simulated):', data);
-        alert('Thank you for your message! We\'ll get back to you within 24 hours.'); 
-        this.reset();
+
+        // Use your actual Cloudflare Worker URL here
+        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; 
+        // If your worker expects a path like /submit-form, add it:
+        // const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/submit-form';
+
+
+        try {
+            const response = await fetch(workerUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                formMessageDiv.textContent = result.message || 'Message sent successfully!';
+                formMessageDiv.style.backgroundColor = 'var(--muted-gold)'; 
+                formMessageDiv.style.color = 'var(--black)';
+                this.reset(); 
+            } else {
+                formMessageDiv.textContent = result.message || 'Failed to send message. Please try again.';
+                formMessageDiv.style.backgroundColor = 'var(--primary-red)';
+                formMessageDiv.style.color = 'var(--white)';
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            formMessageDiv.textContent = 'An error occurred. Please try again later.';
+            formMessageDiv.style.backgroundColor = 'var(--dark-red)';
+            formMessageDiv.style.color = 'var(--white)';
+        } finally {
+            formMessageDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        }
     });
 } else {
     console.warn("Contact form with ID 'contactForm' not found.");
@@ -285,9 +345,6 @@ const animatedElementsObserver = new IntersectionObserver(function(entries, obse
 }, observerOptions);
 
 document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *').forEach((el) => {
-    // Initial styles (opacity: 0, transform: translateY(20px)) are now handled by CSS directly
-    // for elements NOT having the .element--in-view class.
-    // The CSS should define the "before animation" state, and .element--in-view defines the "after animation" state.
     animatedElementsObserver.observe(el);
 });
 
