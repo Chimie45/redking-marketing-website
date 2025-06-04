@@ -1254,25 +1254,29 @@ nav .container {
     font-size: 1.3rem;
     color: var(--white);
     font-weight: 300;
+    margin-bottom: 2rem; /* Add space before mission statement */
 }
 
-.mission-statement-section {
-    padding: 80px 0;
-    background-color: var(--black); 
-}
-
-.mission-statement-section .mission-content {
+.mission-statement-header {
+    margin-top: 2rem; /* Space above mission statement within header */
     max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.mission-statement-section .mission-content p {
-    font-size: 1.2rem;
-    line-height: 1.8;
+.mission-statement-header h2 { /* For "Our Mission" title inside header */
+    font-size: 1.8rem !important; /* Override .section-title if needed */
+    margin-bottom: 1rem !important;
+    color: var(--gold) !important;
+}
+
+.mission-statement-header p {
+    font-size: 1.1rem; /* Adjusted size for readability in header */
+    line-height: 1.7;
     color: #e0e0e0; 
     margin-bottom: 0; 
 }
+
 
 .team-section {
     padding: 80px 0;
@@ -1420,14 +1424,14 @@ nav .container {
 .team-modal-img-main { 
     position: relative;
     z-index: 2; 
-    width: auto; /* Let height control for 16:9 */
-    height: 180px; /* Set a height */
-    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
-    object-fit: cover; /* Will crop 1:1 to fit 16:9 */
-    border-radius: 8px; /* Rectangular */
+    width: auto; 
+    height: 180px; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+    border-radius: 8px; 
     border: 3px solid var(--gold);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    max-width: 80%; /* Don't let it get too wide */
+    max-width: 80%; 
 }
 
 
@@ -1457,7 +1461,7 @@ nav .container {
 
 
 .team-modal-body {
-    padding: 2rem; /* Adjusted padding */
+    padding: 2rem;
     text-align: center;
 }
 
@@ -1790,8 +1794,9 @@ nav .container {
     .page-header .hero-content .subtitle {
         font-size: 1.1rem;
     }
-    .mission-statement-section .mission-content p {
-        font-size: 1.1rem;
+    .mission-statement-header p { /* Adjust mission statement in header for mobile */
+        font-size: 1rem;
+        line-height: 1.6;
     }
     .team-member-card {
         padding: 1.5rem 1rem;
@@ -1802,15 +1807,14 @@ nav .container {
     }
     .team-modal-content {
         width: 95%;
-        padding: 20px; 
+        padding: 20px 15px; /* Adjust padding for modal content on mobile */
     }
     .team-modal-header {
         height: 200px; 
     }
     .team-modal-img-main {
-        width: auto; /* Let height and aspect-ratio control */
         height: 120px; /* Adjust modal image size for mobile */
-        max-width: 90%; /* Ensure it doesn't overflow header */
+        /* width will be auto due to aspect-ratio */
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
