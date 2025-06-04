@@ -62,20 +62,19 @@
             <h2 class="section-title">Our Mission</h2>
             <div class="mission-content">
                 <p>At RedKing Marketing, our mission is to empower gaming and iGaming companies to achieve unprecedented global reach and player engagement. We combine deep industry expertise with innovative, data-driven marketing strategies to turn ambitious visions into market-leading realities. We are committed to transparency, results, and forging true partnerships that drive sustainable growth and elevate brands to dominate their respective arenas.</p>
-                <!-- You can expand on this or add more specific points -->
             </div>
         </div>
     </section>
 
     <!-- Team Members Section -->
-    <section id="team-members" class="team-section services"> <!-- Reusing .services for similar background/padding -->
+    <section id="team-members" class="team-section services"> 
         <div class="container">
             <h2 class="section-title">Our Experts</h2>
             <div class="team-grid">
                 <!-- Employee 1 -->
-                <div class="team-member-card">
+                <div class="team-member-card" onclick="openTeamModal('teamMember1')">
                     <div class="team-member-image">
-                        <img src="placeholder-profile.jpg" alt="Team Member 1 Name">
+                        <img src="placeholder-profile.jpg" alt="Thomas Streetman">
                     </div>
                     <div class="team-member-info">
                         <h3>Thomas Streetman</h3>
@@ -88,9 +87,9 @@
                     </div>
                 </div>
                 <!-- Employee 2 -->
-                <div class="team-member-card">
+                <div class="team-member-card" onclick="openTeamModal('teamMember2')">
                     <div class="team-member-image">
-                        <img src="placeholder-profile.jpg" alt="Team Member 2 Name">
+                        <img src="placeholder-profile.jpg" alt="Jane Doe">
                     </div>
                     <div class="team-member-info">
                         <h3>Jane Doe</h3>
@@ -102,9 +101,9 @@
                     </div>
                 </div>
                 <!-- Employee 3 -->
-                <div class="team-member-card">
+                <div class="team-member-card" onclick="openTeamModal('teamMember3')">
                     <div class="team-member-image">
-                        <img src="placeholder-profile.jpg" alt="Team Member 3 Name">
+                        <img src="placeholder-profile.jpg" alt="John Smith">
                     </div>
                     <div class="team-member-info">
                         <h3>John Smith</h3>
@@ -116,9 +115,9 @@
                     </div>
                 </div>
                 <!-- Employee 4 -->
-                <div class="team-member-card">
+                <div class="team-member-card" onclick="openTeamModal('teamMember4')">
                     <div class="team-member-image">
-                        <img src="placeholder-profile.jpg" alt="Team Member 4 Name">
+                        <img src="placeholder-profile.jpg" alt="Aisha Khan">
                     </div>
                     <div class="team-member-info">
                         <h3>Aisha Khan</h3>
@@ -130,9 +129,9 @@
                     </div>
                 </div>
                 <!-- Employee 5 -->
-                <div class="team-member-card">
+                <div class="team-member-card" onclick="openTeamModal('teamMember5')">
                     <div class="team-member-image">
-                        <img src="placeholder-profile.jpg" alt="Team Member 5 Name">
+                        <img src="placeholder-profile.jpg" alt="Carlos Rossi">
                     </div>
                     <div class="team-member-info">
                         <h3>Carlos Rossi</h3>
@@ -148,7 +147,7 @@
     </section>
 
     <!-- Awards Section -->
-    <section id="awards" class="awards-section about"> <!-- Reusing .about -->
+    <section id="awards" class="awards-section about"> 
         <div class="container">
             <h2 class="section-title">Recognition & Awards</h2>
             <div class="awards-grid">
@@ -167,13 +166,12 @@
                     <h4>Digital Marketing Innovators</h4>
                     <p>Innovation in User Acquisition 2023</p>
                 </div>
-                <!-- Add more awards as needed -->
             </div>
         </div>
     </section>
 
     <!-- Jobs Board Section -->
-    <section id="careers" class="jobs-section services"> <!-- Reusing .services -->
+    <section id="careers" class="jobs-section services"> 
         <div class="container">
             <h2 class="section-title">Join Our Kingdom</h2>
             <p class="jobs-intro">We're always looking for passionate and talented individuals to join our quest for marketing domination. Check out our open positions below!</p>
@@ -182,23 +180,105 @@
                     <h3>Digital Marketing Specialist - APAC</h3>
                     <p class="job-location">Seoul, South Korea (Remote Options)</p>
                     <p class="job-description">Seeking an experienced digital marketer with a deep understanding of APAC gaming markets to lead innovative campaigns...</p>
-                    <a href="#contact" class="cta-button job-apply-button">Apply Now</a>
+                    <a href="index.html#contact" class="cta-button job-apply-button">Apply Now</a>
                 </div>
                 <div class="job-posting">
                     <h3>Community Manager - LATAM</h3>
                     <p class="job-location">Remote (LATAM Based)</p>
                     <p class="job-description">Passionate about gaming and community building? Join us to engage and grow our clients' player bases in Latin America...</p>
-                    <a href="#contact" class="cta-button job-apply-button">Apply Now</a>
+                    <a href="index.html#contact" class="cta-button job-apply-button">Apply Now</a>
                 </div>
                 <div class="job-posting">
                     <h3>No Openings Currently</h3>
                     <p class="job-location">Check back soon!</p>
                     <p class="job-description">We are not actively hiring for specific roles at this moment, but we're always interested in hearing from exceptional talent. Feel free to send us your resume via the contact form.</p>
                 </div>
-                <!-- Add more job postings as needed -->
             </div>
         </div>
     </section>
+
+    <!-- Team Member Modals -->
+    <div id="teamMember1" class="team-modal">
+        <div class="team-modal-content">
+            <span class="close-team-modal" onclick="closeTeamModal('teamMember1')">&times;</span>
+            <img src="placeholder-profile.jpg" alt="Thomas Streetman" class="team-modal-img">
+            <h2>Thomas Streetman</h2>
+            <p class="team-modal-title">CEO & Founder</p>
+            <div class="team-modal-bio">
+                <p>Detailed bio for Thomas Streetman. Visionary leader with over [X] years of experience in the gaming and iGaming marketing sectors. Thomas has a proven track record of launching and scaling games in challenging global markets, with a particular expertise in Asia (Japan, Korea) and the Americas (North & Latin America).</p>
+                <p>He founded RedKing Marketing with the vision to provide unparalleled, data-driven marketing solutions that deliver tangible results and help clients dominate their niche. His strategic insights and passion for the industry are the driving force behind the company's success.</p>
+            </div>
+            <div class="team-member-social-modal">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="teamMember2" class="team-modal">
+        <div class="team-modal-content">
+            <span class="close-team-modal" onclick="closeTeamModal('teamMember2')">&times;</span>
+            <img src="placeholder-profile.jpg" alt="Jane Doe" class="team-modal-img">
+            <h2>Jane Doe</h2>
+            <p class="team-modal-title">Head of Creative Strategy</p>
+            <div class="team-modal-bio">
+                <p>Jane is the creative powerhouse behind RedKing's most captivating campaigns. With a background in visual arts and digital media, she excels at crafting compelling narratives and designing stunning visuals that resonate deeply with target audiences across diverse gaming genres.</p>
+                <p>She leads a talented team of designers and content creators, ensuring every campaign is not only strategically sound but also creatively exceptional.</p>
+            </div>
+            <div class="team-member-social-modal">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+     <div id="teamMember3" class="team-modal">
+        <div class="team-modal-content">
+            <span class="close-team-modal" onclick="closeTeamModal('teamMember3')">&times;</span>
+            <img src="placeholder-profile.jpg" alt="John Smith" class="team-modal-img">
+            <h2>John Smith</h2>
+            <p class="team-modal-title">Lead Data Analyst</p>
+            <div class="team-modal-bio">
+                <p>John is our data maestro, turning complex datasets into clear, actionable strategies. His expertise in market research, performance tracking, and predictive analytics ensures that every RedKing campaign is optimized for maximum impact and ROI.</p>
+                <p>He believes that data tells a story, and his insights are crucial for understanding player behavior and refining marketing approaches for continuous improvement.</p>
+            </div>
+            <div class="team-member-social-modal">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+     <div id="teamMember4" class="team-modal">
+        <div class="team-modal-content">
+            <span class="close-team-modal" onclick="closeTeamModal('teamMember4')">&times;</span>
+            <img src="placeholder-profile.jpg" alt="Aisha Khan" class="team-modal-img">
+            <h2>Aisha Khan</h2>
+            <p class="team-modal-title">Community & APAC Lead</p>
+            <div class="team-modal-bio">
+                <p>Aisha is a specialist in building and nurturing vibrant online gaming communities. With extensive experience in the APAC region, particularly Japan and Korea, she understands the cultural nuances essential for effective engagement and brand loyalty.</p>
+                <p>She spearheads our community management initiatives and tailors regional marketing strategies to connect authentically with players.</p>
+            </div>
+            <div class="team-member-social-modal">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+     <div id="teamMember5" class="team-modal">
+        <div class="team-modal-content">
+            <span class="close-team-modal" onclick="closeTeamModal('teamMember5')">&times;</span>
+            <img src="placeholder-profile.jpg" alt="Carlos Rossi" class="team-modal-img">
+            <h2>Carlos Rossi</h2>
+            <p class="team-modal-title">LATAM Market Specialist</p>
+            <div class="team-modal-bio">
+                <p>Carlos is our go-to expert for the dynamic and rapidly growing Latin American gaming market. His insights into regional trends, player preferences, and local influencer networks are invaluable for clients looking to expand their footprint in LATAM.</p>
+                <p>He develops and executes culturally attuned marketing campaigns that drive significant user acquisition and brand presence.</p>
+            </div>
+            <div class="team-member-social-modal">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <footer class="site-footer">
