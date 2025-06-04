@@ -1499,28 +1499,24 @@ nav .container {
 
 .team-metrics .metric-card {
     padding: 0.75rem; /* Smaller padding for smaller cards */
-    min-height: 90px; /* Ensure a minimum height */
+    min-height: auto; /* Let content define height */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative; /* For aspect ratio hack */
+    /* position: relative; /* Not needed if not using padding hack for aspect ratio */
     width: 100%; /* Make it responsive within the grid column */
-    /* aspect-ratio: 16 / 9; /* Enforce 16:9 - this might be tricky with varying text */
 }
-/* Attempting 16:9 with padding hack - may need adjustments based on content */
 .team-metrics .metric-card::before {
-    content: "";
-    display: block;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+    content: none; /* Remove aspect ratio hack */
 }
-.team-metrics .metric-card .metric-number,
-.team-metrics .metric-card .metric-label {
-    /* Position content absolutely if using padding hack, or adjust flexbox */
-    font-size: 1.5rem; /* Smaller font for metric numbers */
+.team-metrics .metric-card .metric-number {
+    font-size: 1.6rem; /* Adjusted font for metric numbers */
+    margin-bottom: 0.1rem;
 }
 .team-metrics .metric-card .metric-label {
-    font-size: 0.8rem; /* Smaller font for metric labels */
+    font-size: 0.85rem; /* Adjusted font for metric labels */
+    line-height: 1.2;
 }
 
 
@@ -1866,16 +1862,17 @@ nav .container {
         gap: 1rem;
     }
     .team-metrics .metric-card {
-        min-height: 0; /* Remove min-height for stacked mobile view */
+        min-height: auto; /* Let content define height for stacked mobile */
+        padding: 0.5rem; /* Further reduce padding for stacked mobile */
     }
     .team-metrics .metric-card::before {
-        padding-top: 0; /* Remove aspect ratio padding for stacked mobile */
+        content: none; /* Remove aspect ratio padding for stacked mobile */
     }
     .team-metrics .metric-card .metric-number {
-        font-size: 1.6rem; /* Adjust for mobile */
+        font-size: 1.4rem; /* Adjust for mobile */
     }
     .team-metrics .metric-card .metric-label {
-        font-size: 0.75rem; /* Adjust for mobile */
+        font-size: 0.7rem; /* Adjust for mobile */
     }
 }
 
