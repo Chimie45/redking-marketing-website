@@ -13,14 +13,14 @@
         <div class="container">
             <div class="nav-content">
                 <div class="nav-left">
-                    <a href="index.html#home" class="logo"> <!-- Updated to link to index.html#home -->
+                    <a href="index.html#home" class="logo"> 
                         <img src="logo.png" alt="RedKing Marketing">
                     </a>
                     <ul class="nav-links">
                         <li><a href="index.html#home">Home</a></li>
                         <li><a href="index.html#services">Services</a></li>
                         <li><a href="index.html#about">About</a></li>
-                        <li><a href="our-team.html">Our Team</a></li> <!-- New Link -->
+                        <li><a href="our-team.html">Our Team</a></li> 
                         <li><a href="index.html#portfolio">Portfolio</a></li>
                         <li><a href="index.html#gallery">Gallery</a></li>
                         <li><a href="index.html#blog">Blog</a></li>
@@ -47,9 +47,9 @@
     </nav>
 
     <!-- Page Header Section -->
-    <section id="team-header" class="page-header hero" style="min-height: 50vh; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('header-team.jpg');"> <!-- You might want a different header image -->
+    <section id="team-header" class="page-header hero" style="min-height: 50vh; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('header-team.jpg');"> 
         <div class="container">
-            <div class="hero-content" style="padding-top: 100px;"> <!-- Adjust padding as needed -->
+            <div class="hero-content" style="padding-top: 100px;"> 
                 <h1>Meet the Kings</h1>
                 <p class="subtitle">The Passionate Professionals Driving Your Success</p>
             </div>
@@ -57,12 +57,11 @@
     </section>
 
     <!-- Mission Statement Section -->
-    <section id="mission" class="mission-statement-section about"> <!-- Reusing .about for similar background/padding -->
+    <section id="mission" class="mission-statement-section about"> 
         <div class="container">
             <h2 class="section-title">Our Mission</h2>
             <div class="mission-content">
                 <p>At RedKing Marketing, our mission is to empower gaming and iGaming companies to achieve unprecedented global reach and player engagement. We combine deep industry expertise with innovative, data-driven marketing strategies to turn ambitious visions into market-leading realities. We are committed to transparency, results, and forging true partnerships that drive sustainable growth and elevate brands to dominate their respective arenas.</p>
-                <!-- You can expand on this or add more specific points -->
             </div>
         </div>
     </section>
@@ -101,13 +100,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- Employee 3: Songi -->
+                <!-- Employee 3: Songi Kim -->
                 <div class="team-member-card" onclick="openTeamModal('teamMember3')">
                     <div class="team-member-image">
-                        <img src="songi.jpg" alt="Songi">
+                        <img src="songi.jpg" alt="Songi Kim">
                     </div>
                     <div class="team-member-info">
-                        <h3>Songi</h3>
+                        <h3>Songi Kim</h3>
                         <p class="team-member-title">Korea Specialist</p>
                         <p class="team-member-bio">Expert in fostering vibrant online communities and navigating the unique marketing landscapes of the Korean market.</p>
                          <div class="team-member-social">
@@ -201,81 +200,171 @@
     <!-- Team Member Modals -->
     <div id="teamMember1" class="team-modal">
         <div class="team-modal-content">
-            <span class="close-team-modal" onclick="closeTeamModal('teamMember1')">&times;</span>
-            <img src="tom.jpg" alt="Thomas Streetman" class="team-modal-img">
-            <h2>Thomas Streetman</h2>
-            <p class="team-modal-title">CEO & Founder</p>
-            <div class="team-modal-bio">
-                <p>Detailed bio for Thomas Streetman. Visionary leader with over [X] years of experience in the gaming and iGaming marketing sectors. Thomas has a proven track record of launching and scaling games in challenging global markets, with a particular expertise in Asia (Japan, Korea) and the Americas (North & Latin America).</p>
-                <p>He founded RedKing Marketing with the vision to provide unparalleled, data-driven marketing solutions that deliver tangible results and help clients dominate their niche. His strategic insights and passion for the industry are the driving force behind the company's success.</p>
+            <div class="team-modal-header"> <!-- New Header Div -->
+                <img src="tom.jpg" alt="Thomas Streetman" class="team-modal-img-main"> <!-- Main image for centered display -->
+                 <span class="close-team-modal" onclick="closeTeamModal('teamMember1')">&times;</span>
             </div>
-            <div class="team-member-social-modal">
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <div class="team-modal-body">
+                <h2>Thomas Streetman</h2>
+                <p class="team-modal-title">CEO & Founder</p>
+                <div class="metrics team-metrics"> <!-- Metrics Section -->
+                    <div class="metric-card">
+                        <span class="metric-number">15+</span>
+                        <span class="metric-label">Years Experience</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">50+</span>
+                        <span class="metric-label">Global Campaigns</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">3</span>
+                        <span class="metric-label">Continents Covered</span>
+                    </div>
+                </div>
+                <div class="team-modal-bio">
+                    <p>Detailed bio for Thomas Streetman. Visionary leader with over 15 years of experience in the gaming and iGaming marketing sectors. Thomas has a proven track record of launching and scaling games in challenging global markets, with a particular expertise in Asia (Japan, Korea) and the Americas (North & Latin America).</p>
+                    <p>He founded RedKing Marketing with the vision to provide unparalleled, data-driven marketing solutions that deliver tangible results and help clients dominate their niche. His strategic insights and passion for the industry are the driving force behind the company's success.</p>
+                </div>
+                <div class="team-member-social-modal">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="teamMember2" class="team-modal">
         <div class="team-modal-content">
-            <span class="close-team-modal" onclick="closeTeamModal('teamMember2')">&times;</span>
-            <img src="dan.jpg" alt="Dan" class="team-modal-img">
-            <h2>Dan</h2>
-            <p class="team-modal-title">Creative Manager</p>
-            <div class="team-modal-bio">
-                <p>Jane is the creative powerhouse behind RedKing's most captivating campaigns. With a background in visual arts and digital media, she excels at crafting compelling narratives and designing stunning visuals that resonate deeply with target audiences across diverse gaming genres.</p>
-                <p>She leads a talented team of designers and content creators, ensuring every campaign is not only strategically sound but also creatively exceptional.</p>
+            <div class="team-modal-header">
+                <img src="dan.jpg" alt="Dan" class="team-modal-img-main">
+                <span class="close-team-modal" onclick="closeTeamModal('teamMember2')">&times;</span>
             </div>
-            <div class="team-member-social-modal">
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <div class="team-modal-body">
+                <h2>Dan</h2>
+                <p class="team-modal-title">Creative Manager</p>
+                <div class="metrics team-metrics">
+                     <div class="metric-card">
+                        <span class="metric-number">100+</span>
+                        <span class="metric-label">Ad Creatives</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">20+</span>
+                        <span class="metric-label">Brand Identities</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">5</span>
+                        <span class="metric-label">Design Awards</span>
+                    </div>
+                </div>
+                <div class="team-modal-bio">
+                    <p>Dan is the creative powerhouse behind RedKing's most captivating campaigns. With a background in visual arts and digital media, he excels at crafting compelling narratives and designing stunning visuals that resonate deeply with target audiences across diverse gaming genres.</p>
+                    <p>He leads a talented team of designers and content creators, ensuring every campaign is not only strategically sound but also creatively exceptional.</p>
+                </div>
+                <div class="team-member-social-modal">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
         </div>
     </div>
 
      <div id="teamMember3" class="team-modal">
         <div class="team-modal-content">
-            <span class="close-team-modal" onclick="closeTeamModal('teamMember3')">&times;</span>
-            <img src="songi.jpg" alt="Songi" class="team-modal-img">
-            <h2>Songi</h2>
-            <p class="team-modal-title">Korea Specialist</p>
-            <div class="team-modal-bio">
-                <p>John is our data maestro, turning complex datasets into clear, actionable strategies. His expertise in market research, performance tracking, and predictive analytics ensures that every RedKing campaign is optimized for maximum impact and ROI.</p>
-                <p>He believes that data tells a story, and his insights are crucial for understanding player behavior and refining marketing approaches for continuous improvement.</p>
+            <div class="team-modal-header">
+                <img src="songi.jpg" alt="Songi Kim" class="team-modal-img-main">
+                <span class="close-team-modal" onclick="closeTeamModal('teamMember3')">&times;</span>
             </div>
-            <div class="team-member-social-modal">
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <div class="team-modal-body">
+                <h2>Songi Kim</h2>
+                <p class="team-modal-title">Korea Specialist</p>
+                <div class="metrics team-metrics">
+                    <div class="metric-card">
+                        <span class="metric-number">1M+</span>
+                        <span class="metric-label">Community Members</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">99%</span>
+                        <span class="metric-label">Korean Market Insight</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">10+</span>
+                        <span class="metric-label">Viral Campaigns</span>
+                    </div>
+                </div>
+                <div class="team-modal-bio">
+                    <p>Songi is our dedicated Korea Specialist, bringing an unparalleled understanding of the Korean gaming market. Her expertise in local player behavior, cultural nuances, and digital trends ensures our clients' campaigns resonate authentically and effectively in one of Asia's most dynamic gaming landscapes.</p>
+                    <p>She excels in community engagement, influencer collaborations, and adapting global strategies for maximum impact in Korea.</p>
+                </div>
+                <div class="team-member-social-modal">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
         </div>
     </div>
 
      <div id="teamMember4" class="team-modal">
         <div class="team-modal-content">
-            <span class="close-team-modal" onclick="closeTeamModal('teamMember4')">&times;</span>
-            <img src="isabella.jpg" alt="Isabella" class="team-modal-img">
-            <h2>Isabella</h2>
-            <p class="team-modal-title">LATAM Specialist</p>
-            <div class="team-modal-bio">
-                <p>Aisha is a specialist in building and nurturing vibrant online gaming communities. With extensive experience in the APAC region, particularly Japan and Korea, she understands the cultural nuances essential for effective engagement and brand loyalty.</p>
-                <p>She spearheads our community management initiatives and tailors regional marketing strategies to connect authentically with players.</p>
+             <div class="team-modal-header">
+                <img src="isabella.jpg" alt="Isabella" class="team-modal-img-main">
+                <span class="close-team-modal" onclick="closeTeamModal('teamMember4')">&times;</span>
             </div>
-            <div class="team-member-social-modal">
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <div class="team-modal-body">
+                <h2>Isabella</h2>
+                <p class="team-modal-title">LATAM Specialist</p>
+                <div class="metrics team-metrics">
+                    <div class="metric-card">
+                        <span class="metric-number">200%</span>
+                        <span class="metric-label">LATAM Growth</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">30+</span>
+                        <span class="metric-label">Localized Campaigns</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">1st</span>
+                        <span class="metric-label">Choice for LATAM</span>
+                    </div>
+                </div>
+                <div class="team-modal-bio">
+                    <p>Isabella is our passionate LATAM Specialist, dedicated to unlocking the vast potential of the Latin American gaming market for our clients. Her deep cultural understanding and network within the region allow her to craft highly effective, localized marketing strategies.</p>
+                    <p>From Brazil to Mexico, Isabella ensures our campaigns speak directly to LATAM players, driving engagement and substantial growth.</p>
+                </div>
+                <div class="team-member-social-modal">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
         </div>
     </div>
 
      <div id="teamMember5" class="team-modal">
         <div class="team-modal-content">
-            <span class="close-team-modal" onclick="closeTeamModal('teamMember5')">&times;</span>
-            <img src="andrew.jpg" alt="Andrew" class="team-modal-img">
-            <h2>Andrew</h2>
-            <p class="team-modal-title">Web & Programming Lead</p>
-            <div class="team-modal-bio">
-                <p>Carlos is our go-to expert for the dynamic and rapidly growing Latin American gaming market. His insights into regional trends, player preferences, and local influencer networks are invaluable for clients looking to expand their footprint in LATAM.</p>
-                <p>He develops and executes culturally attuned marketing campaigns that drive significant user acquisition and brand presence.</p>
+            <div class="team-modal-header">
+                <img src="andrew.jpg" alt="Andrew" class="team-modal-img-main">
+                <span class="close-team-modal" onclick="closeTeamModal('teamMember5')">&times;</span>
             </div>
-            <div class="team-member-social-modal">
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <div class="team-modal-body">
+                <h2>Andrew</h2>
+                <p class="team-modal-title">Web & Programming Lead</p>
+                 <div class="metrics team-metrics">
+                    <div class="metric-card">
+                        <span class="metric-number">100K+</span>
+                        <span class="metric-label">Lines of Code</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">99.9%</span>
+                        <span class="metric-label">Uptime Delivered</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">15+</span>
+                        <span class="metric-label">Web Platforms Built</span>
+                    </div>
+                </div>
+                <div class="team-modal-bio">
+                    <p>Andrew is the technical architect behind RedKing's robust digital solutions. As the Web & Programming Lead, he ensures our clients' online platforms are not only visually appealing but also highly functional, scalable, and secure.</p>
+                    <p>With expertise in a wide array of web technologies, Andrew translates complex marketing needs into seamless digital experiences that convert.</p>
+                </div>
+                <div class="team-member-social-modal">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
         </div>
     </div>
@@ -336,6 +425,6 @@
         </div>
     </footer>
 
-    <script src="scripts.js"></script> <!-- Link to your existing JavaScript -->
+    <script src="scripts.js"></script> 
 </body>
 </html>
