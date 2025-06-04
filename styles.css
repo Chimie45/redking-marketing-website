@@ -1391,7 +1391,7 @@ nav .container {
 
 .team-modal-header {
     position: relative;
-    height: 300px; /* Adjust height as needed for 1:1 image display */
+    height: 300px; /* Adjust height as needed */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1810,10 +1810,10 @@ nav .container {
     }
     .team-modal-img-main {
         height: 120px; 
-        /* width will be auto due to object-fit: contain and max-width */
-        max-width: 90%;
-        border-radius: 5px; /* Match portfolio modal images */
+        width: 120px; /* Ensure it's square for 1:1 */
+        border-radius: 8px; /* Match portfolio modal images */
         border: none; /* Remove gold border */
+        object-fit: cover; /* Ensure it covers the square area */
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
@@ -1823,4 +1823,5 @@ nav .container {
         gap: 1rem;
     }
 }
+
 
