@@ -800,20 +800,30 @@ nav .container {
 
 /* Contact Section */
 .contact {
-    padding: 100px 0;
+    padding: 80px 0; /* Reduced padding */
     background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
 }
 
-.contact-content-wrapper { /* New wrapper for single column flow */
+.contact-content-wrapper { 
     display: flex;
     flex-direction: column;
-    gap: 3rem; /* Space between info and form */
-    max-width: 900px; /* Optional: constrain width of this section */
-    margin: 0 auto; /* Center it */
+    gap: 2.5rem; /* Adjusted space between info and form */
+    max-width: 850px; /* Slightly reduced max-width for a tighter look */
+    margin: 0 auto; 
 }
 
 .contact-info {
-    text-align: center; /* Center the heading and paragraphs */
+    text-align: center; 
+}
+
+.contact-icon-wrapper { 
+    text-align: center; 
+    margin-bottom: 1.5rem; /* Space below icon */
+}
+
+.contact-icon-wrapper .fas.fa-crown {
+    font-size: 3rem; 
+    color: var(--muted-gold);
 }
 
 .contact-info h2 {
@@ -827,19 +837,9 @@ nav .container {
     margin-bottom: 1rem; 
     line-height: 1.7;
     color: var(--white); 
-    max-width: 700px; /* Constrain paragraph width */
+    max-width: 100%; /* Allow paragraphs to take full width of .contact-info */
     margin-left: auto;
     margin-right: auto;
-}
-
-.contact-icon-wrapper {
-    text-align: center; 
-    margin: 2rem 0; 
-}
-
-.contact-icon-wrapper .fas.fa-crown {
-    font-size: 3rem; 
-    color: var(--muted-gold);
 }
 
 .contact-form {
@@ -847,24 +847,24 @@ nav .container {
     padding: 2.5rem; 
     border-radius: 10px;
     border: 1px solid var(--muted-gold);
-    width: 100%; /* Form takes full width of its parent */
+    width: 100%; 
 }
 
 .contact-form .form-columns {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 2rem; /* Gap between columns */
-    margin-bottom: 1.5rem; /* Space before submit button */
+    grid-template-columns: 1fr 1fr; 
+    gap: 2rem; 
+    margin-bottom: 1.5rem; 
 }
 
 .contact-form .form-column-left,
 .contact-form .form-column-right {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Gap between form groups within a column */
+    gap: 1.5rem; 
 }
 .contact-form .form-group {
-    margin-bottom: 0; /* Remove default bottom margin as gap is handled by column */
+    margin-bottom: 0; 
 }
 
 
@@ -947,6 +947,7 @@ nav .container {
     grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
     gap: 30px; 
     margin-bottom: 40px;
+    align-items: end; /* Vertically align footer columns to the bottom */
 }
 
 .site-footer .footer-column h4 {
@@ -1269,6 +1270,7 @@ nav .container {
     }
     .site-footer .footer-main {
         grid-template-columns: 1fr 1fr; /* Two columns for tablet */
+        align-items: start; /* Reset alignment for tablet */
     }
     .site-footer .footer-about,
     .site-footer .footer-links-wrapper,
