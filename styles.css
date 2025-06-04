@@ -950,6 +950,12 @@ nav .container {
     align-items: end; /* Vertically align footer columns to the bottom */
 }
 
+.site-footer .footer-column {
+    display: flex; /* Added for inner content alignment */
+    flex-direction: column; /* Added for inner content alignment */
+    justify-content: flex-end; /* Push content to the bottom of the column */
+}
+
 .site-footer .footer-column h4 {
     color: var(--muted-gold);
     font-size: 1.25rem; 
@@ -957,6 +963,7 @@ nav .container {
     font-weight: 600;
     text-transform: uppercase; 
     letter-spacing: 0.5px;
+    /* margin-top: auto; /* Removed, as justify-content: flex-end on parent is better */
 }
 
 .site-footer .footer-logo {
@@ -966,6 +973,7 @@ nav .container {
 
 .site-footer .footer-about {
     /* Takes 1st column by default */
+    /* justify-content: space-between; /* If you want logo at top, text/icons at bottom */
 }
 
 .site-footer .footer-about p {
@@ -975,7 +983,8 @@ nav .container {
 }
 
 .site-footer .footer-social-icons {
-    margin-top: 10px; 
+    margin-top: 10px; /* Pushes it down slightly if footer-about is flex-end */
+    /* margin-top: auto; /* If footer-about is space-between */
 }
 
 .site-footer .footer-social-icons a {
@@ -1430,4 +1439,5 @@ nav .container {
         width: 12px;
     }
 }
+
 
