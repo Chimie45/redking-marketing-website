@@ -23,7 +23,7 @@ function openIframeModal(modalId, iframeSrc) {
 }
 
 
-// Gallery modal functions (modified to include slideshow and iframe logic)
+// Gallery modal functions
 function openGalleryModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) {
@@ -39,8 +39,7 @@ function openGalleryModal(modalId) {
         video.play().catch(e => console.log('Video autoplay prevented by browser:', e));
     }
 
-    // If the modal is a slideshow, initialize it
-    if (modalId === 'gallery5') { // Check if it's our specific slideshow
+    if (modalId === 'gallery5') { 
         gallerySlideIndexes[modalId] = 1; 
         showGallerySlide(gallerySlideIndexes[modalId], modalId);
     }
@@ -120,14 +119,14 @@ function openPortfolioModal(modalId) {
         return;
     }
     const modalHeader = modal.querySelector('.portfolio-modal-header');
-    const modalImg = modalHeader.querySelector('img');
+    const modalImg = modalHeader.querySelector('img'); // This is the image for the blurred background
     
     if (modalImg && modalImg.src) {
         modalHeader.style.backgroundImage = `url(${modalImg.src})`;
     } else if (modalImg) {
         console.warn('Portfolio modal image source not found for background blur:', modalId);
     } else {
-        console.warn('Portfolio modal image not found for background blur:', modalId);
+        console.warn('Portfolio modal image element not found for background blur:', modalId);
     }
     
     modal.style.display = 'block';
@@ -154,8 +153,24 @@ function openTeamModal(modalId) {
         console.error('Team modal not found:', modalId);
         return;
     }
+    const modalHeader = modal.querySelector('.team-modal-header');
+    // The image for the blurred background is the same as the main modal image
+    const modalImg = modalHeader.querySelector('.team-modal-img-main'); 
+    
+    if (modalImg && modalImg.src) {
+        modalHeader.style.backgroundImage = `url(${modalImg.src})`;
+    } else if (modalImg) {
+        console.warn('Team modal image source not found for background blur:', modalId);
+    } else {
+         console.warn('Team modal image element (.team-modal-img-main) not found for background blur:', modalId);
+    }
+    
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+
+    // Animate metrics in team modal
+    const metricNumbers = modal.querySelectorAll('.metric-number');
+    metricNumbers.forEach(num => animateValue(num));
 }
 
 function closeTeamModal(modalId) {
@@ -184,7 +199,7 @@ window.addEventListener('click', function(event) {
         }
     }
 
-    if (event.target.classList.contains('team-modal')) { // Added for team modals
+    if (event.target.classList.contains('team-modal')) { 
         if (event.target.style.display === 'block') {
             closeTeamModal(event.target.id);
         }
@@ -195,26 +210,11 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         let aModalWasOpen = false;
-        const galleryModals = document.querySelectorAll('.gallery-modal');
-        galleryModals.forEach(modal => {
+        document.querySelectorAll('.gallery-modal, .portfolio-modal, .team-modal').forEach(modal => {
             if (modal.style.display === 'block') {
-                closeGalleryModal(modal.id);
-                aModalWasOpen = true;
-            }
-        });
-        
-        const portfolioModals = document.querySelectorAll('.portfolio-modal');
-        portfolioModals.forEach(modal => {
-            if (modal.style.display === 'block') {
-                closePortfolioModal(modal.id);
-                aModalWasOpen = true;
-            }
-        });
-
-        const teamModals = document.querySelectorAll('.team-modal'); // Added for team modals
-        teamModals.forEach(modal => {
-            if (modal.style.display === 'block') {
-                closeTeamModal(modal.id);
+                if (modal.classList.contains('gallery-modal')) closeGalleryModal(modal.id);
+                if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modal.id);
+                if (modal.classList.contains('team-modal')) closeTeamModal(modal.id);
                 aModalWasOpen = true;
             }
         });
@@ -225,7 +225,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Contact form handling (Updated for Cloudflare Worker)
+// Contact form handling
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     let formMessageDiv = document.getElementById('form-submission-message');
@@ -236,14 +236,13 @@ if (contactForm) {
         formMessageDiv.style.padding = '10px';
         formMessageDiv.style.borderRadius = '5px';
         formMessageDiv.style.textAlign = 'center';
-        formMessageDiv.style.display = 'none'; // Initially hidden
+        formMessageDiv.style.display = 'none'; 
         if (contactForm.parentNode.parentNode) { 
              contactForm.parentNode.parentNode.insertBefore(formMessageDiv, contactForm.parentNode.nextSibling);
         } else { 
             contactForm.parentNode.insertBefore(formMessageDiv, contactForm.nextSibling);
         }
     }
-
 
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -257,7 +256,7 @@ if (contactForm) {
 
         const formData = new FormData(this);
         const data = Object.fromEntries(formData.entries()); 
-        data.formType = 'contact'; // Add form type
+        data.formType = 'contact'; 
         
         if (!data.name || !data.email || !data.message) {
             formMessageDiv.textContent = 'Please fill in all required fields.';
@@ -330,7 +329,7 @@ if (newsletterForm) {
         newsletterMessageDiv.style.borderRadius = '4px';
         newsletterMessageDiv.style.textAlign = 'center';
         newsletterMessageDiv.style.fontSize = '0.9em';
-        newsletterMessageDiv.style.display = 'none'; // Initially hidden
+        newsletterMessageDiv.style.display = 'none'; 
         newsletterForm.parentNode.insertBefore(newsletterMessageDiv, newsletterForm.nextSibling);
     }
 
@@ -368,10 +367,10 @@ if (newsletterForm) {
             return;
         }
 
-        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; // Same worker URL
+        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; 
         const data = {
             email: email,
-            formType: 'newsletter' // Differentiate from contact form
+            formType: 'newsletter' 
         };
 
         try {
@@ -389,7 +388,7 @@ if (newsletterForm) {
                 newsletterMessageDiv.textContent = result.message || 'Successfully subscribed!';
                 newsletterMessageDiv.style.backgroundColor = 'var(--muted-gold)';
                 newsletterMessageDiv.style.color = 'var(--black)';
-                this.reset(); // Clear the form
+                this.reset(); 
             } else {
                 newsletterMessageDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
                 newsletterMessageDiv.style.backgroundColor = 'var(--primary-red)';
@@ -412,34 +411,66 @@ if (newsletterForm) {
 
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        // Check if the link is to a different page or an anchor on the current page
-        const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1);
-        const targetPath = href.split('#')[0];
-
-        if (targetPath && targetPath !== currentPath && targetPath !== '') {
-            // It's a link to a different page, let the browser handle it
-            return;
-        }
-
-        if (href.length > 1 && href.startsWith('#')) {
-            const targetElement = document.querySelector(href);
-            if (targetElement) {
-                e.preventDefault();
-                if (navLinks && navLinks.classList.contains('nav-links--active')) {
-                    navLinks.classList.remove('nav-links--active');
-                    if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
+document.addEventListener('DOMContentLoaded', function() {
+    // Set current year in footer
+    const currentYearSpan = document.getElementById('currentYear');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+    
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    if (lazyImages.length > 0) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    imageObserver.unobserve(img);
                 }
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start' 
-                });
+            });
+        }, { threshold: 0.1 }); 
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+
+    // Refined Smooth scrolling for navigation links
+    document.querySelectorAll('nav .nav-links a[href*="#"], .logo[href*="#"], .cta-button[href*="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            const [path, hash] = href.split('#');
+            
+            // Determine if the link is to the current page or a different one
+            const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1) || "index.html";
+            const targetPath = path || "index.html"; // Default to index.html if path is empty
+
+            if (hash) { // If there's a hash
+                if (targetPath === currentPath || (targetPath === '' && currentPath === 'index.html') || (targetPath === 'index.html' && currentPath === '')) { // Anchor on the current page
+                    e.preventDefault();
+                    const targetElement = document.getElementById(hash);
+                    if (targetElement) {
+                        if (navLinks && navLinks.classList.contains('nav-links--active')) {
+                            navLinks.classList.remove('nav-links--active');
+                            if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
+                        }
+                        const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; 
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+                // If path is different, browser will handle navigation to new page,
+                // and standard anchor behavior will scroll to hash on that page.
             }
-        }
+            // If no hash, it's a normal link to another page, let browser handle it.
+        });
     });
 });
+
 
 // Mobile menu toggle
 const mobileMenuIcon = document.querySelector('.mobile-menu');
@@ -483,7 +514,7 @@ const animatedElementsObserver = new IntersectionObserver(function(entries, obse
     });
 }, observerOptions);
 
-document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, .blog .service-card, .contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content').forEach((el) => {
+document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content').forEach((el) => {
     animatedElementsObserver.observe(el);
 });
 
@@ -541,61 +572,3 @@ document.querySelectorAll('img').forEach(img => {
     }
 });
 
-// Initialize on DOM load
-document.addEventListener('DOMContentLoaded', function() {
-    // Set current year in footer
-    const currentYearSpan = document.getElementById('currentYear');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
-    }
-    
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    if (lazyImages.length > 0) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, { threshold: 0.1 }); 
-        
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
-
-    // Update smooth scrolling to handle links on different pages
-    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            const [path, hash] = href.split('#');
-            const currentPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
-
-            if (hash) { // If there's a hash
-                if (path === '' || path === currentPage) { // Anchor on the current page
-                    e.preventDefault();
-                    const targetElement = document.getElementById(hash);
-                    if (targetElement) {
-                        if (navLinks && navLinks.classList.contains('nav-links--active')) {
-                            navLinks.classList.remove('nav-links--active');
-                            if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
-                        }
-                        // Recalculate nav height for scroll offset, as it might change if fixed
-                        const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; // Extra 20px buffer
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: "smooth"
-                        });
-                    }
-                }
-                // If path is different, browser will handle navigation to new page,
-                // and standard anchor behavior will scroll to hash on that page.
-            }
-            // If no hash, it's a normal link, let browser handle it.
-        });
-    });
-});
