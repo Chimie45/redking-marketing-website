@@ -1235,10 +1235,9 @@ nav .container {
 
 
 /* Our Team Page Specific Styles */
-.page-header#team-header { /* More specific selector for team page header */
-    min-height: 100vh; /* Match homepage hero height */
-    background-attachment: fixed; /* Match homepage hero attachment */
-    /* Other hero styles like background-size, position are already on .hero */
+.page-header#team-header { 
+    min-height: 100vh; 
+    background-attachment: fixed; 
 }
 
 .page-header .hero-content h1 {
@@ -1251,17 +1250,17 @@ nav .container {
     font-size: 1.3rem;
     color: var(--white);
     font-weight: 300;
-    margin-bottom: 2rem; /* Add space before mission statement */
+    margin-bottom: 2rem; 
 }
 
 .mission-statement-header {
-    margin-top: 2rem; /* Space above mission statement within header */
+    margin-top: 2rem; 
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.mission-statement-header h2 { /* For "Our Mission" title inside header */
+.mission-statement-header h2 { 
     font-size: 1.8rem !important; 
     margin-bottom: 1rem !important;
     color: var(--gold) !important;
@@ -1391,7 +1390,7 @@ nav .container {
 
 .team-modal-header {
     position: relative;
-    height: 300px; /* Adjust height as needed */
+    height: 280px; /* Adjusted height for a wider feel */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1421,13 +1420,14 @@ nav .container {
 .team-modal-img-main { 
     position: relative;
     z-index: 2; 
-    width: 180px; /* Set width for 1:1 */
-    height: 180px; /* Set height for 1:1 */
-    object-fit: cover; /* Cover ensures it fills, might crop if not square */
-    border-radius: 8px; /* Rectangular corners */
-    border: none; /* Removed gold border */
+    width: 180px; /* Set fixed width */
+    height: 180px; /* Set fixed height for 1:1 */
+    object-fit: cover; 
+    border-radius: 8px; /* Slightly rounded corners, not circular */
+    border: none; /* No gold border */
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    max-width: 80%; 
+    max-width: 70%; /* Ensure it doesn't get too large in the header */
+    max-height: 70%;
 }
 
 
@@ -1471,21 +1471,16 @@ nav .container {
 .team-modal-title { 
     font-size: 1.2rem;
     color: var(--white);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem; /* Reduced margin */
     font-weight: 500;
 }
-
-.team-metrics { 
-    margin: 2rem 0; 
-}
-
 
 .team-modal-bio {
     font-size: 1rem;
     color: #ccc;
     line-height: 1.7;
     text-align: left; 
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Reduced margin */
 }
 .team-modal-bio p {
     margin-bottom: 1em;
@@ -1494,7 +1489,44 @@ nav .container {
     margin-bottom: 0;
 }
 
+.team-metrics { 
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for metrics */
+    gap: 1rem; /* Gap between metric cards */
+    margin: 1.5rem 0; /* Adjusted margin */
+    justify-content: center; /* Center the grid if it doesn't fill width */
+}
 
+.team-metrics .metric-card {
+    padding: 0.75rem; /* Smaller padding for smaller cards */
+    min-height: 90px; /* Ensure a minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* For aspect ratio hack */
+    width: 100%; /* Make it responsive within the grid column */
+    /* aspect-ratio: 16 / 9; /* Enforce 16:9 - this might be tricky with varying text */
+}
+/* Attempting 16:9 with padding hack - may need adjustments based on content */
+.team-metrics .metric-card::before {
+    content: "";
+    display: block;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+.team-metrics .metric-card .metric-number,
+.team-metrics .metric-card .metric-label {
+    /* Position content absolutely if using padding hack, or adjust flexbox */
+    font-size: 1.5rem; /* Smaller font for metric numbers */
+}
+.team-metrics .metric-card .metric-label {
+    font-size: 0.8rem; /* Smaller font for metric labels */
+}
+
+
+.team-member-social-modal {
+    margin-top: 1.5rem; /* Space above social icons */
+}
 .team-member-social-modal a { 
     color: #ccc;
     font-size: 1.8rem; 
@@ -1647,6 +1679,9 @@ nav .container {
         margin-left: 0;
         margin-right: 0;
     }
+    .team-metrics {
+        grid-template-columns: 1fr; /* Stack metrics on tablet if needed */
+    }
 }
 
 @media (max-width: 768px) { /* Mobile breakpoint */
@@ -1686,10 +1721,19 @@ nav .container {
     .hero h1 { 
         font-size: 2.5rem;
     }
+    .page-header#team-header .hero-content h1 { /* Target team page header h1 specifically */
+        font-size: 2.5rem;
+    }
+
 
     .hero .subtitle {
         font-size: 1.2rem;
     }
+    .page-header#team-header .hero-content .subtitle {
+        font-size: 1.2rem;
+    }
+
+
     .hero p {
         font-size: 1rem;
     }
@@ -1781,8 +1825,8 @@ nav .container {
     }
 
     /* Our Team Page Responsive Adjustments */
-    .page-header#team-header { /* More specific selector */
-        min-height: 50vh; /* Adjust if 100vh is too much with mission text */
+    .page-header#team-header { 
+        min-height: 60vh; /* Adjusted for mobile */
     }
     .page-header .hero-content h1 {
         font-size: 2.2rem;
@@ -1810,10 +1854,9 @@ nav .container {
     }
     .team-modal-img-main {
         height: 120px; 
-        width: 120px; /* Ensure it's square for 1:1 */
-        border-radius: 8px; /* Match portfolio modal images */
-        border: none; /* Remove gold border */
-        object-fit: cover; /* Ensure it covers the square area */
+        width: 120px; 
+        border-radius: 8px; 
+        border: none; 
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
@@ -1822,6 +1865,17 @@ nav .container {
         grid-template-columns: 1fr; /* Stack metric cards */
         gap: 1rem;
     }
+    .team-metrics .metric-card {
+        min-height: 0; /* Remove min-height for stacked mobile view */
+    }
+    .team-metrics .metric-card::before {
+        padding-top: 0; /* Remove aspect ratio padding for stacked mobile */
+    }
+    .team-metrics .metric-card .metric-number {
+        font-size: 1.6rem; /* Adjust for mobile */
+    }
+    .team-metrics .metric-card .metric-label {
+        font-size: 0.75rem; /* Adjust for mobile */
+    }
 }
-
 
