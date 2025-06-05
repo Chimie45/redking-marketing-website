@@ -695,7 +695,7 @@ nav .container {
 
 .portfolio-modal h2 { /* Specific to portfolio modal title */
     color: var(--muted-gold);
-    font-size: 2.0rem; /* MODIFIED */
+    font-size: 2.2rem; /* REVERTED to original desktop size */
     margin-bottom: 1.5rem;
 }
 
@@ -757,40 +757,42 @@ nav .container {
 .service-detail-modal .service-modal-header {
     background-color: var(--dark-gray);
     color: var(--white);
-    padding: 1.5rem 2rem;
-    padding-right: 70px; /* Space for close button */
+    padding: 1.5rem 2rem; /* Base padding */
+    padding-right: 70px; /* Space for close button, adjust as needed */
     box-sizing: border-box;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centers the header-content-wrapper */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-shrink: 0;
-    position: relative; /* Context for absolute close button if it were a child */
+    /* position: relative; /* Not strictly needed if close is on parent */
 }
 
 .service-detail-modal .service-modal-header .header-content-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    width: 100%; /* Takes up available space in header */
-    /* This wrapper's content (icon and h2) will be centered by its own flex properties */
+    gap: 1rem; /* <<< ENSURED GAP IS HERE */
+    width: 100%; /* Occupy space left by parent's padding */
+    /* text-align: center; /* If h2 is inline-block, this helps */
 }
 
 
 .service-detail-modal .service-modal-header i {
-    font-size: 2.5rem; /* Icon size */
+    font-size: 2.5rem;
     color: var(--muted-gold);
     line-height: 1;
+    flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 .service-detail-modal .service-modal-header h2 {
-    font-size: 1.6rem; /* MODIFIED */
+    font-size: 1.8rem; /* REVERTED to original desktop size */
     font-weight: bold;
-    margin: 0;
+    margin: 0; /* Reset margin to allow gap to control spacing */
     color: var(--white);
+    /* flex-grow: 1; /* Allow title to take space, but might push icon if too long */
+    /* text-align: left; /* Align text left within its own box */
 }
 
 .service-detail-modal .service-modal-body {
@@ -1297,7 +1299,7 @@ nav .container {
 }
 
 .team-modal-body h2 { /* Team modal specific title */
-    font-size: 2.0rem; /* MODIFIED */
+    font-size: 2.2rem; /* REVERTED to original desktop size */
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
     margin-top: 0;
@@ -1437,7 +1439,7 @@ nav .container {
 }
 
 .job-modal .job-modal-body h2 { /* Main title in Job Modal */
-    font-size: 1.6rem; /* MODIFIED */
+    font-size: 1.8rem; /* REVERTED to original desktop size */
     font-weight: bold;
     color: var(--muted-gold);
     text-align: center;
@@ -1647,12 +1649,14 @@ nav .container {
     }
     .service-detail-modal .service-modal-header .header-content-wrapper {
         padding-right: 0; /* Reset wrapper padding if header itself has enough */
+        gap: 0.5rem; /* MODIFIED: Reduced gap for mobile header */
     }
-    .service-detail-modal .service-modal-header i { font-size: 2rem; }
-    .service-detail-modal .service-modal-header h2 { font-size: 1.4rem; } /* MODIFIED Mobile */
-    .job-modal .job-modal-body h2 { font-size: 1.4rem; } /* MODIFIED Mobile: Job modal main title responsive */
-    .portfolio-modal h2 { font-size: 1.4rem; } /* MODIFIED Mobile */
-    .team-modal-body h2 { font-size: 1.4rem; } /* MODIFIED Mobile */
+    .service-detail-modal .service-modal-header i { font-size: 1.8rem; } /* MODIFIED: Smaller icon on mobile */
+    .service-detail-modal .service-modal-header h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
+
+    .job-modal .job-modal-body h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
+    .portfolio-modal h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
+    .team-modal-body h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
 
 
      .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
