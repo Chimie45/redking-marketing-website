@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team - RedKing Marketing</title>
+    <!-- Link to Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link to your main stylesheet -->
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
+    <!-- Navigation Section -->
     <nav>
         <div class="container">
             <div class="nav-content">
                 <div class="nav-left">
+                    <!-- Logo linked to the home section of index.html -->
                     <a href="index.html#home" class="logo"> 
                         <img src="logo.png" alt="RedKing Marketing">
                     </a>
+                    <!-- Navigation links -->
                     <ul class="nav-links">
                         <li><a href="index.html#home">Home</a></li>
                         <li><a href="index.html#services">Services</a></li>
@@ -27,6 +32,7 @@
                     </ul>
                 </div>
                 <div class="nav-right">
+                    <!-- Social media icons in the navigation -->
                     <div class="social-icons">
                         <a href="https://linkedin.com/company/red-king-marketing" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
@@ -35,6 +41,7 @@
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
+                    <!-- Mobile menu hamburger icon -->
                     <div class="mobile-menu">
                         <span></span>
                         <span></span>
@@ -45,11 +52,14 @@
         </div>
     </nav>
 
+    <!-- Page Header Section with Mission Statement -->
+    <!-- The background for this section is styled in styles.css and should have been updated there to use teamheader.jpg -->
     <section id="team-header" class="page-header hero"> 
         <div class="container">
             <div class="hero-content" style="padding-top: 100px; padding-bottom: 40px;"> 
                 <h1>Meet the Kings</h1>
                 <p class="subtitle">The Passionate Professionals Driving Your Success</p>
+                <!-- Mission statement within the header -->
                 <div class="mission-statement-header">
                     <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--gold);">Our Mission</h2>
                     <p>At RedKing Marketing, our mission is to empower gaming and iGaming companies to achieve unprecedented global reach and player engagement. We combine deep industry expertise with innovative, data-driven marketing strategies to turn ambitious visions into market-leading realities. We are committed to transparency, results, and forging true partnerships that drive sustainable growth and elevate brands to dominate their respective arenas.</p>
@@ -58,10 +68,13 @@
         </div>
     </section>
 
+    <!-- Team Members Section -->
     <section id="team-members" class="team-section services"> 
         <div class="container">
-            <h2 class="section-title">Our Team</h2> {/* Changed from "Our Experts" */}
+            <!-- Section title changed from "Our Experts" to "Our Team" -->
+            <h2 class="section-title">Our Team</h2> 
             <div class="team-grid">
+                <!-- Team Member 1: Thomas Streetman -->
                 <div class="team-member-card" onclick="openTeamModal('teamMember1')">
                     <div class="team-member-image">
                         <img src="tom.jpg" alt="Thomas Streetman">
@@ -71,11 +84,11 @@
                         <p class="team-member-title">CEO & Founder</p>
                         <p class="team-member-bio">Visionary leader with a passion for gaming and a track record of building successful global marketing campaigns. Expert in Asian and American markets.</p>
                         <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            {/* Twitter link removed */}
+                            <!-- All social links removed -->
                         </div>
                     </div>
                 </div>
+                <!-- Team Member 2: Dan Koh -->
                 <div class="team-member-card" onclick="openTeamModal('teamMember2')">
                     <div class="team-member-image">
                         <img src="dan.jpg" alt="Dan Koh">
@@ -85,10 +98,11 @@
                         <p class="team-member-title">Creative Manager</p>
                         <p class="team-member-bio">Directing and producing high-quality videos for brands and social media campaigns, with a portfolio including Hyundai, Netflix, and Calvin Klein.</p>
                         <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <!-- All social links removed -->
                         </div>
                     </div>
                 </div>
+                <!-- Team Member 3: Songi Kim -->
                 <div class="team-member-card" onclick="openTeamModal('teamMember3')">
                     <div class="team-member-image">
                         <img src="songi.jpg" alt="Songi Kim">
@@ -98,10 +112,11 @@
                         <p class="team-member-title">Korea Specialist</p>
                         <p class="team-member-bio">Expert in fostering vibrant online communities and navigating the unique marketing landscapes of the Korean market.</p>
                          <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <!-- All social links removed -->
                         </div>
                     </div>
                 </div>
+                <!-- Team Member 4: Isabella Garcia -->
                 <div class="team-member-card" onclick="openTeamModal('teamMember4')">
                     <div class="team-member-image">
                         <img src="isabella.jpg" alt="Isabella Garcia">
@@ -111,10 +126,11 @@
                         <p class="team-member-title">LATAM Specialist</p>
                         <p class="team-member-bio">Driving growth and engagement in Latin American gaming markets with culturally attuned strategies.</p>
                          <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <!-- All social links removed -->
                         </div>
                     </div>
                 </div>
+                <!-- Team Member 5: Andrew Smith -->
                 <div class="team-member-card" onclick="openTeamModal('teamMember5')">
                     <div class="team-member-image">
                         <img src="andrew.jpg" alt="Andrew Smith">
@@ -124,7 +140,7 @@
                         <p class="team-member-title">Web & Programming Lead</p>
                         <p class="team-member-bio">Architecting seamless digital experiences and robust web solutions that power our clients' online presence.</p>
                          <div class="team-member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <!-- All social links removed -->
                         </div>
                     </div>
                 </div>
@@ -132,20 +148,24 @@
         </div>
     </section>
 
+    <!-- Awards Section -->
     <section id="awards" class="awards-section about"> 
         <div class="container">
             <h2 class="section-title">Recognition & Awards</h2>
             <div class="awards-grid">
+                <!-- Award Item 1 -->
                 <div class="award-item">
                     <i class="fas fa-trophy award-icon"></i>
                     <h4>Global Gaming Awards</h4>
                     <p>Best Marketing Campaign 2024</p>
                 </div>
+                <!-- Award Item 2 -->
                 <div class="award-item">
                     <i class="fas fa-medal award-icon"></i>
                     <h4>iGaming Excellence</h4>
                     <p>Top Agency APAC 2023</p>
                 </div>
+                <!-- Award Item 3 -->
                 <div class="award-item">
                     <i class="fas fa-award award-icon"></i>
                     <h4>Digital Marketing Innovators</h4>
@@ -155,23 +175,27 @@
         </div>
     </section>
 
+    <!-- Jobs Board Section -->
     <section id="careers" class="jobs-section services"> 
         <div class="container">
             <h2 class="section-title">Join Our Kingdom</h2>
             <p class="jobs-intro">We're always looking for passionate and talented individuals to join our quest for marketing domination. Check out our open positions below!</p>
             <div class="jobs-list">
+                <!-- Job Posting 1 -->
                 <div class="job-posting">
                     <h3>Digital Marketing Specialist - APAC</h3>
                     <p class="job-location">Seoul, South Korea (Remote Options)</p>
                     <p class="job-description">Seeking an experienced digital marketer with a deep understanding of APAC gaming markets to lead innovative campaigns...</p>
                     <a href="index.html#contact" class="cta-button job-apply-button">Apply Now</a>
                 </div>
+                <!-- Job Posting 2 -->
                 <div class="job-posting">
                     <h3>Community Manager - LATAM</h3>
                     <p class="job-location">Remote (LATAM Based)</p>
                     <p class="job-description">Passionate about gaming and community building? Join us to engage and grow our clients' player bases in Latin America...</p>
                     <a href="index.html#contact" class="cta-button job-apply-button">Apply Now</a>
                 </div>
+                <!-- Placeholder for when no openings are available -->
                 <div class="job-posting">
                     <h3>No Openings Currently</h3>
                     <p class="job-location">Check back soon!</p>
@@ -181,7 +205,10 @@
         </div>
     </section>
 
-    <div id="teamMember1" class="team-modal"> <div class="team-modal-content">
+    <!-- Team Member Modals (Pop-ups) -->
+    <!-- Modal for Team Member 1: Thomas Streetman -->
+    <div id="teamMember1" class="team-modal"> 
+        <div class="team-modal-content">
             <div class="team-modal-header"> 
                 <img src="tom.jpg" alt="Thomas Streetman" class="team-modal-img-main"> 
                  <span class="close-team-modal" onclick="closeTeamModal('teamMember1')">&times;</span>
@@ -204,14 +231,15 @@
                     </div>
                 </div>
                 <div class="team-member-social-modal">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    {/* Twitter link removed */}
+                    <!-- All social links removed -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="teamMember2" class="team-modal"> <div class="team-modal-content">
+    <!-- Modal for Team Member 2: Dan Koh -->
+    <div id="teamMember2" class="team-modal"> 
+        <div class="team-modal-content">
             <div class="team-modal-header">
                 <img src="dan.jpg" alt="Dan Koh" class="team-modal-img-main">
                 <span class="close-team-modal" onclick="closeTeamModal('teamMember2')">&times;</span>
@@ -234,13 +262,15 @@
                     </div>
                 </div>
                 <div class="team-member-social-modal">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <!-- All social links removed -->
                 </div>
             </div>
         </div>
     </div>
 
-     <div id="teamMember3" class="team-modal"> <div class="team-modal-content">
+    <!-- Modal for Team Member 3: Songi Kim -->
+     <div id="teamMember3" class="team-modal"> 
+        <div class="team-modal-content">
             <div class="team-modal-header">
                 <img src="songi.jpg" alt="Songi Kim" class="team-modal-img-main">
                 <span class="close-team-modal" onclick="closeTeamModal('teamMember3')">&times;</span>
@@ -263,13 +293,15 @@
                     </div>
                 </div>
                 <div class="team-member-social-modal">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <!-- All social links removed -->
                 </div>
             </div>
         </div>
     </div>
 
-     <div id="teamMember4" class="team-modal"> <div class="team-modal-content">
+    <!-- Modal for Team Member 4: Isabella Garcia -->
+     <div id="teamMember4" class="team-modal"> 
+        <div class="team-modal-content">
              <div class="team-modal-header">
                 <img src="isabella.jpg" alt="Isabella Garcia" class="team-modal-img-main">
                 <span class="close-team-modal" onclick="closeTeamModal('teamMember4')">&times;</span>
@@ -292,13 +324,15 @@
                     </div>
                 </div>
                 <div class="team-member-social-modal">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <!-- All social links removed -->
                 </div>
             </div>
         </div>
     </div>
 
-     <div id="teamMember5" class="team-modal"> <div class="team-modal-content">
+    <!-- Modal for Team Member 5: Andrew Smith -->
+     <div id="teamMember5" class="team-modal"> 
+        <div class="team-modal-content">
             <div class="team-modal-header">
                 <img src="andrew.jpg" alt="Andrew Smith" class="team-modal-img-main">
                 <span class="close-team-modal" onclick="closeTeamModal('teamMember5')">&times;</span>
@@ -321,16 +355,18 @@
                     </div>
                 </div>
                 <div class="team-member-social-modal">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <!-- All social links removed -->
                 </div>
             </div>
         </div>
     </div>
 
 
+    <!-- Footer Section -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-main">
+                <!-- Footer About Column -->
                 <div class="footer-column footer-about"> 
                     <img src="logo.png" alt="RedKing Marketing" class="footer-logo">
                     <p>Global gaming marketing experts specializing in Asia, Americas, and beyond. We turn gaming brands into market leaders through data-driven strategies and cultural expertise.</p>
@@ -340,6 +376,7 @@
                     </div>
                 </div>
 
+                <!-- Footer Quick Links Column -->
                 <div class="footer-column footer-links-wrapper"> 
                     <h4>Quick Links</h4>
                     <div class="footer-links-columns">
@@ -356,12 +393,14 @@
                     </div>
                 </div>
 
+                <!-- Footer Contact Info Column -->
                 <div class="footer-column footer-contact">
                     <h4>Contact Info</h4>
                     <p><a href="tel:+16148228696">P: +1 (614) 822-8696</a></p>
                     <p><a href="mailto:info@redkingmarketing.com">E: info@redkingmarketing.com</a></p>
                 </div>
                 
+                <!-- Footer Newsletter Column -->
                 <div class="footer-column footer-newsletter">
                     <h4>Stay Updated</h4>
                     <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
@@ -372,6 +411,7 @@
                 </div>
             </div>
 
+            <!-- Footer Bottom Row -->
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear">2025</span> RedKing Marketing. All Rights Reserved.</p>
                 <div class="footer-legal-links">
@@ -382,6 +422,7 @@
         </div>
     </footer>
 
+    <!-- Link to your JavaScript file -->
     <script src="scripts.js"></script> 
 </body>
 </html>
