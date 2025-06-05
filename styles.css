@@ -495,7 +495,6 @@ nav .container {
     font-weight: bold;
     font-size: 0.8rem; 
     white-space: nowrap;
-    /* margin-left: 1rem; /* Removed as text block has margin-right now */
     transition: color 0.3s ease;
 }
 
@@ -533,34 +532,34 @@ nav .container {
 
 .portfolio-modal-header {
     position: relative;
-    height: 400px; /* Or adjust as needed */
+    height: 400px; 
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--black); /* Fallback background */
-    background-size: cover; /* For the blurred background image */
-    background-position: center; /* For the blurred background image */
-    border-top-left-radius: 8px; /* Match content radius */
-    border-top-right-radius: 8px; /* Match content radius */
+    background: var(--black); 
+    background-size: cover; 
+    background-position: center; 
+    border-top-left-radius: 8px; 
+    border-top-right-radius: 8px; 
 }
 
-.portfolio-modal-header::before { /* Blur effect layer */
+.portfolio-modal-header::before { 
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: inherit; /* Inherits from .portfolio-modal-header JS-set background */
+    background-image: inherit; 
     background-size: cover;
     background-position: center;
-    filter: blur(12px) brightness(0.7); /* Increased blur */
+    filter: blur(12px) brightness(0.7); 
     opacity: 1; 
     z-index: 1;
 }
 
-.portfolio-modal-header img { /* The actual sharp image */
+.portfolio-modal-header img { 
     position: relative;
     max-width: 90%;
     max-height: 90%;
@@ -572,7 +571,7 @@ nav .container {
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-.close-modal { /* Shared by portfolio and team modals */
+.close-modal { 
     position: absolute;
     top: 15px;
     right: 20px;
@@ -622,14 +621,14 @@ nav .container {
 }
 
 
-.portfolio-modal .metrics { /* Also used by team modal metrics */
+.portfolio-modal .metrics { 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
     gap: 1.5rem;
     margin: 2.5rem 0;
 }
 
-.metric-card { /* Shared by portfolio and team modal metrics */
+.metric-card { 
     background: var(--dark-gray);
     padding: 1.5rem;
     border-radius: 8px; 
@@ -642,7 +641,7 @@ nav .container {
     transform: scale(1.03);
 }
 
-.metric-number { /* Shared by portfolio and team modal metrics */
+.metric-number { 
     font-size: 2.2rem; 
     font-weight: bold;
     color: var(--muted-gold);
@@ -650,7 +649,7 @@ nav .container {
     margin-bottom: 0.25rem;
 }
 
-.metric-label { /* Shared by portfolio and team modal metrics */
+.metric-label { 
     color: #ccc;
     font-size: 0.9rem;
 }
@@ -969,7 +968,6 @@ nav .container {
     font-weight: 600;
     text-transform: uppercase; 
     letter-spacing: 0.5px;
-    /* margin-top: auto; /* Removed, as justify-content: flex-end on parent is better */
 }
 
 .site-footer .footer-logo {
@@ -978,8 +976,7 @@ nav .container {
 }
 
 .site-footer .footer-about {
-    /* Takes 1st column by default */
-     justify-content: space-between; /* Logo at top, text/icons at bottom for this specific column */
+     justify-content: space-between; 
 }
 
 .site-footer .footer-about p {
@@ -1007,30 +1004,26 @@ nav .container {
     transform: scale(1.1);
 }
 
-.site-footer .footer-links-wrapper {
-    /* Takes 2nd column */
-}
-
 .site-footer .footer-links-columns {
     display: grid; 
-    grid-template-columns: 1fr 1fr; /* Two columns for links */
-    gap: 10px; /* Gap between the two internal columns of links */
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
 }
 
 .site-footer .footer-links-columns ul {
-    list-style: none !important; /* Ensure no bullets */
+    list-style: none !important; 
     padding: 0 !important;
     margin: 0 !important;
 }
 
 .site-footer .footer-links-wrapper li { 
-    margin-bottom: 12px; /* Increased spacing */
-    list-style-type: none !important; /* Ensure no bullets on li */
+    margin-bottom: 12px; 
+    list-style-type: none !important; 
 }
 
 .site-footer .footer-links-wrapper a {
     color: #ccc;
-    text-decoration: none !important; /* Ensure no underline */
+    text-decoration: none !important; 
     transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
@@ -1039,21 +1032,6 @@ nav .container {
     padding-left: 5px;
 }
 
-.site-footer .footer-contact {
-    /* Takes 3rd column */
-    margin-bottom: 0; /* Reset margin if it was for stacking */
-}
-.site-footer .footer-newsletter {
-    /* Takes 4th column */
-}
-
-
-.site-footer .footer-contact address {
-    font-style: normal;
-    line-height: 1.7;
-    margin-bottom: 12px;
-    color: #b3b3b3;
-}
 .site-footer .footer-contact p {
     margin-bottom: 12px;
 }
@@ -1069,12 +1047,12 @@ nav .container {
 
 .site-footer .newsletter-form {
     display: flex;
-    margin-top: 15px; /* More space above form */
+    margin-top: 15px; 
 }
 
 .site-footer .newsletter-form input[type="email"] {
     flex-grow: 1;
-    padding: 12px; /* Increased padding */
+    padding: 12px; 
     border: 1px solid var(--dark-gray);
     border-radius: 4px 0 0 4px;
     background-color: var(--dark-gray);
@@ -1091,7 +1069,7 @@ nav .container {
 }
 
 .site-footer .newsletter-form button {
-    padding: 12px 18px; /* Increased padding */
+    padding: 12px 18px; 
     background-color: var(--muted-gold);
     color: var(--black);
     border: none;
@@ -1110,7 +1088,7 @@ nav .container {
 .site-footer .footer-bottom {
     text-align: center;
     padding-top: 30px; 
-    margin-top: 40px; /* Increased margin */
+    margin-top: 40px; 
     border-top: 1px solid var(--dark-gray);
     display: flex;
     flex-direction: column; 
@@ -1126,19 +1104,19 @@ nav .container {
 
 .site-footer .footer-legal-links {
     display: flex; 
-    gap: 25px; /* Increased space */
+    gap: 25px; 
     padding: 0;
     margin: 0;
 }
 .site-footer .footer-legal-links a { 
     color: #aaa;
-    text-decoration: none !important; /* Ensure no underline */
+    text-decoration: none !important; 
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 .site-footer .footer-legal-links a:hover {
     color: var(--muted-gold);
-    text-decoration: underline !important; /* Underline on hover only */
+    text-decoration: underline !important; 
 }
 
 
@@ -1148,8 +1126,8 @@ nav .container {
     to { opacity: 1; }
 }
 
-@keyframes slideIn { /* Used by modals */
-    from { transform: translateY(-30px); opacity: 0; } /* Softer slide */
+@keyframes slideIn { 
+    from { transform: translateY(-30px); opacity: 0; } 
     to { transform: translateY(0); opacity: 1; }
 }
 
@@ -1318,10 +1296,11 @@ nav .container {
     border-color: var(--muted-gold);
 }
 
+/* Team member image on the main page - rounded square */
 .team-member-image {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
+    border-radius: 15px; /* Rounded square instead of circle */
     overflow: hidden;
     margin-bottom: 1.5rem;
     border: 4px solid var(--muted-gold);
@@ -1358,6 +1337,7 @@ nav .container {
 .team-member-social {
     margin-top: auto; 
     padding-top: 1rem;
+    /* Social icons were here, now removed from individual profiles */
 }
 
 .team-member-social a {
@@ -1402,45 +1382,37 @@ nav .container {
 
 .team-modal-header {
     position: relative;
-    height: 280px; /* Set desired height for the header area */
+    height: 280px; 
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* This will be overridden by the image if it's the only child */
+    align-items: center; /* Align image if it doesn't fill */
+    justify-content: center; /* Center image if it doesn't fill */
     background-color: var(--dark-gray); 
-    background-size: cover;
-    background-position: center;
+    /* Removed background-size and position for ::before as image will fill */
     border-top-left-radius: 8px; 
     border-top-right-radius: 8px;
 }
 
+/* No blur needed if image fills the header directly */
 .team-modal-header::before { 
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: inherit; 
-    background-size: cover;
-    background-position: center;
-    filter: blur(10px) brightness(0.6);
-    transform: scale(1.1); 
-    z-index: 1;
+    content: none; /* Remove the pseudo-element for blur */
 }
 
+/* Team member image in the modal - fill header */
 .team-modal-img-main { 
-    position: relative;
-    z-index: 2; 
-    height: 85%; /* Take most of the header's height */
-    width: auto;   /* Let aspect-ratio define width */
-    aspect-ratio: 1 / 1; /* Enforce 1:1 aspect ratio */
+    position: relative; /* Changed from absolute if it was */
+    z-index: 2; /* Keep above any potential ::before if it were re-added */
+    width: 100%;   /* Fill the width of .team-modal-header */
+    height: 100%;  /* Fill the height of .team-modal-header */
     object-fit: cover; /* Cover the area, cropping if necessary */
-    border-radius: 8px; 
+    border-radius: 0; /* Remove individual radius if header has one and we want flush */
+    /* If the header has top-left/right radius, and image should match: */
+    border-top-left-radius: 8px; 
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 0; /* Ensure bottom corners are not rounded */
+    border-bottom-right-radius: 0;
     border: none; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    max-width: 90%; /* Prevent it from becoming too wide relative to header */
-    max-height: 90%; /* Ensure it stays within header bounds */
+    box-shadow: none; /* Remove shadow if it's meant to be flush */
 }
 
 
@@ -1460,7 +1432,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10; 
+    z-index: 10; /* Ensure it's above the image */
     line-height: 1;
 }
 .close-team-modal:hover {
@@ -1506,8 +1478,8 @@ nav .container {
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 1rem; 
-    margin: 1.5rem auto; /* Center the metrics block if it's narrower than modal body */
-    max-width: 500px; /* Constrain width of metrics block */
+    margin: 1.5rem auto; 
+    max-width: 500px; 
 }
 
 .team-metrics .metric-card {
@@ -1518,26 +1490,25 @@ nav .container {
     justify-content: center;
     align-items: center;
     width: 100%; 
-    background-color: rgba(26, 26, 26, 0.7); /* Slightly different bg for team metrics */
-    border-color: var(--dark-gold); /* Darker gold border */
+    background-color: rgba(26, 26, 26, 0.7); 
+    border-color: var(--dark-gold); 
 }
-.team-metrics .metric-card::before {
-    content: none; 
-}
+
 .team-metrics .metric-card .metric-number {
     font-size: 1.6rem; 
     margin-bottom: 0.1rem;
-    color: var(--gold); /* Brighter gold for numbers */
+    color: var(--gold); 
 }
 .team-metrics .metric-card .metric-label {
     font-size: 0.85rem; 
     line-height: 1.2;
-    color: #bbb; /* Lighter label */
+    color: #bbb; 
 }
 
 
 .team-member-social-modal {
     margin-top: 1.5rem; 
+    /* Social icons were here, now removed */
 }
 .team-member-social-modal a { 
     color: #ccc;
@@ -1692,7 +1663,7 @@ nav .container {
         margin-right: 0;
     }
     .team-metrics {
-        grid-template-columns: 1fr; /* Stack metrics on tablet if needed */
+        grid-template-columns: 1fr; 
     }
 }
 
@@ -1733,7 +1704,7 @@ nav .container {
     .hero h1 { 
         font-size: 2.5rem;
     }
-    .page-header#team-header .hero-content h1 { /* Target team page header h1 specifically */
+    .page-header#team-header .hero-content h1 { 
         font-size: 2.5rem;
     }
 
@@ -1838,7 +1809,7 @@ nav .container {
 
     /* Our Team Page Responsive Adjustments */
     .page-header#team-header { 
-        min-height: 60vh; /* Adjusted for mobile */
+        min-height: 60vh; 
     }
     .page-header .hero-content h1 {
         font-size: 2.2rem;
@@ -1856,40 +1827,36 @@ nav .container {
     .team-member-image {
         width: 120px;
         height: 120px;
+        border-radius: 10px; /* Slightly less rounded for smaller size if desired */
     }
     .team-modal-content {
         width: 95%;
-        padding: 20px 15px; 
+        padding: 0; /* Modal content padding is handled by header/body */
     }
     .team-modal-header {
         height: 200px; 
     }
-    .team-modal-img-main {
-        height: 85%; /* Make image take most of the header height on mobile */
-        width: auto;   
-        aspect-ratio: 1 / 1; 
-        object-fit: cover; 
-        border-radius: 8px; 
-        border: none; 
+    /* team-modal-img-main already set to cover, adjustments for mobile if needed would go here */
+    /* For example, if header height changes drastically */
+
+    .team-modal-body {
+        padding: 1.5rem; /* Adjust padding for smaller modals */
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
     }
     .team-modal .metrics { 
-        grid-template-columns: 1fr; /* Stack metric cards */
+        grid-template-columns: 1fr; 
         gap: 1rem;
     }
     .team-metrics .metric-card {
-        min-height: auto; /* Let content define height for stacked mobile */
-        padding: 0.5rem; /* Further reduce padding for stacked mobile */
-    }
-    .team-metrics .metric-card::before {
-        content: none; /* Remove aspect ratio padding for stacked mobile */
+        min-height: auto; 
+        padding: 0.5rem; 
     }
     .team-metrics .metric-card .metric-number {
-        font-size: 1.4rem; /* Adjust for mobile */
+        font-size: 1.4rem; 
     }
     .team-metrics .metric-card .metric-label {
-        font-size: 0.7rem; /* Adjust for mobile */
+        font-size: 0.7rem; 
     }
 }
