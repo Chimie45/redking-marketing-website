@@ -32,71 +32,46 @@
 }
 
 /* Styling for the services section on this page */
-.services-page-section {
+/* The main #services section will now primarily use styles from styles.css */
+.services-page-section { /* This class was on the original services section, can be removed if #services is used instead */
     padding: 80px 0;
     background-color: var(--dark-gray); /* Match .services from styles.css */
 }
 
-.services-page-section .section-title {
-    margin-bottom: 3rem;
-}
+/* .section-title styling is handled by styles.css */
+/* .services-grid styling is handled by styles.css */
 
-/* .service-card styles are mostly inherited from styles.css */
-.services-page-section .service-card {
+/* .service-card base styling is handled by styles.css */
+/* Kept cursor: pointer; as it's a minor, non-conflicting addition specific to this page's cards if needed */
+#services .service-card { /* Targeting service cards within the new #services section if needed for specificity */
     cursor: pointer; 
-    /* Any overrides or additions for services.html cards can go here */
-    /* display: flex, flex-direction, justify-content are already in styles.css for .service-card */
 }
 
-.services-page-section .service-card:hover {
-    border-color: var(--muted-gold); /* Already in styles.css */
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25); /* Slightly different shadow if desired */
-}
-
-/* .view-details-button is already styled in styles.css for .service-card */
+/* Removed .services-page-section .service-card:hover specific box-shadow to inherit from styles.css */
+/* Base .service-card:hover from styles.css will apply */
 
 
 /* Service Detail Modal Styles */
+/* Most modal styling will now defer to styles.css for consistency */
+
 /* .service-detail-modal is covered by common modal styles in styles.css */
 
-/* .service-modal-content is covered by common modal styles in styles.css, with max-width override below */
 .service-modal-content { 
-    max-width: 850px; 
+    max-width: 850px; /* Consistent with styles.css, kept for clarity */
 }
 
-/* .close-service-modal is covered by common modal styles in styles.css */
+/* Removed specific .service-modal-header, .service-modal-header i, .service-modal-header h2 styles. */
+/* These will now be primarily styled by .service-detail-modal .service-modal-header in styles.css */
 
-.service-modal-header { /* Specific to service modals */
-    padding: 1.5rem 2rem;
-    background-color: var(--dark-gray); 
-    border-bottom: 2px solid var(--muted-gold);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-top-left-radius: 8px; 
-    border-top-right-radius: 8px;
-}
-
-.service-modal-header i { 
-    font-size: 2.2rem;
-    color: var(--muted-gold);
-}
-
-.service-modal-header h2 {
-    color: var(--white);
-    font-size: 1.8rem; 
-    margin: 0;
-    text-align: left; /* Ensure alignment */
-}
-
-/* .service-modal-body inherits common padding from styles.css */
-.service-modal-body {
+/* .service-modal-body basic properties */
+.service-modal-body { /* Applied if .service-detail-modal .service-modal-body in styles.css isn't sufficient */
     color: #ccc;
     line-height: 1.7;
-    text-align: left;
+    text-align: left; /* Default text alignment for body content */
+     padding: 2rem 2.5rem; /* Ensure padding matches styles.css */
 }
 
-.service-modal-intro {
+.service-modal-intro { /* This style is unique to services.css, kept as it enhances service modals */
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
     color: #e0e0e0;
@@ -105,32 +80,34 @@
 
 .service-modal-body h4 {
     color: var(--gold);
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; /* Removed to allow styles.css (1.4rem) to take precedence */
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
+    /* Other h4 styles like border-bottom can be inherited or defined in styles.css */
 }
 
 .service-modal-body ul {
     list-style: disc;
-    padding-left: 20px;
+    padding-left: 20px; /* Consider standardizing this with styles.css if different */
     margin-bottom: 1.5rem;
 }
 
 .service-modal-body ul li {
     margin-bottom: 0.6rem;
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* Check consistency with styles.css */
 }
 
-.service-modal-cta {
-    display: inline-block;
-    margin-top: 2rem;
-    /* text-align: center; */ /* If button is block, this isn't needed. If inline-block in a block parent, parent needs text-align. */
+.service-modal-cta { /* This is for the button itself */
+    display: inline-block; /* Inherited from .cta-button in styles.css */
+    margin-top: 2rem; /* Spacing above the button */
 }
-.service-modal-body .service-modal-cta { /* Ensure CTA button is centered if it's the last element */
-    display: block; /* Make it block to take full width */
-    width: fit-content; /* Shrink to content */
-    margin-left: auto; /* Center */
-    margin-right: auto; /* Center */
+.service-modal-body .service-modal-cta-wrapper, /* If a wrapper div is used for centering */
+.service-modal-body > .service-modal-cta { /* If button is a direct child and needs centering */
+    display: block; 
+    width: fit-content; 
+    margin-left: auto; 
+    margin-right: auto;
+    text-align: center; /* Ensures text within button is centered if button has padding */
 }
 
 
@@ -140,37 +117,22 @@
         min-height: 50vh;
     }
     #services-page-header .hero-content h1 {
-        font-size: 2.2rem; /* Adjusted from 2.5rem based on styles.css mobile */
+        font-size: 2.2rem; 
     }
     #services-page-header .hero-content .subtitle {
-        font-size: 1.1rem; /* Adjusted from 1.2rem based on styles.css mobile */
+        font-size: 1.1rem; 
     }
     .page-intro-text {
         font-size: 1rem;
     }
 
-    /* .services-page-section .services-grid already stacks to 1fr from styles.css */
-
-    .service-modal-header {
-        padding: 1rem 1.5rem;
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
-    }
-    .service-modal-header i {
-        font-size: 2rem;
-    }
-    .service-modal-header h2 {
-        font-size: 1.5rem; /* Matches .portfolio-modal h2 mobile */
-    }
+    /* .service-modal-header responsive styles from styles.css should take over */
     /* .service-modal-body padding inherited from common modal styles */
     
     .service-modal-intro {
         font-size: 1rem;
     }
-    .service-modal-body h4 {
-        font-size: 1.1rem;
-    }
+    /* .service-modal-body h4 font-size will be handled by styles.css responsive part if defined */
     .service-modal-body ul li {
         font-size: 0.9rem;
     }
