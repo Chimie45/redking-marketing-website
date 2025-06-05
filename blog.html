@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M56HMGXR');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - RedKing Marketing</title>
@@ -9,23 +16,26 @@
     <link rel="stylesheet" href="blog-styles.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M56HMGXR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation (Updated to match index.html structure with adjusted links) -->
     <nav>
         <div class="container">
             <div class="nav-content">
                 <div class="nav-left">
-                    <a href="index.html#home" class="logo"> 
+                    <a href="index.html#home" class="logo"> <!-- Link to homepage -->
                         <img src="images/home/logo.png" alt="RedKing Marketing">
                     </a>
                     <ul class="nav-links">
                         <li><a href="index.html#home">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="services.html">Services</a></li> 
                         <li><a href="index.html#about">About</a></li>
                         <li><a href="our-team.html">Our Team</a></li>
                         <li><a href="index.html#portfolio">Portfolio</a></li>
-                        <li><a href="index.html#gallery">Gallery</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li> <!-- Current page -->
+                        <li><a href="index.html#contact">Contact</a></li> <!-- Link to contact section on index.html -->
                     </ul>
                 </div>
                 <div class="nav-right">
@@ -171,7 +181,7 @@
     </section>
 
     <!-- Newsletter Signup Section -->
-    <section id="blog-newsletter" class="contact">
+    <section id="blog-newsletter" class="contact"> <!-- Re-using .contact styles for consistency -->
         <div class="container">
             <div class="contact-content-wrapper"> 
                 <div class="contact-info">
@@ -182,10 +192,10 @@
                     <p>Subscribe to our newsletter and never miss the latest gaming marketing insights, industry analysis, and strategic guidance.</p>
                 </div>
 
-                <form class="contact-form newsletter-signup-form" id="blogNewsletterForm">
+                <form class="contact-form newsletter-signup-form" id="blogPageNewsletterForm"> <!-- Unique ID for this form -->
                     <div class="form-group">
-                        <label for="blog-email">Email Address *</label>
-                        <input type="email" id="blog-email" name="email" placeholder="Enter your email address" required>
+                        <label for="blog-page-email">Email Address *</label> <!-- Unique ID for input -->
+                        <input type="email" id="blog-page-email" name="email" placeholder="Enter your email address" required>
                     </div>
                     <button type="submit" class="submit-btn">Subscribe to Newsletter</button>
                 </form>
@@ -193,11 +203,11 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (Updated to match index.html structure with adjusted links) -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-main">
-                <div class="footer-column footer-about"> 
+                <div class="footer-column footer-about">
                     <img src="images/home/logo.png" alt="RedKing Marketing" class="footer-logo">
                     <p>Global gaming marketing experts specializing in Asia, Americas, and beyond. We turn gaming brands into market leaders through data-driven strategies and cultural expertise.</p>
                     <div class="footer-social-icons">
@@ -205,35 +215,31 @@
                         <a href="https://instagram.com/Red_King_Marketing" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-
-                <div class="footer-column footer-links-wrapper"> 
+                <div class="footer-column footer-links-wrapper">
                     <h4>Quick Links</h4>
                     <div class="footer-links-columns">
                         <ul class="footer-links-col-1">
                             <li><a href="index.html#home">Home</a></li>
-                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="services.html">Services</a></li>
                             <li><a href="index.html#about">About Us</a></li>
+                            <li><a href="our-team.html">Our Team</a></li> 
                         </ul>
                         <ul class="footer-links-col-2">
                             <li><a href="index.html#portfolio">Portfolio</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="index.html#contact">Contact Us</a></li>
+                            <li><a href="blog.html">Blog</a></li> 
+                            <li><a href="index.html#contact">Contact Us</a></li> <!-- Link to contact section on index.html -->
                         </ul>
                     </div>
                 </div>
-
                 <div class="footer-column footer-contact">
                     <h4>Contact Info</h4>
-                    <p><a href="tel:+16148228696">P: +1 (614) 822-8696</a></p>
-                    <p><a href="mailto:info@redkingmarketing.com">E: info@redkingmarketing.com</a></p>
+                    <p><a href="tel:+16148228696">P: +1 (614) 822-8696</a></p><p><a href="mailto:info@redkingmarketing.com">E: info@redkingmarketing.com</a></p>
                 </div>
-                
                 <div class="footer-column footer-newsletter">
                     <h4>Stay Updated</h4>
                     <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-                    <form id="newsletterForm" class="newsletter-form">
-                        <input type="email" name="email" placeholder="Enter your email" required>
-                        <button type="submit">Subscribe</button>
+                    <form id="footerNewsletterFormBlogPage" class="newsletter-form"> <!-- Unique ID for this form -->
+                        <input type="email" name="email" placeholder="Enter your email" required><button type="submit">Subscribe</button>
                     </form>
                 </div>
             </div>
@@ -403,6 +409,152 @@
     <script>
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Newsletter Form Handler for Blog Page (Body Section)
+        const blogPageNewsletterForm = document.getElementById('blogPageNewsletterForm');
+        if (blogPageNewsletterForm) {
+            let blogPageFeedbackDiv = document.getElementById('blog-page-newsletter-feedback');
+            if (!blogPageFeedbackDiv) {
+                blogPageFeedbackDiv = document.createElement('div');
+                blogPageFeedbackDiv.id = 'blog-page-newsletter-feedback';
+                blogPageFeedbackDiv.className = 'form-submission-feedback';
+                blogPageFeedbackDiv.style.cssText = 'margin-top: 15px; padding: 10px; border-radius: 5px; text-align: center; display: none;';
+                blogPageNewsletterForm.parentNode.insertBefore(blogPageFeedbackDiv, blogPageNewsletterForm.nextSibling);
+            }
+
+            blogPageNewsletterForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                blogPageFeedbackDiv.textContent = '';
+                blogPageFeedbackDiv.style.display = 'none';
+                blogPageFeedbackDiv.className = 'form-submission-feedback'; 
+
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
+                submitButton.textContent = 'Subscribing...';
+                submitButton.disabled = true;
+
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                
+                if (!email) {
+                    blogPageFeedbackDiv.textContent = 'Please enter your email address.';
+                    blogPageFeedbackDiv.classList.add('error');
+                    blogPageFeedbackDiv.style.display = 'block';
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                    return;
+                }
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    blogPageFeedbackDiv.textContent = 'Please enter a valid email address.';
+                    blogPageFeedbackDiv.classList.add('error');
+                    blogPageFeedbackDiv.style.display = 'block';
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                    return;
+                }
+
+                const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
+                const data = { email: email, formType: 'blog-page-newsletter' }; 
+
+                try {
+                    const response = await fetch(workerUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', },
+                        body: JSON.stringify(data),
+                    });
+                    const result = await response.json();
+                    if (response.ok && result.success) {
+                        blogPageFeedbackDiv.textContent = result.message || 'Successfully subscribed!';
+                        blogPageFeedbackDiv.classList.add('success');
+                        this.reset(); 
+                    } else {
+                        blogPageFeedbackDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
+                        blogPageFeedbackDiv.classList.add('error');
+                    }
+                } catch (error) {
+                    console.error('Error submitting blog page newsletter form:', error);
+                    blogPageFeedbackDiv.textContent = 'An error occurred. Please try again later.';
+                    blogPageFeedbackDiv.classList.add('error');
+                } finally {
+                    blogPageFeedbackDiv.style.display = 'block';
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                }
+            });
+        }
+
+        // Newsletter Form Handler for Footer on Blog Page
+        const footerNewsletterFormBlogPage = document.getElementById('footerNewsletterFormBlogPage');
+        if (footerNewsletterFormBlogPage) {
+            let footerFeedbackDiv = document.getElementById('footer-newsletter-feedback-blog');
+            if (!footerFeedbackDiv) {
+                footerFeedbackDiv = document.createElement('div');
+                footerFeedbackDiv.id = 'footer-newsletter-feedback-blog';
+                footerFeedbackDiv.className = 'form-submission-feedback';
+                footerFeedbackDiv.style.cssText = 'margin-top: 10px; padding: 8px; border-radius: 4px; text-align: center; font-size: 0.9em; display: none;';
+                footerNewsletterFormBlogPage.parentNode.insertBefore(footerFeedbackDiv, footerNewsletterFormBlogPage.nextSibling);
+            }
+
+            footerNewsletterFormBlogPage.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                footerFeedbackDiv.textContent = '';
+                footerFeedbackDiv.style.display = 'none';
+                footerFeedbackDiv.className = 'form-submission-feedback';
+
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
+                submitButton.textContent = 'Subscribing...';
+                submitButton.disabled = true;
+
+                if (!email) {
+                    footerFeedbackDiv.textContent = 'Please enter your email address.';
+                    footerFeedbackDiv.classList.add('error');
+                    footerFeedbackDiv.style.display = 'block';
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                    return;
+                }
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    footerFeedbackDiv.textContent = 'Please enter a valid email address.';
+                    footerFeedbackDiv.classList.add('error');
+                    footerFeedbackDiv.style.display = 'block';
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                    return;
+                }
+
+                const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
+                const data = { email: email, formType: 'footer-newsletter-blog-page' }; 
+                try {
+                    const response = await fetch(workerUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', },
+                        body: JSON.stringify(data),
+                    });
+                    const result = await response.json();
+                    if (response.ok && result.success) {
+                        footerFeedbackDiv.textContent = result.message || 'Successfully subscribed!';
+                        footerFeedbackDiv.classList.add('success');
+                        this.reset();
+                    } else {
+                        footerFeedbackDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
+                        footerFeedbackDiv.classList.add('error');
+                    }
+                } catch (error) {
+                    console.error('Error submitting footer newsletter form on blog page:', error);
+                    footerFeedbackDiv.textContent = 'An error occurred. Please try again later.';
+                    footerFeedbackDiv.classList.add('error');
+                } finally {
+                    footerFeedbackDiv.style.display = 'block';
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                }
+            });
+        }
     </script>
 </body>
 </html>
