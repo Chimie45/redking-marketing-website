@@ -60,7 +60,7 @@
     </section>
 
     <!-- Team Members Section -->
-    <section id="team-members" class="team-section services">
+    <section id="team-members" class="team-section services"> <!-- Note: 'services' class is for consistent padding, background from original structure -->
         <div class="container">
             <h2 class="section-title">Our Team</h2>
             <div class="team-grid">
@@ -124,7 +124,7 @@
     </section>
 
     <!-- Jobs Board Section -->
-    <section id="careers" class="jobs-section services"> <!-- Re-using 'services' class for consistent section padding/background -->
+    <section id="careers" class="jobs-section"> <!-- Removed 'services' class if background is handled by .jobs-section directly -->
         <div class="container">
             <h2 class="section-title">Join Our Kingdom</h2>
             <p class="jobs-intro">We're always looking for passionate and talented individuals to join our quest for marketing domination. Check out our open positions below!</p>
@@ -132,7 +132,7 @@
                 <!-- Job Posting 1: Motion Graphic Designer -->
                 <div class="job-posting" onclick="openJobModal('motionDesignerJobModal')">
                     <div class="job-posting-header">
-                        <i class="fas fa-briefcase job-posting-icon"></i> <!-- Added Icon -->
+                        <i class="fas fa-briefcase job-posting-icon"></i>
                         <h3>Motion Graphic Designer</h3>
                     </div>
                     <p class="job-location">Remote (Global)</p>
@@ -331,7 +331,7 @@
                         <input type="email" id="jobAppEmailMotionDesigner" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="jobAppMessageMotionDesigner">Message (Max 300 characters) *</label>
+                        <label for="jobAppMessageMotionDesigner">Introduction (Max 300 characters) *</label> <!-- Changed Label -->
                         <textarea id="jobAppMessageMotionDesigner" name="message" rows="4" maxlength="300" required></textarea>
                         <div id="charCounterMotionDesigner" class="char-counter">300 characters remaining</div>
                     </div>
@@ -339,7 +339,7 @@
                         <label for="jobAppResumeMotionDesigner">Attach Resume (PDF, DOC, DOCX - Max 5MB) *</label>
                         <input type="file" id="jobAppResumeMotionDesigner" name="resume" accept=".pdf,.doc,.docx,.rtf,.txt" required>
                     </div>
-                    <div class="job-submit-cta-wrapper"> <!-- Wrapper for centering button -->
+                    <div class="job-submit-cta-wrapper">
                         <button type="submit" class="submit-btn">Submit Application</button>
                     </div>
                     <div id="jobAppSubmissionMessageMotionDesigner" class="form-submission-feedback" style="display:none;"></div>
