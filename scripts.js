@@ -42,18 +42,16 @@ function openGalleryModal(modalId) {
             console.log('Video playback started for gallery modal:', modalId);
         }).catch(e => {
             console.error('Video playback error for gallery modal ' + modalId + ':', e.message);
+            // Log if controls are missing, as a fallback
             if (!video.hasAttribute('controls')) {
                 console.warn('Video in modal ' + modalId + ' does not have controls. User might not be able to play manually if autoplay fails.');
             }
         });
     } else {
-        // This is expected for gallery5 which is an image slideshow
-        if (modalId !== 'gallery5') {
-            console.log('No video element found in gallery modal (and not gallery5):', modalId);
-        }
+        console.log('No video element found in gallery modal:', modalId);
     }
 
-    if (modalId === 'gallery5') { 
+    if (modalId === 'gallery5') { // Specific logic for gallery5 slideshow
         gallerySlideIndexes[modalId] = 1; 
         showGallerySlide(gallerySlideIndexes[modalId], modalId);
     }
@@ -74,7 +72,7 @@ function closeGalleryModal(modalId) {
     }
     const iframe = modal.querySelector('.gallery-iframe');
     if (iframe) {
-        iframe.src = 'about:blank'; 
+        iframe.src = 'about:blank'; // Clear iframe src to stop loading/playing
     }
     checkAndRestoreScroll(); 
 }
@@ -200,8 +198,7 @@ window.addEventListener('click', function(event) {
             else if (event.target.classList.contains('team-modal')) closeTeamModal(event.target.id);
             else if (event.target.classList.contains('job-modal')) closeJobModal(event.target.id);
             else if (event.target.classList.contains('service-detail-modal')) closeServiceModal(event.target.id);
-            // blog-modal close is primarily handled in blog-scripts.js, but this ensures checkAndRestoreScroll is called if needed.
-            else if (event.target.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(event.target.id); 
+            else if (event.target.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(event.target.id);
         }
     }
 });
@@ -462,7 +459,6 @@ if (jobAppFormMotionDesigner) {
 
 // DOMContentLoaded for general initializations
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM fully loaded and parsed. Initializing scripts...');
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
     
@@ -512,39 +508,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    console.log('Setting up IntersectionObserver...');
     const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
-            if (entry.isIntersecting) { 
-                console.log('Element in view:', entry.target);
-                entry.target.classList.add('element--in-view'); 
-                observer.unobserve(entry.target); 
-            }
+            if (entry.isIntersecting) { entry.target.classList.add('element--in-view'); observer.unobserve(entry.target); }
         });
     }, observerOptions);
 
-    // More robust selector for ALL elements that need animation.
     const elementsToObserve = document.querySelectorAll(
         '.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, ' + 
         '.contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content'
     );
-    console.log(`Found ${elementsToObserve.length} elements to observe for animation.`);
     elementsToObserve.forEach(el => {
-        // The .blog-card elements on blog.html are handled by blog-scripts.js's observer.
-        // This ensures that .service-card elements used in "Latest Insights" on index.html ARE observed.
-        if (!el.classList.contains('blog-card')) {
+        // Exclude blog cards on index.html if they should be handled by blog-scripts.js on blog.html
+        // This logic assumes #blog.services is the "Latest Insights" section on index.html using .service-card
+        // and .blog-card is specific to blog.html (handled by blog-scripts.js)
+        if (!(el.classList.contains('blog-card') && el.closest('#blog-posts'))) { // if it's not a blog-card inside main blog grid
              animatedElementsObserver.observe(el);
         }
     });
-     // Special handling for "Latest Insights" cards on index.html if they are structured as service-cards
-    const latestInsightsSection = document.querySelector('#blog.services');
-    if (latestInsightsSection) {
-        const latestInsightsCards = latestInsightsSection.querySelectorAll('.service-card');
-        console.log(`Found ${latestInsightsCards.length} 'Latest Insights' cards to observe.`);
-        latestInsightsCards.forEach(el => animatedElementsObserver.observe(el));
-    }
-
-
 });
 
 // Animate stat numbers 
