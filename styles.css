@@ -676,8 +676,8 @@ nav .container {
 }
 .team-modal-body { text-align: center; padding: 2rem; }
 .blog-modal-body { padding: 2.5rem; } /* From blog-styles.css */
-.job-modal-body { padding: 2rem; }   /* For job modal */
-/* .service-modal-body { padding: 2rem 2.5rem; } */ /* From services.css - Handled by new service modal styles */
+/* .job-modal-body { padding: 2rem; } */   /* Will be handled by new job modal styles */
+/* .service-modal-body { padding: 2rem 2.5rem; } */ /* Handled by new service modal styles */
 
 
 .portfolio-modal h2 { /* Specific to portfolio */
@@ -1416,7 +1416,7 @@ nav .container {
 }
 
 
-.team-section {
+.team-section { /* This is for the Team Members section, not jobs */
     padding: 80px 0;
     background-color: var(--dark-gray);
 }
@@ -1513,60 +1513,26 @@ nav .container {
     margin-bottom: 0;
 }
 
-
-.awards-section {
-    padding: 80px 0;
-    background-color: var(--black);
-}
-
-.awards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-    text-align: center;
-}
-
-.award-item {
-    background: var(--dark-gray);
-    padding: 2rem;
-    border-radius: 8px;
-    border-left: 5px solid var(--muted-gold);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.award-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-}
-
-.award-icon {
-    font-size: 2.5rem;
-    color: var(--muted-gold);
-    margin-bottom: 1rem;
-}
-
-.award-item h4 {
-    font-size: 1.3rem;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-}
-
-.award-item p {
-    font-size: 0.95rem;
-    color: #ccc;
-}
-
 /* Jobs Section Styles */
-.jobs-section {
+.jobs-section { /* Applied to the "Join Our Kingdom" section */
     padding: 80px 0;
-    background-color: var(--dark-gray);
+    background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%); /* Red gradient background */
+    /* Ensure text colors provide good contrast on red background */
 }
+
+.jobs-section .section-title, /* "Join Our Kingdom" title */
+.jobs-section .jobs-intro {   /* Introductory paragraph */
+    color: var(--white); /* White for better contrast on red */
+}
+.jobs-section .section-title {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Optional shadow for depth */
+}
+
 
 .jobs-intro {
     text-align: center;
     font-size: 1.1rem;
-    color: #ccc;
+    /* color: #ccc; */ /* Overridden by .jobs-section .jobs-intro */
     max-width: 700px;
     margin: 0 auto 3rem auto;
 }
@@ -1579,102 +1545,149 @@ nav .container {
     margin: 0 auto;
 }
 
+/* === Job Posting Card Styling (on our-team.html page) === */
 .job-posting {
-    background: var(--black);
+    background: var(--black); /* Keep card background black for contrast */
     padding: 2rem;
     border-radius: 8px;
     border: 1px solid var(--muted-gold);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .job-posting:hover {
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.25); /* Adjusted for better visibility */
     transform: translateY(-5px);
 }
 
-.job-posting h3 {
+.job-posting-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.job-posting-icon {
+    font-size: 2.2rem;
+    color: var(--muted-gold);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.job-posting .job-posting-header h3 {
     font-size: 1.6rem;
     color: var(--muted-gold);
-    margin-bottom: 0.5rem;
+    font-weight: bold;
+    margin-bottom: 0;
 }
 
-.job-location {
+.job-posting .job-location {
     font-size: 0.95rem;
-    color: #bbb;
+    color: #bbb; /* Light color for location text on black card */
     margin-bottom: 1rem;
-    font-style: italic;
+    margin-left: 0; /* Reset from previous, if any */
 }
 
-.job-description {
+.job-posting .job-description {
     font-size: 1rem;
-    color: #ccc;
+    color: #ccc; /* Light color for description text on black card */
     margin-bottom: 1.5rem;
     line-height: 1.7;
+    flex-grow: 1;
+    margin-left: 0; /* Reset from previous, if any */
 }
 
 .job-posting-footer {
+    margin-top: auto;
     text-align: right;
-    margin-top: 1rem;
 }
 
-.see-more-button {
-    padding: 10px 25px;
-    font-size: 1rem;
-}
-
-/* Job Modal Specific Styles */
-.job-modal-body h2 { /* Distinct from other modal h2s */
-    font-size: 2rem;
+.job-posting .see-more-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    background-color: transparent;
     color: var(--muted-gold);
-    margin-bottom: 1.5rem;
-    text-align: center;
+    border: 1px solid var(--muted-gold);
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.job-details-section {
-    margin-bottom: 1.5rem;
+.job-posting:hover .see-more-button {
+    background-color: var(--muted-gold);
+    color: var(--black);
+}
+
+/* === Job Modal Content Styling (inside the opened job modal) === */
+.job-modal .job-modal-body { /* General padding for job modal body */
+    padding: 2rem 2.5rem;
+}
+
+.job-modal .job-modal-body h2 { /* Main title of the job modal */
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--muted-gold);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.job-modal .job-details-section h3 { /* Headings like "Job Description" */
+    font-size: 1.4rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--dark-gray);
     text-align: left;
 }
 
-.job-details-section h3 {
-    font-size: 1.3rem;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    border-bottom: 1px solid var(--dark-gray);
-    padding-bottom: 0.25rem;
-}
-
-.job-details-section p,
-.job-details-section ul {
-    font-size: 1rem;
-    color: #ccc;
-    line-height: 1.7;
-}
-
-.job-details-section ul {
+.job-modal .job-details-section ul {
     list-style: disc;
-    padding-left: 20px;
-    margin-top: 0.5rem;
-}
-.job-details-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.job-modal-divider {
-    border: 0;
-    height: 1px;
-    background: var(--dark-gray);
-    margin: 2rem 0;
+    padding-left: 25px;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
 }
 
-.job-application-form h3 {
+.job-modal .job-details-section ul li {
+    margin-bottom: 0.85rem;
+    line-height: 1.7;
+    color: #ccc;
+}
+
+.job-modal .job-application-form h3 { /* "Directly Apply" heading */
     font-size: 1.5rem;
     color: var(--muted-gold);
     text-align: center;
+    margin-top: 2.5rem;
     margin-bottom: 1.5rem;
 }
-.job-application-form .form-group {
-    margin-bottom: 1.2rem;
+
+.job-application-form .form-group label {
+    color: var(--muted-gold);
+}
+
+.job-application-form .form-group input,
+.job-application-form .form-group textarea {
+    background: var(--black);
+    border-color: var(--dark-gray);
+    color: var(--white);
+}
+
+.job-application-form .form-group input:focus,
+.job-application-form .form-group textarea:focus {
+    border-color: var(--muted-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+.job-submit-cta-wrapper {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 .char-counter {
@@ -1783,6 +1796,10 @@ nav .container {
     .section-title {
         font-size: 2rem;
     }
+     .jobs-section .section-title { /* Ensure job section title is responsive too */
+        font-size: 2rem;
+    }
+
 
     .services-grid,
     .portfolio-grid,
@@ -1813,15 +1830,17 @@ nav .container {
     .portfolio-modal-header { height: 250px; }
     .team-modal-header { height: 200px; }
     .blog-modal-header { height: 220px; }
-    .service-detail-modal .service-modal-header { padding: 1rem 1.5rem; } /* Adjusted padding for mobile */
-    .service-detail-modal .service-modal-header i { font-size: 2rem; } /* Slightly smaller icon on mobile */
-    .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; } /* Smaller title on mobile */
+    .service-detail-modal .service-modal-header { padding: 1rem 1.5rem; }
+    .service-detail-modal .service-modal-header i { font-size: 2rem; }
+    .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; }
+    .job-modal .job-modal-body h2 { font-size: 1.5rem; } /* Job modal main title responsive */
 
 
     .portfolio-modal h2, .team-modal-body h2, .blog-modal h1, .job-modal-body h2, .service-modal-header h2 { /* Consolidated modal titles */
-        font-size: 1.5rem; /* General modal title size for mobile */
+        /* font-size: 1.5rem; */ /* General modal title size for mobile - Handled by more specific rules now */
     }
-     .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; } /* Smaller "Key Offerings" on mobile */
+     .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
+     .job-modal .job-details-section h3 { font-size: 1.2rem; } /* Job modal section titles responsive */
 
 
     .portfolio-modal-body .client-info { font-size: 0.9rem; padding: 1rem; }
@@ -1895,9 +1914,10 @@ nav .container {
     .team-metrics .metric-card .metric-label { font-size: 0.7rem; }
 
     /* Job Modal specific for mobile */
-    .job-modal-body { padding: 1.5rem; }
-    .job-details-section h3 { font-size: 1.1rem; }
-    .job-details-section p, .job-details-section ul { font-size: 0.9rem; }
+    .job-modal .job-modal-body { padding: 1.5rem; } /* Responsive padding for job modal body */
+    /* .job-details-section h3 { font-size: 1.1rem; } */ /* Already covered by job-modal .job-details-section h3 */
+    .job-modal .job-details-section p, .job-modal .job-details-section ul { font-size: 0.9rem; }
+
 
 }
 /* MODAL Z-INDEX HIERARCHY - Add this section to fix the layering */
@@ -1974,153 +1994,4 @@ nav .container {
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-}
-/* === Job Posting Card Styling (on our-team.html page) === */
-
-.job-posting {
-    /* Existing styles are mostly fine, we'll enhance with icon and title focus */
-    /* background: var(--black); */ /* Already set */
-    /* padding: 2rem; */ /* Already set */
-    /* border-radius: 8px; */ /* Already set */
-    /* border: 1px solid var(--muted-gold); */ /* Already set */
-    /* transition: box-shadow 0.3s ease, transform 0.3s ease; */ /* Already set */
-    /* cursor: pointer; */ /* Already set */
-    display: flex; /* Use flex to align icon and content */
-    flex-direction: column; /* Stack items vertically */
-}
-
-.job-posting-header { /* New wrapper for icon and title */
-    display: flex;
-    align-items: center; /* Align icon and title vertically */
-    gap: 1rem; /* Space between icon and title */
-    margin-bottom: 1rem; /* Space below header before description */
-}
-
-.job-posting-icon { /* New class for the job icon */
-    font-size: 2.2rem; /* Prominent icon size */
-    color: var(--muted-gold); /* Gold color for the icon */
-    line-height: 1;
-    flex-shrink: 0; /* Prevent icon from shrinking */
-}
-
-.job-posting .job-posting-header h3 { /* Title within the job posting card header */
-    font-size: 1.6rem; /* Matches existing */
-    color: var(--muted-gold); /* Matches existing */
-    font-weight: bold; /* Make it bold like service modal titles */
-    margin-bottom: 0; /* Remove default bottom margin if any */
-}
-
-.job-posting .job-location {
-    font-size: 0.95rem;
-    color: #bbb;
-    margin-bottom: 1rem; /* Existing style */
-    margin-left: calc(2.2rem + 1rem); /* Indent to align with text after icon */
-}
-
-.job-posting .job-description {
-    font-size: 1rem;
-    color: #ccc;
-    margin-bottom: 1.5rem; /* Existing style */
-    line-height: 1.7; /* Existing style */
-    flex-grow: 1; /* Allow description to take space */
-     margin-left: calc(2.2rem + 1rem); /* Indent to align with text after icon if icon is present for full card*/
-}
-/* If icon is only for header, then job-location and job-description don't need margin-left */
-/* For this design, let's assume the icon is part of the header only. */
-.job-posting .job-location {
-    margin-left: 0; 
-}
-.job-posting .job-description {
-     margin-left: 0;
-}
-
-
-.job-posting-footer {
-    margin-top: auto; /* Pushes button to the bottom */
-    text-align: right; /* Existing style */
-}
-
-.job-posting .see-more-button { /* Styling for the "See More" button on the card */
-    padding: 0.6rem 1.2rem; /* Slightly smaller than main CTA */
-    font-size: 0.9rem;
-    background-color: transparent;
-    color: var(--muted-gold);
-    border: 1px solid var(--muted-gold);
-    border-radius: 4px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.job-posting:hover .see-more-button {
-    background-color: var(--muted-gold);
-    color: var(--black);
-}
-
-/* === Job Modal Content Styling (inside the opened job modal) === */
-
-.job-modal .job-modal-body h2 { /* Main title of the job modal, e.g., "Motion Graphic Designer" */
-    font-size: 1.8rem; /* Consistent with service modal h2 */
-    font-weight: bold;
-    color: var(--muted-gold);
-    text-align: center;
-    margin-bottom: 2rem; /* Space after the main title */
-}
-
-.job-modal .job-details-section h3 { /* Headings like "Job Description", "Responsibilities" */
-    font-size: 1.4rem; /* Consistent with service modal 'Key Offerings' h4 */
-    color: var(--gold);
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--dark-gray); /* Underline */
-    text-align: left;
-}
-
-.job-modal .job-details-section ul {
-    list-style: disc;
-    padding-left: 25px; /* Indentation for bullets */
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    text-align: left;
-}
-
-.job-modal .job-details-section ul li {
-    margin-bottom: 0.85rem;
-    line-height: 1.7;
-    color: #ccc;
-}
-
-.job-modal .job-application-form h3 { /* "Directly Apply" heading */
-    font-size: 1.5rem; /* Slightly larger than section headings */
-    color: var(--muted-gold);
-    text-align: center;
-    margin-top: 2.5rem; /* More space before form */
-    margin-bottom: 1.5rem;
-}
-
-/* Wrapper for Centering the "Submit Application" Button */
-.job-submit-cta-wrapper {
-    text-align: center;
-    margin-top: 2rem; /* Padding above the button */
-    margin-bottom: 1rem; /* Padding below */
-}
-
-/* Ensure the job application form elements are consistently styled */
-.job-application-form .form-group label {
-    color: var(--muted-gold); /* Consistent label color */
-}
-
-.job-application-form .form-group input,
-.job-application-form .form-group textarea {
-    background: var(--black); /* Consistent input background */
-    border-color: var(--dark-gray); /* Consistent border */
-    color: var(--white);
-}
-
-.job-application-form .form-group input:focus,
-.job-application-form .form-group textarea:focus {
-    border-color: var(--muted-gold); /* Consistent focus border */
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
