@@ -1,16 +1,3 @@
-// Store slide indexes for each gallery slideshow (if gallery were present)
-// let gallerySlideIndexes = { 'gallery5': 1 }; // Example if gallery was used
-
-// Function to open a gallery modal that contains an iframe (if gallery were present)
-// function openIframeModal(modalId, iframeSrc) { ... } // Example
-
-// Gallery modal functions (if gallery were present)
-// function openGalleryModal(modalId) { ... } // Example
-// function closeGalleryModal(modalId) { ... } // Example
-// function plusSlides(n, galleryId) { ... } // Example
-// function currentGallerySlide(n, galleryId) { ... } // Example
-// function showGallerySlide(n, galleryId) { ... } // Example
-
 // Portfolio modal functions
 function openPortfolioModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -18,13 +5,18 @@ function openPortfolioModal(modalId) {
     const modalHeader = modal.querySelector('.portfolio-modal-header');
     const modalImg = modalHeader ? modalHeader.querySelector('img') : null;
     if (modalImg && modalImg.src && modalHeader) modalHeader.style.backgroundImage = `url(${modalImg.src})`;
-    modal.style.display = 'flex'; // MODIFIED: Use flex for consistency
+    
+    modal.style.removeProperty('display'); // Remove inline display:none if present
+    modal.classList.add('modal--is-open');
     document.body.style.overflow = 'hidden';
     modal.querySelectorAll('.metric-number').forEach(num => animateValue(num));
 }
 function closePortfolioModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.classList.remove('modal--is-open');
+        modal.style.display = 'none'; // Explicitly hide
+    }
     checkAndRestoreScroll();
 }
 
@@ -35,13 +27,18 @@ function openTeamModal(modalId) {
     const modalHeader = modal.querySelector('.team-modal-header');
     const modalImg = modalHeader ? modalHeader.querySelector('.team-modal-img-main') : null;
     if (modalImg && modalImg.src && modalHeader) modalHeader.style.backgroundImage = `url(${modalImg.src})`;
-    modal.style.display = 'flex'; // MODIFIED: Use flex for consistency
+    
+    modal.style.removeProperty('display');
+    modal.classList.add('modal--is-open');
     document.body.style.overflow = 'hidden';
     modal.querySelectorAll('.metric-number').forEach(num => animateValue(num));
 }
 function closeTeamModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.classList.remove('modal--is-open');
+        modal.style.display = 'none';
+    }
     checkAndRestoreScroll();
 }
 
@@ -49,24 +46,30 @@ function closeTeamModal(modalId) {
 function openJobModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) { console.error('Job modal not found:', modalId); return; }
-    modal.style.display = 'flex'; // MODIFIED: Use flex for consistency
+    
+    modal.style.removeProperty('display');
+    modal.classList.add('modal--is-open');
     document.body.style.overflow = 'hidden';
+    
     const form = modal.querySelector('.job-application-form');
     if (form) form.reset();
     const messageDiv = modal.querySelector('.form-submission-feedback');
     if (messageDiv) { messageDiv.style.display = 'none'; messageDiv.textContent = ''; messageDiv.className = 'form-submission-feedback'; }
     const charCounter = modal.querySelector('.char-counter');
-    const messageTextarea = modal.querySelector('textarea[name="message"]'); // Assuming 'message' is still the name attribute
-    if (charCounter && messageTextarea && messageTextarea.maxLength) { // Check if maxLength is defined
+    const messageTextarea = modal.querySelector('textarea[name="message"]');
+    if (charCounter && messageTextarea && messageTextarea.maxLength) {
         charCounter.textContent = `${messageTextarea.maxLength} characters remaining`;
         charCounter.style.color = '#aaa';
-    } else if (charCounter && messageTextarea) { // Fallback if maxLength is not on textarea but expected
+    } else if (charCounter && messageTextarea) {
         charCounter.textContent = `Check character limit`;
     }
 }
 function closeJobModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.classList.remove('modal--is-open');
+        modal.style.display = 'none';
+    }
     checkAndRestoreScroll();
 }
 
@@ -74,39 +77,46 @@ function closeJobModal(modalId) {
 function openServiceModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) { console.error('Service modal not found:', modalId); return; }
-    modal.style.display = 'flex'; // MODIFIED: Use flex for proper centering via CSS
+    
+    modal.style.removeProperty('display'); // Clear any inline display:none
+    modal.classList.add('modal--is-open'); // Add class to trigger display:flex and transitions
     document.body.style.overflow = 'hidden';
-    // Ensure content is scrolled to top
+    
     setTimeout(() => {
-       if(modal.contains(document.activeElement)) modal.blur(); // Remove focus from any element within
-       modal.scrollTop = 0; // Scroll the modal overlay itself
+       if(modal.contains(document.activeElement)) modal.blur();
+       modal.scrollTop = 0;
        const content = modal.querySelector('.service-modal-content');
-       if(content) content.scrollTop = 0; // Scroll the content box
+       if(content) content.scrollTop = 0;
     },0);
 }
 function closeServiceModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.classList.remove('modal--is-open');
+        // Add a slight delay for the opacity transition before setting display:none
+        // This helps ensure the fade-out animation is visible.
+        // The CSS transition for visibility will handle making it non-interactive sooner.
+        // setTimeout(() => {
+        //     modal.style.display = 'none';
+        // }, 300); // Match CSS transition duration for opacity
+        modal.style.display = 'none'; // For now, direct hide. CSS handles transition.
+    }
     checkAndRestoreScroll();
 }
 
 // Function for Service Modal CTA buttons: Scroll to contact and close modal
 function scrollToContactAndCloseModal(event, modalId) {
-    event.preventDefault(); // Prevent default anchor behavior
+    event.preventDefault(); 
 
     if (modalId) {
-        closeServiceModal(modalId); // This should now correctly set display: none
+        closeServiceModal(modalId);
     }
 
     const targetElement = document.getElementById('contact');
     if (targetElement) {
         const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
         const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; // Adjust offset as needed
-
-        // The checkAndRestoreScroll in closeServiceModal should handle body scroll.
-        // If it's still an issue, ensure body overflow is 'auto' *before* scrolling.
-        // document.body.style.overflow = 'auto'; // Potentially redundant if checkAndRestoreScroll is effective
+        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
 
         window.scrollTo({
             top: offsetPosition,
@@ -120,13 +130,7 @@ function scrollToContactAndCloseModal(event, modalId) {
 
 // Helper function to check if any modal is open and restore scroll if not
 function checkAndRestoreScroll() {
-    const anyModalOpen = document.querySelector(
-        '.portfolio-modal[style*="display: flex"], .portfolio-modal[style*="display: block"], ' +
-        '.team-modal[style*="display: flex"], .team-modal[style*="display: block"], ' +
-        '.blog-modal[style*="display: flex"], .blog-modal[style*="display: block"], ' + // Assuming blog modals also use flex/block
-        '.job-modal[style*="display: flex"], .job-modal[style*="display: block"], ' +
-        '.service-detail-modal[style*="display: flex"], .service-detail-modal[style*="display: block"]'
-    );
+    const anyModalOpen = document.querySelector('.modal--is-open'); // Simpler check for the open class
     if (!anyModalOpen) {
         document.body.style.overflow = 'auto';
     }
@@ -134,15 +138,13 @@ function checkAndRestoreScroll() {
 
 // Close modals when clicking outside of content (on the overlay)
 window.addEventListener('click', function(event) {
-    // Check if the direct target is one of the modal overlay classes
     if (event.target.matches('.portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal')) {
-        // And ensure it's actually visible (JS sets inline style for display)
-        if (event.target.style.display === 'flex' || event.target.style.display === 'block') {
+        if (event.target.classList.contains('modal--is-open')) { // Check for the open class
             const modalId = event.target.id;
             if (modalId) {
                 if (event.target.classList.contains('portfolio-modal')) closePortfolioModal(modalId);
                 else if (event.target.classList.contains('team-modal')) closeTeamModal(modalId);
-                else if (event.target.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(modalId); // Check if closeBlogModal exists
+                else if (event.target.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(modalId);
                 else if (event.target.classList.contains('job-modal')) closeJobModal(modalId);
                 else if (event.target.classList.contains('service-detail-modal')) closeServiceModal(modalId);
             }
@@ -153,19 +155,15 @@ window.addEventListener('click', function(event) {
 // Close modals with Escape key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
-        let modalClosedThisEvent = false;
-        document.querySelectorAll('.portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal').forEach(modal => {
-            if (modal.style.display === 'flex' || modal.style.display === 'block') { // Check if visible
-                const modalId = modal.id;
-                if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modalId);
-                else if (modal.classList.contains('team-modal')) closeTeamModal(modalId);
-                else if (modal.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(modalId);
-                else if (modal.classList.contains('job-modal')) closeJobModal(modalId);
-                else if (modal.classList.contains('service-detail-modal')) closeServiceModal(modalId);
-                modalClosedThisEvent = true;
-            }
+        document.querySelectorAll('.modal--is-open').forEach(modal => { // Iterate over currently open modals
+            const modalId = modal.id;
+            if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modalId);
+            else if (modal.classList.contains('team-modal')) closeTeamModal(modalId);
+            else if (modal.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(modalId);
+            else if (modal.classList.contains('job-modal')) closeJobModal(modalId);
+            else if (modal.classList.contains('service-detail-modal')) closeServiceModal(modalId);
         });
-        // No need to call checkAndRestoreScroll here as each close function calls it.
+        // checkAndRestoreScroll will be called by the last closed modal's close function
     }
 });
 
@@ -547,6 +545,3 @@ document.querySelectorAll('img').forEach(img => {
          console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
 });
-
-// Debug function (can be removed in production)
-// function debugGalleryModal(modalId) { /* ... */ }
