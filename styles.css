@@ -402,7 +402,7 @@ nav .container {
 /* Portfolio Section - Uses .services for padding/background */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted minmax for potentially smaller cards */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -426,10 +426,10 @@ nav .container {
 .portfolio-image {
     position: relative;
     width: 100%;
-    height: 0; /* Set height to 0 for aspect ratio hack */
-    padding-bottom: 56.25%; /* 16:9 aspect ratio (9 / 16 * 100) */
+    height: 0; 
+    padding-bottom: 56.25%; 
     overflow: hidden;
-    background-color: var(--dark-gray); /* Fallback background */
+    background-color: var(--dark-gray); 
 }
 
 .portfolio-image img {
@@ -438,12 +438,12 @@ nav .container {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image covers the area, might crop */
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother zoom */
+    object-fit: cover; 
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
 }
 
 .portfolio-card:hover .portfolio-image img {
-    transform: scale(1.08); /* Slightly larger zoom */
+    transform: scale(1.08); 
 }
 
 .portfolio-overlay {
@@ -452,9 +452,9 @@ nav .container {
     left: 0;
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-    padding: 1rem; /* Adjusted padding */
-    height: auto; /* Auto height based on content */
-    min-height: 70px; /* Minimum height */
+    padding: 1rem; 
+    height: auto; 
+    min-height: 70px; 
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -468,25 +468,25 @@ nav .container {
 .portfolio-info {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* Align items to the bottom */
+    align-items: flex-end; 
 }
 
 .portfolio-text {
     flex: 1;
-    margin-right: 0.5rem; /* Add some space between text and arrow */
+    margin-right: 0.5rem; 
 }
 
 .portfolio-info h3 {
     color: var(--muted-gold);
-    font-size: 0.9rem; /* Reduced font size */
-    margin-bottom: 0.1rem; /* Reduced margin */
+    font-size: 0.9rem; 
+    margin-bottom: 0.1rem; 
     line-height: 1.2;
 }
 
 .portfolio-info p {
     color: #ccc;
-    font-size: 0.8rem; /* Reduced font size */
-    margin-bottom: 0.1rem; /* Reduced margin */
+    font-size: 0.8rem; 
+    margin-bottom: 0.1rem; 
     line-height: 1.2;
 }
 
@@ -499,7 +499,7 @@ nav .container {
 }
 
 .portfolio-card:hover .view-details {
-    color: var(--gold); /* Brighter gold on hover */
+    color: var(--gold); 
 }
 
 
@@ -512,16 +512,16 @@ nav .container {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.92); /* Slightly more opaque */
+    background-color: rgba(0,0,0,0.92); 
     animation: fadeIn 0.3s ease;
-    overflow-y: auto; /* Allow modal itself to scroll if content is too long */
+    overflow-y: auto; 
 }
 
 .portfolio-modal-content {
     position: relative;
     background-color: var(--black);
-    margin: 3% auto; /* Adjusted margin */
-    padding: 0; /* Padding will be in header/body */
+    margin: 3% auto; 
+    padding: 0; 
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
     width: 90%;
@@ -1384,35 +1384,42 @@ nav .container {
     position: relative;
     height: 280px; 
     overflow: hidden;
-    display: flex; /* This will be overridden by the image if it's the only child */
-    align-items: center; /* Align image if it doesn't fill */
-    justify-content: center; /* Center image if it doesn't fill */
-    background-color: var(--dark-gray); 
-    /* Removed background-size and position for ::before as image will fill */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: var(--dark-gray); /* Fallback, will be overridden by JS if image is set */
     border-top-left-radius: 8px; 
     border-top-right-radius: 8px;
+    /* background-image is set by JS for the ::before pseudo-element */
 }
 
-/* No blur needed if image fills the header directly */
 .team-modal-header::before { 
-    content: none; /* Remove the pseudo-element for blur */
+    content: ''; /* Restored for blur effect */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit; /* Inherits from .team-modal-header (set by JS) */
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px) brightness(0.6); /* Adjust blur/brightness as needed */
+    transform: scale(1.1); /* Optional: helps blur cover edges better */
+    z-index: 1;
 }
 
-/* Team member image in the modal - fill header */
+/* Team member image in the modal - centered, respects aspect ratio */
 .team-modal-img-main { 
-    position: relative; /* Changed from absolute if it was */
-    z-index: 2; /* Keep above any potential ::before if it were re-added */
-    width: 100%;   /* Fill the width of .team-modal-header */
-    height: 100%;  /* Fill the height of .team-modal-header */
-    object-fit: cover; /* Cover the area, cropping if necessary */
-    border-radius: 0; /* Remove individual radius if header has one and we want flush */
-    /* If the header has top-left/right radius, and image should match: */
-    border-top-left-radius: 8px; 
-    border-top-right-radius: 8px;
-    border-bottom-left-radius: 0; /* Ensure bottom corners are not rounded */
-    border-bottom-right-radius: 0;
+    position: relative; 
+    z-index: 2; /* Above the ::before pseudo-element */
+    max-height: 85%;  /* Fill most of the header height, leaving some space for blur */
+    max-width: 90%;   /* Prevent image from touching sides if very wide */
+    width: auto;      /* Maintain aspect ratio */
+    height: auto;     /* Maintain aspect ratio */
+    object-fit: contain; /* Show entire image, letterboxed if needed */
+    border-radius: 8px; /* Slightly rounded corners for the image itself */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Subtle shadow for depth */
     border: none; 
-    box-shadow: none; /* Remove shadow if it's meant to be flush */
 }
 
 
@@ -1432,7 +1439,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10; /* Ensure it's above the image */
+    z-index: 10; 
     line-height: 1;
 }
 .close-team-modal:hover {
@@ -1831,16 +1838,13 @@ nav .container {
     }
     .team-modal-content {
         width: 95%;
-        padding: 0; /* Modal content padding is handled by header/body */
+        padding: 0; 
     }
     .team-modal-header {
         height: 200px; 
     }
-    /* team-modal-img-main already set to cover, adjustments for mobile if needed would go here */
-    /* For example, if header height changes drastically */
-
     .team-modal-body {
-        padding: 1.5rem; /* Adjust padding for smaller modals */
+        padding: 1.5rem; 
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
