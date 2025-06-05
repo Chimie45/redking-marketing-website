@@ -332,7 +332,6 @@ nav .container {
     margin-bottom: 1rem;
     color: var(--white);
 }
-/* .service-card h3 a.blog-preview-link was removed as #blog previews are gone from index */
 
 .service-card p {
     color: #ccc;
@@ -553,7 +552,7 @@ nav .container {
 
 /* === Common Modal Styles (Overlay) === */
 .portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal {
-    display: none; /* Initially hidden */
+    display: none; /* MODIFIED: Ensure this is the only display property here for default state */
     position: fixed;
     z-index: 2000;
     left: 0;
@@ -565,9 +564,7 @@ nav .container {
     overflow-y: auto;
     padding: 20px;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Flexbox properties for centering the content box will be applied by the [style*="display: block"] rule */
 }
 
 /* === Common Modal Content Box Styles === */
@@ -1589,7 +1586,6 @@ nav .container {
 
     .services-grid,
     .portfolio-grid,
-    /* .gallery-grid, /* Gallery removed */
     .site-footer .footer-main {
         grid-template-columns: 1fr;
     }
@@ -1693,7 +1689,6 @@ nav .container {
 }
 
 /* MODAL Z-INDEX HIERARCHY & DISPLAY FIXES */
-/* .gallery-modal styles removed */
 
 .service-detail-modal {
     z-index: 2500 !important;
@@ -1705,8 +1700,6 @@ nav .container {
     z-index: 2000 !important;
 }
 
-/* .gallery-modal-content styles removed */
-
 .close-service-modal,
 .close-modal, /* Generic, if used on a basic modal */
 .close-team-modal,
@@ -1715,13 +1708,15 @@ nav .container {
     z-index: 2510 !important;
 }
 
-/* Modal display override to ensure flex behavior when JS shows them */
-.service-detail-modal[style*="display: block"],
-.portfolio-modal[style*="display: block"],
-.team-modal[style*="display: block"],
-.blog-modal[style*="display: block"],
-.job-modal[style*="display: block"] {
-    display: flex !important; /* Ensure display:flex is used when shown by JS with style.display = 'block' */
+/* This rule applies 'display: flex' and other properties ONLY when JS adds an inline style="display: block;" (or "display: flex;") */
+.service-detail-modal[style*="display:"],
+.portfolio-modal[style*="display:"],
+.team-modal[style*="display:"],
+.blog-modal[style*="display:"],
+.job-modal[style*="display:"] {
+    display: flex !important; /* Override inline 'block' with 'flex' for centering */
+    align-items: center !important; /* Add centering for the overlay */
+    justify-content: center !important; /* Add centering for the overlay */
     opacity: 1 !important;
     visibility: visible !important;
 }
