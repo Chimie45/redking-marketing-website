@@ -192,20 +192,25 @@ nav .container {
 
 /* Page Header for sub-pages (Team, Blog, Services) */
 .page-header.hero { /* More specific selector for sub-page headers */
-    min-height: 60vh; /* Default min-height for sub-page headers */
+    min-height: 60vh; /* Default min-height for sub-page headers, overridden by IDs */
 }
 
 #team-header.page-header.hero {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/team/teamheader.jpg'); /* Ensure this image path is correct */
-    min-height: 100vh; /* team page has a taller header */
+        url('images/team/teamheader.jpg'); 
+    min-height: 100vh; 
 }
 #blog-header.page-header.hero {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
-        url('images/blog/blogheader.jpg'); /* Ensure this image path is correct */
-     min-height: 100vh; /* UPDATED: Was 70vh, now 100vh to match index.html hero */
+        url('images/blog/blogheader.jpg'); 
+     min-height: 100vh; 
+}
+/* ADDED: Rule for Services Page Header to match index.html hero height */
+#services-page-header.page-header.hero {
+    /* Background image is set in services.css */
+    min-height: 100vh; 
 }
 
 
@@ -1690,11 +1695,10 @@ nav .container {
     }
 
     /* Our Team Page Responsive Adjustments */
-    .page-header#team-header {
-        min-height: 60vh;
-    }
-    #blog-header.page-header.hero { /* Ensure blog header respects mobile height adjustment */
-        min-height: 60vh; /* Match other page headers on mobile */
+    .page-header#team-header,
+    #services-page-header.page-header.hero, /* ADDED: Services page mobile header height */
+    #blog-header.page-header.hero { 
+        min-height: 60vh; 
     }
     .mission-statement-header p {
         font-size: 1rem;
