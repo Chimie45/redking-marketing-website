@@ -4,8 +4,8 @@
 #services-page-header.page-header.hero {
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
-        url('images/services/servicesheader.jpg'); /* Updated path */
-    min-height: 70vh; /* Adjusted height for a subpage header */
+        url('images/services/servicesheader.jpg'); /* Path for services page header image */
+    min-height: 70vh; 
     background-attachment: fixed; 
 }
 
@@ -22,97 +22,78 @@
     margin-bottom: 1.5rem; 
 }
 
-.page-intro-text {
+.page-intro-text { /* Used on services.html for intro paragraph */
     max-width: 800px;
     margin: 1rem auto 0 auto;
     font-size: 1.1rem;
     color: #e0e0e0;
     line-height: 1.7;
+    text-align: center;
 }
 
 /* Styling for the services section on this page */
 .services-page-section {
     padding: 80px 0;
-    background-color: var(--dark-gray);
+    background-color: var(--dark-gray); /* Match .services from styles.css */
 }
 
 .services-page-section .section-title {
     margin-bottom: 3rem;
 }
 
+/* .service-card styles are mostly inherited from styles.css */
 .services-page-section .service-card {
-    cursor: pointer; /* Make entire card clickable */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Pushes button to bottom */
+    cursor: pointer; 
+    /* Any overrides or additions for services.html cards can go here */
+    /* display: flex, flex-direction, justify-content are already in styles.css for .service-card */
 }
 
 .services-page-section .service-card:hover {
-    border-color: var(--muted-gold);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+    border-color: var(--muted-gold); /* Already in styles.css */
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25); /* Slightly different shadow if desired */
 }
 
-.view-details-button {
-    display: inline-block;
-    margin-top: 1.5rem; /* Space above the button */
-    padding: 0.5rem 1rem;
-    background-color: transparent;
-    color: var(--muted-gold);
-    border: 1px solid var(--muted-gold);
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 0.9rem;
-    text-decoration: none;
-    align-self: center; /* Center button if card text doesn't fill height */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.service-card:hover .view-details-button {
-    background-color: var(--muted-gold);
-    color: var(--black);
-}
+/* .view-details-button is already styled in styles.css for .service-card */
 
 
 /* Service Detail Modal Styles */
-.service-detail-modal { /* Uses common modal styles from styles.css, but allows specific overrides */
-    /* Base styles are inherited from .portfolio-modal, .team-modal etc. in styles.css */
+/* .service-detail-modal is covered by common modal styles in styles.css */
+
+/* .service-modal-content is covered by common modal styles in styles.css, with max-width override below */
+.service-modal-content { 
+    max-width: 850px; 
 }
 
-.service-modal-content { /* Uses common modal content styles from styles.css */
-    max-width: 850px; /* Specific width for service modals */
-    padding: 0; /* Reset padding, will be handled by header/body */
-}
+/* .close-service-modal is covered by common modal styles in styles.css */
 
-.close-service-modal { /* Uses common close button styles */
-    /* Inherits .close-modal styles */
-}
-
-.service-modal-header {
+.service-modal-header { /* Specific to service modals */
     padding: 1.5rem 2rem;
-    background-color: var(--dark-gray); /* Darker header for service modals */
+    background-color: var(--dark-gray); 
     border-bottom: 2px solid var(--muted-gold);
     display: flex;
     align-items: center;
     gap: 1rem;
-    border-top-left-radius: 8px; /* Match content container */
+    border-top-left-radius: 8px; 
     border-top-right-radius: 8px;
 }
 
-.service-modal-header i { /* Icon in the modal header */
+.service-modal-header i { 
     font-size: 2.2rem;
     color: var(--muted-gold);
 }
 
 .service-modal-header h2 {
     color: var(--white);
-    font-size: 1.8rem; /* Slightly smaller than main modal titles */
+    font-size: 1.8rem; 
     margin: 0;
+    text-align: left; /* Ensure alignment */
 }
 
+/* .service-modal-body inherits common padding from styles.css */
 .service-modal-body {
-    padding: 2rem 2.5rem; /* Standard padding for modal body */
     color: #ccc;
     line-height: 1.7;
+    text-align: left;
 }
 
 .service-modal-intro {
@@ -143,8 +124,15 @@
 .service-modal-cta {
     display: inline-block;
     margin-top: 2rem;
-    text-align: center;
+    /* text-align: center; */ /* If button is block, this isn't needed. If inline-block in a block parent, parent needs text-align. */
 }
+.service-modal-body .service-modal-cta { /* Ensure CTA button is centered if it's the last element */
+    display: block; /* Make it block to take full width */
+    width: fit-content; /* Shrink to content */
+    margin-left: auto; /* Center */
+    margin-right: auto; /* Center */
+}
+
 
 /* Responsive adjustments for service modals and page */
 @media (max-width: 768px) {
@@ -152,18 +140,16 @@
         min-height: 50vh;
     }
     #services-page-header .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem; /* Adjusted from 2.5rem based on styles.css mobile */
     }
     #services-page-header .hero-content .subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* Adjusted from 1.2rem based on styles.css mobile */
     }
     .page-intro-text {
         font-size: 1rem;
     }
 
-    .services-page-section .services-grid {
-        grid-template-columns: 1fr; /* Stack cards on mobile */
-    }
+    /* .services-page-section .services-grid already stacks to 1fr from styles.css */
 
     .service-modal-header {
         padding: 1rem 1.5rem;
@@ -175,11 +161,10 @@
         font-size: 2rem;
     }
     .service-modal-header h2 {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* Matches .portfolio-modal h2 mobile */
     }
-    .service-modal-body {
-        padding: 1.5rem;
-    }
+    /* .service-modal-body padding inherited from common modal styles */
+    
     .service-modal-intro {
         font-size: 1rem;
     }
