@@ -175,18 +175,18 @@ nav .container {
 /* Hero Section */
 .hero { /* General hero for index.html */
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-    background-image: 
+    background-image:
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/home/header.jpg'); 
+        url('images/home/header.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; 
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
     text-align: center;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
     border-bottom: 3px solid var(--muted-gold);
 }
 
@@ -197,13 +197,13 @@ nav .container {
 }
 
 #team-header.page-header.hero {
-    background-image: 
+    background-image:
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
         url('images/team/teamheader.jpg');
     min-height: 100vh; /* team page has a taller header */
 }
 #blog-header.page-header.hero {
-    background-image: 
+    background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
         url('images/blog/blogheader.jpg'); /* Assuming a blogheader.jpg in images/blog/ */
      min-height: 70vh;
@@ -213,7 +213,7 @@ nav .container {
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 20px; 
+    padding: 20px;
 }
 
 .sr-only {
@@ -289,7 +289,7 @@ nav .container {
 }
 
 /* Services Section (also used by Portfolio and Blog previews on index.html) */
-.services { 
+.services {
     padding: 100px 0;
     background: var(--dark-gray);
     border-bottom: 2px solid var(--muted-gold);
@@ -302,14 +302,14 @@ nav .container {
     margin-top: 3rem;
 }
 
-.service-card { 
+.service-card {
     background: var(--black);
     padding: 2rem;
     border-radius: 10px;
     text-align: center;
     border: 2px solid var(--primary-red);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-    position: relative; 
+    position: relative;
     display: flex; /* Added for flex layout */
     flex-direction: column; /* Stack items vertically */
     justify-content: space-between; /* Pushes button to bottom */
@@ -318,14 +318,14 @@ nav .container {
 .service-card:hover {
     border-color: var(--muted-gold);
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
 }
 
 .service-icon {
-    font-size: 2.8rem; 
+    font-size: 2.8rem;
     color: var(--muted-gold);
     margin-bottom: 1rem;
-    line-height: 1; 
+    line-height: 1;
 }
 
 .service-card h3 {
@@ -360,7 +360,7 @@ nav .container {
     font-weight: 500;
     font-size: 0.9rem;
     text-decoration: none;
-    align-self: center; 
+    align-self: center;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 .service-card:hover .view-details-button {
@@ -370,7 +370,7 @@ nav .container {
 
 
 /* About Section */
-.about { 
+.about {
     padding: 100px 0;
     background: var(--black);
     border-bottom: 2px solid var(--muted-gold);
@@ -378,12 +378,12 @@ nav .container {
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
 }
 
-.about-text h2 { 
+.about-text h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: var(--muted-gold);
@@ -396,7 +396,7 @@ nav .container {
     line-height: 1.7;
 }
 
-.stats-video { 
+.stats-video {
     width: 100%;
     max-width: 650px;
     margin: 2rem auto;
@@ -423,7 +423,7 @@ nav .container {
     align-items: center;
     gap: 3rem;
     flex-wrap: wrap;
-    max-width: 1200px; 
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -431,10 +431,10 @@ nav .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px; 
+    height: 60px;
     transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0.7;
-    flex: 0 0 auto; 
+    flex: 0 0 auto;
 }
 
 .logo-item:hover {
@@ -443,12 +443,12 @@ nav .container {
 }
 
 .logo-item img {
-    max-width: 120px; 
+    max-width: 120px;
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: brightness(0.8) grayscale(0.2); 
+    filter: brightness(0.8) grayscale(0.2);
     transition: filter 0.3s ease;
 }
 
@@ -459,7 +459,7 @@ nav .container {
 /* Portfolio Section - Uses .services for padding/background */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -483,10 +483,10 @@ nav .container {
 .portfolio-image {
     position: relative;
     width: 100%;
-    height: 0; 
-    padding-bottom: 56.25%; 
+    height: 0;
+    padding-bottom: 56.25%;
     overflow: hidden;
-    background-color: var(--dark-gray); 
+    background-color: var(--dark-gray);
 }
 
 .portfolio-image img {
@@ -495,12 +495,12 @@ nav .container {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .portfolio-card:hover .portfolio-image img {
-    transform: scale(1.08); 
+    transform: scale(1.08);
 }
 
 .portfolio-overlay {
@@ -509,9 +509,9 @@ nav .container {
     left: 0;
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-    padding: 1rem; 
-    height: auto; 
-    min-height: 70px; 
+    padding: 1rem;
+    height: auto;
+    min-height: 70px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -525,38 +525,38 @@ nav .container {
 .portfolio-info {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; 
+    align-items: flex-end;
 }
 
 .portfolio-text {
     flex: 1;
-    margin-right: 0.5rem; 
+    margin-right: 0.5rem;
 }
 
 .portfolio-info h3 {
     color: var(--muted-gold);
-    font-size: 0.9rem; 
-    margin-bottom: 0.1rem; 
+    font-size: 0.9rem;
+    margin-bottom: 0.1rem;
     line-height: 1.2;
 }
 
 .portfolio-info p {
     color: #ccc;
-    font-size: 0.8rem; 
-    margin-bottom: 0.1rem; 
+    font-size: 0.8rem;
+    margin-bottom: 0.1rem;
     line-height: 1.2;
 }
 
 .view-details { /* Shared with portfolio-card, used on index and services.html for modals */
     color: var(--muted-gold);
     font-weight: bold;
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
     white-space: nowrap;
     transition: color 0.3s ease;
 }
 
 .portfolio-card:hover .view-details {
-    color: var(--gold); 
+    color: var(--gold);
 }
 
 
@@ -569,23 +569,23 @@ nav .container {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.92); 
+    background-color: rgba(0,0,0,0.92);
     animation: fadeIn 0.3s ease;
-    overflow-y: auto; 
-    padding: 20px; 
+    overflow-y: auto;
+    padding: 20px;
 }
 
 .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
     position: relative;
     background-color: var(--black);
-    margin: 3% auto; 
-    padding: 0; 
+    margin: 3% auto;
+    padding: 0;
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
     width: 90%;
     animation: slideIn 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden; 
+    overflow: hidden;
 }
 .portfolio-modal-content { max-width: 1000px; }
 .team-modal-content { max-width: 750px; }
@@ -601,11 +601,11 @@ nav .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--black); 
-    background-size: cover; 
-    background-position: center; 
-    border-top-left-radius: 8px; 
-    border-top-right-radius: 8px; 
+    background: var(--black);
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 .portfolio-modal-header { height: 400px; }
 .team-modal-header { height: 280px; background-color: var(--dark-gray); }
@@ -619,11 +619,11 @@ nav .container {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: inherit; 
+    background-image: inherit;
     background-size: cover;
     background-position: center;
-    filter: blur(12px) brightness(0.7); 
-    opacity: 1; 
+    filter: blur(12px) brightness(0.7);
+    opacity: 1;
     z-index: 1;
 }
 .team-modal-header::before { filter: blur(10px) brightness(0.6); transform: scale(1.1); }
@@ -640,11 +640,11 @@ nav .container {
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
-.team-modal-img-main { border: none; } 
+.team-modal-img-main { border: none; }
 
 
 /* Common Close Button for All Modals */
-.close-modal, .close-team-modal, .close-blog-modal, .close-job-modal, .close-service-modal { 
+.close-modal, .close-team-modal, .close-blog-modal, .close-job-modal, .close-service-modal {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -660,8 +660,8 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10; 
-    line-height: 1; 
+    z-index: 10;
+    line-height: 1;
 }
 
 .close-modal:hover, .close-team-modal:hover, .close-blog-modal:hover, .close-job-modal:hover, .close-service-modal:hover {
@@ -672,23 +672,23 @@ nav .container {
 
 /* Common Modal Body Padding */
 .portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body, .service-modal-body {
-    padding: 2.5rem; 
+    padding: 2.5rem;
 }
 .team-modal-body { text-align: center; padding: 2rem; }
 .blog-modal-body { padding: 2.5rem; } /* From blog-styles.css */
 .job-modal-body { padding: 2rem; }   /* For job modal */
-.service-modal-body { padding: 2rem 2.5rem; } /* From services.css */
+/* .service-modal-body { padding: 2rem 2.5rem; } */ /* From services.css - Handled by new service modal styles */
 
 
 .portfolio-modal h2 { /* Specific to portfolio */
     color: var(--muted-gold);
-    font-size: 2.2rem; 
+    font-size: 2.2rem;
     margin-bottom: 1.5rem;
 }
 
 .portfolio-modal .client-info {
     background: var(--dark-gray);
-    padding: 1.5rem; 
+    padding: 1.5rem;
     border-radius: 5px;
     margin-bottom: 2.5rem;
     border-left: 5px solid var(--muted-gold);
@@ -700,7 +700,7 @@ nav .container {
 }
 
 
-.portfolio-modal .metrics, .team-metrics { 
+.portfolio-modal .metrics, .team-metrics {
     display: grid;
     gap: 1.5rem;
     margin: 2.5rem 0;
@@ -709,10 +709,10 @@ nav .container {
 .team-metrics { grid-template-columns: 1fr 1fr; margin: 1.5rem auto; max-width: 500px; }
 
 
-.metric-card { 
+.metric-card {
     background: var(--dark-gray);
     padding: 1.5rem;
-    border-radius: 8px; 
+    border-radius: 8px;
     text-align: center;
     border: 1px solid var(--primary-red);
     transition: border-color 0.3s ease, transform 0.3s ease;
@@ -724,8 +724,8 @@ nav .container {
 .team-metrics .metric-card { padding: 0.75rem; min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; background-color: rgba(26, 26, 26, 0.7); border-color: var(--dark-gold); }
 
 
-.metric-number { 
-    font-size: 2.2rem; 
+.metric-number {
+    font-size: 2.2rem;
     font-weight: bold;
     color: var(--muted-gold);
     display: block;
@@ -733,11 +733,86 @@ nav .container {
 }
 .team-metrics .metric-card .metric-number { font-size: 1.6rem; margin-bottom: 0.1rem; color: var(--gold); }
 
-.metric-label { 
+.metric-label {
     color: #ccc;
     font-size: 0.9rem;
 }
 .team-metrics .metric-card .metric-label { font-size: 0.85rem; line-height: 1.2; color: #bbb; }
+
+
+/* === Updated/New Styles for Service Modals === */
+
+/* Service Modal Header Styling */
+.service-detail-modal .service-modal-header {
+    background-color: var(--dark-gray); /* Matches a darker theme, adjust if needed */
+    color: var(--white);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: row; /* Ensures icon and title are side-by-side */
+    align-items: center; /* Vertically aligns icon and title */
+    justify-content: center; /* Horizontally centers icon and title group */
+    gap: 1rem; /* Space between icon and title */
+    text-align: center; /* Fallback for text centering */
+    border-top-left-radius: 8px; /* Keep existing modal corner rounding */
+    border-top-right-radius: 8px; /* Keep existing modal corner rounding */
+}
+
+.service-detail-modal .service-modal-header i { /* Icon in the modal header */
+    font-size: 2.5rem; /* Prominent icon size, matches card */
+    color: var(--muted-gold); /* Gold color for the icon, matches card */
+    line-height: 1;
+}
+
+.service-detail-modal .service-modal-header h2 { /* Title in the modal header */
+    font-size: 1.8rem; /* Adjust size as needed, H2 equivalent */
+    font-weight: bold; /* Bold as requested */
+    margin: 0; /* Reset default margins */
+    color: var(--white); /* Title color */
+}
+
+/* "Key Offerings:" Heading Styling */
+.service-detail-modal .service-modal-body h4 { /* Targeting the 'Key Offerings:' h4 */
+    font-size: 1.4rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 1.5rem; /* Space above */
+    margin-bottom: 0.75rem; /* Space before the line */
+    padding-bottom: 0.75rem; /* Space after text, before line */
+    border-bottom: 1px solid var(--dark-gray); /* Visual line break */
+    text-align: left; /* Ensure heading text is left-aligned as per typical article/list format */
+}
+
+/* Bullet Points Styling in Service Modal Body */
+.service-detail-modal .service-modal-body ul {
+    list-style: disc; /* Standard disc bullets */
+    padding-left: 25px; /* Indentation for bullets */
+    margin-top: 1.5rem; /* Increased space above the list, after "Key Offerings" line */
+    margin-bottom: 2rem; /* Space after the list */
+    text-align: left; /* Bullets should be left-aligned */
+}
+
+.service-detail-modal .service-modal-body ul li {
+    margin-bottom: 0.85rem; /* Space between list items */
+    line-height: 1.7; /* Improved readability */
+    color: #ccc; /* Text color for list items */
+}
+
+/* Wrapper for Centering the CTA Button in Service Modals */
+.service-modal-cta-wrapper {
+    text-align: center; /* Center the button */
+    margin-top: 2rem; /* Padding/space above the button */
+    margin-bottom: 1rem; /* Padding/space below the button */
+}
+
+/* Ensure overall padding for the service modal body */
+.service-detail-modal .service-modal-body {
+    padding: 2rem 2.5rem; /* Adjust overall padding as desired */
+}
+
+/* Optional: Add some padding at the very bottom of the modal content area if needed */
+.service-detail-modal .service-modal-content {
+    padding-bottom: 1rem; /* e.g. if content feels too close to modal bottom edge */
+}
 
 
 /* Gallery Section - uses .about for padding/background */
@@ -754,15 +829,15 @@ nav .container {
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    height: 250px; 
-    background: var(--dark-gray); 
-    border: 2px solid transparent; 
+    height: 250px;
+    background: var(--dark-gray);
+    border: 2px solid transparent;
 }
 
 .gallery-item:hover {
-    transform: translateY(-5px) scale(1.02); 
+    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-    border-color: var(--muted-gold); 
+    border-color: var(--muted-gold);
 }
 
 .gallery-item img,
@@ -785,7 +860,7 @@ nav .container {
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
     padding: 1.5rem 1rem 1rem;
-    height: auto; 
+    height: auto;
     min-height: 70px;
     display: flex;
     align-items: flex-end;
@@ -810,10 +885,10 @@ nav .container {
 
 .gallery-modal-content {
     position: relative;
-    margin: 2% auto; 
+    margin: 2% auto;
     max-width: 90%;
-    width: 90%; 
-    max-height: 90vh; 
+    width: 90%;
+    max-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -825,9 +900,9 @@ nav .container {
 }
 
 .gallery-modal-content.iframe-modal-content {
-    height: 85vh; 
-    width: 85vw;  
-    max-width: 1200px; 
+    height: 85vh;
+    width: 85vw;
+    max-width: 1200px;
     background-color: var(--black); /* Restore bg for iframe modal if needed */
 }
 
@@ -835,7 +910,7 @@ nav .container {
 .gallery-modal-content img,
 .gallery-modal-content video {
     max-width: 100%;
-    max-height: 80vh; 
+    max-height: 80vh;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -845,13 +920,13 @@ nav .container {
 
 .gallery-iframe {
     width: 100%;
-    height: 100%; 
+    height: 100%;
     border: none;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 
 
-.close-gallery-modal { 
+.close-gallery-modal {
     /* Common styles already defined */
 }
 
@@ -864,76 +939,76 @@ nav .container {
 
 /* Contact Section */
 .contact {
-    padding: 80px 0; 
+    padding: 80px 0;
     background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
 }
 
-.contact-content-wrapper { 
+.contact-content-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem; 
-    max-width: 850px; 
-    margin: 0 auto; 
+    gap: 2.5rem;
+    max-width: 850px;
+    margin: 0 auto;
 }
 
 .contact-info {
-    text-align: center; 
+    text-align: center;
 }
 
-.contact-icon-wrapper { 
-    text-align: center; 
-    margin-bottom: 1.5rem; 
+.contact-icon-wrapper {
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .contact-icon-wrapper .fas.fa-crown,
-.contact-icon-wrapper .fas.fa-envelope { 
-    font-size: 3rem; 
+.contact-icon-wrapper .fas.fa-envelope {
+    font-size: 3rem;
     color: var(--muted-gold);
 }
 
 .contact-info h2 {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.5rem;
     color: var(--muted-gold);
 }
 
 .contact-info p {
     font-size: 1.1rem;
-    margin-bottom: 1rem; 
+    margin-bottom: 1rem;
     line-height: 1.7;
-    color: var(--white); 
-    max-width: 100%; 
+    color: var(--white);
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.contact-form { 
-    background: rgba(0, 0, 0, 0.35); 
-    padding: 2.5rem; 
+.contact-form {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 2.5rem;
     border-radius: 10px;
     border: 1px solid var(--muted-gold);
-    width: 100%; 
+    width: 100%;
 }
-.newsletter-signup-form .form-group { 
+.newsletter-signup-form .form-group {
     margin-bottom: 0;
 }
 
 
 .contact-form .form-columns {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 2rem; 
-    margin-bottom: 1.5rem; 
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .contact-form .form-column-left,
 .contact-form .form-column-right {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; 
+    gap: 1.5rem;
 }
-.contact-form .form-group { 
-    margin-bottom: 0; 
+.contact-form .form-group {
+    margin-bottom: 0;
 }
 
 
@@ -946,7 +1021,7 @@ nav .container {
 
 .form-group input,
 .form-group textarea,
-.form-group select { 
+.form-group select {
     width: 100%;
     padding: 12px;
     border: 2px solid var(--dark-gray);
@@ -962,27 +1037,27 @@ nav .container {
 .form-group select:focus {
     outline: none;
     border-color: var(--muted-gold);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3); 
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
 
 .form-group textarea {
-    height: 165px; 
+    height: 165px;
     resize: vertical;
 }
-.job-application-form .form-group textarea { 
+.job-application-form .form-group textarea {
     height: 100px;
 }
 
 
 .form-group select {
-    appearance: none; 
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23C9B037%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px auto;
-    padding-right: 30px; 
+    padding-right: 30px;
 }
 
 
@@ -996,8 +1071,8 @@ nav .container {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%; 
-    margin-top: 1rem; 
+    width: 100%;
+    margin-top: 1rem;
 }
 
 .submit-btn:hover {
@@ -1032,57 +1107,57 @@ nav .container {
 .site-footer {
     background-color: var(--black);
     color: #ccc;
-    padding: 60px 0 30px; 
+    padding: 60px 0 30px;
     border-top: 3px solid var(--muted-gold);
     font-size: 0.95rem;
 }
 
 .site-footer .footer-main {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 30px; 
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
     margin-bottom: 40px;
-    align-items: start; 
+    align-items: start;
 }
 
 .site-footer .footer-column {
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-start; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .site-footer .footer-column h4 {
     color: var(--muted-gold);
-    font-size: 1.25rem; 
-    margin-bottom: 25px; 
+    font-size: 1.25rem;
+    margin-bottom: 25px;
     font-weight: 600;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .site-footer .footer-logo {
-    max-height: 50px; 
+    max-height: 50px;
     margin-bottom: 25px;
-    align-self: flex-start; 
+    align-self: flex-start;
 }
 
 .site-footer .footer-about {
-     justify-content: flex-start; 
+     justify-content: flex-start;
 }
 
 .site-footer .footer-about p {
     margin-bottom: 25px;
     line-height: 1.7;
-    color: #b3b3b3; 
+    color: #b3b3b3;
 }
 
 .site-footer .footer-social-icons {
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .site-footer .footer-social-icons a {
     color: #ccc;
-    font-size: 1.6rem; 
+    font-size: 1.6rem;
     margin-right: 18px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -1096,25 +1171,25 @@ nav .container {
 }
 
 .site-footer .footer-links-columns {
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 10px; 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .site-footer .footer-links-columns ul {
-    list-style: none !important; 
+    list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
 }
 
-.site-footer .footer-links-wrapper li { 
-    margin-bottom: 12px; 
-    list-style-type: none !important; 
+.site-footer .footer-links-wrapper li {
+    margin-bottom: 12px;
+    list-style-type: none !important;
 }
 
 .site-footer .footer-links-wrapper a {
     color: #ccc;
-    text-decoration: none !important; 
+    text-decoration: none !important;
     transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
@@ -1138,12 +1213,12 @@ nav .container {
 
 .site-footer .newsletter-form {
     display: flex;
-    margin-top: 15px; 
+    margin-top: 15px;
 }
 
 .site-footer .newsletter-form input[type="email"] {
     flex-grow: 1;
-    padding: 12px; 
+    padding: 12px;
     border: 1px solid var(--dark-gray);
     border-radius: 4px 0 0 4px;
     background-color: var(--dark-gray);
@@ -1160,7 +1235,7 @@ nav .container {
 }
 
 .site-footer .newsletter-form button {
-    padding: 12px 18px; 
+    padding: 12px 18px;
     background-color: var(--muted-gold);
     color: var(--black);
     border: none;
@@ -1178,13 +1253,13 @@ nav .container {
 
 .site-footer .footer-bottom {
     text-align: center;
-    padding-top: 30px; 
-    margin-top: 40px; 
+    padding-top: 30px;
+    margin-top: 40px;
     border-top: 1px solid var(--dark-gray);
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
-    gap: 15px; 
+    gap: 15px;
 }
 
 .site-footer .footer-bottom p {
@@ -1194,20 +1269,20 @@ nav .container {
 }
 
 .site-footer .footer-legal-links {
-    display: flex; 
-    gap: 25px; 
+    display: flex;
+    gap: 25px;
     padding: 0;
     margin: 0;
 }
-.site-footer .footer-legal-links a { 
+.site-footer .footer-legal-links a {
     color: #aaa;
-    text-decoration: none !important; 
+    text-decoration: none !important;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 .site-footer .footer-legal-links a:hover {
     color: var(--muted-gold);
-    text-decoration: underline !important; 
+    text-decoration: underline !important;
 }
 
 
@@ -1217,15 +1292,15 @@ nav .container {
     to { opacity: 1; }
 }
 
-@keyframes slideIn { 
-    from { transform: translateY(-30px); opacity: 0; } 
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
 /* CSS for scroll-triggered animations */
-.portfolio-card, .service-card, .about-text > *, .client-logos, 
-.gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, 
-.team-member-card, .award-item, .job-posting, .mission-content, .blog-card /* Added .blog-card here */ { 
+.portfolio-card, .service-card, .about-text > *, .client-logos,
+.gallery-item, #blog .service-card, .contact-info > *, .contact-form > *,
+.team-member-card, .award-item, .job-posting, .mission-content, .blog-card /* Added .blog-card here */ {
     opacity: 0; /* Start hidden */
     transform: translateY(20px); /* Start slightly lower */
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -1239,22 +1314,22 @@ nav .container {
 /* Slideshow container for Gallery Modals */
 .slideshow-container {
   position: relative;
-  max-width: 100%; 
+  max-width: 100%;
   margin: auto;
 }
 
 .gallery-slide {
-  display: none; 
-  text-align: center; 
+  display: none;
+  text-align: center;
 }
 
 .gallery-slide img {
   max-width: 100%;
-  max-height: 75vh; 
+  max-height: 75vh;
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .prev-slide, .next-slide {
@@ -1263,15 +1338,15 @@ nav .container {
   top: 50%;
   width: auto;
   padding: 16px;
-  margin-top: -22px; 
+  margin-top: -22px;
   color: white;
   font-weight: bold;
   font-size: 20px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
-  background-color: rgba(0,0,0,0.5); 
-  z-index: 15; 
+  background-color: rgba(0,0,0,0.5);
+  z-index: 15;
 }
 
 .next-slide {
@@ -1280,7 +1355,7 @@ nav .container {
 }
 
 .prev-slide:hover, .next-slide:hover {
-  background-color: rgba(212, 175, 55, 0.8); 
+  background-color: rgba(212, 175, 55, 0.8);
   color: var(--black);
 }
 
@@ -1294,56 +1369,56 @@ nav .container {
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  background-color: #717171; 
+  background-color: #717171;
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
 }
 
-.dot.active, .dot:hover { 
-  background-color: var(--muted-gold); 
+.dot.active, .dot:hover {
+  background-color: var(--muted-gold);
 }
 
 .fade { /* General fade animation for slides */
   animation-name: fadeAnimate;
-  animation-duration: 0.5s; 
+  animation-duration: 0.5s;
 }
 
 @keyframes fadeAnimate {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 
 
 /* Our Team Page Specific Styles */
-.page-header#team-header { 
+.page-header#team-header {
     /* specific background set with higher specificity */
 }
 
 .mission-statement-header {
-    margin-top: 2rem; 
+    margin-top: 2rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.mission-statement-header h2 { 
-    font-size: 1.8rem !important; 
+.mission-statement-header h2 {
+    font-size: 1.8rem !important;
     margin-bottom: 1rem !important;
     color: var(--gold) !important;
 }
 
 .mission-statement-header p {
-    font-size: 1.1rem; 
+    font-size: 1.1rem;
     line-height: 1.7;
-    color: #e0e0e0; 
-    margin-bottom: 0; 
+    color: #e0e0e0;
+    margin-bottom: 0;
 }
 
 
 .team-section {
     padding: 80px 0;
-    background-color: var(--dark-gray); 
+    background-color: var(--dark-gray);
 }
 
 .team-grid {
@@ -1364,7 +1439,7 @@ nav .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 .team-member-card:hover {
@@ -1376,7 +1451,7 @@ nav .container {
 .team-member-image {
     width: 150px;
     height: 150px;
-    border-radius: 15px; 
+    border-radius: 15px;
     overflow: hidden;
     margin-bottom: 1.5rem;
     border: 4px solid var(--muted-gold);
@@ -1407,20 +1482,20 @@ nav .container {
     color: #ccc;
     line-height: 1.6;
     margin-bottom: 1rem;
-    min-height: 60px; 
+    min-height: 60px;
 }
 
 .team-modal-body h2 { /* Team modal specific title */
     font-size: 2.2rem;
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
-    margin-top: 0; 
+    margin-top: 0;
 }
 
 .team-modal-title { /* Team modal specific subtitle */
     font-size: 1.2rem;
     color: var(--white);
-    margin-bottom: 1rem; 
+    margin-bottom: 1rem;
     font-weight: 500;
 }
 
@@ -1428,8 +1503,8 @@ nav .container {
     font-size: 1rem;
     color: #ccc;
     line-height: 1.7;
-    text-align: left; 
-    margin-bottom: 1.5rem; 
+    text-align: left;
+    margin-bottom: 1.5rem;
 }
 .team-modal-bio p {
     margin-bottom: 1em;
@@ -1510,7 +1585,7 @@ nav .container {
     border-radius: 8px;
     border: 1px solid var(--muted-gold);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 .job-posting:hover {
@@ -1539,11 +1614,11 @@ nav .container {
 }
 
 .job-posting-footer {
-    text-align: right; 
+    text-align: right;
     margin-top: 1rem;
 }
 
-.see-more-button { 
+.see-more-button {
     padding: 10px 25px;
     font-size: 1rem;
 }
@@ -1592,14 +1667,14 @@ nav .container {
     margin: 2rem 0;
 }
 
-.job-application-form h3 { 
+.job-application-form h3 {
     font-size: 1.5rem;
     color: var(--muted-gold);
     text-align: center;
     margin-bottom: 1.5rem;
 }
 .job-application-form .form-group {
-    margin-bottom: 1.2rem; 
+    margin-bottom: 1.2rem;
 }
 
 .char-counter {
@@ -1613,8 +1688,8 @@ nav .container {
 /* Responsive Design */
 @media (max-width: 992px) { /* Tablet breakpoint */
     .about-content,
-    .contact-content-wrapper .form-columns { 
-        grid-template-columns: 1fr; 
+    .contact-content-wrapper .form-columns {
+        grid-template-columns: 1fr;
         gap: 2rem; /* Added some gap for single column */
     }
     .contact-form .form-columns { /* Keep some gap if form-columns is still used */
@@ -1622,78 +1697,78 @@ nav .container {
     }
 
     .contact-content-wrapper .form-column-right .form-group textarea {
-        height: 120px; 
+        height: 120px;
     }
     .portfolio-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
     .site-footer .footer-main {
-        grid-template-columns: 1fr 1fr; 
-        align-items: start; 
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
     }
     .site-footer .footer-about,
     .site-footer .footer-links-wrapper,
     .site-footer .footer-contact,
     .site-footer .footer-newsletter {
-        grid-column: span 1; 
-        text-align: left; 
+        grid-column: span 1;
+        text-align: left;
     }
-    .site-footer .footer-about { 
-         grid-column: span 2; 
-         text-align: center; 
+    .site-footer .footer-about {
+         grid-column: span 2;
+         text-align: center;
     }
      .site-footer .footer-social-icons {
         justify-content: center;
     }
     .site-footer .footer-links-columns {
-        justify-content: flex-start; 
+        justify-content: flex-start;
         grid-template-columns: 1fr; /* Stack footer link columns */
     }
     .site-footer .newsletter-form {
-        max-width: none; 
+        max-width: none;
         margin-left: 0;
         margin-right: 0;
     }
     .team-metrics {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) { /* Mobile breakpoint */
     .nav-links {
-        display: none; 
+        display: none;
         flex-direction: column;
         position: absolute;
-        top: 70px; 
+        top: 70px;
         left: 0;
         right: 0;
-        background: rgba(0,0,0,0.98); 
+        background: rgba(0,0,0,0.98);
         padding: 1rem;
         gap: 1rem;
         border-bottom: 1px solid var(--muted-gold);
-        z-index: 998; 
+        z-index: 998;
     }
 
-    .nav-links.nav-links--active { 
+    .nav-links.nav-links--active {
         display: flex;
     }
 
 
-    .nav-right .social-icons { 
+    .nav-right .social-icons {
         display: none;
     }
 
 
     .mobile-menu {
-        display: flex; 
-        z-index: 1001; 
+        display: flex;
+        z-index: 1001;
     }
 
     .logo img {
         height: 35px;
     }
 
-    .hero h1, .page-header .hero-content h1 { 
+    .hero h1, .page-header .hero-content h1 {
         font-size: 2.5rem;
     }
 
@@ -1710,27 +1785,27 @@ nav .container {
     }
 
     .services-grid,
-    .portfolio-grid, 
+    .portfolio-grid,
     .gallery-grid,
-    .site-footer .footer-main { 
-        grid-template-columns: 1fr; 
+    .site-footer .footer-main {
+        grid-template-columns: 1fr;
     }
     .site-footer .footer-about,
     .site-footer .footer-links-wrapper,
     .site-footer .footer-contact,
-    .site-footer .footer-newsletter { 
+    .site-footer .footer-newsletter {
         grid-column: auto;
-        text-align: left; 
+        text-align: left;
     }
      .site-footer .footer-social-icons {
-        justify-content: flex-start; 
+        justify-content: flex-start;
     }
 
      .site-footer .newsletter-form {
-        max-width: none; 
+        max-width: none;
     }
-    
-    .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content { 
+
+    .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
         width: 95%;
         margin: 5% auto;
     }
@@ -1738,10 +1813,17 @@ nav .container {
     .portfolio-modal-header { height: 250px; }
     .team-modal-header { height: 200px; }
     .blog-modal-header { height: 220px; }
-    
-    .portfolio-modal h2, .team-modal-body h2, .blog-modal h1, .job-modal-body h2, .service-modal-header h2 {
-        font-size: 1.5rem; /* Consolidated modal titles */
+    .service-detail-modal .service-modal-header { padding: 1rem 1.5rem; } /* Adjusted padding for mobile */
+    .service-detail-modal .service-modal-header i { font-size: 2rem; } /* Slightly smaller icon on mobile */
+    .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; } /* Smaller title on mobile */
+
+
+    .portfolio-modal h2, .team-modal-body h2, .blog-modal h1, .job-modal-body h2, .service-modal-header h2 { /* Consolidated modal titles */
+        font-size: 1.5rem; /* General modal title size for mobile */
     }
+     .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; } /* Smaller "Key Offerings" on mobile */
+
+
     .portfolio-modal-body .client-info { font-size: 0.9rem; padding: 1rem; }
 
 
@@ -1755,16 +1837,16 @@ nav .container {
     .contact-form {
         padding: 1.5rem;
     }
-     .contact-form .form-columns { 
+     .contact-form .form-columns {
         grid-template-columns: 1fr;
-        gap: 0; 
+        gap: 0;
     }
     .contact-form .form-column-left .form-group,
     .contact-form .form-column-right .form-group {
-        margin-bottom: 1.5rem; 
+        margin-bottom: 1.5rem;
     }
      .contact-form .form-column-right .form-group:last-child {
-        margin-bottom: 0; 
+        margin-bottom: 0;
     }
 
 
@@ -1790,10 +1872,10 @@ nav .container {
     }
 
     /* Our Team Page Responsive Adjustments */
-    .page-header#team-header { 
-        min-height: 60vh; 
+    .page-header#team-header {
+        min-height: 60vh;
     }
-    .mission-statement-header p { 
+    .mission-statement-header p {
         font-size: 1rem;
         line-height: 1.6;
     }
@@ -1803,7 +1885,7 @@ nav .container {
     .team-member-image {
         width: 120px;
         height: 120px;
-        border-radius: 10px; 
+        border-radius: 10px;
     }
 
     .team-modal-body { padding: 1.5rem; }
@@ -1827,9 +1909,9 @@ nav .container {
     z-index: 2500 !important; /* Service modals below gallery */
 }
 
-.portfolio-modal, 
-.team-modal, 
-.blog-modal, 
+.portfolio-modal,
+.team-modal,
+.blog-modal,
 .job-modal {
     z-index: 2000 !important; /* Other modals below service modals */
 }
