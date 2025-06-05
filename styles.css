@@ -553,6 +553,8 @@ nav .container {
 /* === Common Modal Styles (Overlay) === */
 .portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal {
     display: none; /* Default: hidden */
+    opacity: 0; /* Default: transparent */
+    visibility: hidden; /* Default: not visible and not interactive */
     position: fixed;
     z-index: 2000;
     left: 0;
@@ -560,14 +562,23 @@ nav .container {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.92);
-    animation: fadeIn 0.3s ease;
-    overflow-y: auto; /* In case content box is taller than viewport, though content box should scroll */
-    padding: 20px; /* Gutters */
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Transition opacity, delay visibility change */
+    overflow-y: auto;
+    padding: 20px;
     box-sizing: border-box;
-    /* Flexbox for centering the modal-content, applied when display is set to flex by JS */
-    align-items: center;
-    justify-content: center;
+    /* Centering is handled when .modal--is-open is applied */
 }
+
+/* Class to show modals, added by JavaScript */
+.modal--is-open {
+    display: flex !important; /* Use flex for centering */
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: opacity 0.3s ease, visibility 0s linear 0s; /* Immediate visibility on open */
+}
+
 
 /* === Common Modal Content Box Styles === */
 .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
@@ -576,11 +587,11 @@ nav .container {
     padding: 0;
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
-    width: 100%; /* Takes full width of parent's padded area */
-    max-height: 100%; /* Takes full height of parent's padded area */
-    animation: slideIn 0.3s ease;
+    width: 100%;
+    max-height: 100%;
+    animation: slideIn 0.3s ease; /* Keep existing slide-in animation */
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow-y: auto; /* This makes the content box scrollable */
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
@@ -594,7 +605,7 @@ nav .container {
 
 /* Common Modal Header Styles (Portfolio, Team, Blog - for modals with cover images) */
 .portfolio-modal-header, .team-modal-header, .blog-modal-header {
-    position: relative;
+    position: relative; /* For pseudo-elements and close button positioning */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -646,7 +657,7 @@ nav .container {
 .close-modal, .close-team-modal, .close-blog-modal, .close-job-modal, .close-service-modal {
     position: absolute;
     top: 15px;
-    right: 20px; /* Positioned relative to .modal-content */
+    right: 20px; /* Relative to .modal-content or a specifically positioned header */
     color: var(--white);
     font-size: 2rem;
     font-weight: bold;
@@ -659,7 +670,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 2510 !important; /* High z-index, ensure it's above other modal elements */
+    z-index: 2510 !important; /* Ensure it's above other modal elements */
     line-height: 1;
 }
 
@@ -671,7 +682,8 @@ nav .container {
 
 /* Common Modal Body Base Styles */
 .portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body, .service-modal-body {
-    flex-grow: 1;
+    flex-grow: 1; /* Allows body to expand */
+    /* overflow-y: auto; */ /* Scroll is handled by .modal-content now */
 }
 
 .portfolio-modal-body { padding: 2.5rem; }
@@ -743,19 +755,31 @@ nav .container {
 .service-detail-modal .service-modal-header {
     background-color: var(--dark-gray);
     color: var(--white);
-    padding: 1.5rem 2rem 1.5rem 2rem; /* Base padding */
-    padding-right: 70px; /* Increased padding on the right for close button (40px width + 20px offset + 10px buffer) */
+    padding: 1.5rem 2rem; /* Base padding */
+    /* padding-right: 70px; /* Ensure space for close button if it's positioned inside this header */
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center; /* This centers the icon and h2 group */
+    justify-content: center; /* Centers the (icon + title) group */
     gap: 1rem;
-    text-align: center;
+    text-align: center; /* Fallback for title text */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-shrink: 0;
-    position: relative; /* Added for potential internal absolute positioning if needed by title, though close button is sibling to header */
+    position: relative; /* For the .close-service-modal if it were inside */
+                          /* The close button is currently a sibling of the header in the .service-modal-content */
 }
+
+.service-detail-modal .service-modal-header .header-content-wrapper { /* New wrapper for icon and title */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    /* This wrapper will be centered by the parent's justify-content: center */
+    /* Add padding here if title is very long and might overlap the close button area */
+    padding-right: 50px; /* Space for the absolutely positioned close button */
+}
+
 
 .service-detail-modal .service-modal-header i {
     font-size: 2.5rem;
@@ -768,7 +792,7 @@ nav .container {
     font-weight: bold;
     margin: 0;
     color: var(--white);
-    /* The title will be centered by the parent flex container (.service-modal-header) */
+    /* text-align: center; /* Already centered by parent flex */
 }
 
 .service-detail-modal .service-modal-body {
@@ -1098,7 +1122,7 @@ nav .container {
 .site-footer .newsletter-form input[type="email"]:focus {
     outline: none;
     border-color: var(--muted-gold);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
 
 .site-footer .newsletter-form button {
@@ -1619,7 +1643,12 @@ nav .container {
     .team-modal-header { height: 200px; }
     .blog-modal-header { height: 220px; } /* Assuming blog.html uses this */
 
-    .service-detail-modal .service-modal-header { padding: 1rem 60px 1rem 1.5rem; } /* Adjusted right padding for mobile close button */
+    .service-detail-modal .service-modal-header {
+        padding: 1rem 1.5rem; /* Adjusted base padding for mobile */
+    }
+    .service-detail-modal .service-modal-header .header-content-wrapper {
+        padding-right: 45px; /* Adjust right padding for close button on mobile */
+    }
     .service-detail-modal .service-modal-header i { font-size: 2rem; }
     .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; }
     .job-modal .job-modal-body h2 { font-size: 1.5rem; } /* Job modal main title responsive */
@@ -1695,14 +1724,26 @@ nav .container {
 
 /* MODAL Z-INDEX HIERARCHY & DISPLAY FIXES */
 
-.service-detail-modal {
-    z-index: 2500 !important;
+.service-detail-modal.modal--is-open, /* Ensure higher z-index when open */
+.portfolio-modal.modal--is-open,
+.team-modal.modal--is-open,
+.blog-modal.modal--is-open,
+.job-modal.modal--is-open {
+    /* display: flex !important;  Already handled by .modal--is-open */
+    /* align-items: center !important; */
+    /* justify-content: center !important; */
+    /* opacity: 1 !important; */
+    /* visibility: visible !important; */
+}
+
+.service-detail-modal { /* Base z-index, open state will be higher */
+    z-index: 2500;
 }
 .portfolio-modal,
 .team-modal,
 .blog-modal,
 .job-modal {
-    z-index: 2000 !important;
+    z-index: 2000;
 }
 
 .close-service-modal,
@@ -1711,40 +1752,4 @@ nav .container {
 .close-blog-modal,
 .close-job-modal {
     z-index: 2510 !important; /* Ensures close button is above its modal's content */
-}
-
-/* This rule applies 'display: flex' and other properties ONLY when JS adds an inline style containing "display" */
-/* For example, when modal.style.display = 'flex' or modal.style.display = 'block' is set by JavaScript */
-.portfolio-modal[style*="display:"],
-.team-modal[style*="display:"],
-.blog-modal[style*="display:"],
-.job-modal[style*="display:"],
-.service-detail-modal[style*="display:"] {
-    /* This will apply IF the element has an inline style attribute that includes "display:" */
-    /* If JS sets display:flex, this is fine. If JS sets display:block, this will override to flex */
-    /* It will NOT apply if there is no inline style or if the inline style doesn't include "display" */
-}
-
-/* If JS is setting modal.style.display = 'block' to show, then this specific rule will override it to flex */
-.portfolio-modal[style*="display: block"],
-.team-modal[style*="display: block"],
-.blog-modal[style*="display: block"],
-.job-modal[style*="display: block"],
-.service-detail-modal[style*="display: block"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    opacity: 1 !important; /* Ensure full opacity when shown */
-    visibility: visible !important; /* Ensure visibility when shown */
-}
-
-/* Ensure that when JS sets display: none, it STAYS none and is not overridden by the above flex rule */
-.portfolio-modal[style="display: none;"],
-.team-modal[style="display: none;"],
-.blog-modal[style="display: none;"],
-.job-modal[style="display: none;"],
-.service-detail-modal[style="display: none;"] {
-    display: none !important; /* Crucial to keep it hidden when JS explicitly hides it */
-    opacity: 0 !important;
-    visibility: hidden !important;
 }
