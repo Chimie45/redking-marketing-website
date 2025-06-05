@@ -177,7 +177,7 @@ nav .container {
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/home/header.jpg');
+        url('images/home/header.jpg'); /* Ensure this image path is correct */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -198,13 +198,13 @@ nav .container {
 #team-header.page-header.hero {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/team/teamheader.jpg');
+        url('images/team/teamheader.jpg'); /* Ensure this image path is correct */
     min-height: 100vh; /* team page has a taller header */
 }
 #blog-header.page-header.hero {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
-        url('images/blog/blogheader.jpg');
+        url('images/blog/blogheader.jpg'); /* Ensure this image path is correct */
      min-height: 70vh;
 }
 
@@ -240,7 +240,7 @@ nav .container {
     color: var(--muted-gold);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
-.hero .hero-content h1 {
+.hero .hero-content h1 { /* For index.html sr-only, if it became visible */
     font-size: 3.5rem;
     color: var(--white);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -253,12 +253,12 @@ nav .container {
     color: var(--white);
     font-weight: 300;
 }
-.hero .hero-content .subtitle {
+.hero .hero-content .subtitle { /* For index.html main subtitle */
      color: var(--muted-gold);
 }
 
 
-.hero p {
+.hero p { /* For index.html hero text */
     font-size: 1.2rem;
     margin-bottom: 2rem;
     max-width: 600px;
@@ -287,7 +287,7 @@ nav .container {
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
-/* Services Section */
+/* Services Section (also used by Portfolio section styling) */
 .services {
     padding: 100px 0;
     background: var(--dark-gray);
@@ -320,7 +320,7 @@ nav .container {
     transform: translateY(-5px);
 }
 
-.service-icon {
+.service-icon { /* Used in Service Cards */
     font-size: 2.8rem;
     color: var(--muted-gold);
     margin-bottom: 1rem;
@@ -332,15 +332,7 @@ nav .container {
     margin-bottom: 1rem;
     color: var(--white);
 }
-.service-card h3 a.blog-preview-link {
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-.service-card h3 a.blog-preview-link:hover {
-    color: var(--muted-gold);
-}
-
+/* .service-card h3 a.blog-preview-link was removed as #blog previews are gone from index */
 
 .service-card p {
     color: #ccc;
@@ -348,7 +340,7 @@ nav .container {
     flex-grow: 1;
     margin-bottom: 1rem;
 }
-.service-card .view-details-button {
+.service-card .view-details-button { /* Shared with services.html cards */
     display: inline-block;
     margin-top: auto;
     padding: 0.5rem 1rem;
@@ -455,7 +447,7 @@ nav .container {
     filter: brightness(1) grayscale(0);
 }
 
-/* Portfolio Section */
+/* Portfolio Section - Uses .services class for padding/background consistency */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -483,9 +475,9 @@ nav .container {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     overflow: hidden;
-    background-color: var(--dark-gray);
+    background-color: var(--dark-gray); /* Placeholder color */
 }
 
 .portfolio-image img {
@@ -546,7 +538,7 @@ nav .container {
     line-height: 1.2;
 }
 
-.view-details {
+.view-details { /* Used on portfolio cards */
     color: var(--muted-gold);
     font-weight: bold;
     font-size: 0.8rem;
@@ -558,21 +550,21 @@ nav .container {
     color: var(--gold);
 }
 
+
 /* === Common Modal Styles (Overlay) === */
 .portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal {
     display: none; /* Initially hidden */
     position: fixed;
-    z-index: 2000; /* Base z-index, specific modals can override */
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.92);
     animation: fadeIn 0.3s ease;
-    overflow-y: auto; /* Allows the overlay to scroll if content is very tall and fixed */
-    padding: 20px; /* Gutter space around the content box */
+    overflow-y: auto;
+    padding: 20px;
     box-sizing: border-box;
-    /* Flexbox for centering the modal content box */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -580,47 +572,44 @@ nav .container {
 
 /* === Common Modal Content Box Styles === */
 .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
-    position: relative; /* For absolute positioning of close button, etc. */
+    position: relative;
     background-color: var(--black);
-    /* margin: 3% auto; /* Removed, flex handles centering */
-    padding: 0; /* Padding will be inside .modal-body or specific content parts */
+    padding: 0;
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
-    width: 100%; /* Takes full width of parent's padded area, up to max-width */
-    /* max-width will be set by specific modal types below */
-    max-height: 100%; /* Takes full height of parent's padded area */
+    width: 100%;
+    max-height: 100%;
     animation: slideIn 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow-y: auto; /* Allows the content box itself to scroll if its internal content is too tall */
-    display: flex; /* To structure header, body, footer */
+    overflow-y: auto;
+    display: flex;
     flex-direction: column;
 }
 
 .portfolio-modal-content { max-width: 1000px; }
 .team-modal-content { max-width: 750px; }
-.blog-modal-content { max-width: 900px; }
+.blog-modal-content { max-width: 900px; } /* Assuming blog.html uses this */
 .job-modal-content { max-width: 800px; }
 .service-modal-content { max-width: 850px; }
 
 
-/* Common Modal Header Styles (Portfolio, Team, Blog - has image) */
-/* Note: Service modal header is styled separately below */
+/* Common Modal Header Styles (Portfolio, Team, Blog - for modals with cover images) */
 .portfolio-modal-header, .team-modal-header, .blog-modal-header {
     position: relative;
-    overflow: hidden; /* For ::before pseudo-element blur effect */
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--black); /* Fallback/base */
+    background-color: var(--black);
     background-size: cover;
     background-position: center;
-    border-top-left-radius: 8px; /* Matches content box rounding */
+    border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    flex-shrink: 0; /* Prevent header from shrinking */
+    flex-shrink: 0;
 }
 .portfolio-modal-header { height: 400px; }
 .team-modal-header { height: 280px; background-color: var(--dark-gray); }
-.blog-modal-header { height: 300px; }
+.blog-modal-header { height: 300px; } /* Assuming blog.html uses this */
 
 
 .portfolio-modal-header::before, .team-modal-header::before, .blog-modal-header::before {
@@ -630,12 +619,12 @@ nav .container {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: inherit; /* Inherits background image from parent for blur */
+    background-image: inherit;
     background-size: cover;
     background-position: center;
     filter: blur(12px) brightness(0.7);
     opacity: 1;
-    z-index: 1; /* Behind the actual image */
+    z-index: 1;
 }
 .team-modal-header::before { filter: blur(10px) brightness(0.6); transform: scale(1.1); }
 
@@ -647,7 +636,7 @@ nav .container {
     width: auto;
     height: auto;
     object-fit: contain;
-    z-index: 2; /* Above the ::before pseudo-element */
+    z-index: 2;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
@@ -671,7 +660,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10; /* Ensure it's above modal content */
+    z-index: 10;
     line-height: 1;
 }
 
@@ -682,18 +671,16 @@ nav .container {
 }
 
 /* Common Modal Body Base Styles */
-/* Specific padding will be in .service-modal-body, .portfolio-modal-body etc. */
 .portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body, .service-modal-body {
-    flex-grow: 1; /* Allows body to expand and fill space */
-    /* overflow-y: auto; /* Individual bodies can scroll if needed, but parent .modal-content handles main scroll */
+    flex-grow: 1;
 }
 
-.portfolio-modal-body { padding: 2.5rem; } /* Specific padding */
+.portfolio-modal-body { padding: 2.5rem; }
 .team-modal-body { text-align: center; padding: 2rem; }
-.blog-modal-body { padding: 2.5rem; }
+.blog-modal-body { padding: 2.5rem; } /* Assuming blog.html uses this */
 
 
-.portfolio-modal h2 {
+.portfolio-modal h2 { /* Specific to portfolio modal title */
     color: var(--muted-gold);
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
@@ -713,7 +700,7 @@ nav .container {
 }
 
 
-.portfolio-modal .metrics, .team-metrics {
+.portfolio-modal .metrics, .team-metrics { /* Used in Portfolio and Team modals */
     display: grid;
     gap: 1.5rem;
     margin: 2.5rem 0;
@@ -722,7 +709,7 @@ nav .container {
 .team-metrics { grid-template-columns: 1fr 1fr; margin: 1.5rem auto; max-width: 500px; }
 
 
-.metric-card {
+.metric-card { /* Used in Portfolio and Team modals */
     background: var(--dark-gray);
     padding: 1.5rem;
     border-radius: 8px;
@@ -737,7 +724,7 @@ nav .container {
 .team-metrics .metric-card { padding: 0.75rem; min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; background-color: rgba(26, 26, 26, 0.7); border-color: var(--dark-gold); }
 
 
-.metric-number {
+.metric-number { /* Used in Portfolio and Team modals */
     font-size: 2.2rem;
     font-weight: bold;
     color: var(--muted-gold);
@@ -746,7 +733,7 @@ nav .container {
 }
 .team-metrics .metric-card .metric-number { font-size: 1.6rem; margin-bottom: 0.1rem; color: var(--gold); }
 
-.metric-label {
+.metric-label { /* Used in Portfolio and Team modals */
     color: #ccc;
     font-size: 0.9rem;
 }
@@ -766,7 +753,7 @@ nav .container {
     text-align: center;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    flex-shrink: 0; /* Prevent header from shrinking */
+    flex-shrink: 0;
 }
 
 .service-detail-modal .service-modal-header i {
@@ -783,12 +770,11 @@ nav .container {
 }
 
 .service-detail-modal .service-modal-body {
-    padding: 2rem 2.5rem; /* Overall padding for the service modal body */
-    flex-grow: 1; /* Allows body to take available space */
-    /* overflow-y: auto; /* If body itself needs to scroll within a fixed height modal-content */
+    padding: 2rem 2.5rem;
+    flex-grow: 1;
 }
 
-.service-detail-modal .service-modal-body h4 {
+.service-detail-modal .service-modal-body h4 { /* "Key Offerings:" */
     font-size: 1.4rem;
     color: var(--gold);
     font-weight: 600;
@@ -816,13 +802,9 @@ nav .container {
 .service-modal-cta-wrapper {
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 1rem; /* Space below button if it's the last element */
-    padding-bottom: 1rem; /* Ensure padding if content is short and button is near bottom of modal-body */
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
 }
-
-/* Gallery Section - (Styles for if it were present) */
-/* ... existing gallery styles would go here ... */
-
 
 /* Contact Section */
 .contact {
@@ -876,10 +858,6 @@ nav .container {
     border: 1px solid var(--muted-gold);
     width: 100%;
 }
-.newsletter-signup-form .form-group {
-    margin-bottom: 0;
-}
-
 
 .contact-form .form-columns {
     display: grid;
@@ -927,11 +905,11 @@ nav .container {
     box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
 
-.form-group textarea {
+.form-group textarea { /* For contact form */
     height: 165px;
     resize: vertical;
 }
-.job-application-form .form-group textarea {
+.job-application-form .form-group textarea { /* For job application form */
     height: 100px;
 }
 
@@ -948,7 +926,7 @@ nav .container {
 }
 
 
-.submit-btn {
+.submit-btn { /* Used by contact form and job application form */
     background: var(--muted-gold);
     color: var(--black);
     padding: 12px 30px;
@@ -981,12 +959,12 @@ nav .container {
 .form-submission-feedback.success {
     background-color: var(--success-green);
     color: var(--white);
-    border: 1px solid darken(var(--success-green), 10%);
+    border: 1px solid var(--success-green); /* Simplified border */
 }
 .form-submission-feedback.error {
     background-color: var(--error-red);
     color: var(--white);
-    border: 1px solid darken(var(--error-red), 10%);
+    border: 1px solid var(--error-red); /* Simplified border */
 }
 
 
@@ -1186,8 +1164,8 @@ nav .container {
 
 /* CSS for scroll-triggered animations */
 .portfolio-card, .service-card, .about-text > *, .client-logos,
-.gallery-item, #blog .service-card, .contact-info > *, .contact-form > *,
-.team-member-card, .award-item, .job-posting, .mission-content, .blog-card
+.contact-info > *, .contact-form > *,
+.team-member-card, .job-posting, .mission-content, .blog-card
 {
     opacity: 0;
     transform: translateY(20px);
@@ -1199,88 +1177,9 @@ nav .container {
     transform: translateY(0);
 }
 
-/* Slideshow container for Gallery Modals */
-/* ... (gallery slideshow styles remain unchanged) ... */
-.slideshow-container {
-  position: relative;
-  max-width: 100%;
-  margin: auto;
-}
-
-.gallery-slide {
-  display: none;
-  text-align: center;
-}
-
-.gallery-slide img {
-  max-width: 100%;
-  max-height: 75vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 5px;
-}
-
-.prev-slide, .next-slide {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 15;
-}
-
-.next-slide {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-.prev-slide:hover, .next-slide:hover {
-  background-color: rgba(212, 175, 55, 0.8);
-  color: var(--black);
-}
-
-#gallery5-dots {
-  text-align: center;
-  margin-top: 15px;
-}
-
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #717171;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.dot.active, .dot:hover {
-  background-color: var(--muted-gold);
-}
-
-.fade {
-  animation-name: fadeAnimate;
-  animation-duration: 0.5s;
-}
-
-@keyframes fadeAnimate {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-
 /* Our Team Page Specific Styles */
 .page-header#team-header {
+    /* specific background set via ID in HTML */
 }
 
 .mission-statement-header {
@@ -1290,7 +1189,7 @@ nav .container {
     margin-right: auto;
 }
 
-.mission-statement-header h2 {
+.mission-statement-header h2 { /* This specific h2 already has !important, so it's fine */
     font-size: 1.8rem !important;
     margin-bottom: 1rem !important;
     color: var(--gold) !important;
@@ -1304,7 +1203,7 @@ nav .container {
 }
 
 
-.team-section {
+.team-section { /* For the Team Members section */
     padding: 80px 0;
     background-color: var(--dark-gray);
 }
@@ -1373,14 +1272,14 @@ nav .container {
     min-height: 60px;
 }
 
-.team-modal-body h2 {
+.team-modal-body h2 { /* Team modal specific title */
     font-size: 2.2rem;
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
     margin-top: 0;
 }
 
-.team-modal-title {
+.team-modal-title { /* Team modal specific subtitle */
     font-size: 1.2rem;
     color: var(--white);
     margin-bottom: 1rem;
@@ -1490,7 +1389,7 @@ nav .container {
     text-align: right;
 }
 
-.job-posting .see-more-button {
+.job-posting .see-more-button { /* Button on the job card */
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
     background-color: transparent;
@@ -1510,10 +1409,10 @@ nav .container {
 /* Job Modal Content Styling */
 .job-modal .job-modal-body {
     padding: 2rem 2.5rem;
-    flex-grow: 1; /* Added to allow body to grow */
+    flex-grow: 1;
 }
 
-.job-modal .job-modal-body h2 {
+.job-modal .job-modal-body h2 { /* Main title in Job Modal */
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--muted-gold);
@@ -1521,7 +1420,7 @@ nav .container {
     margin-bottom: 2rem;
 }
 
-.job-modal .job-details-section h3 {
+.job-modal .job-details-section h3 { /* Section titles in Job Modal */
     font-size: 1.4rem;
     color: var(--gold);
     font-weight: 600;
@@ -1546,7 +1445,7 @@ nav .container {
     color: #ccc;
 }
 
-.job-modal .job-application-form h3 {
+.job-modal .job-application-form h3 { /* "Directly Apply" heading */
     font-size: 1.5rem;
     color: var(--muted-gold);
     text-align: center;
@@ -1561,7 +1460,7 @@ nav .container {
 .job-application-form .form-group input,
 .job-application-form .form-group textarea {
     background: var(--black);
-    border-color: var(--dark-gray);
+    border-color: var(--dark-gray); /* Ensure consistent border color */
     color: var(--white);
 }
 
@@ -1571,7 +1470,7 @@ nav .container {
     box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
 
-.job-submit-cta-wrapper {
+.job-submit-cta-wrapper { /* For "Submit Application" button */
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -1639,7 +1538,7 @@ nav .container {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 70px;
+        top: 70px; /* Adjust if nav height changes */
         left: 0;
         right: 0;
         background: rgba(0,0,0,0.98);
@@ -1655,13 +1554,13 @@ nav .container {
 
 
     .nav-right .social-icons {
-        display: none;
+        display: none; /* Hide social icons next to hamburger on mobile */
     }
 
 
     .mobile-menu {
         display: flex;
-        z-index: 1001;
+        z-index: 1001; /* Ensure it's above nav-links when they are closed */
     }
 
     .logo img {
@@ -1683,14 +1582,14 @@ nav .container {
     .section-title {
         font-size: 2rem;
     }
-     .jobs-section .section-title {
+     .jobs-section .section-title { /* Ensure job section title is responsive */
         font-size: 2rem;
     }
 
 
     .services-grid,
     .portfolio-grid,
-    .gallery-grid, /* If gallery was present */
+    /* .gallery-grid, /* Gallery removed */
     .site-footer .footer-main {
         grid-template-columns: 1fr;
     }
@@ -1698,36 +1597,35 @@ nav .container {
     .site-footer .footer-links-wrapper,
     .site-footer .footer-contact,
     .site-footer .footer-newsletter {
-        grid-column: auto;
-        text-align: left;
+        grid-column: auto; /* Reset from larger screen layout */
+        text-align: left; /* Default alignment for stacked items */
     }
      .site-footer .footer-social-icons {
-        justify-content: flex-start;
+        justify-content: flex-start; /* Align to left in stacked view */
     }
 
      .site-footer .newsletter-form {
-        max-width: none;
+        max-width: none; /* Allow full width */
     }
 
     /* Modal Content Box specific mobile styles */
     .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
-        width: 95%;
-        /* margin: 5% auto; /* Removed as parent modal overlay handles centering and padding */
-        max-height: calc(100% - 40px); /* Ensures content fits within viewport with padding */
+        width: 95%; /* Use more screen width on mobile */
+        max-height: calc(100% - 40px); /* Ensure content fits within viewport with overlay padding */
     }
 
     .portfolio-modal-header { height: 250px; }
     .team-modal-header { height: 200px; }
-    .blog-modal-header { height: 220px; }
+    .blog-modal-header { height: 220px; } /* Assuming blog.html uses this */
 
     .service-detail-modal .service-modal-header { padding: 1rem 1.5rem; }
     .service-detail-modal .service-modal-header i { font-size: 2rem; }
     .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; }
-    .job-modal .job-modal-body h2 { font-size: 1.5rem; }
+    .job-modal .job-modal-body h2 { font-size: 1.5rem; } /* Job modal main title responsive */
 
 
      .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
-     .job-modal .job-details-section h3 { font-size: 1.2rem; }
+     .job-modal .job-details-section h3 { font-size: 1.2rem; } /* Job modal section titles responsive */
 
 
     .portfolio-modal-body .client-info { font-size: 0.9rem; padding: 1rem; }
@@ -1744,15 +1642,15 @@ nav .container {
         padding: 1.5rem;
     }
      .contact-form .form-columns {
-        grid-template-columns: 1fr;
-        gap: 0;
+        grid-template-columns: 1fr; /* Stack columns */
+        gap: 0; /* Remove gap as they are stacked */
     }
-    .contact-form .form-column-left .form-group,
+    .contact-form .form-column-left .form-group, /* Ensure consistent margin for stacked groups */
     .contact-form .form-column-right .form-group {
         margin-bottom: 1.5rem;
     }
      .contact-form .form-column-right .form-group:last-child {
-        margin-bottom: 0;
+        margin-bottom: 0; /* Remove bottom margin from last group in stacked view if needed */
     }
 
 
@@ -1765,9 +1663,6 @@ nav .container {
         gap: 10px;
         align-items: center;
     }
-
-    /* Slideshow adjustments for mobile (if gallery was present) */
-    /* ... */
 
     /* Our Team Page Responsive Adjustments */
     .page-header#team-header {
@@ -1787,7 +1682,7 @@ nav .container {
     }
 
     .team-modal-body { padding: 1.5rem; }
-    .team-modal .metrics { grid-template-columns: 1fr; gap: 1rem; }
+    .team-modal .metrics { grid-template-columns: 1fr; gap: 1rem; } /* Stack team metrics */
     .team-metrics .metric-card { min-height: auto; padding: 0.5rem; }
     .team-metrics .metric-card .metric-number { font-size: 1.4rem; }
     .team-metrics .metric-card .metric-label { font-size: 0.7rem; }
@@ -1797,10 +1692,9 @@ nav .container {
     .job-modal .job-details-section p, .job-modal .job-details-section ul { font-size: 0.9rem; }
 }
 
-/* MODAL Z-INDEX HIERARCHY */
-.gallery-modal { /* If gallery modals are ever re-added */
-    z-index: 3000 !important;
-}
+/* MODAL Z-INDEX HIERARCHY & DISPLAY FIXES */
+/* .gallery-modal styles removed */
+
 .service-detail-modal {
     z-index: 2500 !important;
 }
@@ -1811,48 +1705,23 @@ nav .container {
     z-index: 2000 !important;
 }
 
-/* Gallery modal specific content styling (if re-added) */
-.gallery-modal-content {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    z-index: 3001 !important;
-}
-.gallery-modal-content.iframe-modal-content {
-    background-color: var(--black) !important;
-    border: 2px solid var(--muted-gold) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
-}
-.gallery-modal-content video,
-.gallery-modal-content img {
-    z-index: 3002 !important;
-    position: relative !important;
-    display: block !important;
-}
-.close-gallery-modal {
-    z-index: 3010 !important;
-}
+/* .gallery-modal-content styles removed */
 
-/* General modal close button z-index */
 .close-service-modal,
-.close-modal, /* Generic close, if used */
+.close-modal, /* Generic, if used on a basic modal */
 .close-team-modal,
 .close-blog-modal,
 .close-job-modal {
-    z-index: 2510 !important; /* Ensure close button is above content within its modal type */
+    z-index: 2510 !important;
 }
 
-/* Modal display fixes if any opacity/visibility issues persist */
-.gallery-modal, .service-detail-modal, .portfolio-modal, .team-modal, .blog-modal, .job-modal {
-    opacity: 1 !important; /* Ensure fully opaque when display is block */
-}
-.gallery-modal[style*="display: block"],
+/* Modal display override to ensure flex behavior when JS shows them */
 .service-detail-modal[style*="display: block"],
 .portfolio-modal[style*="display: block"],
 .team-modal[style*="display: block"],
 .blog-modal[style*="display: block"],
 .job-modal[style*="display: block"] {
-    display: flex !important; /* Ensure display:flex is used when shown */
+    display: flex !important; /* Ensure display:flex is used when shown by JS with style.display = 'block' */
     opacity: 1 !important;
     visibility: visible !important;
 }
