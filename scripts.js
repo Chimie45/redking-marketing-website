@@ -1,122 +1,15 @@
-// Store slide indexes for each gallery slideshow
-let gallerySlideIndexes = {
-    'gallery5': 1
-};
+// Store slide indexes for each gallery slideshow (if gallery were present)
+// let gallerySlideIndexes = { 'gallery5': 1 }; // Example if gallery was used
 
-// Function to open a gallery modal that contains an iframe
-function openIframeModal(modalId, iframeSrc) {
-    console.log('Attempting to open iframe modal:', modalId, 'with src:', iframeSrc);
-    const modal = document.getElementById(modalId);
-    if (!modal) {
-        console.error('Iframe modal element not found in DOM:', modalId);
-        return;
-    }
-    const iframe = modal.querySelector('.gallery-iframe');
-    if (!iframe) {
-        console.error('Iframe .gallery-iframe class not found in modal:', modalId);
-        return;
-    }
-    iframe.src = iframeSrc;
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    console.log('Iframe modal displayed:', modalId);
-}
+// Function to open a gallery modal that contains an iframe (if gallery were present)
+// function openIframeModal(modalId, iframeSrc) { ... } // Example
 
-// Gallery modal functions (for video and image slideshows)
-function openGalleryModal(modalId) {
-    console.log('Attempting to open gallery modal:', modalId);
-    const modal = document.getElementById(modalId);
-    if (!modal) {
-        console.error('Gallery modal element not found in DOM:', modalId);
-        return;
-    }
-
-    // Debug before showing
-    console.log('Before showing - Modal display:', window.getComputedStyle(modal).display);
-
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-
-    // Debug after showing
-    console.log('After showing - Modal display:', window.getComputedStyle(modal).display);
-    console.log('Gallery modal displayed:', modalId);
-
-    // Call debug function
-    setTimeout(() => debugGalleryModal(modalId), 100);
-
-    const video = modal.querySelector('video');
-    if (video) {
-        video.currentTime = 0;
-        console.log('Attempting to play video in gallery modal:', video.src);
-        video.play().then(() => {
-            console.log('Video playback started for gallery modal:', modalId);
-        }).catch(e => {
-            console.error('Video playback error for gallery modal ' + modalId + ':', e.message);
-            if (!video.hasAttribute('controls')) {
-                console.warn('Video in modal ' + modalId + ' does not have controls. User might not be able to play manually if autoplay fails.');
-            }
-        });
-    } else {
-        console.log('No video element found in gallery modal:', modalId);
-    }
-
-    if (modalId === 'gallery5') { // Specific logic for gallery5 slideshow
-        gallerySlideIndexes[modalId] = 1;
-        showGallerySlide(gallerySlideIndexes[modalId], modalId);
-    }
-}
-
-
-function closeGalleryModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) {
-        console.error('Modal not found for closing gallery:', modalId);
-        return;
-    }
-    modal.style.display = 'none';
-
-    const video = modal.querySelector('video');
-    if (video) {
-        video.pause();
-        video.currentTime = 0;
-    }
-    const iframe = modal.querySelector('.gallery-iframe');
-    if (iframe) {
-        iframe.src = 'about:blank'; // Clear iframe src to stop loading/playing
-    }
-    checkAndRestoreScroll();
-}
-
-// Slideshow specific functions
-function plusSlides(n, galleryId) {
-    showGallerySlide(gallerySlideIndexes[galleryId] += n, galleryId);
-}
-function currentGallerySlide(n, galleryId) {
-    showGallerySlide(gallerySlideIndexes[galleryId] = n, galleryId);
-}
-function showGallerySlide(n, galleryId) {
-    let i;
-    const slideshowContainer = document.getElementById(galleryId + '-slideshow');
-    if (!slideshowContainer) { console.error('Slideshow container not found:', galleryId + '-slideshow'); return; }
-    const slides = slideshowContainer.getElementsByClassName("gallery-slide");
-    const dotsContainer = document.getElementById(galleryId + '-dots');
-    let dots = dotsContainer ? dotsContainer.getElementsByClassName("dot") : [];
-    if (slides.length === 0) { console.warn('No slides found in slideshow:', galleryId); return; }
-    if (n > slides.length) gallerySlideIndexes[galleryId] = 1;
-    if (n < 1) gallerySlideIndexes[galleryId] = slides.length;
-    for (i = 0; i < slides.length; i++) slides[i].style.display = "none";
-    if (dots.length > 0) {
-        for (i = 0; i < dots.length; i++) dots[i].className = dots[i].className.replace(" active", "");
-    }
-    if (slides[gallerySlideIndexes[galleryId] - 1]) {
-        slides[gallerySlideIndexes[galleryId] - 1].style.display = "block";
-    } else {
-        console.error('Slide index out of bounds for slideshow:', galleryId, gallerySlideIndexes[galleryId]);
-    }
-    if (dots.length > 0 && dots[gallerySlideIndexes[galleryId] - 1]) {
-        dots[gallerySlideIndexes[galleryId] - 1].className += " active";
-    }
-}
+// Gallery modal functions (if gallery were present)
+// function openGalleryModal(modalId) { ... } // Example
+// function closeGalleryModal(modalId) { ... } // Example
+// function plusSlides(n, galleryId) { ... } // Example
+// function currentGallerySlide(n, galleryId) { ... } // Example
+// function showGallerySlide(n, galleryId) { ... } // Example
 
 // Portfolio modal functions
 function openPortfolioModal(modalId) {
@@ -125,7 +18,7 @@ function openPortfolioModal(modalId) {
     const modalHeader = modal.querySelector('.portfolio-modal-header');
     const modalImg = modalHeader ? modalHeader.querySelector('img') : null;
     if (modalImg && modalImg.src && modalHeader) modalHeader.style.backgroundImage = `url(${modalImg.src})`;
-    modal.style.display = 'block';
+    modal.style.display = 'flex'; // MODIFIED: Use flex for consistency
     document.body.style.overflow = 'hidden';
     modal.querySelectorAll('.metric-number').forEach(num => animateValue(num));
 }
@@ -142,7 +35,7 @@ function openTeamModal(modalId) {
     const modalHeader = modal.querySelector('.team-modal-header');
     const modalImg = modalHeader ? modalHeader.querySelector('.team-modal-img-main') : null;
     if (modalImg && modalImg.src && modalHeader) modalHeader.style.backgroundImage = `url(${modalImg.src})`;
-    modal.style.display = 'block';
+    modal.style.display = 'flex'; // MODIFIED: Use flex for consistency
     document.body.style.overflow = 'hidden';
     modal.querySelectorAll('.metric-number').forEach(num => animateValue(num));
 }
@@ -156,15 +49,20 @@ function closeTeamModal(modalId) {
 function openJobModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) { console.error('Job modal not found:', modalId); return; }
-    modal.style.display = 'block';
+    modal.style.display = 'flex'; // MODIFIED: Use flex for consistency
     document.body.style.overflow = 'hidden';
     const form = modal.querySelector('.job-application-form');
     if (form) form.reset();
     const messageDiv = modal.querySelector('.form-submission-feedback');
     if (messageDiv) { messageDiv.style.display = 'none'; messageDiv.textContent = ''; messageDiv.className = 'form-submission-feedback'; }
     const charCounter = modal.querySelector('.char-counter');
-    const messageTextarea = modal.querySelector('textarea[name="message"]');
-    if (charCounter && messageTextarea) { charCounter.textContent = `${messageTextarea.maxLength} characters remaining`; charCounter.style.color = '#aaa'; }
+    const messageTextarea = modal.querySelector('textarea[name="message"]'); // Assuming 'message' is still the name attribute
+    if (charCounter && messageTextarea && messageTextarea.maxLength) { // Check if maxLength is defined
+        charCounter.textContent = `${messageTextarea.maxLength} characters remaining`;
+        charCounter.style.color = '#aaa';
+    } else if (charCounter && messageTextarea) { // Fallback if maxLength is not on textarea but expected
+        charCounter.textContent = `Check character limit`;
+    }
 }
 function closeJobModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -176,13 +74,14 @@ function closeJobModal(modalId) {
 function openServiceModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) { console.error('Service modal not found:', modalId); return; }
-    modal.style.display = 'block';
+    modal.style.display = 'flex'; // MODIFIED: Use flex for proper centering via CSS
     document.body.style.overflow = 'hidden';
+    // Ensure content is scrolled to top
     setTimeout(() => {
-       if(modal.contains(document.activeElement)) modal.blur();
-       modal.scrollTop = 0;
+       if(modal.contains(document.activeElement)) modal.blur(); // Remove focus from any element within
+       modal.scrollTop = 0; // Scroll the modal overlay itself
        const content = modal.querySelector('.service-modal-content');
-       if(content) content.scrollTop = 0;
+       if(content) content.scrollTop = 0; // Scroll the content box
     },0);
 }
 function closeServiceModal(modalId) {
@@ -191,25 +90,24 @@ function closeServiceModal(modalId) {
     checkAndRestoreScroll();
 }
 
-// NEW FUNCTION: Scroll to contact and close modal
+// Function for Service Modal CTA buttons: Scroll to contact and close modal
 function scrollToContactAndCloseModal(event, modalId) {
-    event.preventDefault(); // Prevent default anchor behavior (page jump)
+    event.preventDefault(); // Prevent default anchor behavior
 
-    // Close the modal
-    if (modalId) { // Ensure modalId is provided
-        closeServiceModal(modalId);
+    if (modalId) {
+        closeServiceModal(modalId); // This should now correctly set display: none
     }
 
-    // Scroll to contact section
     const targetElement = document.getElementById('contact');
     if (targetElement) {
         const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
         const elementPosition = targetElement.getBoundingClientRect().top;
-        // The offset should account for the nav bar height and a little extra padding
-        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
+        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; // Adjust offset as needed
 
-        // Body scroll should be restored by closeServiceModal via checkAndRestoreScroll
-        // if no other modals are open.
+        // The checkAndRestoreScroll in closeServiceModal should handle body scroll.
+        // If it's still an issue, ensure body overflow is 'auto' *before* scrolling.
+        // document.body.style.overflow = 'auto'; // Potentially redundant if checkAndRestoreScroll is effective
+
         window.scrollTo({
             top: offsetPosition,
             behavior: "smooth"
@@ -222,22 +120,32 @@ function scrollToContactAndCloseModal(event, modalId) {
 
 // Helper function to check if any modal is open and restore scroll if not
 function checkAndRestoreScroll() {
-    const anyModalOpen = document.querySelector('.gallery-modal[style*="display: block"], .portfolio-modal[style*="display: block"], .team-modal[style*="display: block"], .job-modal[style*="display: block"], .service-detail-modal[style*="display: block"], .blog-modal[style*="display: block"]');
+    const anyModalOpen = document.querySelector(
+        '.portfolio-modal[style*="display: flex"], .portfolio-modal[style*="display: block"], ' +
+        '.team-modal[style*="display: flex"], .team-modal[style*="display: block"], ' +
+        '.blog-modal[style*="display: flex"], .blog-modal[style*="display: block"], ' + // Assuming blog modals also use flex/block
+        '.job-modal[style*="display: flex"], .job-modal[style*="display: block"], ' +
+        '.service-detail-modal[style*="display: flex"], .service-detail-modal[style*="display: block"]'
+    );
     if (!anyModalOpen) {
         document.body.style.overflow = 'auto';
     }
 }
 
-// Close modals when clicking outside of content
+// Close modals when clicking outside of content (on the overlay)
 window.addEventListener('click', function(event) {
-    if (event.target.matches('.gallery-modal, .portfolio-modal, .team-modal, .job-modal, .service-detail-modal, .blog-modal')) {
-        if (event.target.style.display === 'block') {
-            if (event.target.classList.contains('gallery-modal')) closeGalleryModal(event.target.id);
-            else if (event.target.classList.contains('portfolio-modal')) closePortfolioModal(event.target.id);
-            else if (event.target.classList.contains('team-modal')) closeTeamModal(event.target.id);
-            else if (event.target.classList.contains('job-modal')) closeJobModal(event.target.id);
-            else if (event.target.classList.contains('service-detail-modal')) closeServiceModal(event.target.id);
-            else if (event.target.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(event.target.id);
+    // Check if the direct target is one of the modal overlay classes
+    if (event.target.matches('.portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal')) {
+        // And ensure it's actually visible (JS sets inline style for display)
+        if (event.target.style.display === 'flex' || event.target.style.display === 'block') {
+            const modalId = event.target.id;
+            if (modalId) {
+                if (event.target.classList.contains('portfolio-modal')) closePortfolioModal(modalId);
+                else if (event.target.classList.contains('team-modal')) closeTeamModal(modalId);
+                else if (event.target.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(modalId); // Check if closeBlogModal exists
+                else if (event.target.classList.contains('job-modal')) closeJobModal(modalId);
+                else if (event.target.classList.contains('service-detail-modal')) closeServiceModal(modalId);
+            }
         }
     }
 });
@@ -246,18 +154,18 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         let modalClosedThisEvent = false;
-        document.querySelectorAll('.gallery-modal, .portfolio-modal, .team-modal, .job-modal, .service-detail-modal, .blog-modal').forEach(modal => {
-            if (modal.style.display === 'block') {
-                if (modal.classList.contains('gallery-modal')) closeGalleryModal(modal.id);
-                else if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modal.id);
-                else if (modal.classList.contains('team-modal')) closeTeamModal(modal.id);
-                else if (modal.classList.contains('job-modal')) closeJobModal(modal.id);
-                else if (modal.classList.contains('service-detail-modal')) closeServiceModal(modal.id);
-                else if (modal.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(modal.id);
+        document.querySelectorAll('.portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal').forEach(modal => {
+            if (modal.style.display === 'flex' || modal.style.display === 'block') { // Check if visible
+                const modalId = modal.id;
+                if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modalId);
+                else if (modal.classList.contains('team-modal')) closeTeamModal(modalId);
+                else if (modal.classList.contains('blog-modal') && typeof closeBlogModal === 'function') closeBlogModal(modalId);
+                else if (modal.classList.contains('job-modal')) closeJobModal(modalId);
+                else if (modal.classList.contains('service-detail-modal')) closeServiceModal(modalId);
                 modalClosedThisEvent = true;
             }
         });
-        if (modalClosedThisEvent) checkAndRestoreScroll();
+        // No need to call checkAndRestoreScroll here as each close function calls it.
     }
 });
 
@@ -397,13 +305,15 @@ if (newsletterForm) {
     });
 }
 
-// Job Application Form Handler
+// Job Application Form Handler (Example for one job type)
 const jobAppFormMotionDesigner = document.getElementById('jobApplicationFormMotionDesigner');
 if (jobAppFormMotionDesigner) {
     const messageTextarea = document.getElementById('jobAppMessageMotionDesigner');
     const charCounterDisplay = document.getElementById('charCounterMotionDesigner');
-    const maxLength = 300;
+    const maxLength = messageTextarea.maxLength > 0 ? messageTextarea.maxLength : 300; // Use attribute or default
+
     if (messageTextarea && charCounterDisplay) {
+        charCounterDisplay.textContent = `${maxLength} characters remaining`; // Initial display
         messageTextarea.addEventListener('input', function() {
             const currentLength = this.value.length;
             const charsRemaining = maxLength - currentLength;
@@ -411,6 +321,7 @@ if (jobAppFormMotionDesigner) {
             charCounterDisplay.style.color = charsRemaining < 0 ? 'var(--error-red)' : '#aaa';
         });
     }
+
     jobAppFormMotionDesigner.addEventListener('submit', async function(e) {
         e.preventDefault();
         const feedbackDiv = document.getElementById('jobAppSubmissionMessageMotionDesigner');
@@ -421,9 +332,11 @@ if (jobAppFormMotionDesigner) {
         const originalButtonText = submitButton.textContent;
         submitButton.textContent = 'Submitting...';
         submitButton.disabled = true;
+
         const nameInput = document.getElementById('jobAppNameMotionDesigner');
         const emailInput = document.getElementById('jobAppEmailMotionDesigner');
         const resumeInput = document.getElementById('jobAppResumeMotionDesigner');
+
         if (!nameInput.value || !emailInput.value || !messageTextarea.value || !resumeInput.files.length) {
             feedbackDiv.textContent = 'Please fill in all required fields and attach a resume.';
             feedbackDiv.classList.add('error');
@@ -433,7 +346,7 @@ if (jobAppFormMotionDesigner) {
             return;
         }
         if (messageTextarea.value.length > maxLength) {
-            feedbackDiv.textContent = `Message exceeds ${maxLength} characters.`;
+            feedbackDiv.textContent = `Introduction exceeds ${maxLength} characters.`;
             feedbackDiv.classList.add('error');
             feedbackDiv.style.display = 'block';
             submitButton.textContent = originalButtonText;
@@ -468,6 +381,7 @@ if (jobAppFormMotionDesigner) {
             submitButton.disabled = false;
             return;
         }
+
         const formData = new FormData(this);
         formData.append('formType', 'job-application-motion-designer');
         const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
@@ -518,11 +432,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
 
     navAnchors.forEach(anchor => {
-        // Exclude service modal CTAs from this generic scroll handler as they have their own
-        if (!anchor.classList.contains('service-modal-cta')) {
+        if (!anchor.classList.contains('service-modal-cta')) { // Exclude service modal CTAs
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                // Check if it's purely an internal link (starts with #) or targets the current page
                 if (href.startsWith('#') || href.startsWith(window.location.pathname + '#') || (href.startsWith('index.html#') && (window.location.pathname.endsWith('/') || window.location.pathname.endsWith('index.html')))) {
                     e.preventDefault();
                     const hash = href.substring(href.lastIndexOf('#') + 1);
@@ -539,7 +451,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
                     }
                 }
-                // If it's a link to a different page (e.g., services.html) or index.html#contact from another page, let the browser handle it.
             });
         }
     });
@@ -561,11 +472,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     const elementsToObserve = document.querySelectorAll(
-        '.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, ' +
-        '.contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content'
+        '.portfolio-card, .service-card, .about-text > *, .client-logos, ' +
+        '.contact-info > *, .contact-form > *, ' +
+        '.team-member-card, .job-posting, .mission-content, .blog-card'
     );
     elementsToObserve.forEach(el => {
-        if (!(el.classList.contains('blog-card') && el.closest('#blog-posts'))) { 
+        if (!(el.classList.contains('blog-card') && el.closest('#blog-posts'))) {
              animatedElementsObserver.observe(el);
         }
     });
@@ -635,43 +547,6 @@ document.querySelectorAll('img').forEach(img => {
          console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
 });
-// Add this debug function to your scripts.js to help identify the issue
 
-function debugGalleryModal(modalId) {
-    console.log('=== DEBUGGING GALLERY MODAL ===');
-    const modal = document.getElementById(modalId);
-
-    if (!modal) {
-        console.error('Modal not found:', modalId);
-        return;
-    }
-
-    console.log('Modal element:', modal);
-    console.log('Modal display style:', window.getComputedStyle(modal).display);
-    console.log('Modal opacity:', window.getComputedStyle(modal).opacity);
-    console.log('Modal z-index:', window.getComputedStyle(modal).zIndex);
-    console.log('Modal visibility:', window.getComputedStyle(modal).visibility);
-    console.log('Modal position:', window.getComputedStyle(modal).position);
-    console.log('Modal top:', window.getComputedStyle(modal).top);
-    console.log('Modal left:', window.getComputedStyle(modal).left);
-    console.log('Modal width:', window.getComputedStyle(modal).width);
-    console.log('Modal height:', window.getComputedStyle(modal).height);
-
-    const content = modal.querySelector('.gallery-modal-content');
-    if (content) {
-        console.log('Content element:', content);
-        console.log('Content display:', window.getComputedStyle(content).display);
-        console.log('Content opacity:', window.getComputedStyle(content).opacity);
-        console.log('Content z-index:', window.getComputedStyle(content).zIndex);
-    }
-
-    const video = modal.querySelector('video');
-    if (video) {
-        console.log('Video element:', video);
-        console.log('Video display:', window.getComputedStyle(video).display);
-        console.log('Video opacity:', window.getComputedStyle(video).opacity);
-        console.log('Video z-index:', window.getComputedStyle(video).zIndex);
-    }
-
-    console.log('=== END DEBUG ===');
-}
+// Debug function (can be removed in production)
+// function debugGalleryModal(modalId) { /* ... */ }
