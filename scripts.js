@@ -119,7 +119,7 @@ function openPortfolioModal(modalId) {
         return;
     }
     const modalHeader = modal.querySelector('.portfolio-modal-header');
-    const modalImg = modalHeader.querySelector('img'); // This is the image for the blurred background
+    const modalImg = modalHeader.querySelector('img');
     
     if (modalImg && modalImg.src) {
         modalHeader.style.backgroundImage = `url(${modalImg.src})`;
@@ -154,7 +154,6 @@ function openTeamModal(modalId) {
         return;
     }
     const modalHeader = modal.querySelector('.team-modal-header');
-    // The image for the blurred background is the same as the main modal image
     const modalImg = modalHeader.querySelector('.team-modal-img-main'); 
     
     if (modalImg && modalImg.src) {
@@ -168,7 +167,6 @@ function openTeamModal(modalId) {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 
-    // Animate metrics in team modal
     const metricNumbers = modal.querySelectorAll('.metric-number');
     metricNumbers.forEach(num => animateValue(num));
 }
@@ -185,6 +183,8 @@ function closeTeamModal(modalId) {
 
 
 // Close modals when clicking outside of content
+// This listener handles portfolio, team, and gallery modals.
+// Blog modals' outside click is handled in blog-scripts.js
 window.addEventListener('click', function(event) {
     if (event.target.classList.contains('gallery-modal')) {
         const modalId = event.target.id;
@@ -207,6 +207,8 @@ window.addEventListener('click', function(event) {
 });
 
 // Close modals with Escape key
+// This listener handles portfolio, team, and gallery modals.
+// Blog modals' escape key is handled in blog-scripts.js
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         let aModalWasOpen = false;
@@ -219,13 +221,15 @@ document.addEventListener('keydown', function(event) {
             }
         });
         
-        if (aModalWasOpen) {
+        // If a non-blog modal was closed, restore body overflow.
+        // blog-scripts.js handles its own body overflow for blog modals.
+        if (aModalWasOpen && !document.querySelector('.blog-modal[style*="display: block"]')) {
             document.body.style.overflow = 'auto';
         }
     }
 });
 
-// Contact form handling
+// Contact form handling (for index.html footer form)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     let formMessageDiv = document.getElementById('form-submission-message');
@@ -237,10 +241,10 @@ if (contactForm) {
         formMessageDiv.style.borderRadius = '5px';
         formMessageDiv.style.textAlign = 'center';
         formMessageDiv.style.display = 'none'; 
-        if (contactForm.parentNode.parentNode) { 
-             contactForm.parentNode.parentNode.insertBefore(formMessageDiv, contactForm.parentNode.nextSibling);
-        } else { 
-            contactForm.parentNode.insertBefore(formMessageDiv, contactForm.nextSibling);
+        // Adjust insertion point if necessary, this is a general approach
+        const parentOfContactForm = contactForm.parentNode;
+        if (parentOfContactForm) {
+             parentOfContactForm.insertBefore(formMessageDiv, contactForm.nextSibling);
         }
     }
 
@@ -305,7 +309,7 @@ if (contactForm) {
         } catch (error) {
             console.error('Error submitting contact form:', error);
             formMessageDiv.textContent = 'An error occurred. Please try again later.';
-            formMessageDiv.style.backgroundColor = 'var(--dark-red)';
+            formMessageDiv.style.backgroundColor = 'var(--dark-red)'; // Changed from dark-red to primary-red for consistency
             formMessageDiv.style.color = 'var(--white)';
         } finally {
             formMessageDiv.style.display = 'block';
@@ -314,10 +318,11 @@ if (contactForm) {
         }
     });
 } else {
-    console.warn("Contact form with ID 'contactForm' not found.");
+    // It's normal for this form not to be found on blog.html or our-team.html if they don't have this specific form ID.
+    // console.warn("Contact form with ID 'contactForm' not found."); 
 }
 
-// Newsletter form handling
+// Newsletter form handling (for footer newsletter, ID 'newsletterForm')
 const newsletterForm = document.getElementById('newsletterForm');
 if (newsletterForm) {
     let newsletterMessageDiv = document.getElementById('newsletter-submission-message');
@@ -370,7 +375,7 @@ if (newsletterForm) {
         const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; 
         const data = {
             email: email,
-            formType: 'newsletter' 
+            formType: 'newsletter' // General newsletter subscription
         };
 
         try {
@@ -397,7 +402,7 @@ if (newsletterForm) {
         } catch (error) {
             console.error('Error submitting newsletter form:', error);
             newsletterMessageDiv.textContent = 'An error occurred. Please try again later.';
-            newsletterMessageDiv.style.backgroundColor = 'var(--dark-red)';
+            newsletterMessageDiv.style.backgroundColor = 'var(--dark-red)'; // Changed from dark-red to primary-red for consistency
             newsletterMessageDiv.style.color = 'var(--white)';
         } finally {
             newsletterMessageDiv.style.display = 'block';
@@ -406,11 +411,12 @@ if (newsletterForm) {
         }
     });
 } else {
-    console.warn("Newsletter form with ID 'newsletterForm' not found.");
+     // It's normal for this form not to be found on blog.html if it uses 'blogNewsletterForm' ID instead.
+    // console.warn("Newsletter form with ID 'newsletterForm' not found.");
 }
 
 
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links & Mobile menu toggle & Nav scroll effect
 document.addEventListener('DOMContentLoaded', function() {
     // Set current year in footer
     const currentYearSpan = document.getElementById('currentYear');
@@ -418,6 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentYearSpan.textContent = new Date().getFullYear();
     }
     
+    // Lazy loading for images with data-src attribute
     const lazyImages = document.querySelectorAll('img[data-src]');
     if (lazyImages.length > 0) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -434,21 +441,22 @@ document.addEventListener('DOMContentLoaded', function() {
         lazyImages.forEach(img => imageObserver.observe(img));
     }
 
-    // Refined Smooth scrolling for navigation links
+    // Smooth scrolling for navigation links
     document.querySelectorAll('nav .nav-links a[href*="#"], .logo[href*="#"], .cta-button[href*="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             const [path, hash] = href.split('#');
             
-            // Determine if the link is to the current page or a different one
             const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1) || "index.html";
-            const targetPath = path || "index.html"; // Default to index.html if path is empty
+            const targetPath = path || (currentPath === "index.html" || currentPath === "" ? "index.html" : currentPath) ;
 
-            if (hash) { // If there's a hash
-                if (targetPath === currentPath || (targetPath === '' && currentPath === 'index.html') || (targetPath === 'index.html' && currentPath === '')) { // Anchor on the current page
+
+            if (hash) {
+                if (targetPath === currentPath || (targetPath === 'index.html' && (currentPath === '' || currentPath === 'index.html'))) {
                     e.preventDefault();
                     const targetElement = document.getElementById(hash);
                     if (targetElement) {
+                        // Close mobile menu if open
                         if (navLinks && navLinks.classList.contains('nav-links--active')) {
                             navLinks.classList.remove('nav-links--active');
                             if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
@@ -463,59 +471,59 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     }
                 }
-                // If path is different, browser will handle navigation to new page,
-                // and standard anchor behavior will scroll to hash on that page.
+                // If targetPath is different, let the browser handle navigation.
+                // The hash will be processed by the browser on the new page.
             }
-            // If no hash, it's a normal link to another page, let browser handle it.
+            // If no hash, it's a normal link, let browser handle it.
         });
     });
-});
 
+    // Mobile menu toggle
+    const mobileMenuIcon = document.querySelector('.mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
 
-// Mobile menu toggle
-const mobileMenuIcon = document.querySelector('.mobile-menu');
-const navLinks = document.querySelector('.nav-links');
-
-if (mobileMenuIcon && navLinks) {
-    mobileMenuIcon.addEventListener('click', function() {
-        navLinks.classList.toggle('nav-links--active'); 
-        this.classList.toggle('active'); 
-    });
-} else {
-    console.warn("Mobile menu icon or nav links not found.");
-}
-
-
-// Add scroll effect to navigation
-window.addEventListener('scroll', function() {
-    const nav = document.querySelector('nav');
-    if (nav) {
-        if (window.scrollY > 100) {
-            nav.classList.add('nav--scrolled'); 
-        } else {
-            nav.classList.remove('nav--scrolled');
-        }
+    if (mobileMenuIcon && navLinks) {
+        mobileMenuIcon.addEventListener('click', function() {
+            navLinks.classList.toggle('nav-links--active'); 
+            this.classList.toggle('active'); 
+        });
+    } else {
+        console.warn("Mobile menu icon or nav links not found.");
     }
-});
 
-
-// Animate elements on scroll
-const observerOptions = {
-    threshold: 0.1, 
-    rootMargin: '0px 0px -50px 0px' 
-};
-
-const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('element--in-view'); 
-            observer.unobserve(entry.target); 
+    // Add scroll effect to navigation
+    window.addEventListener('scroll', function() {
+        const nav = document.querySelector('nav');
+        if (nav) {
+            if (window.scrollY > 100) {
+                nav.classList.add('nav--scrolled'); 
+            } else {
+                nav.classList.remove('nav--scrolled');
+            }
         }
     });
-}, observerOptions);
 
-document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content').forEach((el) => {
-    animatedElementsObserver.observe(el);
+    // Animate elements on scroll
+    const observerOptions = {
+        threshold: 0.1, 
+        rootMargin: '0px 0px -50px 0px' 
+    };
+
+    const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('element--in-view'); 
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements common across pages (except blog-specific ones handled in blog-scripts.js)
+    document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content').forEach((el) => {
+        if (!el.classList.contains('blog-card')) { // Avoid double-observing blog cards if blog-scripts.js also observes them
+             animatedElementsObserver.observe(el);
+        }
+    });
 });
 
 
@@ -535,15 +543,25 @@ function animateValue(element) {
     const duration = 1500; 
     const frameDuration = 16; 
     const totalFrames = duration / frameDuration;
-    const increment = numericValue / totalFrames;
+    let increment = numericValue / totalFrames; // Ensure increment is calculated correctly for negative numbers too
+
+    // Handle cases where numericValue is 0 or very small to avoid division by zero or tiny increments leading to long animations.
+    if (numericValue === 0) {
+        element.textContent = '0' + suffix;
+        return;
+    }
+    if (Math.abs(increment) < 0.001 && numericValue !== 0) { // If increment is too small, adjust
+        increment = numericValue > 0 ? 0.001 : -0.001;
+    }
+
+
     let currentValue = 0;
-    
     element.textContent = (numericValue < 1 && numericValue > 0 && numericValue !== 0 ? '0.0' : '0') + suffix; 
 
     const timer = setInterval(() => {
         currentValue += increment;
-        if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue) || numericValue === 0) {
-            currentValue = numericValue;
+        if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue)) {
+            currentValue = numericValue; // Snap to final value
             clearInterval(timer);
         }
         
@@ -565,20 +583,17 @@ document.querySelectorAll('img').forEach(img => {
         img.addEventListener('error', function() {
             this.style.display = 'none'; 
             console.error('Failed to load image:', this.src);
+            // Optionally, replace with a placeholder:
+            // this.src = 'images/placeholder.png'; 
+            // this.alt = 'Image not available';
+            // this.style.display = 'block'; // if you use a placeholder
         });
-    } else if (img.naturalWidth === 0 && img.src) { 
+    } else if (img.naturalWidth === 0 && img.src && !img.getAttribute('src').startsWith('data:image/')) { 
+         // Check for non-data URI images that might have failed silently before
          img.style.display = 'none';
          console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
 });
 
-// Blog modal functions
-function openBlogModal(modalId) { ... }
-function closeBlogModal(modalId) { ... }
-
-// Blog newsletter form handling
-const blogNewsletterForm = document.getElementById('blogNewsletterForm');
-
-// Updated modal close handlers to include blog modals
-// Updated escape key handler to include blog modals
-// Added blog cards to scroll animation observer
+// Note: The placeholder definitions for openBlogModal and closeBlogModal have been removed from this file.
+// They are correctly defined in blog-scripts.js, which is loaded on blog.html.
