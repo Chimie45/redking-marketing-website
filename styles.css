@@ -945,11 +945,13 @@ nav .container {
     grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
     gap: 30px; 
     margin-bottom: 40px;
-    /* align-items: end; /* Reverted this for default (stretch/start) alignment */
+    align-items: end; /* Vertically align footer columns to the bottom */
 }
 
 .site-footer .footer-column {
-    /* Reverted flex properties for default block flow */
+    display: flex; /* Added for inner content alignment */
+    flex-direction: column; /* Added for inner content alignment */
+    justify-content: flex-end; /* Push content to the bottom of the column */
 }
 
 .site-footer .footer-column h4 {
@@ -959,6 +961,7 @@ nav .container {
     font-weight: 600;
     text-transform: uppercase; 
     letter-spacing: 0.5px;
+    /* margin-top: auto; /* Removed, as justify-content: flex-end on parent is better */
 }
 
 .site-footer .footer-logo {
@@ -968,6 +971,7 @@ nav .container {
 
 .site-footer .footer-about {
     /* Takes 1st column by default */
+     justify-content: space-between; /* Logo at top, text/icons at bottom for this specific column */
 }
 
 .site-footer .footer-about p {
@@ -1390,7 +1394,7 @@ nav .container {
 
 .team-modal-header {
     position: relative;
-    height: 280px; 
+    height: 280px; /* Set desired height for the header area */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1420,15 +1424,15 @@ nav .container {
 .team-modal-img-main { 
     position: relative;
     z-index: 2; 
-    height: 100%; /* Take full height of parent .team-modal-header */
-    width: auto;   /* Allow width to adjust based on aspect-ratio */
-    aspect-ratio: 1 / 1; /* Maintain 1:1 aspect ratio */
+    height: 85%; /* Take most of the header's height */
+    width: auto;   /* Let aspect-ratio define width */
+    aspect-ratio: 1 / 1; /* Enforce 1:1 aspect ratio */
     object-fit: cover; /* Cover the area, cropping if necessary */
     border-radius: 8px; 
     border: none; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    max-width: 90%; /* Prevent it from being too wide if header is very wide */
-    max-height: 90%; /* Ensure it doesn't exceed header boundaries */
+    max-width: 90%; /* Prevent it from becoming too wide relative to header */
+    max-height: 90%; /* Ensure it stays within header bounds */
 }
 
 
@@ -1494,8 +1498,8 @@ nav .container {
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 1rem; 
-    margin: 1.5rem 0; 
-    justify-content: center; 
+    margin: 1.5rem auto; /* Center the metrics block if it's narrower than modal body */
+    max-width: 500px; /* Constrain width of metrics block */
 }
 
 .team-metrics .metric-card {
@@ -1506,6 +1510,8 @@ nav .container {
     justify-content: center;
     align-items: center;
     width: 100%; 
+    background-color: rgba(26, 26, 26, 0.7); /* Slightly different bg for team metrics */
+    border-color: var(--dark-gold); /* Darker gold border */
 }
 .team-metrics .metric-card::before {
     content: none; 
@@ -1513,10 +1519,12 @@ nav .container {
 .team-metrics .metric-card .metric-number {
     font-size: 1.6rem; 
     margin-bottom: 0.1rem;
+    color: var(--gold); /* Brighter gold for numbers */
 }
 .team-metrics .metric-card .metric-label {
     font-size: 0.85rem; 
     line-height: 1.2;
+    color: #bbb; /* Lighter label */
 }
 
 
@@ -1849,14 +1857,12 @@ nav .container {
         height: 200px; 
     }
     .team-modal-img-main {
-        height: 100%; /* Let it take full height of header */
-        width: auto;   /* Width adjusts by aspect-ratio */
-        aspect-ratio: 1 / 1; /* Enforce 1:1 */
-        object-fit: cover; /* Cover the area */
+        height: 85%; /* Make image take most of the header height on mobile */
+        width: auto;   
+        aspect-ratio: 1 / 1; 
+        object-fit: cover; 
         border-radius: 8px; 
         border: none; 
-        max-width: 100%; /* Can take full width if header is narrow */
-        max-height: 100%; /* Can take full height */
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
