@@ -758,24 +758,25 @@ nav .container {
     background-color: var(--dark-gray);
     color: var(--white);
     padding: 1.5rem 2rem; /* Base padding */
-    padding-right: 70px; /* Space for close button, adjust as needed */
+    /* The close button is a sibling within .service-modal-content, so this header doesn't directly need right padding for it. */
+    /* The header-content-wrapper below will handle centering icon/title and can have padding if needed. */
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers the header-content-wrapper */
+    justify-content: center; /* Centers the .header-content-wrapper */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-shrink: 0;
-    /* position: relative; /* Not strictly needed if close is on parent */
 }
 
 .service-detail-modal .service-modal-header .header-content-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1rem; /* <<< ENSURED GAP IS HERE */
-    width: 100%; /* Occupy space left by parent's padding */
-    /* text-align: center; /* If h2 is inline-block, this helps */
+    justify-content: center; /* Centers icon and title */
+    gap: 1rem; /* <<< ENSURED GAP IS HERE for desktop */
+    padding-right: 50px; /* Provides space on the right IF close button was inside header and absolutely positioned to header's right. Since it's sibling, this helps prevent text overlap if title is long */
+    flex-grow: 1; /* Allow wrapper to take space */
+    text-align: center; /* Center text within the wrapper */
 }
 
 
@@ -783,16 +784,15 @@ nav .container {
     font-size: 2.5rem;
     color: var(--muted-gold);
     line-height: 1;
-    flex-shrink: 0; /* Prevent icon from shrinking */
+    flex-shrink: 0;
 }
 
 .service-detail-modal .service-modal-header h2 {
     font-size: 1.8rem; /* REVERTED to original desktop size */
     font-weight: bold;
-    margin: 0; /* Reset margin to allow gap to control spacing */
+    margin: 0;
     color: var(--white);
-    /* flex-grow: 1; /* Allow title to take space, but might push icon if too long */
-    /* text-align: left; /* Align text left within its own box */
+    /* Removed text-align: left to allow flex centering */
 }
 
 .service-detail-modal .service-modal-body {
@@ -1651,12 +1651,12 @@ nav .container {
         padding-right: 0; /* Reset wrapper padding if header itself has enough */
         gap: 0.5rem; /* MODIFIED: Reduced gap for mobile header */
     }
-    .service-detail-modal .service-modal-header i { font-size: 1.8rem; } /* MODIFIED: Smaller icon on mobile */
-    .service-detail-modal .service-modal-header h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
+    .service-detail-modal .service-modal-header i { font-size: 1.5rem; } /* MODIFIED: Significantly smaller icon on mobile */
+    .service-detail-modal .service-modal-header h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
 
-    .job-modal .job-modal-body h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
-    .portfolio-modal h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
-    .team-modal-body h2 { font-size: 1.2rem; } /* MODIFIED: Further reduced mobile title */
+    .job-modal .job-modal-body h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
+    .portfolio-modal h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
+    .team-modal-body h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
 
 
      .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
