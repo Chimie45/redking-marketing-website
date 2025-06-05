@@ -1885,3 +1885,11 @@ nav .container {
     opacity: 1 !important;
     visibility: visible !important;
 }
+/* EMERGENCY GALLERY MODAL FIX */
+.gallery-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
