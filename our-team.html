@@ -124,20 +124,24 @@
     </section>
 
     <!-- Jobs Board Section -->
-    <section id="careers" class="jobs-section services">
+    <section id="careers" class="jobs-section services"> <!-- Re-using 'services' class for consistent section padding/background -->
         <div class="container">
             <h2 class="section-title">Join Our Kingdom</h2>
             <p class="jobs-intro">We're always looking for passionate and talented individuals to join our quest for marketing domination. Check out our open positions below!</p>
             <div class="jobs-list">
                 <!-- Job Posting 1: Motion Graphic Designer -->
                 <div class="job-posting" onclick="openJobModal('motionDesignerJobModal')">
-                    <h3>Motion Graphic Designer</h3>
+                    <div class="job-posting-header">
+                        <i class="fas fa-briefcase job-posting-icon"></i> <!-- Added Icon -->
+                        <h3>Motion Graphic Designer</h3>
+                    </div>
                     <p class="job-location">Remote (Global)</p>
                     <p class="job-description">Seeking a talented Motion Graphic Designer to create short, high-impact video ads for various platforms. Click to learn more and apply.</p>
                     <div class="job-posting-footer">
                          <button type="button" class="cta-button job-apply-button see-more-button">See More</button>
                     </div>
                 </div>
+                <!-- Add more job postings here if needed, following the same structure -->
             </div>
         </div>
     </section>
@@ -335,7 +339,9 @@
                         <label for="jobAppResumeMotionDesigner">Attach Resume (PDF, DOC, DOCX - Max 5MB) *</label>
                         <input type="file" id="jobAppResumeMotionDesigner" name="resume" accept=".pdf,.doc,.docx,.rtf,.txt" required>
                     </div>
-                    <button type="submit" class="submit-btn">Submit Application</button>
+                    <div class="job-submit-cta-wrapper"> <!-- Wrapper for centering button -->
+                        <button type="submit" class="submit-btn">Submit Application</button>
+                    </div>
                     <div id="jobAppSubmissionMessageMotionDesigner" class="form-submission-feedback" style="display:none;"></div>
                 </form>
             </div>
