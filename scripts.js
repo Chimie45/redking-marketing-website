@@ -63,7 +63,6 @@ function closeGalleryModal(modalId) {
     if (iframe) {
         iframe.src = ''; 
     }
-    // Restore body scroll if no other modals are open
     checkAndRestoreScroll(); 
 }
 
@@ -192,20 +191,19 @@ function openJobModal(modalId) {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 
-    // Reset form and message if it exists
     const form = modal.querySelector('.job-application-form');
     if (form) form.reset();
     const messageDiv = modal.querySelector('.form-submission-feedback');
     if (messageDiv) {
         messageDiv.style.display = 'none';
         messageDiv.textContent = '';
+        messageDiv.className = 'form-submission-feedback'; 
     }
-    // Reset character counter
     const charCounter = modal.querySelector('.char-counter');
     const messageTextarea = modal.querySelector('textarea[name="message"]');
     if (charCounter && messageTextarea) {
         charCounter.textContent = `${messageTextarea.maxLength} characters remaining`;
-        charCounter.style.color = '#aaa'; // Default color
+        charCounter.style.color = '#aaa'; 
     }
 }
 
@@ -219,13 +217,43 @@ function closeJobModal(modalId) {
     checkAndRestoreScroll();
 }
 
+// Service Detail Modal Functions (NEW)
+function openServiceModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Service modal not found:', modalId);
+        return;
+    }
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+     // Scroll modal to top
+    setTimeout(() => { 
+       if(modal.contains(document.activeElement)) modal.blur();
+       modal.scrollTop = 0; 
+       const content = modal.querySelector('.service-modal-content');
+       if(content) content.scrollTop = 0;
+    },0);
+}
+
+function closeServiceModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Service modal not found for closing:', modalId);
+        return;
+    }
+    modal.style.display = 'none';
+    checkAndRestoreScroll();
+}
+
+
 // Helper function to check if any modal is open and restore scroll if not
 function checkAndRestoreScroll() {
     const anyModalOpen = document.querySelector('.gallery-modal[style*="display: block"]') ||
                          document.querySelector('.portfolio-modal[style*="display: block"]') ||
                          document.querySelector('.team-modal[style*="display: block"]') ||
                          document.querySelector('.job-modal[style*="display: block"]') ||
-                         document.querySelector('.blog-modal[style*="display: block"]'); // blog-modal check from blog-scripts.js
+                         document.querySelector('.service-detail-modal[style*="display: block"]') || // Added service modal
+                         (typeof closeBlogModal !== 'undefined' && document.querySelector('.blog-modal[style*="display: block"]'));
     if (!anyModalOpen) {
         document.body.style.overflow = 'auto';
     }
@@ -241,6 +269,8 @@ window.addEventListener('click', function(event) {
         closeTeamModal(event.target.id);
     } else if (event.target.classList.contains('job-modal')) {
         closeJobModal(event.target.id);
+    } else if (event.target.classList.contains('service-detail-modal')) { // Added service modal
+        closeServiceModal(event.target.id);
     }
     // Note: blog-modal outside click is handled in blog-scripts.js
 });
@@ -249,16 +279,17 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         let modalClosedThisEvent = false;
-        document.querySelectorAll('.gallery-modal, .portfolio-modal, .team-modal, .job-modal').forEach(modal => {
+        document.querySelectorAll('.gallery-modal, .portfolio-modal, .team-modal, .job-modal, .service-detail-modal').forEach(modal => { // Added service modal
             if (modal.style.display === 'block') {
                 if (modal.classList.contains('gallery-modal')) closeGalleryModal(modal.id);
                 else if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modal.id);
                 else if (modal.classList.contains('team-modal')) closeTeamModal(modal.id);
                 else if (modal.classList.contains('job-modal')) closeJobModal(modal.id);
+                else if (modal.classList.contains('service-detail-modal')) closeServiceModal(modal.id); // Added service modal
                 modalClosedThisEvent = true;
             }
         });
-        // blog-modal escape is handled in blog-scripts.js
+        
         if (modalClosedThisEvent) {
              checkAndRestoreScroll();
         }
@@ -277,6 +308,7 @@ if (contactForm) {
         formMessageDiv.style.borderRadius = '5px';
         formMessageDiv.style.textAlign = 'center';
         formMessageDiv.style.display = 'none'; 
+        formMessageDiv.className = 'form-submission-feedback'; 
         const parentOfContactForm = contactForm.parentNode;
         if (parentOfContactForm) {
              parentOfContactForm.insertBefore(formMessageDiv, contactForm.nextSibling);
@@ -287,7 +319,7 @@ if (contactForm) {
         e.preventDefault();
         formMessageDiv.textContent = ''; 
         formMessageDiv.style.display = 'none'; 
-        formMessageDiv.className = 'form-submission-feedback'; // Reset class
+        formMessageDiv.className = 'form-submission-feedback'; 
 
         const submitButton = this.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.textContent;
@@ -360,7 +392,7 @@ if (newsletterForm) {
         newsletterMessageDiv.style.textAlign = 'center';
         newsletterMessageDiv.style.fontSize = '0.9em';
         newsletterMessageDiv.style.display = 'none'; 
-        newsletterMessageDiv.className = 'form-submission-feedback';
+        newsletterMessageDiv.className = 'form-submission-feedback'; 
         newsletterForm.parentNode.insertBefore(newsletterMessageDiv, newsletterForm.nextSibling);
     }
 
@@ -368,7 +400,7 @@ if (newsletterForm) {
         e.preventDefault();
         newsletterMessageDiv.textContent = '';
         newsletterMessageDiv.style.display = 'none';
-        newsletterMessageDiv.className = 'form-submission-feedback';
+        newsletterMessageDiv.className = 'form-submission-feedback'; 
 
 
         const emailInput = this.querySelector('input[type="email"]');
@@ -449,7 +481,7 @@ if (jobAppFormMotionDesigner) {
         const feedbackDiv = document.getElementById('jobAppSubmissionMessageMotionDesigner');
         feedbackDiv.textContent = '';
         feedbackDiv.style.display = 'none';
-        feedbackDiv.className = 'form-submission-feedback';
+        feedbackDiv.className = 'form-submission-feedback'; 
 
 
         const submitButton = this.querySelector('button[type="submit"]');
@@ -461,7 +493,6 @@ if (jobAppFormMotionDesigner) {
         const emailInput = document.getElementById('jobAppEmailMotionDesigner');
         const resumeInput = document.getElementById('jobAppResumeMotionDesigner');
 
-        // Basic Validation
         if (!nameInput.value || !emailInput.value || !messageTextarea.value || !resumeInput.files.length) {
             feedbackDiv.textContent = 'Please fill in all required fields and attach a resume.';
             feedbackDiv.classList.add('error');
@@ -509,20 +540,20 @@ if (jobAppFormMotionDesigner) {
 
         const formData = new FormData(this);
         formData.append('formType', 'job-application-motion-designer');
-        // The worker URL
+        
         const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
 
         try {
             const response = await fetch(workerUrl, {
                 method: 'POST',
-                body: formData, // Browser sets Content-Type to multipart/form-data
+                body: formData, 
             });
-            const result = await response.json();
+            const result = await response.json(); 
 
             if (response.ok && result.success) {
                 feedbackDiv.textContent = result.message || 'Application submitted successfully!';
                 feedbackDiv.classList.add('success');
-                this.reset();
+                this.reset(); 
                 if (charCounterDisplay) charCounterDisplay.textContent = `${maxLength} characters remaining`;
             } else {
                 feedbackDiv.textContent = result.message || `Submission failed. Server responded with ${response.status}.`;
@@ -543,13 +574,11 @@ if (jobAppFormMotionDesigner) {
 
 // DOMContentLoaded for general initializations
 document.addEventListener('DOMContentLoaded', function() {
-    // Set current year in footer
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
     
-    // Lazy loading for images with data-src attribute
     const lazyImages = document.querySelectorAll('img[data-src]');
     if (lazyImages.length > 0) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -565,10 +594,9 @@ document.addEventListener('DOMContentLoaded', function() {
         lazyImages.forEach(img => imageObserver.observe(img));
     }
 
-    // Smooth scrolling for navigation links
     const navAnchors = document.querySelectorAll('nav .nav-links a[href*="#"], .logo[href*="#"], .cta-button[href*="#"]');
-    const mobileMenuIcon = document.querySelector('.mobile-menu'); // Define here for access in click listener
-    const navLinks = document.querySelector('.nav-links'); // Define here for access
+    const mobileMenuIcon = document.querySelector('.mobile-menu'); 
+    const navLinks = document.querySelector('.nav-links'); 
 
     navAnchors.forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -597,17 +625,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mobile menu toggle
     if (mobileMenuIcon && navLinks) {
         mobileMenuIcon.addEventListener('click', function() {
             navLinks.classList.toggle('nav-links--active'); 
             this.classList.toggle('active'); 
         });
-    } else {
-        // console.warn("Mobile menu icon or nav links not found for toggle.");
     }
 
-    // Add scroll effect to navigation
     window.addEventListener('scroll', function() {
         const nav = document.querySelector('nav');
         if (nav) {
@@ -615,7 +639,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Animate elements on scroll
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
@@ -627,7 +650,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content').forEach((el) => {
-        if (!el.classList.contains('blog-card')) { 
+        // Updated to ensure blog cards are observed correctly by their specific script if necessary.
+        if (el.closest('#blog-posts') && el.classList.contains('blog-card')) {
+            // If blog-scripts.js handles blog-card animations, this check prevents double observation.
+            // If blog-scripts.js relies on this observer, then this check is not needed.
+            // For now, assume blog-scripts.js might have its own observer or rely on this one.
+            // If this script is meant to be the sole animator, remove this conditional block for blog-cards.
+        } else {
              animatedElementsObserver.observe(el);
         }
     });
@@ -645,52 +674,44 @@ function animateValue(element) {
     const suffix = finalValueText.substring(numericPart.length); 
     const duration = 1500; 
     const frameDuration = 16; 
-    const totalFrames = Math.max(1, duration / frameDuration); // Ensure at least 1 frame
+    const totalFrames = Math.max(1, duration / frameDuration); 
     let increment = numericValue / totalFrames; 
 
     if (numericValue === 0) {
         element.textContent = '0' + suffix;
         return;
     }
-     // Adjust increment if it's too small to make a difference, but avoid infinite loops for small numbers
     if (Math.abs(increment) < 0.0001 && numericValue !== 0) {
-      increment = (numericValue / Math.abs(numericValue)) * 0.001; // Smallest practical increment preserving sign
+      increment = (numericValue / Math.abs(numericValue)) * 0.001; 
     }
 
-
     let currentValue = 0;
-    // Initial display before animation starts
     const initialDisplayValue = (numericValue < 1 && numericValue > 0 && !Number.isInteger(numericValue)) ? '0.0' : '0';
     element.textContent = initialDisplayValue + suffix;
 
     const timer = setInterval(() => {
         currentValue += increment;
         let animationComplete = false;
-        if (increment > 0 && currentValue >= numericValue) {
+        if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue)) {
             currentValue = numericValue;
             animationComplete = true;
-        } else if (increment < 0 && currentValue <= numericValue) {
-            currentValue = numericValue;
-            animationComplete = true;
-        } else if (numericValue === 0) { // Should have been caught earlier, but as a safeguard
+        } else if (numericValue === 0) { 
             currentValue = 0;
             animationComplete = true;
         }
-
 
         let displayValue;
         if (numericPart.includes('.') && !Number.isInteger(numericValue) ) { 
             const decimalPlaces = (numericPart.split('.')[1] || '').length;
             displayValue = currentValue.toFixed(decimalPlaces);
         } else {
-            displayValue = Math.round(currentValue); // Use round for smoother appearance towards end
+            displayValue = Math.round(currentValue); 
         }
         element.textContent = displayValue + suffix;
         
         if(animationComplete){
             clearInterval(timer);
         }
-
     }, frameDuration);
 }
 
