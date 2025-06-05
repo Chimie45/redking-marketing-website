@@ -606,7 +606,7 @@ nav .container {
 
 /* Common Modal Header Styles (Portfolio, Team, Blog - for modals with cover images) */
 .portfolio-modal-header, .team-modal-header, .blog-modal-header {
-    position: relative;
+    position: relative; /* For pseudo-elements and close button positioning */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -690,12 +690,12 @@ nav .container {
 
 .portfolio-modal-body { padding: 2.5rem; }
 .team-modal-body { text-align: center; padding: 2rem; }
-.blog-modal-body { padding: 2.5rem; }
+.blog-modal-body { padding: 2.5rem; } /* Assuming blog.html uses this */
 
 
 .portfolio-modal h2 { /* Specific to portfolio modal title */
     color: var(--muted-gold);
-    font-size: 2.2rem;
+    font-size: 2.0rem; /* MODIFIED */
     margin-bottom: 1.5rem;
 }
 
@@ -757,41 +757,40 @@ nav .container {
 .service-detail-modal .service-modal-header {
     background-color: var(--dark-gray);
     color: var(--white);
-    padding: 1.5rem 2rem; /* Apply base padding */
-    padding-right: 70px; /* Add extra padding on the right for the close button area */
-    box-sizing: border-box; /* Ensures padding is within the element's total width/height */
+    padding: 1.5rem 2rem;
+    padding-right: 70px; /* Space for close button */
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center; /* Centers the .header-content-wrapper */
-    gap: 1rem; /* Gap between icon and title if they were direct children (now handled by wrapper) */
-    text-align: center; /* Fallback for title if not perfectly centered by flex */
+    justify-content: center;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-shrink: 0;
-    /* position: relative; /* Not needed here as close button is sibling */
+    position: relative; /* Context for absolute close button if it were a child */
 }
 
 .service-detail-modal .service-modal-header .header-content-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center icon and title within this wrapper */
-    gap: 1rem; /* Space between icon and title */
-    width: 100%; /* Allow it to take available space minus parent padding */
+    justify-content: center;
+    gap: 1rem;
+    width: 100%; /* Takes up available space in header */
+    /* This wrapper's content (icon and h2) will be centered by its own flex properties */
 }
 
+
 .service-detail-modal .service-modal-header i {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Icon size */
     color: var(--muted-gold);
     line-height: 1;
 }
 
 .service-detail-modal .service-modal-header h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* MODIFIED */
     font-weight: bold;
     margin: 0;
     color: var(--white);
-    /* Text will be centered by the .header-content-wrapper's justify-content */
 }
 
 .service-detail-modal .service-modal-body {
@@ -1121,7 +1120,7 @@ nav .container {
 .site-footer .newsletter-form input[type="email"]:focus {
     outline: none;
     border-color: var(--muted-gold);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
 }
 
 .site-footer .newsletter-form button {
@@ -1298,7 +1297,7 @@ nav .container {
 }
 
 .team-modal-body h2 { /* Team modal specific title */
-    font-size: 2.2rem;
+    font-size: 2.0rem; /* MODIFIED */
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
     margin-top: 0;
@@ -1438,7 +1437,7 @@ nav .container {
 }
 
 .job-modal .job-modal-body h2 { /* Main title in Job Modal */
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* MODIFIED */
     font-weight: bold;
     color: var(--muted-gold);
     text-align: center;
@@ -1650,8 +1649,10 @@ nav .container {
         padding-right: 0; /* Reset wrapper padding if header itself has enough */
     }
     .service-detail-modal .service-modal-header i { font-size: 2rem; }
-    .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; }
-    .job-modal .job-modal-body h2 { font-size: 1.5rem; } /* Job modal main title responsive */
+    .service-detail-modal .service-modal-header h2 { font-size: 1.4rem; } /* MODIFIED Mobile */
+    .job-modal .job-modal-body h2 { font-size: 1.4rem; } /* MODIFIED Mobile: Job modal main title responsive */
+    .portfolio-modal h2 { font-size: 1.4rem; } /* MODIFIED Mobile */
+    .team-modal-body h2 { font-size: 1.4rem; } /* MODIFIED Mobile */
 
 
      .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
@@ -1724,8 +1725,16 @@ nav .container {
 
 /* MODAL Z-INDEX HIERARCHY & DISPLAY FIXES */
 
-.service-detail-modal {
-    z-index: 2500; /* Keep !important if absolutely necessary, but try without first */
+.service-detail-modal.modal--is-open, /* Ensure higher z-index when open */
+.portfolio-modal.modal--is-open,
+.team-modal.modal--is-open,
+.blog-modal.modal--is-open,
+.job-modal.modal--is-open {
+    /* display, align-items, justify-content, opacity, visibility are handled by .modal--is-open directly */
+}
+
+.service-detail-modal { /* Base z-index, open state will be higher */
+    z-index: 2500;
 }
 .portfolio-modal,
 .team-modal,
@@ -1735,9 +1744,9 @@ nav .container {
 }
 
 .close-service-modal,
-.close-modal, 
+.close-modal,
 .close-team-modal,
 .close-blog-modal,
 .close-job-modal {
-    z-index: 2510 !important; /* Higher than modal content */
+    z-index: 2510 !important; /* Ensures close button is above its modal's content */
 }
