@@ -938,7 +938,7 @@ nav .container {
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* Footer New Styles V2 - Adjusted for 4 columns */
+/* Footer Styles */
 .site-footer {
     background-color: var(--black);
     color: #ccc;
@@ -949,16 +949,16 @@ nav .container {
 
 .site-footer .footer-main {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    grid-template-columns: repeat(4, 1fr); 
     gap: 30px; 
     margin-bottom: 40px;
-    align-items: end; /* Vertically align footer columns to the bottom */
+    align-items: start; /* Changed from end to start */
 }
 
 .site-footer .footer-column {
-    display: flex; /* Added for inner content alignment */
-    flex-direction: column; /* Added for inner content alignment */
-    justify-content: flex-end; /* Push content to the bottom of the column */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; /* Changed from flex-end to flex-start */
 }
 
 .site-footer .footer-column h4 {
@@ -973,10 +973,11 @@ nav .container {
 .site-footer .footer-logo {
     max-height: 50px; 
     margin-bottom: 25px;
+    align-self: flex-start; /* Ensure logo aligns to the start of its column if needed */
 }
 
 .site-footer .footer-about {
-     justify-content: space-between; 
+     justify-content: flex-start; /* Changed from space-between to flex-start */
 }
 
 .site-footer .footer-about p {
@@ -1387,38 +1388,36 @@ nav .container {
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    background-color: var(--dark-gray); /* Fallback, will be overridden by JS if image is set */
+    background-color: var(--dark-gray); 
     border-top-left-radius: 8px; 
     border-top-right-radius: 8px;
-    /* background-image is set by JS for the ::before pseudo-element */
 }
 
 .team-modal-header::before { 
-    content: ''; /* Restored for blur effect */
+    content: ''; 
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: inherit; /* Inherits from .team-modal-header (set by JS) */
+    background-image: inherit; 
     background-size: cover;
     background-position: center;
-    filter: blur(10px) brightness(0.6); /* Adjust blur/brightness as needed */
-    transform: scale(1.1); /* Optional: helps blur cover edges better */
+    filter: blur(10px) brightness(0.6); 
+    transform: scale(1.1); 
     z-index: 1;
 }
 
-/* Team member image in the modal - centered, respects aspect ratio */
 .team-modal-img-main { 
     position: relative; 
-    z-index: 2; /* Above the ::before pseudo-element */
-    max-height: 85%;  /* Fill most of the header height, leaving some space for blur */
-    max-width: 90%;   /* Prevent image from touching sides if very wide */
-    width: auto;      /* Maintain aspect ratio */
-    height: auto;     /* Maintain aspect ratio */
-    object-fit: contain; /* Show entire image, letterboxed if needed */
-    border-radius: 8px; /* Slightly rounded corners for the image itself */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Subtle shadow for depth */
+    z-index: 2; 
+    max-height: 85%;  
+    max-width: 90%;   
+    width: auto;      
+    height: auto;     
+    object-fit: contain; 
+    border-radius: 8px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
     border: none; 
 }
 
