@@ -17,8 +17,8 @@
     --dark-gray: #1a1a1a;
     --light-gray: #f5f5f5;
     --white: #ffffff;
-    --success-green: #28a745;
-    --error-red: #dc3545;
+    --success-green: #28a745; /* For success messages */
+    --error-red: #dc3545;     /* For error messages */
 }
 
 /* Typography and Body */
@@ -173,38 +173,49 @@ nav .container {
 
 
 /* Hero Section */
-.hero {
+.hero { /* General hero for index.html */
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/home/header.jpg'); /* Default header image for index.html */
+        url('images/home/header.jpg'); 
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* This creates the parallax-like effect */
+    background-attachment: fixed; 
     min-height: 100vh;
     display: flex;
     align-items: center;
     text-align: center;
     position: relative;
-    overflow: hidden; /* If any child elements might overflow */
+    overflow: hidden; 
     border-bottom: 3px solid var(--muted-gold);
 }
 
-/* Specific background for Our Team page header */
+/* Page Header for sub-pages (Team, Blog, Services) */
+.page-header.hero { /* More specific selector for sub-page headers */
+    /* Background images will be set in page-specific CSS or inline */
+    min-height: 60vh; /* Default min-height for sub-page headers */
+}
+
 #team-header.page-header.hero {
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/team/teamheader.jpg'); /* Ensure teamheader.jpg is in the correct path */
+        url('images/team/teamheader.jpg');
+    min-height: 100vh; /* team page has a taller header */
+}
+#blog-header.page-header.hero {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+        url('images/blog/blogheader.jpg'); /* Assuming a blogheader.jpg in images/blog/ */
+     min-height: 70vh;
 }
 
 
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 20px; /* Add some padding for smaller screens */
+    padding: 20px; 
 }
 
-/* Screen reader only - for SEO h1 */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -217,28 +228,38 @@ nav .container {
     border: 0;
 }
 
-.hero-logo {
+.hero-logo { /* For index.html main logo */
     max-width: 720px;
     width: 100%;
     height: auto;
     margin-bottom: 1.5rem;
 }
 
-.hero h1 { /* This is the .sr-only h1, so visual styles might not be needed unless it becomes visible */
+.hero h1, .page-header .hero-content h1 { /* For subpage headers */
+    font-size: 3rem; /* Adjusted default */
+    margin-bottom: 0.5rem; /* Adjusted default */
+    color: var(--muted-gold);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.hero .hero-content h1 { /* For index.html sr-only, less visual impact needed if it became visible */
     font-size: 3.5rem;
-    margin-bottom: 1rem;
     color: var(--white);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.hero .subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: var(--muted-gold);
+
+.hero .subtitle, .page-header .hero-content .subtitle {
+    font-size: 1.5rem; /* Adjusted default */
+    margin-bottom: 2rem; /* Adjusted default */
+    color: var(--white); /* Default for subpages, index hero has its own */
     font-weight: 300;
 }
+.hero .hero-content .subtitle { /* For index.html main subtitle */
+     color: var(--muted-gold);
+}
 
-.hero p {
+
+.hero p { /* For index.html hero text */
     font-size: 1.2rem;
     margin-bottom: 2rem;
     max-width: 600px;
@@ -267,8 +288,8 @@ nav .container {
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
-/* Services Section */
-.services { /* Also used by Portfolio section */
+/* Services Section (also used by Portfolio and Blog previews on index.html) */
+.services { 
     padding: 100px 0;
     background: var(--dark-gray);
     border-bottom: 2px solid var(--muted-gold);
@@ -281,27 +302,30 @@ nav .container {
     margin-top: 3rem;
 }
 
-.service-card { /* Also used by Blog section */
+.service-card { 
     background: var(--black);
     padding: 2rem;
     border-radius: 10px;
     text-align: center;
     border: 2px solid var(--primary-red);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-    position: relative; /* For potential future pseudo-elements or absolutely positioned children */
+    position: relative; 
+    display: flex; /* Added for flex layout */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Pushes button to bottom */
 }
 
 .service-card:hover {
     border-color: var(--muted-gold);
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
-    transform: translateY(-5px); /* Subtle lift effect */
+    transform: translateY(-5px); 
 }
 
 .service-icon {
-    font-size: 2.8rem; /* Adjusted for Font Awesome */
+    font-size: 2.8rem; 
     color: var(--muted-gold);
     margin-bottom: 1rem;
-    line-height: 1; /* Ensure icon vertical alignment */
+    line-height: 1; 
 }
 
 .service-card h3 {
@@ -309,14 +333,44 @@ nav .container {
     margin-bottom: 1rem;
     color: var(--white);
 }
+.service-card h3 a.blog-preview-link { /* For blog previews on index */
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.service-card h3 a.blog-preview-link:hover {
+    color: var(--muted-gold);
+}
+
 
 .service-card p {
     color: #ccc;
     line-height: 1.6;
+    flex-grow: 1; /* Allows p to take available space before button */
+    margin-bottom: 1rem; /* Ensure space if button isn't present */
+}
+.service-card .view-details-button { /* Shared with services.css */
+    display: inline-block;
+    margin-top: auto; /* Pushes to bottom if content above is short */
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: var(--muted-gold);
+    border: 1px solid var(--muted-gold);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    align-self: center; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.service-card:hover .view-details-button {
+    background-color: var(--muted-gold);
+    color: var(--black);
 }
 
+
 /* About Section */
-.about { /* Also used by Gallery section */
+.about { 
     padding: 100px 0;
     background: var(--black);
     border-bottom: 2px solid var(--muted-gold);
@@ -324,12 +378,12 @@ nav .container {
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Default for larger screens */
+    grid-template-columns: 1fr 1fr; 
     gap: 4rem;
     align-items: center;
 }
 
-.about-text h2 { /* This is "Why Choose RedKing?" */
+.about-text h2 { 
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: var(--muted-gold);
@@ -342,7 +396,7 @@ nav .container {
     line-height: 1.7;
 }
 
-.stats-video { /* Container for the animated GIF/image */
+.stats-video { 
     width: 100%;
     max-width: 650px;
     margin: 2rem auto;
@@ -369,7 +423,7 @@ nav .container {
     align-items: center;
     gap: 3rem;
     flex-wrap: wrap;
-    max-width: 1200px; /* Or adjust as needed */
+    max-width: 1200px; 
     margin: 0 auto;
 }
 
@@ -377,10 +431,10 @@ nav .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px; /* Adjust as needed */
+    height: 60px; 
     transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0.7;
-    flex: 0 0 auto; /* Prevent shrinking if not enough space */
+    flex: 0 0 auto; 
 }
 
 .logo-item:hover {
@@ -389,12 +443,12 @@ nav .container {
 }
 
 .logo-item img {
-    max-width: 120px; /* Adjust as needed */
+    max-width: 120px; 
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: brightness(0.8) grayscale(0.2); /* Slightly desaturated and dimmed */
+    filter: brightness(0.8) grayscale(0.2); 
     transition: filter 0.3s ease;
 }
 
@@ -493,7 +547,7 @@ nav .container {
     line-height: 1.2;
 }
 
-.view-details {
+.view-details { /* Shared with portfolio-card, used on index and services.html for modals */
     color: var(--muted-gold);
     font-weight: bold;
     font-size: 0.8rem; 
@@ -506,8 +560,8 @@ nav .container {
 }
 
 
-/* Portfolio Modal */
-.portfolio-modal, .team-modal, .blog-modal, .job-modal { /* Combined common modal styles */
+/* Common Modal Styles (Portfolio, Team, Blog, Job, Service) */
+.portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal {
     display: none;
     position: fixed;
     z-index: 2000;
@@ -518,10 +572,10 @@ nav .container {
     background-color: rgba(0,0,0,0.92); 
     animation: fadeIn 0.3s ease;
     overflow-y: auto; 
-    padding: 20px; /* Added padding for better spacing on small screens */
+    padding: 20px; 
 }
 
-.portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content { /* Combined common modal content styles */
+.portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
     position: relative;
     background-color: var(--black);
     margin: 3% auto; 
@@ -531,15 +585,17 @@ nav .container {
     width: 90%;
     animation: slideIn 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden; /* Prevent content from breaking border radius */
+    overflow: hidden; 
 }
 .portfolio-modal-content { max-width: 1000px; }
 .team-modal-content { max-width: 750px; }
-.blog-modal-content { max-width: 900px; }
+.blog-modal-content { max-width: 900px; } /* From blog-styles.css */
 .job-modal-content { max-width: 800px; }
+.service-modal-content { max-width: 850px; } /* From services.css */
 
 
-.portfolio-modal-header, .team-modal-header, .blog-modal-header { /* Common modal header styles */
+/* Common Modal Header Styles (Portfolio, Team, Blog - has image) */
+.portfolio-modal-header, .team-modal-header, .blog-modal-header {
     position: relative;
     overflow: hidden;
     display: flex;
@@ -553,10 +609,10 @@ nav .container {
 }
 .portfolio-modal-header { height: 400px; }
 .team-modal-header { height: 280px; background-color: var(--dark-gray); }
-.blog-modal-header { height: 300px; }
+.blog-modal-header { height: 300px; } /* From blog-styles.css */
 
 
-.portfolio-modal-header::before, .team-modal-header::before, .blog-modal-header::before { /* Common modal header pseudo-element for blur */
+.portfolio-modal-header::before, .team-modal-header::before, .blog-modal-header::before {
     content: '';
     position: absolute;
     top: 0;
@@ -573,7 +629,7 @@ nav .container {
 .team-modal-header::before { filter: blur(10px) brightness(0.6); transform: scale(1.1); }
 
 
-.portfolio-modal-header img, .team-modal-img-main, .blog-modal-header img { /* Common modal header image styles */
+.portfolio-modal-header img, .team-modal-img-main, .blog-modal-header img {
     position: relative;
     max-width: 90%;
     max-height: 90%;
@@ -584,10 +640,11 @@ nav .container {
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
-.team-modal-img-main { border: none; } /* Specific for team modal image */
+.team-modal-img-main { border: none; } 
 
 
-.close-modal, .close-team-modal, .close-blog-modal, .close-job-modal { /* Common close button */
+/* Common Close Button for All Modals */
+.close-modal, .close-team-modal, .close-blog-modal, .close-job-modal, .close-service-modal { 
     position: absolute;
     top: 15px;
     right: 20px;
@@ -607,21 +664,23 @@ nav .container {
     line-height: 1; 
 }
 
-.close-modal:hover, .close-team-modal:hover, .close-blog-modal:hover, .close-job-modal:hover {
+.close-modal:hover, .close-team-modal:hover, .close-blog-modal:hover, .close-job-modal:hover, .close-service-modal:hover {
     background: var(--muted-gold);
     color: var(--black);
     transform: rotate(90deg);
 }
 
-.portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body { /* Common modal body padding */
+/* Common Modal Body Padding */
+.portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body, .service-modal-body {
     padding: 2.5rem; 
 }
 .team-modal-body { text-align: center; padding: 2rem; }
-.blog-modal-body { padding: 2.5rem; }
-.job-modal-body { padding: 2rem; }
+.blog-modal-body { padding: 2.5rem; } /* From blog-styles.css */
+.job-modal-body { padding: 2rem; }   /* For job modal */
+.service-modal-body { padding: 2rem 2.5rem; } /* From services.css */
 
 
-.portfolio-modal h2 {
+.portfolio-modal h2 { /* Specific to portfolio */
     color: var(--muted-gold);
     font-size: 2.2rem; 
     margin-bottom: 1.5rem;
@@ -707,7 +766,7 @@ nav .container {
 }
 
 .gallery-item img,
-.gallery-item video {
+.gallery-item video { /* Styles for video previews in the grid */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -746,16 +805,7 @@ nav .container {
 
 /* Gallery Modal (for single image/video AND iframe) */
 .gallery-modal {
-    display: none;
-    position: fixed;
-    z-index: 2000; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.95); 
-    animation: fadeIn 0.3s ease;
-    overflow-y: auto; 
+    /* Common styles already defined with .portfolio-modal etc. */
 }
 
 .gallery-modal-content {
@@ -769,12 +819,16 @@ nav .container {
     align-items: center;
     justify-content: center;
     animation: slideIn 0.3s ease;
+    background-color: transparent; /* Override inherited black for gallery modal */
+    border: none; /* Override inherited border for gallery modal */
+    box-shadow: none; /* Override inherited shadow for gallery modal */
 }
 
 .gallery-modal-content.iframe-modal-content {
     height: 85vh; 
     width: 85vw;  
     max-width: 1200px; 
+    background-color: var(--black); /* Restore bg for iframe modal if needed */
 }
 
 
@@ -798,29 +852,7 @@ nav .container {
 
 
 .close-gallery-modal { 
-    position: absolute;
-    top: 20px;
-    right: 30px; 
-    color: var(--white);
-    font-size: 2.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    background: rgba(0,0,0,0.6);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10; 
-    line-height: 1; 
-}
-
-.close-gallery-modal:hover {
-    background: var(--muted-gold);
-    color: var(--black);
-    transform: rotate(90deg);
+    /* Common styles already defined */
 }
 
 .gallery-modal-title {
@@ -854,7 +886,7 @@ nav .container {
 }
 
 .contact-icon-wrapper .fas.fa-crown,
-.contact-icon-wrapper .fas.fa-envelope { /* For blog newsletter icon */
+.contact-icon-wrapper .fas.fa-envelope { 
     font-size: 3rem; 
     color: var(--muted-gold);
 }
@@ -875,14 +907,14 @@ nav .container {
     margin-right: auto;
 }
 
-.contact-form { /* Used by main contact and blog newsletter */
+.contact-form { 
     background: rgba(0, 0, 0, 0.35); 
     padding: 2.5rem; 
     border-radius: 10px;
     border: 1px solid var(--muted-gold);
     width: 100%; 
 }
-.newsletter-signup-form .form-group { /* Specific to blog newsletter single field */
+.newsletter-signup-form .form-group { 
     margin-bottom: 0;
 }
 
@@ -900,8 +932,8 @@ nav .container {
     flex-direction: column;
     gap: 1.5rem; 
 }
-.contact-form .form-group { /* General form group, including single ones */
-    margin-bottom: 0; /* Reset if previously set, manage spacing with gap */
+.contact-form .form-group { 
+    margin-bottom: 0; 
 }
 
 
@@ -937,7 +969,7 @@ nav .container {
     height: 165px; 
     resize: vertical;
 }
-.job-application-form .form-group textarea { /* For job app message */
+.job-application-form .form-group textarea { 
     height: 100px;
 }
 
@@ -973,6 +1005,28 @@ nav .container {
     transform: translateY(-2px);
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
+
+/* Form Submission Feedback Messages */
+.form-submission-feedback {
+    margin-top: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: none; /* Hidden by default */
+}
+.form-submission-feedback.success {
+    background-color: var(--success-green);
+    color: var(--white);
+    border: 1px solid darken(var(--success-green), 10%);
+}
+.form-submission-feedback.error {
+    background-color: var(--error-red);
+    color: var(--white);
+    border: 1px solid darken(var(--error-red), 10%);
+}
+
 
 /* Footer Styles */
 .site-footer {
@@ -1171,30 +1225,13 @@ nav .container {
 /* CSS for scroll-triggered animations */
 .portfolio-card, .service-card, .about-text > *, .client-logos, 
 .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, 
-.team-member-card, .award-item, .job-posting, .mission-content { 
-    opacity: 1; 
-    transform: translateY(0); 
+.team-member-card, .award-item, .job-posting, .mission-content, .blog-card /* Added .blog-card here */ { 
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Start slightly lower */
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-/* Ensure initially hidden for JS to reveal */
-.portfolio-card:not(.element--in-view), 
-.service-card:not(.element--in-view),
-.about-text > *:not(.element--in-view), 
-.client-logos:not(.element--in-view), 
-.gallery-item:not(.element--in-view), 
-#blog .service-card:not(.element--in-view), 
-.contact-info > *:not(.element--in-view), 
-.contact-form > *:not(.element--in-view), 
-.team-member-card:not(.element--in-view), 
-.award-item:not(.element--in-view), 
-.job-posting:not(.element--in-view), 
-.mission-content:not(.element--in-view) {
-    opacity: 0;
-    transform: translateY(20px);
-}
 
-
-.element--in-view {
+.element--in-view { /* Class added by JS when element is in view */
     opacity: 1;
     transform: translateY(0);
 }
@@ -1267,35 +1304,20 @@ nav .container {
   background-color: var(--muted-gold); 
 }
 
-.fade {
-  animation-name: fade;
+.fade { /* General fade animation for slides */
+  animation-name: fadeAnimate;
   animation-duration: 0.5s; 
 }
 
-@keyframes fadeAnimate { /* Renamed to avoid conflict if 'fade' is used elsewhere */
+@keyframes fadeAnimate {
   from {opacity: .4} 
   to {opacity: 1}
 }
-.gallery-slide.fade { animation-name: fadeAnimate; }
 
 
 /* Our Team Page Specific Styles */
 .page-header#team-header { 
-    min-height: 100vh; 
-    background-attachment: fixed; 
-}
-
-.page-header .hero-content h1 {
-    font-size: 3rem; 
-    color: var(--muted-gold);
-    margin-bottom: 0.5rem;
-}
-
-.page-header .hero-content .subtitle {
-    font-size: 1.3rem;
-    color: var(--white);
-    font-weight: 300;
-    margin-bottom: 2rem; 
+    /* specific background set with higher specificity */
 }
 
 .mission-statement-header {
@@ -1388,14 +1410,32 @@ nav .container {
     min-height: 60px; 
 }
 
-.team-member-social-modal a { 
-    color: #ccc;
-    font-size: 1.8rem; 
-    margin: 0 0.75rem;
-    transition: color 0.3s ease;
-}
-.team-member-social-modal a:hover {
+.team-modal-body h2 { /* Team modal specific title */
+    font-size: 2.2rem;
     color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+    margin-top: 0; 
+}
+
+.team-modal-title { /* Team modal specific subtitle */
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 1rem; 
+    font-weight: 500;
+}
+
+.team-modal-bio { /* Team modal specific bio text */
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.7;
+    text-align: left; 
+    margin-bottom: 1.5rem; 
+}
+.team-modal-bio p {
+    margin-bottom: 1em;
+}
+.team-modal-bio p:last-child {
+    margin-bottom: 0;
 }
 
 
@@ -1470,7 +1510,7 @@ nav .container {
     border-radius: 8px;
     border: 1px solid var(--muted-gold);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    cursor: pointer; /* Make entire card clickable */
+    cursor: pointer; 
 }
 
 .job-posting:hover {
@@ -1499,17 +1539,17 @@ nav .container {
 }
 
 .job-posting-footer {
-    text-align: right; /* Align button to the right */
+    text-align: right; 
     margin-top: 1rem;
 }
 
-.see-more-button { /* Style for the "See More" button */
+.see-more-button { 
     padding: 10px 25px;
     font-size: 1rem;
 }
 
 /* Job Modal Specific Styles */
-.job-modal-body h2 {
+.job-modal-body h2 { /* Distinct from other modal h2s */
     font-size: 2rem;
     color: var(--muted-gold);
     margin-bottom: 1.5rem;
@@ -1552,14 +1592,14 @@ nav .container {
     margin: 2rem 0;
 }
 
-.job-application-form h3 { /* "Directly Apply" heading */
+.job-application-form h3 { 
     font-size: 1.5rem;
     color: var(--muted-gold);
     text-align: center;
     margin-bottom: 1.5rem;
 }
 .job-application-form .form-group {
-    margin-bottom: 1.2rem; /* Spacing between form fields */
+    margin-bottom: 1.2rem; 
 }
 
 .char-counter {
@@ -1569,30 +1609,18 @@ nav .container {
     margin-top: 0.25rem;
 }
 
-.form-submission-feedback { /* For success/error messages in job app form */
-    margin-top: 1rem;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: 500;
-}
-.form-submission-feedback.success {
-    background-color: var(--success-green);
-    color: var(--white);
-}
-.form-submission-feedback.error {
-    background-color: var(--error-red);
-    color: var(--white);
-}
-
 
 /* Responsive Design */
 @media (max-width: 992px) { /* Tablet breakpoint */
     .about-content,
     .contact-content-wrapper .form-columns { 
         grid-template-columns: 1fr; 
-        gap: 0; 
+        gap: 2rem; /* Added some gap for single column */
     }
+    .contact-form .form-columns { /* Keep some gap if form-columns is still used */
+        gap: 1.5rem;
+    }
+
     .contact-content-wrapper .form-column-right .form-group textarea {
         height: 120px; 
     }
@@ -1619,6 +1647,7 @@ nav .container {
     }
     .site-footer .footer-links-columns {
         justify-content: flex-start; 
+        grid-template-columns: 1fr; /* Stack footer link columns */
     }
     .site-footer .newsletter-form {
         max-width: none; 
@@ -1664,21 +1693,13 @@ nav .container {
         height: 35px;
     }
 
-    .hero h1 { 
-        font-size: 2.5rem;
-    }
-    .page-header#team-header .hero-content h1 { 
+    .hero h1, .page-header .hero-content h1 { 
         font-size: 2.5rem;
     }
 
-
-    .hero .subtitle {
+    .hero .subtitle, .page-header .hero-content .subtitle {
         font-size: 1.2rem;
     }
-    .page-header#team-header .hero-content .subtitle {
-        font-size: 1.2rem;
-    }
-
 
     .hero p {
         font-size: 1rem;
@@ -1704,18 +1725,12 @@ nav .container {
      .site-footer .footer-social-icons {
         justify-content: flex-start; 
     }
-    .site-footer .footer-links-columns {
-        flex-direction: column; 
-        gap: 0;
-    }
-    .site-footer .footer-links-columns ul {
-        margin-bottom: 10px; 
-    }
+
      .site-footer .newsletter-form {
         max-width: none; 
     }
     
-    .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content { /* Combined for mobile */
+    .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content { 
         width: 95%;
         margin: 5% auto;
     }
@@ -1723,11 +1738,12 @@ nav .container {
     .portfolio-modal-header { height: 250px; }
     .team-modal-header { height: 200px; }
     .blog-modal-header { height: 220px; }
-    /* Job modal header doesn't exist, so no style needed here for it */
-
-    .portfolio-modal h2, .team-modal-body h2, .blog-modal h1, .job-modal-body h2 { /* Combined modal titles */
-        font-size: 1.8rem;
+    
+    .portfolio-modal h2, .team-modal-body h2, .blog-modal h1, .job-modal-body h2, .service-modal-header h2 {
+        font-size: 1.5rem; /* Consolidated modal titles */
     }
+    .portfolio-modal-body .client-info { font-size: 0.9rem; padding: 1rem; }
+
 
     .metric-card {
         padding: 1rem;
@@ -1776,12 +1792,6 @@ nav .container {
     /* Our Team Page Responsive Adjustments */
     .page-header#team-header { 
         min-height: 60vh; 
-    }
-    .page-header .hero-content h1 {
-        font-size: 2.2rem;
-    }
-    .page-header .hero-content .subtitle {
-        font-size: 1.1rem;
     }
     .mission-statement-header p { 
         font-size: 1rem;
