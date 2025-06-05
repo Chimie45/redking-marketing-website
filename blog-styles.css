@@ -1,6 +1,14 @@
 /* Blog Page Specific Styles */
 
-/* Blog Header */
+/* Page Header for Blog Page (if a specific one is used, e.g., #blog-header) */
+#blog-header.page-header.hero {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+        url('images/blog/blogheader.jpg'); /* Assumes blogheader.jpg is in images/blog/ */
+    min-height: 70vh; /* Example height */
+}
+
+
 .blog-intro {
     margin-top: 2rem;
     max-width: 800px;
@@ -16,7 +24,7 @@
 }
 
 /* Blog Section */
-.blog-section {
+.blog-section { /* This class is used on blog.html for the main posts area */
     padding: 80px 0;
     background-color: var(--dark-gray);
 }
@@ -123,7 +131,7 @@
     overflow: hidden;
 }
 
-.blog-info .view-details {
+.blog-card .view-details { /* Re-using .view-details style if needed */
     color: var(--muted-gold);
     font-weight: bold;
     font-size: 0.8rem;
@@ -135,112 +143,18 @@
     color: var(--gold);
 }
 
-/* Blog Modal Styles */
-.blog-modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.92);
-    animation: fadeIn 0.3s ease;
-    overflow-y: auto;
-}
+/* Blog Modal Styles (already in styles.css as part of common modal styles) */
+/* .blog-modal, .blog-modal-content, .close-blog-modal, .blog-modal-header, .blog-modal-body */
+/* However, specific content styling within .blog-modal-body can remain here */
 
-.blog-modal-content {
-    position: relative;
-    background-color: var(--black);
-    margin: 3% auto;
-    padding: 0;
-    border: 2px solid var(--muted-gold);
-    border-radius: 10px;
-    width: 90%;
-    max-width: 900px;
-    animation: slideIn 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.blog-modal-header {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--black);
-    background-size: cover;
-    background-position: center;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.blog-modal-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: inherit;
-    background-size: cover;
-    background-position: center;
-    filter: blur(12px) brightness(0.7);
-    opacity: 1;
-    z-index: 1;
-}
-
-.blog-modal-header img {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    z-index: 2;
-    border-radius: 5px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-
-.close-blog-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    color: var(--white);
-    font-size: 2rem;
-    font-weight: bold;
-    cursor: pointer;
-    background: rgba(0,0,0,0.6);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10;
-    line-height: 1;
-}
-
-.close-blog-modal:hover {
-    background: var(--muted-gold);
-    color: var(--black);
-    transform: rotate(90deg);
-}
-
-.blog-modal-body {
-    padding: 2.5rem;
-}
-
-.blog-meta {
+.blog-modal-body .blog-meta {
     display: flex;
     gap: 1rem;
     margin-bottom: 1.5rem;
     font-size: 0.9rem;
 }
 
-.blog-meta .blog-date {
+.blog-modal-body .blog-meta .blog-date { /* .blog-date is already styled, this ensures it's applied if needed inside meta */
     color: #888;
     font-style: italic;
 }
@@ -256,17 +170,19 @@
     letter-spacing: 0.5px;
 }
 
-.blog-modal h1 {
+.blog-modal-body h1 { /* This is the main title inside the modal */
     color: var(--muted-gold);
     font-size: 2.2rem;
     margin-bottom: 2rem;
     line-height: 1.3;
+    text-align: left; /* Override if centered by a more general modal h2 style */
 }
 
 .blog-content {
     color: #ccc;
     line-height: 1.8;
     font-size: 1.05rem;
+    text-align: left;
 }
 
 .blog-content h2 {
@@ -299,10 +215,10 @@
 .blog-content ul,
 .blog-content ol {
     margin-bottom: 1.2rem;
-    padding-left: 1.5rem;
+    padding-left: 1.5rem; /* Standard list indent */
 }
-
-.blog-content li {
+.blog-content ul li,
+.blog-content ol li {
     margin-bottom: 0.5rem;
 }
 
@@ -317,7 +233,10 @@
     margin: 1.5rem 0;
     font-style: italic;
     color: #ddd;
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(212, 175, 55, 0.05); /* Subtle background */
     padding: 1rem 1.5rem;
     border-radius: 0 5px 5px 0;
 }
+
+/* Blog Newsletter Section (already styled by .contact class in styles.css) */
+/* #blog-newsletter.contact {} */
