@@ -52,7 +52,6 @@ function closeGalleryModal(modalId) {
         return;
     }
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
     
     const video = modal.querySelector('video');
     if (video) {
@@ -64,6 +63,8 @@ function closeGalleryModal(modalId) {
     if (iframe) {
         iframe.src = ''; 
     }
+    // Restore body scroll if no other modals are open
+    checkAndRestoreScroll(); 
 }
 
 // Slideshow specific functions
@@ -143,7 +144,7 @@ function closePortfolioModal(modalId) {
         return;
     }
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    checkAndRestoreScroll();
 }
 
 // Team Member Modal Functions
@@ -178,53 +179,88 @@ function closeTeamModal(modalId) {
         return;
     }
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    checkAndRestoreScroll();
 }
 
+// Job Modal Functions
+function openJobModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Job modal not found:', modalId);
+        return;
+    }
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+
+    // Reset form and message if it exists
+    const form = modal.querySelector('.job-application-form');
+    if (form) form.reset();
+    const messageDiv = modal.querySelector('.form-submission-feedback');
+    if (messageDiv) {
+        messageDiv.style.display = 'none';
+        messageDiv.textContent = '';
+    }
+    // Reset character counter
+    const charCounter = modal.querySelector('.char-counter');
+    const messageTextarea = modal.querySelector('textarea[name="message"]');
+    if (charCounter && messageTextarea) {
+        charCounter.textContent = `${messageTextarea.maxLength} characters remaining`;
+        charCounter.style.color = '#aaa'; // Default color
+    }
+}
+
+function closeJobModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Job modal not found for closing:', modalId);
+        return;
+    }
+    modal.style.display = 'none';
+    checkAndRestoreScroll();
+}
+
+// Helper function to check if any modal is open and restore scroll if not
+function checkAndRestoreScroll() {
+    const anyModalOpen = document.querySelector('.gallery-modal[style*="display: block"]') ||
+                         document.querySelector('.portfolio-modal[style*="display: block"]') ||
+                         document.querySelector('.team-modal[style*="display: block"]') ||
+                         document.querySelector('.job-modal[style*="display: block"]') ||
+                         document.querySelector('.blog-modal[style*="display: block"]'); // blog-modal check from blog-scripts.js
+    if (!anyModalOpen) {
+        document.body.style.overflow = 'auto';
+    }
+}
 
 // Close modals when clicking outside of content
-// This listener handles portfolio, team, and gallery modals.
-// Blog modals' outside click is handled in blog-scripts.js
 window.addEventListener('click', function(event) {
     if (event.target.classList.contains('gallery-modal')) {
-        const modalId = event.target.id;
-        if (document.getElementById(modalId) && document.getElementById(modalId).style.display === 'block') {
-            closeGalleryModal(modalId);
-        }
+        closeGalleryModal(event.target.id);
+    } else if (event.target.classList.contains('portfolio-modal')) {
+        closePortfolioModal(event.target.id); 
+    } else if (event.target.classList.contains('team-modal')) { 
+        closeTeamModal(event.target.id);
+    } else if (event.target.classList.contains('job-modal')) {
+        closeJobModal(event.target.id);
     }
-    
-    if (event.target.classList.contains('portfolio-modal')) {
-        if (event.target.style.display === 'block') {
-            closePortfolioModal(event.target.id); 
-        }
-    }
-
-    if (event.target.classList.contains('team-modal')) { 
-        if (event.target.style.display === 'block') {
-            closeTeamModal(event.target.id);
-        }
-    }
+    // Note: blog-modal outside click is handled in blog-scripts.js
 });
 
 // Close modals with Escape key
-// This listener handles portfolio, team, and gallery modals.
-// Blog modals' escape key is handled in blog-scripts.js
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
-        let aModalWasOpen = false;
-        document.querySelectorAll('.gallery-modal, .portfolio-modal, .team-modal').forEach(modal => {
+        let modalClosedThisEvent = false;
+        document.querySelectorAll('.gallery-modal, .portfolio-modal, .team-modal, .job-modal').forEach(modal => {
             if (modal.style.display === 'block') {
                 if (modal.classList.contains('gallery-modal')) closeGalleryModal(modal.id);
-                if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modal.id);
-                if (modal.classList.contains('team-modal')) closeTeamModal(modal.id);
-                aModalWasOpen = true;
+                else if (modal.classList.contains('portfolio-modal')) closePortfolioModal(modal.id);
+                else if (modal.classList.contains('team-modal')) closeTeamModal(modal.id);
+                else if (modal.classList.contains('job-modal')) closeJobModal(modal.id);
+                modalClosedThisEvent = true;
             }
         });
-        
-        // If a non-blog modal was closed, restore body overflow.
-        // blog-scripts.js handles its own body overflow for blog modals.
-        if (aModalWasOpen && !document.querySelector('.blog-modal[style*="display: block"]')) {
-            document.body.style.overflow = 'auto';
+        // blog-modal escape is handled in blog-scripts.js
+        if (modalClosedThisEvent) {
+             checkAndRestoreScroll();
         }
     }
 });
@@ -241,7 +277,6 @@ if (contactForm) {
         formMessageDiv.style.borderRadius = '5px';
         formMessageDiv.style.textAlign = 'center';
         formMessageDiv.style.display = 'none'; 
-        // Adjust insertion point if necessary, this is a general approach
         const parentOfContactForm = contactForm.parentNode;
         if (parentOfContactForm) {
              parentOfContactForm.insertBefore(formMessageDiv, contactForm.nextSibling);
@@ -252,6 +287,7 @@ if (contactForm) {
         e.preventDefault();
         formMessageDiv.textContent = ''; 
         formMessageDiv.style.display = 'none'; 
+        formMessageDiv.className = 'form-submission-feedback'; // Reset class
 
         const submitButton = this.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.textContent;
@@ -264,8 +300,7 @@ if (contactForm) {
         
         if (!data.name || !data.email || !data.message) {
             formMessageDiv.textContent = 'Please fill in all required fields.';
-            formMessageDiv.style.backgroundColor = 'var(--primary-red)';
-            formMessageDiv.style.color = 'var(--white)';
+            formMessageDiv.classList.add('error');
             formMessageDiv.style.display = 'block';
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
@@ -275,8 +310,7 @@ if (contactForm) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
             formMessageDiv.textContent = 'Please enter a valid email address.';
-            formMessageDiv.style.backgroundColor = 'var(--primary-red)';
-            formMessageDiv.style.color = 'var(--white)';
+            formMessageDiv.classList.add('error');
             formMessageDiv.style.display = 'block';
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
@@ -288,38 +322,29 @@ if (contactForm) {
         try {
             const response = await fetch(workerUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify(data),
             });
-
             const result = await response.json();
 
             if (response.ok && result.success) {
                 formMessageDiv.textContent = result.message || 'Message sent successfully!';
-                formMessageDiv.style.backgroundColor = 'var(--muted-gold)'; 
-                formMessageDiv.style.color = 'var(--black)';
+                formMessageDiv.classList.add('success');
                 this.reset(); 
             } else {
                 formMessageDiv.textContent = result.message || `Failed to send message. Server responded with ${response.status}.`;
-                formMessageDiv.style.backgroundColor = 'var(--primary-red)';
-                formMessageDiv.style.color = 'var(--white)';
+                formMessageDiv.classList.add('error');
             }
         } catch (error) {
             console.error('Error submitting contact form:', error);
             formMessageDiv.textContent = 'An error occurred. Please try again later.';
-            formMessageDiv.style.backgroundColor = 'var(--dark-red)'; // Changed from dark-red to primary-red for consistency
-            formMessageDiv.style.color = 'var(--white)';
+            formMessageDiv.classList.add('error');
         } finally {
             formMessageDiv.style.display = 'block';
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
         }
     });
-} else {
-    // It's normal for this form not to be found on blog.html or our-team.html if they don't have this specific form ID.
-    // console.warn("Contact form with ID 'contactForm' not found."); 
 }
 
 // Newsletter form handling (for footer newsletter, ID 'newsletterForm')
@@ -335,6 +360,7 @@ if (newsletterForm) {
         newsletterMessageDiv.style.textAlign = 'center';
         newsletterMessageDiv.style.fontSize = '0.9em';
         newsletterMessageDiv.style.display = 'none'; 
+        newsletterMessageDiv.className = 'form-submission-feedback';
         newsletterForm.parentNode.insertBefore(newsletterMessageDiv, newsletterForm.nextSibling);
     }
 
@@ -342,6 +368,8 @@ if (newsletterForm) {
         e.preventDefault();
         newsletterMessageDiv.textContent = '';
         newsletterMessageDiv.style.display = 'none';
+        newsletterMessageDiv.className = 'form-submission-feedback';
+
 
         const emailInput = this.querySelector('input[type="email"]');
         const email = emailInput.value;
@@ -353,8 +381,7 @@ if (newsletterForm) {
 
         if (!email) {
             newsletterMessageDiv.textContent = 'Please enter your email address.';
-            newsletterMessageDiv.style.backgroundColor = 'var(--primary-red)';
-            newsletterMessageDiv.style.color = 'var(--white)';
+            newsletterMessageDiv.classList.add('error');
             newsletterMessageDiv.style.display = 'block';
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
@@ -364,8 +391,7 @@ if (newsletterForm) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             newsletterMessageDiv.textContent = 'Please enter a valid email address.';
-            newsletterMessageDiv.style.backgroundColor = 'var(--primary-red)';
-            newsletterMessageDiv.style.color = 'var(--white)';
+            newsletterMessageDiv.classList.add('error');
             newsletterMessageDiv.style.display = 'block';
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
@@ -373,50 +399,149 @@ if (newsletterForm) {
         }
 
         const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; 
-        const data = {
-            email: email,
-            formType: 'newsletter' // General newsletter subscription
-        };
+        const data = { email: email, formType: 'newsletter' };
 
         try {
             const response = await fetch(workerUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify(data),
             });
-
             const result = await response.json();
-
             if (response.ok && result.success) {
                 newsletterMessageDiv.textContent = result.message || 'Successfully subscribed!';
-                newsletterMessageDiv.style.backgroundColor = 'var(--muted-gold)';
-                newsletterMessageDiv.style.color = 'var(--black)';
+                newsletterMessageDiv.classList.add('success');
                 this.reset(); 
             } else {
                 newsletterMessageDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
-                newsletterMessageDiv.style.backgroundColor = 'var(--primary-red)';
-                newsletterMessageDiv.style.color = 'var(--white)';
+                newsletterMessageDiv.classList.add('error');
             }
         } catch (error) {
             console.error('Error submitting newsletter form:', error);
             newsletterMessageDiv.textContent = 'An error occurred. Please try again later.';
-            newsletterMessageDiv.style.backgroundColor = 'var(--dark-red)'; // Changed from dark-red to primary-red for consistency
-            newsletterMessageDiv.style.color = 'var(--white)';
+            newsletterMessageDiv.classList.add('error');
         } finally {
             newsletterMessageDiv.style.display = 'block';
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
         }
     });
-} else {
-     // It's normal for this form not to be found on blog.html if it uses 'blogNewsletterForm' ID instead.
-    // console.warn("Newsletter form with ID 'newsletterForm' not found.");
+}
+
+// Job Application Form Handler
+const jobAppFormMotionDesigner = document.getElementById('jobApplicationFormMotionDesigner');
+if (jobAppFormMotionDesigner) {
+    const messageTextarea = document.getElementById('jobAppMessageMotionDesigner');
+    const charCounterDisplay = document.getElementById('charCounterMotionDesigner');
+    const maxLength = 300;
+
+    if (messageTextarea && charCounterDisplay) {
+        messageTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            const charsRemaining = maxLength - currentLength;
+            charCounterDisplay.textContent = `${charsRemaining} characters remaining`;
+            charCounterDisplay.style.color = charsRemaining < 0 ? 'var(--error-red)' : '#aaa';
+        });
+    }
+
+    jobAppFormMotionDesigner.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const feedbackDiv = document.getElementById('jobAppSubmissionMessageMotionDesigner');
+        feedbackDiv.textContent = '';
+        feedbackDiv.style.display = 'none';
+        feedbackDiv.className = 'form-submission-feedback';
+
+
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.textContent = 'Submitting...';
+        submitButton.disabled = true;
+
+        const nameInput = document.getElementById('jobAppNameMotionDesigner');
+        const emailInput = document.getElementById('jobAppEmailMotionDesigner');
+        const resumeInput = document.getElementById('jobAppResumeMotionDesigner');
+
+        // Basic Validation
+        if (!nameInput.value || !emailInput.value || !messageTextarea.value || !resumeInput.files.length) {
+            feedbackDiv.textContent = 'Please fill in all required fields and attach a resume.';
+            feedbackDiv.classList.add('error');
+            feedbackDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+            return;
+        }
+        if (messageTextarea.value.length > maxLength) {
+            feedbackDiv.textContent = `Message exceeds ${maxLength} characters.`;
+            feedbackDiv.classList.add('error');
+            feedbackDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+            return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+            feedbackDiv.textContent = 'Please enter a valid email address.';
+            feedbackDiv.classList.add('error');
+            feedbackDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+            return;
+        }
+        const file = resumeInput.files[0];
+        const maxFileSize = 5 * 1024 * 1024; // 5MB
+        if (file.size > maxFileSize) {
+            feedbackDiv.textContent = 'Resume file size exceeds 5MB.';
+            feedbackDiv.classList.add('error');
+            feedbackDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+            return;
+        }
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/rtf', 'text/plain'];
+        if (!allowedTypes.includes(file.type)) {
+            feedbackDiv.textContent = 'Invalid file type. Please upload PDF, DOC, DOCX, RTF or TXT.';
+            feedbackDiv.classList.add('error');
+            feedbackDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+            return;
+        }
+
+        const formData = new FormData(this);
+        formData.append('formType', 'job-application-motion-designer');
+        // The worker URL
+        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
+
+        try {
+            const response = await fetch(workerUrl, {
+                method: 'POST',
+                body: formData, // Browser sets Content-Type to multipart/form-data
+            });
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                feedbackDiv.textContent = result.message || 'Application submitted successfully!';
+                feedbackDiv.classList.add('success');
+                this.reset();
+                if (charCounterDisplay) charCounterDisplay.textContent = `${maxLength} characters remaining`;
+            } else {
+                feedbackDiv.textContent = result.message || `Submission failed. Server responded with ${response.status}.`;
+                feedbackDiv.classList.add('error');
+            }
+        } catch (error) {
+            console.error('Error submitting job application:', error);
+            feedbackDiv.textContent = 'An error occurred. Please try again later.';
+            feedbackDiv.classList.add('error');
+        } finally {
+            feedbackDiv.style.display = 'block';
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        }
+    });
 }
 
 
-// Smooth scrolling for navigation links & Mobile menu toggle & Nav scroll effect
+// DOMContentLoaded for general initializations
 document.addEventListener('DOMContentLoaded', function() {
     // Set current year in footer
     const currentYearSpan = document.getElementById('currentYear');
@@ -437,12 +562,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, { threshold: 0.1 }); 
-        
         lazyImages.forEach(img => imageObserver.observe(img));
     }
 
     // Smooth scrolling for navigation links
-    document.querySelectorAll('nav .nav-links a[href*="#"], .logo[href*="#"], .cta-button[href*="#"]').forEach(anchor => {
+    const navAnchors = document.querySelectorAll('nav .nav-links a[href*="#"], .logo[href*="#"], .cta-button[href*="#"]');
+    const mobileMenuIcon = document.querySelector('.mobile-menu'); // Define here for access in click listener
+    const navLinks = document.querySelector('.nav-links'); // Define here for access
+
+    navAnchors.forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             const [path, hash] = href.split('#');
@@ -450,13 +578,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1) || "index.html";
             const targetPath = path || (currentPath === "index.html" || currentPath === "" ? "index.html" : currentPath) ;
 
-
             if (hash) {
                 if (targetPath === currentPath || (targetPath === 'index.html' && (currentPath === '' || currentPath === 'index.html'))) {
                     e.preventDefault();
                     const targetElement = document.getElementById(hash);
                     if (targetElement) {
-                        // Close mobile menu if open
                         if (navLinks && navLinks.classList.contains('nav-links--active')) {
                             navLinks.classList.remove('nav-links--active');
                             if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
@@ -464,51 +590,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
                         const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; 
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: "smooth"
-                        });
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
                     }
                 }
-                // If targetPath is different, let the browser handle navigation.
-                // The hash will be processed by the browser on the new page.
             }
-            // If no hash, it's a normal link, let browser handle it.
         });
     });
 
     // Mobile menu toggle
-    const mobileMenuIcon = document.querySelector('.mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-
     if (mobileMenuIcon && navLinks) {
         mobileMenuIcon.addEventListener('click', function() {
             navLinks.classList.toggle('nav-links--active'); 
             this.classList.toggle('active'); 
         });
     } else {
-        console.warn("Mobile menu icon or nav links not found.");
+        // console.warn("Mobile menu icon or nav links not found for toggle.");
     }
 
     // Add scroll effect to navigation
     window.addEventListener('scroll', function() {
         const nav = document.querySelector('nav');
         if (nav) {
-            if (window.scrollY > 100) {
-                nav.classList.add('nav--scrolled'); 
-            } else {
-                nav.classList.remove('nav--scrolled');
-            }
+            nav.classList.toggle('nav--scrolled', window.scrollY > 100);
         }
     });
 
     // Animate elements on scroll
-    const observerOptions = {
-        threshold: 0.1, 
-        rootMargin: '0px 0px -50px 0px' 
-    };
-
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const animatedElementsObserver = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -518,9 +626,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe elements common across pages (except blog-specific ones handled in blog-scripts.js)
     document.querySelectorAll('.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content').forEach((el) => {
-        if (!el.classList.contains('blog-card')) { // Avoid double-observing blog cards if blog-scripts.js also observes them
+        if (!el.classList.contains('blog-card')) { 
              animatedElementsObserver.observe(el);
         }
     });
@@ -531,69 +638,71 @@ document.addEventListener('DOMContentLoaded', function() {
 function animateValue(element) {
     if (!element) return; 
     const finalValueText = element.textContent;
-    
     let numericPart = finalValueText.replace(/[^\d.-]/g, ''); 
     if (numericPart === '') return; 
-
     const numericValue = parseFloat(numericPart);
     if (isNaN(numericValue)) return;
-
     const suffix = finalValueText.substring(numericPart.length); 
-    
     const duration = 1500; 
     const frameDuration = 16; 
-    const totalFrames = duration / frameDuration;
-    let increment = numericValue / totalFrames; // Ensure increment is calculated correctly for negative numbers too
+    const totalFrames = Math.max(1, duration / frameDuration); // Ensure at least 1 frame
+    let increment = numericValue / totalFrames; 
 
-    // Handle cases where numericValue is 0 or very small to avoid division by zero or tiny increments leading to long animations.
     if (numericValue === 0) {
         element.textContent = '0' + suffix;
         return;
     }
-    if (Math.abs(increment) < 0.001 && numericValue !== 0) { // If increment is too small, adjust
-        increment = numericValue > 0 ? 0.001 : -0.001;
+     // Adjust increment if it's too small to make a difference, but avoid infinite loops for small numbers
+    if (Math.abs(increment) < 0.0001 && numericValue !== 0) {
+      increment = (numericValue / Math.abs(numericValue)) * 0.001; // Smallest practical increment preserving sign
     }
 
 
     let currentValue = 0;
-    element.textContent = (numericValue < 1 && numericValue > 0 && numericValue !== 0 ? '0.0' : '0') + suffix; 
+    // Initial display before animation starts
+    const initialDisplayValue = (numericValue < 1 && numericValue > 0 && !Number.isInteger(numericValue)) ? '0.0' : '0';
+    element.textContent = initialDisplayValue + suffix;
 
     const timer = setInterval(() => {
         currentValue += increment;
-        if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue)) {
-            currentValue = numericValue; // Snap to final value
-            clearInterval(timer);
+        let animationComplete = false;
+        if (increment > 0 && currentValue >= numericValue) {
+            currentValue = numericValue;
+            animationComplete = true;
+        } else if (increment < 0 && currentValue <= numericValue) {
+            currentValue = numericValue;
+            animationComplete = true;
+        } else if (numericValue === 0) { // Should have been caught earlier, but as a safeguard
+            currentValue = 0;
+            animationComplete = true;
         }
-        
+
+
         let displayValue;
         if (numericPart.includes('.') && !Number.isInteger(numericValue) ) { 
             const decimalPlaces = (numericPart.split('.')[1] || '').length;
             displayValue = currentValue.toFixed(decimalPlaces);
         } else {
-            displayValue = Math.floor(currentValue);
+            displayValue = Math.round(currentValue); // Use round for smoother appearance towards end
         }
         element.textContent = displayValue + suffix;
+        
+        if(animationComplete){
+            clearInterval(timer);
+        }
 
     }, frameDuration);
 }
 
-// Add loading state for images (error handling)
+// Image error handling
 document.querySelectorAll('img').forEach(img => {
     if (!img.complete) { 
         img.addEventListener('error', function() {
             this.style.display = 'none'; 
             console.error('Failed to load image:', this.src);
-            // Optionally, replace with a placeholder:
-            // this.src = 'images/placeholder.png'; 
-            // this.alt = 'Image not available';
-            // this.style.display = 'block'; // if you use a placeholder
         });
     } else if (img.naturalWidth === 0 && img.src && !img.getAttribute('src').startsWith('data:image/')) { 
-         // Check for non-data URI images that might have failed silently before
          img.style.display = 'none';
          console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
 });
-
-// Note: The placeholder definitions for openBlogModal and closeBlogModal have been removed from this file.
-// They are correctly defined in blog-scripts.js, which is loaded on blog.html.
