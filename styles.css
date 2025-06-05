@@ -1818,3 +1818,70 @@ nav .container {
     .job-details-section p, .job-details-section ul { font-size: 0.9rem; }
 
 }
+/* MODAL Z-INDEX HIERARCHY - Add this section to fix the layering */
+.gallery-modal {
+    z-index: 3000 !important; /* Highest priority for gallery modals */
+}
+
+.service-detail-modal {
+    z-index: 2500 !important; /* Service modals below gallery */
+}
+
+.portfolio-modal, 
+.team-modal, 
+.blog-modal, 
+.job-modal {
+    z-index: 2000 !important; /* Other modals below service modals */
+}
+
+/* Ensure gallery modal content is visible */
+.gallery-modal-content {
+    background-color: transparent !important; /* Gallery modals should be transparent */
+    border: none !important;
+    box-shadow: none !important;
+    z-index: 3001 !important;
+}
+
+.gallery-modal-content.iframe-modal-content {
+    background-color: var(--black) !important; /* Iframe modal needs background */
+    border: 2px solid var(--muted-gold) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+}
+
+/* Ensure gallery modal videos are visible */
+.gallery-modal-content video {
+    z-index: 3002 !important;
+    position: relative !important;
+    display: block !important;
+}
+
+/* Ensure gallery modal images are visible */
+.gallery-modal-content img {
+    z-index: 3002 !important;
+    position: relative !important;
+    display: block !important;
+}
+
+/* Ensure close buttons are always on top */
+.close-gallery-modal {
+    z-index: 3010 !important;
+}
+
+.close-service-modal,
+.close-modal,
+.close-team-modal,
+.close-blog-modal,
+.close-job-modal {
+    z-index: 2510 !important;
+}
+
+/* Fix any potential opacity issues */
+.gallery-modal {
+    opacity: 1 !important;
+}
+
+.gallery-modal[style*="display: block"] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
