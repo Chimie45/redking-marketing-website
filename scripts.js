@@ -592,3 +592,88 @@ document.querySelectorAll('img').forEach(img => {
          console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
 });
+// Add this debug function to your scripts.js to help identify the issue
+
+function debugGalleryModal(modalId) {
+    console.log('=== DEBUGGING GALLERY MODAL ===');
+    const modal = document.getElementById(modalId);
+    
+    if (!modal) {
+        console.error('Modal not found:', modalId);
+        return;
+    }
+    
+    console.log('Modal element:', modal);
+    console.log('Modal display style:', window.getComputedStyle(modal).display);
+    console.log('Modal opacity:', window.getComputedStyle(modal).opacity);
+    console.log('Modal z-index:', window.getComputedStyle(modal).zIndex);
+    console.log('Modal visibility:', window.getComputedStyle(modal).visibility);
+    console.log('Modal position:', window.getComputedStyle(modal).position);
+    console.log('Modal top:', window.getComputedStyle(modal).top);
+    console.log('Modal left:', window.getComputedStyle(modal).left);
+    console.log('Modal width:', window.getComputedStyle(modal).width);
+    console.log('Modal height:', window.getComputedStyle(modal).height);
+    
+    const content = modal.querySelector('.gallery-modal-content');
+    if (content) {
+        console.log('Content element:', content);
+        console.log('Content display:', window.getComputedStyle(content).display);
+        console.log('Content opacity:', window.getComputedStyle(content).opacity);
+        console.log('Content z-index:', window.getComputedStyle(content).zIndex);
+    }
+    
+    const video = modal.querySelector('video');
+    if (video) {
+        console.log('Video element:', video);
+        console.log('Video display:', window.getComputedStyle(video).display);
+        console.log('Video opacity:', window.getComputedStyle(video).opacity);
+        console.log('Video z-index:', window.getComputedStyle(video).zIndex);
+    }
+    
+    console.log('=== END DEBUG ===');
+}
+
+// Modified openGalleryModal function with debug info
+function openGalleryModal(modalId) {
+    console.log('Attempting to open gallery modal:', modalId);
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error('Gallery modal element not found in DOM:', modalId);
+        return;
+    }
+    
+    // Debug before showing
+    console.log('Before showing - Modal display:', window.getComputedStyle(modal).display);
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Debug after showing
+    console.log('After showing - Modal display:', window.getComputedStyle(modal).display);
+    console.log('Gallery modal displayed:', modalId);
+    
+    // Call debug function
+    setTimeout(() => debugGalleryModal(modalId), 100);
+    
+    const video = modal.querySelector('video');
+    if (video) {
+        video.currentTime = 0;
+        console.log('Attempting to play video in gallery modal:', video.src);
+        video.play().then(() => {
+            console.log('Video playback started for gallery modal:', modalId);
+        }).catch(e => {
+            console.error('Video playback error for gallery modal ' + modalId + ':', e.message);
+            // Log if controls are missing, as a fallback
+            if (!video.hasAttribute('controls')) {
+                console.warn('Video in modal ' + modalId + ' does not have controls. User might not be able to play manually if autoplay fails.');
+            }
+        });
+    } else {
+        console.log('No video element found in gallery modal:', modalId);
+    }
+
+    if (modalId === 'gallery5') { // Specific logic for gallery5 slideshow
+        gallerySlideIndexes[modalId] = 1; 
+        showGallerySlide(gallerySlideIndexes[modalId], modalId);
+    }
+}
