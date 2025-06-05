@@ -572,3 +572,13 @@ document.querySelectorAll('img').forEach(img => {
     }
 });
 
+// Blog modal functions
+function openBlogModal(modalId) { ... }
+function closeBlogModal(modalId) { ... }
+
+// Blog newsletter form handling
+const blogNewsletterForm = document.getElementById('blogNewsletterForm');
+
+// Updated modal close handlers to include blog modals
+// Updated escape key handler to include blog modals
+// Added blog cards to scroll animation observer
