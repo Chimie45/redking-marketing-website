@@ -1,0 +1,192 @@
+/* Services Page Specific Styles */
+
+/* Page Header for Services Page */
+#services-page-header.page-header.hero {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+        url('images/services/servicesheader.jpg'); /* Updated path */
+    min-height: 70vh; /* Adjusted height for a subpage header */
+    background-attachment: fixed; 
+}
+
+#services-page-header .hero-content h1 {
+    font-size: 3rem; 
+    color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+}
+
+#services-page-header .hero-content .subtitle {
+    font-size: 1.4rem;
+    color: var(--white);
+    font-weight: 300;
+    margin-bottom: 1.5rem; 
+}
+
+.page-intro-text {
+    max-width: 800px;
+    margin: 1rem auto 0 auto;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    line-height: 1.7;
+}
+
+/* Styling for the services section on this page */
+.services-page-section {
+    padding: 80px 0;
+    background-color: var(--dark-gray);
+}
+
+.services-page-section .section-title {
+    margin-bottom: 3rem;
+}
+
+.services-page-section .service-card {
+    cursor: pointer; /* Make entire card clickable */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes button to bottom */
+}
+
+.services-page-section .service-card:hover {
+    border-color: var(--muted-gold);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+}
+
+.view-details-button {
+    display: inline-block;
+    margin-top: 1.5rem; /* Space above the button */
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: var(--muted-gold);
+    border: 1px solid var(--muted-gold);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    align-self: center; /* Center button if card text doesn't fill height */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.service-card:hover .view-details-button {
+    background-color: var(--muted-gold);
+    color: var(--black);
+}
+
+
+/* Service Detail Modal Styles */
+.service-detail-modal { /* Uses common modal styles from styles.css, but allows specific overrides */
+    /* Base styles are inherited from .portfolio-modal, .team-modal etc. in styles.css */
+}
+
+.service-modal-content { /* Uses common modal content styles from styles.css */
+    max-width: 850px; /* Specific width for service modals */
+    padding: 0; /* Reset padding, will be handled by header/body */
+}
+
+.close-service-modal { /* Uses common close button styles */
+    /* Inherits .close-modal styles */
+}
+
+.service-modal-header {
+    padding: 1.5rem 2rem;
+    background-color: var(--dark-gray); /* Darker header for service modals */
+    border-bottom: 2px solid var(--muted-gold);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top-left-radius: 8px; /* Match content container */
+    border-top-right-radius: 8px;
+}
+
+.service-modal-header i { /* Icon in the modal header */
+    font-size: 2.2rem;
+    color: var(--muted-gold);
+}
+
+.service-modal-header h2 {
+    color: var(--white);
+    font-size: 1.8rem; /* Slightly smaller than main modal titles */
+    margin: 0;
+}
+
+.service-modal-body {
+    padding: 2rem 2.5rem; /* Standard padding for modal body */
+    color: #ccc;
+    line-height: 1.7;
+}
+
+.service-modal-intro {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+    font-style: italic;
+}
+
+.service-modal-body h4 {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.service-modal-body ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 1.5rem;
+}
+
+.service-modal-body ul li {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.service-modal-cta {
+    display: inline-block;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* Responsive adjustments for service modals and page */
+@media (max-width: 768px) {
+    #services-page-header.page-header.hero {
+        min-height: 50vh;
+    }
+    #services-page-header .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    #services-page-header .hero-content .subtitle {
+        font-size: 1.2rem;
+    }
+    .page-intro-text {
+        font-size: 1rem;
+    }
+
+    .services-page-section .services-grid {
+        grid-template-columns: 1fr; /* Stack cards on mobile */
+    }
+
+    .service-modal-header {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    .service-modal-header i {
+        font-size: 2rem;
+    }
+    .service-modal-header h2 {
+        font-size: 1.5rem;
+    }
+    .service-modal-body {
+        padding: 1.5rem;
+    }
+    .service-modal-intro {
+        font-size: 1rem;
+    }
+    .service-modal-body h4 {
+        font-size: 1.1rem;
+    }
+    .service-modal-body ul li {
+        font-size: 0.9rem;
+    }
+}
