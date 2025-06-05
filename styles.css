@@ -205,7 +205,7 @@ nav .container {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
         url('images/blog/blogheader.jpg'); /* Ensure this image path is correct */
-     min-height: 70vh;
+     min-height: 100vh; /* UPDATED: Was 70vh, now 100vh to match index.html hero */
 }
 
 
@@ -761,18 +761,15 @@ nav .container {
     display: flex;
     align-items: center;
     justify-content: center; /* Centers the icon and H2 as a group */
-    gap: 1rem; /* ADDED: Creates space between icon and H2 */
+    gap: 1rem; /* Creates space between icon and H2 */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-shrink: 0;
-    border-bottom: 2px solid var(--muted-gold); /* MOVED from services.css for consistency */
+    border-bottom: 2px solid var(--muted-gold); 
 }
 
-/* The .service-detail-modal .service-modal-header .header-content-wrapper rule is no longer needed 
-   as icon and h2 are direct children of .service-modal-header */
-
 .service-detail-modal .service-modal-header i { /* Styles for the icon itself */
-    font-size: 2.5rem; /* Was 2.2rem in services.css, styles.css had 2.5rem for this rule if wrapper existed */
+    font-size: 2.5rem; 
     color: var(--muted-gold);
     line-height: 1; /* Prevents extra space around icon */
     flex-shrink: 0; /* Prevent icon from shrinking */
@@ -783,7 +780,6 @@ nav .container {
     font-weight: bold;
     margin: 0; /* Remove default h2 margin */
     color: var(--white);
-    /* text-align: left; is default for h2, so it will align left relative to its position after the icon+gap */
 }
 
 .service-detail-modal .service-modal-body {
@@ -818,8 +814,7 @@ nav .container {
 .service-modal-cta-wrapper {
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 1rem; /* Ensure some space at the bottom */
-    /* padding-bottom: 1rem; /* Remove if margin-bottom is sufficient */
+    margin-bottom: 1rem; 
 }
 
 
@@ -1697,6 +1692,9 @@ nav .container {
     /* Our Team Page Responsive Adjustments */
     .page-header#team-header {
         min-height: 60vh;
+    }
+    #blog-header.page-header.hero { /* Ensure blog header respects mobile height adjustment */
+        min-height: 60vh; /* Match other page headers on mobile */
     }
     .mission-statement-header p {
         font-size: 1rem;
