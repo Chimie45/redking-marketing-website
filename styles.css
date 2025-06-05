@@ -192,7 +192,6 @@ nav .container {
 
 /* Page Header for sub-pages (Team, Blog, Services) */
 .page-header.hero { /* More specific selector for sub-page headers */
-    /* Background images will be set in page-specific CSS or inline */
     min-height: 60vh; /* Default min-height for sub-page headers */
 }
 
@@ -205,7 +204,7 @@ nav .container {
 #blog-header.page-header.hero {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
-        url('images/blog/blogheader.jpg'); /* Assuming a blogheader.jpg in images/blog/ */
+        url('images/blog/blogheader.jpg');
      min-height: 70vh;
 }
 
@@ -235,13 +234,13 @@ nav .container {
     margin-bottom: 1.5rem;
 }
 
-.hero h1, .page-header .hero-content h1 { /* For subpage headers */
-    font-size: 3rem; /* Adjusted default */
-    margin-bottom: 0.5rem; /* Adjusted default */
+.hero h1, .page-header .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
     color: var(--muted-gold);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
-.hero .hero-content h1 { /* For index.html sr-only, less visual impact needed if it became visible */
+.hero .hero-content h1 {
     font-size: 3.5rem;
     color: var(--white);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -249,17 +248,17 @@ nav .container {
 
 
 .hero .subtitle, .page-header .hero-content .subtitle {
-    font-size: 1.5rem; /* Adjusted default */
-    margin-bottom: 2rem; /* Adjusted default */
-    color: var(--white); /* Default for subpages, index hero has its own */
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--white);
     font-weight: 300;
 }
-.hero .hero-content .subtitle { /* For index.html main subtitle */
+.hero .hero-content .subtitle {
      color: var(--muted-gold);
 }
 
 
-.hero p { /* For index.html hero text */
+.hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     max-width: 600px;
@@ -288,7 +287,7 @@ nav .container {
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
-/* Services Section (also used by Portfolio and Blog previews on index.html) */
+/* Services Section */
 .services {
     padding: 100px 0;
     background: var(--dark-gray);
@@ -310,9 +309,9 @@ nav .container {
     border: 2px solid var(--primary-red);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
-    display: flex; /* Added for flex layout */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: space-between; /* Pushes button to bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .service-card:hover {
@@ -333,7 +332,7 @@ nav .container {
     margin-bottom: 1rem;
     color: var(--white);
 }
-.service-card h3 a.blog-preview-link { /* For blog previews on index */
+.service-card h3 a.blog-preview-link {
     color: var(--white);
     text-decoration: none;
     transition: color 0.3s ease;
@@ -346,12 +345,12 @@ nav .container {
 .service-card p {
     color: #ccc;
     line-height: 1.6;
-    flex-grow: 1; /* Allows p to take available space before button */
-    margin-bottom: 1rem; /* Ensure space if button isn't present */
+    flex-grow: 1;
+    margin-bottom: 1rem;
 }
-.service-card .view-details-button { /* Shared with services.css */
+.service-card .view-details-button {
     display: inline-block;
-    margin-top: auto; /* Pushes to bottom if content above is short */
+    margin-top: auto;
     padding: 0.5rem 1rem;
     background-color: transparent;
     color: var(--muted-gold);
@@ -456,7 +455,7 @@ nav .container {
     filter: brightness(1) grayscale(0);
 }
 
-/* Portfolio Section - Uses .services for padding/background */
+/* Portfolio Section */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -547,7 +546,7 @@ nav .container {
     line-height: 1.2;
 }
 
-.view-details { /* Shared with portfolio-card, used on index and services.html for modals */
+.view-details {
     color: var(--muted-gold);
     font-weight: bold;
     font-size: 0.8rem;
@@ -559,57 +558,69 @@ nav .container {
     color: var(--gold);
 }
 
-
-/* Common Modal Styles (Portfolio, Team, Blog, Job, Service) */
+/* === Common Modal Styles (Overlay) === */
 .portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal {
-    display: none;
+    display: none; /* Initially hidden */
     position: fixed;
-    z-index: 2000;
+    z-index: 2000; /* Base z-index, specific modals can override */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.92);
     animation: fadeIn 0.3s ease;
-    overflow-y: auto;
-    padding: 20px;
-}
-
-.portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
-    position: relative;
-    background-color: var(--black);
-    margin: 3% auto;
-    padding: 0;
-    border: 2px solid var(--muted-gold);
-    border-radius: 10px;
-    width: 90%;
-    animation: slideIn 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden;
-}
-.portfolio-modal-content { max-width: 1000px; }
-.team-modal-content { max-width: 750px; }
-.blog-modal-content { max-width: 900px; } /* From blog-styles.css */
-.job-modal-content { max-width: 800px; }
-.service-modal-content { max-width: 850px; } /* From services.css */
-
-
-/* Common Modal Header Styles (Portfolio, Team, Blog - has image) */
-.portfolio-modal-header, .team-modal-header, .blog-modal-header {
-    position: relative;
-    overflow: hidden;
+    overflow-y: auto; /* Allows the overlay to scroll if content is very tall and fixed */
+    padding: 20px; /* Gutter space around the content box */
+    box-sizing: border-box;
+    /* Flexbox for centering the modal content box */
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--black);
+}
+
+/* === Common Modal Content Box Styles === */
+.portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
+    position: relative; /* For absolute positioning of close button, etc. */
+    background-color: var(--black);
+    /* margin: 3% auto; /* Removed, flex handles centering */
+    padding: 0; /* Padding will be inside .modal-body or specific content parts */
+    border: 2px solid var(--muted-gold);
+    border-radius: 10px;
+    width: 100%; /* Takes full width of parent's padded area, up to max-width */
+    /* max-width will be set by specific modal types below */
+    max-height: 100%; /* Takes full height of parent's padded area */
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow-y: auto; /* Allows the content box itself to scroll if its internal content is too tall */
+    display: flex; /* To structure header, body, footer */
+    flex-direction: column;
+}
+
+.portfolio-modal-content { max-width: 1000px; }
+.team-modal-content { max-width: 750px; }
+.blog-modal-content { max-width: 900px; }
+.job-modal-content { max-width: 800px; }
+.service-modal-content { max-width: 850px; }
+
+
+/* Common Modal Header Styles (Portfolio, Team, Blog - has image) */
+/* Note: Service modal header is styled separately below */
+.portfolio-modal-header, .team-modal-header, .blog-modal-header {
+    position: relative;
+    overflow: hidden; /* For ::before pseudo-element blur effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black); /* Fallback/base */
     background-size: cover;
     background-position: center;
-    border-top-left-radius: 8px;
+    border-top-left-radius: 8px; /* Matches content box rounding */
     border-top-right-radius: 8px;
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
 .portfolio-modal-header { height: 400px; }
 .team-modal-header { height: 280px; background-color: var(--dark-gray); }
-.blog-modal-header { height: 300px; } /* From blog-styles.css */
+.blog-modal-header { height: 300px; }
 
 
 .portfolio-modal-header::before, .team-modal-header::before, .blog-modal-header::before {
@@ -619,12 +630,12 @@ nav .container {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: inherit;
+    background-image: inherit; /* Inherits background image from parent for blur */
     background-size: cover;
     background-position: center;
     filter: blur(12px) brightness(0.7);
     opacity: 1;
-    z-index: 1;
+    z-index: 1; /* Behind the actual image */
 }
 .team-modal-header::before { filter: blur(10px) brightness(0.6); transform: scale(1.1); }
 
@@ -636,7 +647,7 @@ nav .container {
     width: auto;
     height: auto;
     object-fit: contain;
-    z-index: 2;
+    z-index: 2; /* Above the ::before pseudo-element */
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
@@ -660,7 +671,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 10; /* Ensure it's above modal content */
     line-height: 1;
 }
 
@@ -670,17 +681,19 @@ nav .container {
     transform: rotate(90deg);
 }
 
-/* Common Modal Body Padding */
+/* Common Modal Body Base Styles */
+/* Specific padding will be in .service-modal-body, .portfolio-modal-body etc. */
 .portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body, .service-modal-body {
-    padding: 2.5rem;
+    flex-grow: 1; /* Allows body to expand and fill space */
+    /* overflow-y: auto; /* Individual bodies can scroll if needed, but parent .modal-content handles main scroll */
 }
+
+.portfolio-modal-body { padding: 2.5rem; } /* Specific padding */
 .team-modal-body { text-align: center; padding: 2rem; }
-.blog-modal-body { padding: 2.5rem; } /* From blog-styles.css */
-/* .job-modal-body { padding: 2rem; } */   /* Will be handled by new job modal styles */
-/* .service-modal-body { padding: 2rem 2.5rem; } */ /* Handled by new service modal styles */
+.blog-modal-body { padding: 2.5rem; }
 
 
-.portfolio-modal h2 { /* Specific to portfolio */
+.portfolio-modal h2 {
     color: var(--muted-gold);
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
@@ -740,202 +753,76 @@ nav .container {
 .team-metrics .metric-card .metric-label { font-size: 0.85rem; line-height: 1.2; color: #bbb; }
 
 
-/* === Updated/New Styles for Service Modals === */
-
-/* Service Modal Header Styling */
+/* === Service Modal Specific Styles === */
 .service-detail-modal .service-modal-header {
-    background-color: var(--dark-gray); /* Matches a darker theme, adjust if needed */
+    background-color: var(--dark-gray);
     color: var(--white);
     padding: 1.5rem 2rem;
     display: flex;
-    flex-direction: row; /* Ensures icon and title are side-by-side */
-    align-items: center; /* Vertically aligns icon and title */
-    justify-content: center; /* Horizontally centers icon and title group */
-    gap: 1rem; /* Space between icon and title */
-    text-align: center; /* Fallback for text centering */
-    border-top-left-radius: 8px; /* Keep existing modal corner rounding */
-    border-top-right-radius: 8px; /* Keep existing modal corner rounding */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
 
-.service-detail-modal .service-modal-header i { /* Icon in the modal header */
-    font-size: 2.5rem; /* Prominent icon size, matches card */
-    color: var(--muted-gold); /* Gold color for the icon, matches card */
+.service-detail-modal .service-modal-header i {
+    font-size: 2.5rem;
+    color: var(--muted-gold);
     line-height: 1;
 }
 
-.service-detail-modal .service-modal-header h2 { /* Title in the modal header */
-    font-size: 1.8rem; /* Adjust size as needed, H2 equivalent */
-    font-weight: bold; /* Bold as requested */
-    margin: 0; /* Reset default margins */
-    color: var(--white); /* Title color */
+.service-detail-modal .service-modal-header h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+    color: var(--white);
 }
 
-/* "Key Offerings:" Heading Styling */
-.service-detail-modal .service-modal-body h4 { /* Targeting the 'Key Offerings:' h4 */
+.service-detail-modal .service-modal-body {
+    padding: 2rem 2.5rem; /* Overall padding for the service modal body */
+    flex-grow: 1; /* Allows body to take available space */
+    /* overflow-y: auto; /* If body itself needs to scroll within a fixed height modal-content */
+}
+
+.service-detail-modal .service-modal-body h4 {
     font-size: 1.4rem;
     color: var(--gold);
     font-weight: 600;
-    margin-top: 1.5rem; /* Space above */
-    margin-bottom: 0.75rem; /* Space before the line */
-    padding-bottom: 0.75rem; /* Space after text, before line */
-    border-bottom: 1px solid var(--dark-gray); /* Visual line break */
-    text-align: left; /* Ensure heading text is left-aligned as per typical article/list format */
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--dark-gray);
+    text-align: left;
 }
 
-/* Bullet Points Styling in Service Modal Body */
 .service-detail-modal .service-modal-body ul {
-    list-style: disc; /* Standard disc bullets */
-    padding-left: 25px; /* Indentation for bullets */
-    margin-top: 1.5rem; /* Increased space above the list, after "Key Offerings" line */
-    margin-bottom: 2rem; /* Space after the list */
-    text-align: left; /* Bullets should be left-aligned */
+    list-style: disc;
+    padding-left: 25px;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
 }
 
 .service-detail-modal .service-modal-body ul li {
-    margin-bottom: 0.85rem; /* Space between list items */
-    line-height: 1.7; /* Improved readability */
-    color: #ccc; /* Text color for list items */
+    margin-bottom: 0.85rem;
+    line-height: 1.7;
+    color: #ccc;
 }
 
-/* Wrapper for Centering the CTA Button in Service Modals */
 .service-modal-cta-wrapper {
-    text-align: center; /* Center the button */
-    margin-top: 2rem; /* Padding/space above the button */
-    margin-bottom: 1rem; /* Padding/space below the button */
-}
-
-/* Ensure overall padding for the service modal body */
-.service-detail-modal .service-modal-body {
-    padding: 2rem 2.5rem; /* Adjust overall padding as desired */
-}
-
-/* Optional: Add some padding at the very bottom of the modal content area if needed */
-.service-detail-modal .service-modal-content {
-    padding-bottom: 1rem; /* e.g. if content feels too close to modal bottom edge */
-}
-
-
-/* Gallery Section - uses .about for padding/background */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    height: 250px;
-    background: var(--dark-gray);
-    border: 2px solid transparent;
-}
-
-.gallery-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-    border-color: var(--muted-gold);
-}
-
-.gallery-item img,
-.gallery-item video { /* Styles for video previews in the grid */
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.35s ease;
-}
-
-.gallery-item:hover img,
-.gallery-item:hover video {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-    padding: 1.5rem 1rem 1rem;
-    height: auto;
-    min-height: 70px;
-    display: flex;
-    align-items: flex-end;
-    transition: all 0.3s ease;
-}
-
-.gallery-item:hover .gallery-overlay {
-    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,1) 100%);
-}
-
-.gallery-overlay h3 {
-    color: var(--muted-gold);
-    font-size: 1rem;
-    margin: 0;
-    font-weight: 600;
-}
-
-/* Gallery Modal (for single image/video AND iframe) */
-.gallery-modal {
-    /* Common styles already defined with .portfolio-modal etc. */
-}
-
-.gallery-modal-content {
-    position: relative;
-    margin: 2% auto;
-    max-width: 90%;
-    width: 90%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: slideIn 0.3s ease;
-    background-color: transparent; /* Override inherited black for gallery modal */
-    border: none; /* Override inherited border for gallery modal */
-    box-shadow: none; /* Override inherited shadow for gallery modal */
-}
-
-.gallery-modal-content.iframe-modal-content {
-    height: 85vh;
-    width: 85vw;
-    max-width: 1200px;
-    background-color: var(--black); /* Restore bg for iframe modal if needed */
-}
-
-
-.gallery-modal-content img,
-.gallery-modal-content video {
-    max-width: 100%;
-    max-height: 80vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 5px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-
-.gallery-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 5px;
-}
-
-
-.close-gallery-modal {
-    /* Common styles already defined */
-}
-
-.gallery-modal-title {
-    color: var(--muted-gold);
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
     text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem; /* Space below button if it's the last element */
+    padding-bottom: 1rem; /* Ensure padding if content is short and button is near bottom of modal-body */
 }
+
+/* Gallery Section - (Styles for if it were present) */
+/* ... existing gallery styles would go here ... */
+
 
 /* Contact Section */
 .contact {
@@ -1300,18 +1187,20 @@ nav .container {
 /* CSS for scroll-triggered animations */
 .portfolio-card, .service-card, .about-text > *, .client-logos,
 .gallery-item, #blog .service-card, .contact-info > *, .contact-form > *,
-.team-member-card, .award-item, .job-posting, .mission-content, .blog-card /* Added .blog-card here */ {
-    opacity: 0; /* Start hidden */
-    transform: translateY(20px); /* Start slightly lower */
+.team-member-card, .award-item, .job-posting, .mission-content, .blog-card
+{
+    opacity: 0;
+    transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.element--in-view { /* Class added by JS when element is in view */
+.element--in-view {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* Slideshow container for Gallery Modals */
+/* ... (gallery slideshow styles remain unchanged) ... */
 .slideshow-container {
   position: relative;
   max-width: 100%;
@@ -1379,7 +1268,7 @@ nav .container {
   background-color: var(--muted-gold);
 }
 
-.fade { /* General fade animation for slides */
+.fade {
   animation-name: fadeAnimate;
   animation-duration: 0.5s;
 }
@@ -1392,7 +1281,6 @@ nav .container {
 
 /* Our Team Page Specific Styles */
 .page-header#team-header {
-    /* specific background set with higher specificity */
 }
 
 .mission-statement-header {
@@ -1416,7 +1304,7 @@ nav .container {
 }
 
 
-.team-section { /* This is for the Team Members section, not jobs */
+.team-section {
     padding: 80px 0;
     background-color: var(--dark-gray);
 }
@@ -1485,21 +1373,21 @@ nav .container {
     min-height: 60px;
 }
 
-.team-modal-body h2 { /* Team modal specific title */
+.team-modal-body h2 {
     font-size: 2.2rem;
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
     margin-top: 0;
 }
 
-.team-modal-title { /* Team modal specific subtitle */
+.team-modal-title {
     font-size: 1.2rem;
     color: var(--white);
     margin-bottom: 1rem;
     font-weight: 500;
 }
 
-.team-modal-bio { /* Team modal specific bio text */
+.team-modal-bio {
     font-size: 1rem;
     color: #ccc;
     line-height: 1.7;
@@ -1514,25 +1402,23 @@ nav .container {
 }
 
 /* Jobs Section Styles */
-.jobs-section { /* Applied to the "Join Our Kingdom" section */
+.jobs-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%); /* Red gradient background */
-    /* Ensure text colors provide good contrast on red background */
+    background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
 }
 
-.jobs-section .section-title, /* "Join Our Kingdom" title */
-.jobs-section .jobs-intro {   /* Introductory paragraph */
-    color: var(--white); /* White for better contrast on red */
+.jobs-section .section-title,
+.jobs-section .jobs-intro {
+    color: var(--white);
 }
 .jobs-section .section-title {
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Optional shadow for depth */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 
 .jobs-intro {
     text-align: center;
     font-size: 1.1rem;
-    /* color: #ccc; */ /* Overridden by .jobs-section .jobs-intro */
     max-width: 700px;
     margin: 0 auto 3rem auto;
 }
@@ -1545,9 +1431,9 @@ nav .container {
     margin: 0 auto;
 }
 
-/* === Job Posting Card Styling (on our-team.html page) === */
+/* Job Posting Card Styling */
 .job-posting {
-    background: var(--black); /* Keep card background black for contrast */
+    background: var(--black);
     padding: 2rem;
     border-radius: 8px;
     border: 1px solid var(--muted-gold);
@@ -1558,7 +1444,7 @@ nav .container {
 }
 
 .job-posting:hover {
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.25); /* Adjusted for better visibility */
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.25);
     transform: translateY(-5px);
 }
 
@@ -1585,18 +1471,18 @@ nav .container {
 
 .job-posting .job-location {
     font-size: 0.95rem;
-    color: #bbb; /* Light color for location text on black card */
+    color: #bbb;
     margin-bottom: 1rem;
-    margin-left: 0; /* Reset from previous, if any */
+    margin-left: 0;
 }
 
 .job-posting .job-description {
     font-size: 1rem;
-    color: #ccc; /* Light color for description text on black card */
+    color: #ccc;
     margin-bottom: 1.5rem;
     line-height: 1.7;
     flex-grow: 1;
-    margin-left: 0; /* Reset from previous, if any */
+    margin-left: 0;
 }
 
 .job-posting-footer {
@@ -1621,12 +1507,13 @@ nav .container {
     color: var(--black);
 }
 
-/* === Job Modal Content Styling (inside the opened job modal) === */
-.job-modal .job-modal-body { /* General padding for job modal body */
+/* Job Modal Content Styling */
+.job-modal .job-modal-body {
     padding: 2rem 2.5rem;
+    flex-grow: 1; /* Added to allow body to grow */
 }
 
-.job-modal .job-modal-body h2 { /* Main title of the job modal */
+.job-modal .job-modal-body h2 {
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--muted-gold);
@@ -1634,7 +1521,7 @@ nav .container {
     margin-bottom: 2rem;
 }
 
-.job-modal .job-details-section h3 { /* Headings like "Job Description" */
+.job-modal .job-details-section h3 {
     font-size: 1.4rem;
     color: var(--gold);
     font-weight: 600;
@@ -1659,7 +1546,7 @@ nav .container {
     color: #ccc;
 }
 
-.job-modal .job-application-form h3 { /* "Directly Apply" heading */
+.job-modal .job-application-form h3 {
     font-size: 1.5rem;
     color: var(--muted-gold);
     text-align: center;
@@ -1703,9 +1590,9 @@ nav .container {
     .about-content,
     .contact-content-wrapper .form-columns {
         grid-template-columns: 1fr;
-        gap: 2rem; /* Added some gap for single column */
+        gap: 2rem;
     }
-    .contact-form .form-columns { /* Keep some gap if form-columns is still used */
+    .contact-form .form-columns {
         gap: 1.5rem;
     }
 
@@ -1735,7 +1622,7 @@ nav .container {
     }
     .site-footer .footer-links-columns {
         justify-content: flex-start;
-        grid-template-columns: 1fr; /* Stack footer link columns */
+        grid-template-columns: 1fr;
     }
     .site-footer .newsletter-form {
         max-width: none;
@@ -1796,14 +1683,14 @@ nav .container {
     .section-title {
         font-size: 2rem;
     }
-     .jobs-section .section-title { /* Ensure job section title is responsive too */
+     .jobs-section .section-title {
         font-size: 2rem;
     }
 
 
     .services-grid,
     .portfolio-grid,
-    .gallery-grid,
+    .gallery-grid, /* If gallery was present */
     .site-footer .footer-main {
         grid-template-columns: 1fr;
     }
@@ -1822,25 +1709,25 @@ nav .container {
         max-width: none;
     }
 
+    /* Modal Content Box specific mobile styles */
     .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
         width: 95%;
-        margin: 5% auto;
+        /* margin: 5% auto; /* Removed as parent modal overlay handles centering and padding */
+        max-height: calc(100% - 40px); /* Ensures content fits within viewport with padding */
     }
 
     .portfolio-modal-header { height: 250px; }
     .team-modal-header { height: 200px; }
     .blog-modal-header { height: 220px; }
+
     .service-detail-modal .service-modal-header { padding: 1rem 1.5rem; }
     .service-detail-modal .service-modal-header i { font-size: 2rem; }
     .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; }
-    .job-modal .job-modal-body h2 { font-size: 1.5rem; } /* Job modal main title responsive */
+    .job-modal .job-modal-body h2 { font-size: 1.5rem; }
 
 
-    .portfolio-modal h2, .team-modal-body h2, .blog-modal h1, .job-modal-body h2, .service-modal-header h2 { /* Consolidated modal titles */
-        /* font-size: 1.5rem; */ /* General modal title size for mobile - Handled by more specific rules now */
-    }
      .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
-     .job-modal .job-details-section h3 { font-size: 1.2rem; } /* Job modal section titles responsive */
+     .job-modal .job-details-section h3 { font-size: 1.2rem; }
 
 
     .portfolio-modal-body .client-info { font-size: 0.9rem; padding: 1rem; }
@@ -1879,16 +1766,8 @@ nav .container {
         align-items: center;
     }
 
-
-    /* Slideshow adjustments for mobile */
-    .prev-slide, .next-slide {
-        font-size: 16px;
-        padding: 12px;
-    }
-    .dot {
-        height: 12px;
-        width: 12px;
-    }
+    /* Slideshow adjustments for mobile (if gallery was present) */
+    /* ... */
 
     /* Our Team Page Responsive Adjustments */
     .page-header#team-header {
@@ -1914,84 +1793,66 @@ nav .container {
     .team-metrics .metric-card .metric-label { font-size: 0.7rem; }
 
     /* Job Modal specific for mobile */
-    .job-modal .job-modal-body { padding: 1.5rem; } /* Responsive padding for job modal body */
-    /* .job-details-section h3 { font-size: 1.1rem; } */ /* Already covered by job-modal .job-details-section h3 */
+    .job-modal .job-modal-body { padding: 1.5rem; }
     .job-modal .job-details-section p, .job-modal .job-details-section ul { font-size: 0.9rem; }
-
-
-}
-/* MODAL Z-INDEX HIERARCHY - Add this section to fix the layering */
-.gallery-modal {
-    z-index: 3000 !important; /* Highest priority for gallery modals */
 }
 
+/* MODAL Z-INDEX HIERARCHY */
+.gallery-modal { /* If gallery modals are ever re-added */
+    z-index: 3000 !important;
+}
 .service-detail-modal {
-    z-index: 2500 !important; /* Service modals below gallery */
+    z-index: 2500 !important;
 }
-
 .portfolio-modal,
 .team-modal,
 .blog-modal,
 .job-modal {
-    z-index: 2000 !important; /* Other modals below service modals */
+    z-index: 2000 !important;
 }
 
-/* Ensure gallery modal content is visible */
+/* Gallery modal specific content styling (if re-added) */
 .gallery-modal-content {
-    background-color: transparent !important; /* Gallery modals should be transparent */
+    background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
     z-index: 3001 !important;
 }
-
 .gallery-modal-content.iframe-modal-content {
-    background-color: var(--black) !important; /* Iframe modal needs background */
+    background-color: var(--black) !important;
     border: 2px solid var(--muted-gold) !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
 }
-
-/* Ensure gallery modal videos are visible */
-.gallery-modal-content video {
-    z-index: 3002 !important;
-    position: relative !important;
-    display: block !important;
-}
-
-/* Ensure gallery modal images are visible */
+.gallery-modal-content video,
 .gallery-modal-content img {
     z-index: 3002 !important;
     position: relative !important;
     display: block !important;
 }
-
-/* Ensure close buttons are always on top */
 .close-gallery-modal {
     z-index: 3010 !important;
 }
 
+/* General modal close button z-index */
 .close-service-modal,
-.close-modal,
+.close-modal, /* Generic close, if used */
 .close-team-modal,
 .close-blog-modal,
 .close-job-modal {
-    z-index: 2510 !important;
+    z-index: 2510 !important; /* Ensure close button is above content within its modal type */
 }
 
-/* Fix any potential opacity issues */
-.gallery-modal {
-    opacity: 1 !important;
+/* Modal display fixes if any opacity/visibility issues persist */
+.gallery-modal, .service-detail-modal, .portfolio-modal, .team-modal, .blog-modal, .job-modal {
+    opacity: 1 !important; /* Ensure fully opaque when display is block */
 }
-
-.gallery-modal[style*="display: block"] {
-    display: block !important;
+.gallery-modal[style*="display: block"],
+.service-detail-modal[style*="display: block"],
+.portfolio-modal[style*="display: block"],
+.team-modal[style*="display: block"],
+.blog-modal[style*="display: block"],
+.job-modal[style*="display: block"] {
+    display: flex !important; /* Ensure display:flex is used when shown */
     opacity: 1 !important;
     visibility: visible !important;
-}
-/* EMERGENCY GALLERY MODAL FIX */
-.gallery-modal {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
 }
