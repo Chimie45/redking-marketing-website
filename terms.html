@@ -175,11 +175,11 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer Section -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-main">
-                <div class="footer-column footer-about"> 
+                <div class="footer-column footer-about">
                     <img src="images/home/logo.png" alt="RedKing Marketing" class="footer-logo">
                     <p>Global gaming marketing experts specializing in Asia, Americas, and beyond. We turn gaming brands into market leaders through data-driven strategies and cultural expertise.</p>
                     <div class="footer-social-icons">
@@ -187,13 +187,14 @@
                         <a href="https://instagram.com/Red_King_Marketing" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="footer-column footer-links-wrapper"> 
+                <div class="footer-column footer-links-wrapper">
                     <h4>Quick Links</h4>
                     <div class="footer-links-columns">
                         <ul class="footer-links-col-1">
                             <li><a href="index.html#home">Home</a></li>
-                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="services.html">Services</a></li>
                             <li><a href="index.html#about">About Us</a></li>
+                            <li><a href="our-team.html">Our Team</a></li>
                         </ul>
                         <ul class="footer-links-col-2">
                             <li><a href="index.html#portfolio">Portfolio</a></li>
@@ -228,16 +229,8 @@
 
     <script src="scripts.js"></script>
     <script>
-        // Set current year in footer and "last updated" date
-        const currentYear = new Date().getFullYear();
-        document.getElementById('currentYear').textContent = currentYear;
-        
-        const lastUpdatedSpanTerms = document.getElementById('lastUpdatedDateTerms');
-        if(lastUpdatedSpanTerms) {
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            lastUpdatedSpanTerms.textContent = today.toLocaleDateString('en-US', options);
-        }
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
