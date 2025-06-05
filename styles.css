@@ -1236,8 +1236,8 @@ nav .container {
 
 /* Our Team Page Specific Styles */
 .page-header#team-header { 
-    min-height: 100vh; /* Match homepage hero height */
-    background-attachment: fixed; /* Match homepage hero attachment */
+    min-height: 100vh; 
+    background-attachment: fixed; 
 }
 
 .page-header .hero-content h1 {
@@ -1390,7 +1390,7 @@ nav .container {
 
 .team-modal-header {
     position: relative;
-    height: 280px; /* Adjusted height */
+    height: 280px; 
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1420,14 +1420,15 @@ nav .container {
 .team-modal-img-main { 
     position: relative;
     z-index: 2; 
-    width: 180px; /* Set fixed width for 1:1 */
-    height: 180px; /* Set fixed height for 1:1 */
-    object-fit: cover; /* Ensure it fills the square, cropping if necessary */
-    border-radius: 8px; /* Slightly rounded corners */
-    border: none; /* No gold border */
+    height: 100%; /* Take full height of parent .team-modal-header */
+    width: auto;   /* Allow width to adjust based on aspect-ratio */
+    aspect-ratio: 1 / 1; /* Maintain 1:1 aspect ratio */
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    border-radius: 8px; 
+    border: none; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    max-width: 70%; 
-    max-height: 70%;
+    max-width: 90%; /* Prevent it from being too wide if header is very wide */
+    max-height: 90%; /* Ensure it doesn't exceed header boundaries */
 }
 
 
@@ -1471,7 +1472,7 @@ nav .container {
 .team-modal-title { 
     font-size: 1.2rem;
     color: var(--white);
-    margin-bottom: 1rem; /* Reduced margin */
+    margin-bottom: 1rem; 
     font-weight: 500;
 }
 
@@ -1480,7 +1481,7 @@ nav .container {
     color: #ccc;
     line-height: 1.7;
     text-align: left; 
-    margin-bottom: 1.5rem; /* Reduced margin */
+    margin-bottom: 1.5rem; 
 }
 .team-modal-bio p {
     margin-bottom: 1em;
@@ -1491,37 +1492,36 @@ nav .container {
 
 .team-metrics { 
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns for metrics */
-    gap: 1rem; /* Gap between metric cards */
-    margin: 1.5rem 0; /* Adjusted margin */
-    justify-content: center; /* Center the grid if it doesn't fill width */
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem; 
+    margin: 1.5rem 0; 
+    justify-content: center; 
 }
 
 .team-metrics .metric-card {
-    padding: 0.75rem; /* Smaller padding for smaller cards */
-    min-height: auto; /* Let content define height */
+    padding: 0.75rem; 
+    min-height: auto; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* position: relative; /* Not needed if not using padding hack for aspect ratio */
-    width: 100%; /* Make it responsive within the grid column */
+    width: 100%; 
 }
 .team-metrics .metric-card::before {
-    content: none; /* Remove aspect ratio hack */
+    content: none; 
 }
 .team-metrics .metric-card .metric-number {
-    font-size: 1.6rem; /* Adjusted font for metric numbers */
+    font-size: 1.6rem; 
     margin-bottom: 0.1rem;
 }
 .team-metrics .metric-card .metric-label {
-    font-size: 0.85rem; /* Adjusted font for metric labels */
+    font-size: 0.85rem; 
     line-height: 1.2;
 }
 
 
 .team-member-social-modal {
-    margin-top: 1.5rem; /* Space above social icons */
+    margin-top: 1.5rem; 
 }
 .team-member-social-modal a { 
     color: #ccc;
@@ -1849,10 +1849,14 @@ nav .container {
         height: 200px; 
     }
     .team-modal-img-main {
-        height: 120px; 
-        width: 120px; 
+        height: 100%; /* Let it take full height of header */
+        width: auto;   /* Width adjusts by aspect-ratio */
+        aspect-ratio: 1 / 1; /* Enforce 1:1 */
+        object-fit: cover; /* Cover the area */
         border-radius: 8px; 
         border: none; 
+        max-width: 100%; /* Can take full width if header is narrow */
+        max-height: 100%; /* Can take full height */
     }
     .team-modal-body h2 {
         font-size: 1.8rem;
