@@ -17,6 +17,8 @@
     --dark-gray: #1a1a1a;
     --light-gray: #f5f5f5;
     --white: #ffffff;
+    --success-green: #28a745;
+    --error-red: #dc3545;
 }
 
 /* Typography and Body */
@@ -175,7 +177,7 @@ nav .container {
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/home/header.jpg'); /* Updated path for index.html header */
+        url('images/home/header.jpg'); /* Default header image for index.html */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* This creates the parallax-like effect */
@@ -192,7 +194,7 @@ nav .container {
 #team-header.page-header.hero {
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('images/team/teamheader.jpg'); /* Updated path for team page header */
+        url('images/team/teamheader.jpg'); /* Ensure teamheader.jpg is in the correct path */
 }
 
 
@@ -255,6 +257,7 @@ nav .container {
     font-size: 1.1rem;
     transition: all 0.3s ease;
     border: 2px solid var(--muted-gold);
+    cursor: pointer;
 }
 
 .cta-button:hover {
@@ -504,7 +507,7 @@ nav .container {
 
 
 /* Portfolio Modal */
-.portfolio-modal {
+.portfolio-modal, .team-modal, .blog-modal, .job-modal { /* Combined common modal styles */
     display: none;
     position: fixed;
     z-index: 2000;
@@ -515,9 +518,10 @@ nav .container {
     background-color: rgba(0,0,0,0.92); 
     animation: fadeIn 0.3s ease;
     overflow-y: auto; 
+    padding: 20px; /* Added padding for better spacing on small screens */
 }
 
-.portfolio-modal-content {
+.portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content { /* Combined common modal content styles */
     position: relative;
     background-color: var(--black);
     margin: 3% auto; 
@@ -525,14 +529,18 @@ nav .container {
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
     width: 90%;
-    max-width: 1000px;
     animation: slideIn 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden; /* Prevent content from breaking border radius */
 }
+.portfolio-modal-content { max-width: 1000px; }
+.team-modal-content { max-width: 750px; }
+.blog-modal-content { max-width: 900px; }
+.job-modal-content { max-width: 800px; }
 
-.portfolio-modal-header {
+
+.portfolio-modal-header, .team-modal-header, .blog-modal-header { /* Common modal header styles */
     position: relative;
-    height: 400px; 
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -543,8 +551,12 @@ nav .container {
     border-top-left-radius: 8px; 
     border-top-right-radius: 8px; 
 }
+.portfolio-modal-header { height: 400px; }
+.team-modal-header { height: 280px; background-color: var(--dark-gray); }
+.blog-modal-header { height: 300px; }
 
-.portfolio-modal-header::before { 
+
+.portfolio-modal-header::before, .team-modal-header::before, .blog-modal-header::before { /* Common modal header pseudo-element for blur */
     content: '';
     position: absolute;
     top: 0;
@@ -558,8 +570,10 @@ nav .container {
     opacity: 1; 
     z-index: 1;
 }
+.team-modal-header::before { filter: blur(10px) brightness(0.6); transform: scale(1.1); }
 
-.portfolio-modal-header img { 
+
+.portfolio-modal-header img, .team-modal-img-main, .blog-modal-header img { /* Common modal header image styles */
     position: relative;
     max-width: 90%;
     max-height: 90%;
@@ -570,8 +584,10 @@ nav .container {
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
+.team-modal-img-main { border: none; } /* Specific for team modal image */
 
-.close-modal { 
+
+.close-modal, .close-team-modal, .close-blog-modal, .close-job-modal { /* Common close button */
     position: absolute;
     top: 15px;
     right: 20px;
@@ -591,15 +607,19 @@ nav .container {
     line-height: 1; 
 }
 
-.close-modal:hover {
+.close-modal:hover, .close-team-modal:hover, .close-blog-modal:hover, .close-job-modal:hover {
     background: var(--muted-gold);
     color: var(--black);
     transform: rotate(90deg);
 }
 
-.portfolio-modal-body {
+.portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body { /* Common modal body padding */
     padding: 2.5rem; 
 }
+.team-modal-body { text-align: center; padding: 2rem; }
+.blog-modal-body { padding: 2.5rem; }
+.job-modal-body { padding: 2rem; }
+
 
 .portfolio-modal h2 {
     color: var(--muted-gold);
@@ -621,12 +641,14 @@ nav .container {
 }
 
 
-.portfolio-modal .metrics { 
+.portfolio-modal .metrics, .team-metrics { 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
     gap: 1.5rem;
     margin: 2.5rem 0;
 }
+.portfolio-modal .metrics { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.team-metrics { grid-template-columns: 1fr 1fr; margin: 1.5rem auto; max-width: 500px; }
+
 
 .metric-card { 
     background: var(--dark-gray);
@@ -640,6 +662,8 @@ nav .container {
     border-color: var(--muted-gold);
     transform: scale(1.03);
 }
+.team-metrics .metric-card { padding: 0.75rem; min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; background-color: rgba(26, 26, 26, 0.7); border-color: var(--dark-gold); }
+
 
 .metric-number { 
     font-size: 2.2rem; 
@@ -648,11 +672,14 @@ nav .container {
     display: block;
     margin-bottom: 0.25rem;
 }
+.team-metrics .metric-card .metric-number { font-size: 1.6rem; margin-bottom: 0.1rem; color: var(--gold); }
 
 .metric-label { 
     color: #ccc;
     font-size: 0.9rem;
 }
+.team-metrics .metric-card .metric-label { font-size: 0.85rem; line-height: 1.2; color: #bbb; }
+
 
 /* Gallery Section - uses .about for padding/background */
 .gallery-grid {
@@ -826,7 +853,8 @@ nav .container {
     margin-bottom: 1.5rem; 
 }
 
-.contact-icon-wrapper .fas.fa-crown {
+.contact-icon-wrapper .fas.fa-crown,
+.contact-icon-wrapper .fas.fa-envelope { /* For blog newsletter icon */
     font-size: 3rem; 
     color: var(--muted-gold);
 }
@@ -847,13 +875,17 @@ nav .container {
     margin-right: auto;
 }
 
-.contact-form {
+.contact-form { /* Used by main contact and blog newsletter */
     background: rgba(0, 0, 0, 0.35); 
     padding: 2.5rem; 
     border-radius: 10px;
     border: 1px solid var(--muted-gold);
     width: 100%; 
 }
+.newsletter-signup-form .form-group { /* Specific to blog newsletter single field */
+    margin-bottom: 0;
+}
+
 
 .contact-form .form-columns {
     display: grid;
@@ -868,8 +900,8 @@ nav .container {
     flex-direction: column;
     gap: 1.5rem; 
 }
-.contact-form .form-group {
-    margin-bottom: 0; 
+.contact-form .form-group { /* General form group, including single ones */
+    margin-bottom: 0; /* Reset if previously set, manage spacing with gap */
 }
 
 
@@ -905,6 +937,10 @@ nav .container {
     height: 165px; 
     resize: vertical;
 }
+.job-application-form .form-group textarea { /* For job app message */
+    height: 100px;
+}
+
 
 .form-group select {
     appearance: none; 
@@ -952,13 +988,13 @@ nav .container {
     grid-template-columns: repeat(4, 1fr); 
     gap: 30px; 
     margin-bottom: 40px;
-    align-items: start; /* Changed from end to start */
+    align-items: start; 
 }
 
 .site-footer .footer-column {
     display: flex; 
     flex-direction: column; 
-    justify-content: flex-start; /* Changed from flex-end to flex-start */
+    justify-content: flex-start; 
 }
 
 .site-footer .footer-column h4 {
@@ -973,11 +1009,11 @@ nav .container {
 .site-footer .footer-logo {
     max-height: 50px; 
     margin-bottom: 25px;
-    align-self: flex-start; /* Ensure logo aligns to the start of its column if needed */
+    align-self: flex-start; 
 }
 
 .site-footer .footer-about {
-     justify-content: flex-start; /* Changed from space-between to flex-start */
+     justify-content: flex-start; 
 }
 
 .site-footer .footer-about p {
@@ -1140,6 +1176,23 @@ nav .container {
     transform: translateY(0); 
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+/* Ensure initially hidden for JS to reveal */
+.portfolio-card:not(.element--in-view), 
+.service-card:not(.element--in-view),
+.about-text > *:not(.element--in-view), 
+.client-logos:not(.element--in-view), 
+.gallery-item:not(.element--in-view), 
+#blog .service-card:not(.element--in-view), 
+.contact-info > *:not(.element--in-view), 
+.contact-form > *:not(.element--in-view), 
+.team-member-card:not(.element--in-view), 
+.award-item:not(.element--in-view), 
+.job-posting:not(.element--in-view), 
+.mission-content:not(.element--in-view) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
 
 .element--in-view {
     opacity: 1;
@@ -1219,10 +1272,11 @@ nav .container {
   animation-duration: 0.5s; 
 }
 
-@keyframes fade {
+@keyframes fadeAnimate { /* Renamed to avoid conflict if 'fade' is used elsewhere */
   from {opacity: .4} 
   to {opacity: 1}
 }
+.gallery-slide.fade { animation-name: fadeAnimate; }
 
 
 /* Our Team Page Specific Styles */
@@ -1297,11 +1351,10 @@ nav .container {
     border-color: var(--muted-gold);
 }
 
-/* Team member image on the main page - rounded square */
 .team-member-image {
     width: 150px;
     height: 150px;
-    border-radius: 15px; /* Rounded square instead of circle */
+    border-radius: 15px; 
     overflow: hidden;
     margin-bottom: 1.5rem;
     border: 4px solid var(--muted-gold);
@@ -1335,187 +1388,6 @@ nav .container {
     min-height: 60px; 
 }
 
-.team-member-social {
-    margin-top: auto; 
-    padding-top: 1rem;
-    /* Social icons were here, now removed from individual profiles */
-}
-
-.team-member-social a {
-    color: #ccc;
-    font-size: 1.3rem;
-    margin: 0 0.5rem;
-    transition: color 0.3s ease;
-}
-
-.team-member-social a:hover {
-    color: var(--muted-gold);
-}
-
-/* Team Member Modal Styles */
-.team-modal {
-    display: none;
-    position: fixed;
-    z-index: 3000; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.9);
-    animation: fadeIn 0.3s ease;
-    overflow-y: auto;
-    padding: 20px; 
-}
-
-.team-modal-content {
-    background-color: var(--black);
-    margin: 3% auto; 
-    padding: 0; 
-    border: 2px solid var(--muted-gold);
-    border-radius: 10px;
-    width: 90%;
-    max-width: 750px; 
-    position: relative;
-    animation: slideIn 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden; 
-}
-
-.team-modal-header {
-    position: relative;
-    height: 280px; 
-    overflow: hidden;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background-color: var(--dark-gray); 
-    border-top-left-radius: 8px; 
-    border-top-right-radius: 8px;
-}
-
-.team-modal-header::before { 
-    content: ''; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: inherit; 
-    background-size: cover;
-    background-position: center;
-    filter: blur(10px) brightness(0.6); 
-    transform: scale(1.1); 
-    z-index: 1;
-}
-
-.team-modal-img-main { 
-    position: relative; 
-    z-index: 2; 
-    max-height: 85%;  
-    max-width: 90%;   
-    width: auto;      
-    height: auto;     
-    object-fit: contain; 
-    border-radius: 8px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
-    border: none; 
-}
-
-
-.close-team-modal { 
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    color: var(--white);
-    font-size: 2rem;
-    font-weight: bold;
-    cursor: pointer;
-    background: rgba(0,0,0,0.6);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10; 
-    line-height: 1;
-}
-.close-team-modal:hover {
-    background: var(--muted-gold);
-    color: var(--black);
-}
-
-
-.team-modal-body {
-    padding: 2rem;
-    text-align: center;
-}
-
-.team-modal-body h2 {
-    font-size: 2.2rem;
-    color: var(--muted-gold);
-    margin-bottom: 0.5rem;
-    margin-top: 0; 
-}
-
-.team-modal-title { 
-    font-size: 1.2rem;
-    color: var(--white);
-    margin-bottom: 1rem; 
-    font-weight: 500;
-}
-
-.team-modal-bio {
-    font-size: 1rem;
-    color: #ccc;
-    line-height: 1.7;
-    text-align: left; 
-    margin-bottom: 1.5rem; 
-}
-.team-modal-bio p {
-    margin-bottom: 1em;
-}
-.team-modal-bio p:last-child {
-    margin-bottom: 0;
-}
-
-.team-metrics { 
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 1rem; 
-    margin: 1.5rem auto; 
-    max-width: 500px; 
-}
-
-.team-metrics .metric-card {
-    padding: 0.75rem; 
-    min-height: auto; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%; 
-    background-color: rgba(26, 26, 26, 0.7); 
-    border-color: var(--dark-gold); 
-}
-
-.team-metrics .metric-card .metric-number {
-    font-size: 1.6rem; 
-    margin-bottom: 0.1rem;
-    color: var(--gold); 
-}
-.team-metrics .metric-card .metric-label {
-    font-size: 0.85rem; 
-    line-height: 1.2;
-    color: #bbb; 
-}
-
-
-.team-member-social-modal {
-    margin-top: 1.5rem; 
-    /* Social icons were here, now removed */
-}
 .team-member-social-modal a { 
     color: #ccc;
     font-size: 1.8rem; 
@@ -1570,6 +1442,7 @@ nav .container {
     color: #ccc;
 }
 
+/* Jobs Section Styles */
 .jobs-section {
     padding: 80px 0;
     background-color: var(--dark-gray);
@@ -1596,11 +1469,13 @@ nav .container {
     padding: 2rem;
     border-radius: 8px;
     border: 1px solid var(--muted-gold);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer; /* Make entire card clickable */
 }
 
 .job-posting:hover {
     box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+    transform: translateY(-5px);
 }
 
 .job-posting h3 {
@@ -1623,9 +1498,91 @@ nav .container {
     line-height: 1.7;
 }
 
-.job-apply-button {
+.job-posting-footer {
+    text-align: right; /* Align button to the right */
+    margin-top: 1rem;
+}
+
+.see-more-button { /* Style for the "See More" button */
     padding: 10px 25px;
     font-size: 1rem;
+}
+
+/* Job Modal Specific Styles */
+.job-modal-body h2 {
+    font-size: 2rem;
+    color: var(--muted-gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.job-details-section {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.job-details-section h3 {
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--dark-gray);
+    padding-bottom: 0.25rem;
+}
+
+.job-details-section p,
+.job-details-section ul {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.7;
+}
+
+.job-details-section ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 0.5rem;
+}
+.job-details-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.job-modal-divider {
+    border: 0;
+    height: 1px;
+    background: var(--dark-gray);
+    margin: 2rem 0;
+}
+
+.job-application-form h3 { /* "Directly Apply" heading */
+    font-size: 1.5rem;
+    color: var(--muted-gold);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.job-application-form .form-group {
+    margin-bottom: 1.2rem; /* Spacing between form fields */
+}
+
+.char-counter {
+    font-size: 0.85rem;
+    color: #aaa;
+    text-align: right;
+    margin-top: 0.25rem;
+}
+
+.form-submission-feedback { /* For success/error messages in job app form */
+    margin-top: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+}
+.form-submission-feedback.success {
+    background-color: var(--success-green);
+    color: var(--white);
+}
+.form-submission-feedback.error {
+    background-color: var(--error-red);
+    color: var(--white);
 }
 
 
@@ -1758,17 +1715,20 @@ nav .container {
         max-width: none; 
     }
     
-    .portfolio-modal-content {
+    .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content { /* Combined for mobile */
         width: 95%;
         margin: 5% auto;
     }
 
-    .portfolio-modal-header {
-        height: 250px; 
-    }
-    .portfolio-modal h2 {
+    .portfolio-modal-header { height: 250px; }
+    .team-modal-header { height: 200px; }
+    .blog-modal-header { height: 220px; }
+    /* Job modal header doesn't exist, so no style needed here for it */
+
+    .portfolio-modal h2, .team-modal-body h2, .blog-modal h1, .job-modal-body h2 { /* Combined modal titles */
         font-size: 1.8rem;
     }
+
     .metric-card {
         padding: 1rem;
     }
@@ -1833,33 +1793,18 @@ nav .container {
     .team-member-image {
         width: 120px;
         height: 120px;
-        border-radius: 10px; /* Slightly less rounded for smaller size if desired */
+        border-radius: 10px; 
     }
-    .team-modal-content {
-        width: 95%;
-        padding: 0; 
-    }
-    .team-modal-header {
-        height: 200px; 
-    }
-    .team-modal-body {
-        padding: 1.5rem; 
-    }
-    .team-modal-body h2 {
-        font-size: 1.8rem;
-    }
-    .team-modal .metrics { 
-        grid-template-columns: 1fr; 
-        gap: 1rem;
-    }
-    .team-metrics .metric-card {
-        min-height: auto; 
-        padding: 0.5rem; 
-    }
-    .team-metrics .metric-card .metric-number {
-        font-size: 1.4rem; 
-    }
-    .team-metrics .metric-card .metric-label {
-        font-size: 0.7rem; 
-    }
+
+    .team-modal-body { padding: 1.5rem; }
+    .team-modal .metrics { grid-template-columns: 1fr; gap: 1rem; }
+    .team-metrics .metric-card { min-height: auto; padding: 0.5rem; }
+    .team-metrics .metric-card .metric-number { font-size: 1.4rem; }
+    .team-metrics .metric-card .metric-label { font-size: 0.7rem; }
+
+    /* Job Modal specific for mobile */
+    .job-modal-body { padding: 1.5rem; }
+    .job-details-section h3 { font-size: 1.1rem; }
+    .job-details-section p, .job-details-section ul { font-size: 0.9rem; }
+
 }
