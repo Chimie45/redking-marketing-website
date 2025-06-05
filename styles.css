@@ -685,17 +685,16 @@ nav .container {
 /* Common Modal Body Base Styles */
 .portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body, .service-modal-body {
     flex-grow: 1; /* Allow body to take up remaining space */
-    /* Individual padding is applied below */
+    padding: 2.5rem; /* Default padding, can be overridden */
 }
 
-.portfolio-modal-body { padding: 2.5rem; }
+/* Specific paddings if different from default */
 .team-modal-body { text-align: center; padding: 2rem; }
-.blog-modal-body { padding: 2.5rem; } /* Assuming blog.html uses this */
 
 
 .portfolio-modal h2 { /* Specific to portfolio modal title */
     color: var(--muted-gold);
-    font-size: 2.2rem; /* REVERTED to original desktop size */
+    font-size: 2.2rem; 
     margin-bottom: 1.5rem;
 }
 
@@ -758,46 +757,37 @@ nav .container {
     background-color: var(--dark-gray);
     color: var(--white);
     padding: 1.5rem 2rem; /* Base padding */
-    /* The close button is a sibling within .service-modal-content, so this header doesn't directly need right padding for it. */
-    /* The header-content-wrapper below will handle centering icon/title and can have padding if needed. */
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers the .header-content-wrapper */
+    justify-content: center; /* Centers the icon and H2 as a group */
+    gap: 1rem; /* ADDED: Creates space between icon and H2 */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-shrink: 0;
+    border-bottom: 2px solid var(--muted-gold); /* MOVED from services.css for consistency */
 }
 
-.service-detail-modal .service-modal-header .header-content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centers icon and title */
-    gap: 1rem; /* <<< ENSURED GAP IS HERE for desktop */
-    padding-right: 50px; /* Provides space on the right IF close button was inside header and absolutely positioned to header's right. Since it's sibling, this helps prevent text overlap if title is long */
-    flex-grow: 1; /* Allow wrapper to take space */
-    text-align: center; /* Center text within the wrapper */
-}
+/* The .service-detail-modal .service-modal-header .header-content-wrapper rule is no longer needed 
+   as icon and h2 are direct children of .service-modal-header */
 
-
-.service-detail-modal .service-modal-header i {
-    font-size: 2.5rem;
+.service-detail-modal .service-modal-header i { /* Styles for the icon itself */
+    font-size: 2.5rem; /* Was 2.2rem in services.css, styles.css had 2.5rem for this rule if wrapper existed */
     color: var(--muted-gold);
-    line-height: 1;
-    flex-shrink: 0;
+    line-height: 1; /* Prevents extra space around icon */
+    flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
-.service-detail-modal .service-modal-header h2 {
-    font-size: 1.8rem; /* REVERTED to original desktop size */
+.service-detail-modal .service-modal-header h2 { /* Styles for the title itself */
+    font-size: 1.8rem; 
     font-weight: bold;
-    margin: 0;
+    margin: 0; /* Remove default h2 margin */
     color: var(--white);
-    /* Removed text-align: left to allow flex centering */
+    /* text-align: left; is default for h2, so it will align left relative to its position after the icon+gap */
 }
 
 .service-detail-modal .service-modal-body {
-    padding: 2rem 2.5rem;
-    flex-grow: 1;
+    /* Padding is already set by .portfolio-modal-body, .team-modal-body etc. to 2.5rem, which applies here */
 }
 
 .service-detail-modal .service-modal-body h4 { /* "Key Offerings:" */
@@ -828,9 +818,10 @@ nav .container {
 .service-modal-cta-wrapper {
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem; /* Ensure some space at the bottom */
+    /* padding-bottom: 1rem; /* Remove if margin-bottom is sufficient */
 }
+
 
 /* Contact Section */
 .contact {
@@ -1299,7 +1290,7 @@ nav .container {
 }
 
 .team-modal-body h2 { /* Team modal specific title */
-    font-size: 2.2rem; /* REVERTED to original desktop size */
+    font-size: 2.2rem; 
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
     margin-top: 0;
@@ -1439,7 +1430,7 @@ nav .container {
 }
 
 .job-modal .job-modal-body h2 { /* Main title in Job Modal */
-    font-size: 1.8rem; /* REVERTED to original desktop size */
+    font-size: 1.8rem; 
     font-weight: bold;
     color: var(--muted-gold);
     text-align: center;
@@ -1641,26 +1632,30 @@ nav .container {
 
     .portfolio-modal-header { height: 250px; }
     .team-modal-header { height: 200px; }
-    .blog-modal-header { height: 220px; } /* Assuming blog.html uses this */
+    .blog-modal-header { height: 220px; } 
 
+    /* Service Modal Responsive Styling */
     .service-detail-modal .service-modal-header {
-        padding: 1rem 1.5rem; /* Base for mobile */
-        padding-right: 60px; /* Ensure space for close button (40px + 20px right offset) */
+        padding: 1rem 1.5rem; 
+        padding-right: 60px; /* Ensure space for close button */
+        gap: 0.5rem; /* Reduced gap for icon and title on mobile */
+        flex-direction: row; /* Keep icon and title in a row on mobile */
+        justify-content: center; /* Center the group on mobile */
     }
-    .service-detail-modal .service-modal-header .header-content-wrapper {
-        padding-right: 0; /* Reset wrapper padding if header itself has enough */
-        gap: 0.5rem; /* MODIFIED: Reduced gap for mobile header */
-    }
-    .service-detail-modal .service-modal-header i { font-size: 1.5rem; } /* MODIFIED: Significantly smaller icon on mobile */
-    .service-detail-modal .service-modal-header h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
+    .service-detail-modal .service-modal-header i { 
+        font-size: 1.8rem; /* Adjusted icon size for mobile */
+    } 
+    .service-detail-modal .service-modal-header h2 { 
+        font-size: 1.2rem; /* Adjusted title size for mobile */
+    } 
 
-    .job-modal .job-modal-body h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
-    .portfolio-modal h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
-    .team-modal-body h2 { font-size: 1.1rem; } /* MODIFIED: Significantly smaller mobile title */
+    .job-modal .job-modal-body h2 { font-size: 1.5rem; } 
+    .portfolio-modal h2 { font-size: 1.5rem; } 
+    .team-modal-body h2 { font-size: 1.5rem; } 
 
 
-     .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
-     .job-modal .job-details-section h3 { font-size: 1.2rem; } /* Job modal section titles responsive */
+    .service-detail-modal .service-modal-body h4 { font-size: 1.2rem; }
+    .job-modal .job-details-section h3 { font-size: 1.2rem; } 
 
 
     .portfolio-modal-body .client-info { font-size: 0.9rem; padding: 1rem; }
@@ -1680,12 +1675,12 @@ nav .container {
         grid-template-columns: 1fr; /* Stack columns */
         gap: 0; /* Remove gap as they are stacked */
     }
-    .contact-form .form-column-left .form-group, /* Ensure consistent margin for stacked groups */
+    .contact-form .form-column-left .form-group, 
     .contact-form .form-column-right .form-group {
         margin-bottom: 1.5rem;
     }
      .contact-form .form-column-right .form-group:last-child {
-        margin-bottom: 0; /* Remove bottom margin from last group in stacked view if needed */
+        margin-bottom: 0; 
     }
 
 
@@ -1729,7 +1724,7 @@ nav .container {
 
 /* MODAL Z-INDEX HIERARCHY & DISPLAY FIXES */
 
-.service-detail-modal.modal--is-open, /* Ensure higher z-index when open */
+.service-detail-modal.modal--is-open, 
 .portfolio-modal.modal--is-open,
 .team-modal.modal--is-open,
 .blog-modal.modal--is-open,
@@ -1737,7 +1732,7 @@ nav .container {
     /* display, align-items, justify-content, opacity, visibility are handled by .modal--is-open directly */
 }
 
-.service-detail-modal { /* Base z-index, open state will be higher */
+.service-detail-modal { 
     z-index: 2500;
 }
 .portfolio-modal,
