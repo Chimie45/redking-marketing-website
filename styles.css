@@ -175,7 +175,7 @@ nav .container {
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-        url('header.jpg'); /* Ensure header.jpg is in the correct path */
+        url('header.jpg'); /* Default header image for index.html */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* This creates the parallax-like effect */
@@ -187,6 +187,14 @@ nav .container {
     overflow: hidden; /* If any child elements might overflow */
     border-bottom: 3px solid var(--muted-gold);
 }
+
+/* Specific background for Our Team page header */
+#team-header.page-header.hero {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        url('teamheader.jpg'); /* Ensure teamheader.jpg is in the correct path */
+}
+
 
 .hero-content {
     position: relative;
@@ -1885,4 +1893,3 @@ nav .container {
         font-size: 0.7rem; /* Adjust for mobile */
     }
 }
-
