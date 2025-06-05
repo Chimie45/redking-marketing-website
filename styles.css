@@ -552,48 +552,49 @@ nav .container {
 
 /* === Common Modal Styles (Overlay) === */
 .portfolio-modal, .team-modal, .blog-modal, .job-modal, .service-detail-modal {
-    display: none; /* Default: hidden */
-    opacity: 0; /* Default: transparent */
-    visibility: hidden; /* Default: not visible and not interactive */
+    display: none; /* Default: hidden. JS will toggle with .modal--is-open */
+    opacity: 0;
+    visibility: hidden;
     position: fixed;
-    z-index: 2000;
+    z-index: 2000; /* Base z-index */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.92);
-    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Transition opacity, delay visibility change */
-    overflow-y: auto;
-    padding: 20px;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Visibility hidden AFTER opacity fades */
+    overflow-y: auto; /* For the overlay itself if content box is very tall */
+    padding: 20px; /* Gutters around the modal content */
     box-sizing: border-box;
-    /* Centering is handled when .modal--is-open is applied */
+    /* Flex properties for centering content will be applied by .modal--is-open */
 }
 
-/* Class to show modals, added by JavaScript */
+/* Class to show modals, added/removed by JavaScript */
 .modal--is-open {
-    display: flex !important; /* Use flex for centering */
-    align-items: center !important;
-    justify-content: center !important;
+    display: flex !important; /* Override display:none to show */
+    align-items: center !important; /* Center content vertically */
+    justify-content: center !important; /* Center content horizontally */
     opacity: 1 !important;
     visibility: visible !important;
-    transition: opacity 0.3s ease, visibility 0s linear 0s; /* Immediate visibility on open */
+    transition: opacity 0.3s ease, visibility 0s linear 0s; /* Visibility shown immediately with opacity fade-in */
 }
 
 
 /* === Common Modal Content Box Styles === */
 .portfolio-modal-content, .team-modal-content, .blog-modal-content, .job-modal-content, .service-modal-content {
-    position: relative;
+    position: relative; /* For absolute positioning of close button */
     background-color: var(--black);
-    padding: 0;
+    padding: 0; /* Padding is handled by modal-body or header */
     border: 2px solid var(--muted-gold);
     border-radius: 10px;
-    width: 100%;
-    max-height: 100%;
+    width: 100%; /* Use available width within overlay's padding */
+    max-height: 100%; /* Use available height within overlay's padding */
+    /* Max-width is set per modal type */
     animation: slideIn 0.3s ease; /* Keep existing slide-in animation */
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow-y: auto;
+    overflow-y: auto; /* This makes the content box scrollable if its content overflows */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack header, body, footer */
 }
 
 .portfolio-modal-content { max-width: 1000px; }
@@ -605,7 +606,7 @@ nav .container {
 
 /* Common Modal Header Styles (Portfolio, Team, Blog - for modals with cover images) */
 .portfolio-modal-header, .team-modal-header, .blog-modal-header {
-    position: relative; /* For pseudo-elements and close button positioning */
+    position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -613,9 +614,9 @@ nav .container {
     background-color: var(--black);
     background-size: cover;
     background-position: center;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    flex-shrink: 0;
+    border-top-left-radius: 8px; /* Match parent content box */
+    border-top-right-radius: 8px; /* Match parent content box */
+    flex-shrink: 0; /* Prevent header from shrinking if body content is large */
 }
 .portfolio-modal-header { height: 400px; }
 .team-modal-header { height: 280px; background-color: var(--dark-gray); }
@@ -634,7 +635,7 @@ nav .container {
     background-position: center;
     filter: blur(12px) brightness(0.7);
     opacity: 1;
-    z-index: 1;
+    z-index: 1; /* Behind actual image */
 }
 .team-modal-header::before { filter: blur(10px) brightness(0.6); transform: scale(1.1); }
 
@@ -646,7 +647,7 @@ nav .container {
     width: auto;
     height: auto;
     object-fit: contain;
-    z-index: 2;
+    z-index: 2; /* Above pseudo-element */
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
@@ -654,10 +655,11 @@ nav .container {
 
 
 /* Common Close Button for All Modals */
+/* Positioned relative to .*-modal-content */
 .close-modal, .close-team-modal, .close-blog-modal, .close-job-modal, .close-service-modal {
     position: absolute;
     top: 15px;
-    right: 20px; /* Relative to .modal-content or a specifically positioned header */
+    right: 20px;
     color: var(--white);
     font-size: 2rem;
     font-weight: bold;
@@ -670,7 +672,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 2510 !important; /* Ensure it's above other modal elements */
+    z-index: 2510 !important; /* Ensure high z-index */
     line-height: 1;
 }
 
@@ -682,8 +684,8 @@ nav .container {
 
 /* Common Modal Body Base Styles */
 .portfolio-modal-body, .team-modal-body, .blog-modal-body, .job-modal-body, .service-modal-body {
-    flex-grow: 1; /* Allows body to expand */
-    /* overflow-y: auto; */ /* Scroll is handled by .modal-content now */
+    flex-grow: 1; /* Allow body to take up remaining space */
+    /* Individual padding is applied below */
 }
 
 .portfolio-modal-body { padding: 2.5rem; }
@@ -755,31 +757,28 @@ nav .container {
 .service-detail-modal .service-modal-header {
     background-color: var(--dark-gray);
     color: var(--white);
-    padding: 1.5rem 2rem; /* Base padding */
-    /* padding-right: 70px; /* Ensure space for close button if it's positioned inside this header */
+    padding: 1.5rem 2rem; /* Apply base padding */
+    padding-right: 70px; /* Add extra padding on the right for the close button area */
+    box-sizing: border-box; /* Ensures padding is within the element's total width/height */
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center; /* Centers the (icon + title) group */
-    gap: 1rem;
-    text-align: center; /* Fallback for title text */
+    justify-content: center; /* Centers the .header-content-wrapper */
+    gap: 1rem; /* Gap between icon and title if they were direct children (now handled by wrapper) */
+    text-align: center; /* Fallback for title if not perfectly centered by flex */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     flex-shrink: 0;
-    position: relative; /* For the .close-service-modal if it were inside */
-                          /* The close button is currently a sibling of the header in the .service-modal-content */
+    /* position: relative; /* Not needed here as close button is sibling */
 }
 
-.service-detail-modal .service-modal-header .header-content-wrapper { /* New wrapper for icon and title */
+.service-detail-modal .service-modal-header .header-content-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    /* This wrapper will be centered by the parent's justify-content: center */
-    /* Add padding here if title is very long and might overlap the close button area */
-    padding-right: 50px; /* Space for the absolutely positioned close button */
+    justify-content: center; /* Center icon and title within this wrapper */
+    gap: 1rem; /* Space between icon and title */
+    width: 100%; /* Allow it to take available space minus parent padding */
 }
-
 
 .service-detail-modal .service-modal-header i {
     font-size: 2.5rem;
@@ -792,7 +791,7 @@ nav .container {
     font-weight: bold;
     margin: 0;
     color: var(--white);
-    /* text-align: center; /* Already centered by parent flex */
+    /* Text will be centered by the .header-content-wrapper's justify-content */
 }
 
 .service-detail-modal .service-modal-body {
@@ -1122,7 +1121,7 @@ nav .container {
 .site-footer .newsletter-form input[type="email"]:focus {
     outline: none;
     border-color: var(--muted-gold);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
 }
 
 .site-footer .newsletter-form button {
@@ -1644,10 +1643,11 @@ nav .container {
     .blog-modal-header { height: 220px; } /* Assuming blog.html uses this */
 
     .service-detail-modal .service-modal-header {
-        padding: 1rem 1.5rem; /* Adjusted base padding for mobile */
+        padding: 1rem 1.5rem; /* Base for mobile */
+        padding-right: 60px; /* Ensure space for close button (40px + 20px right offset) */
     }
     .service-detail-modal .service-modal-header .header-content-wrapper {
-        padding-right: 45px; /* Adjust right padding for close button on mobile */
+        padding-right: 0; /* Reset wrapper padding if header itself has enough */
     }
     .service-detail-modal .service-modal-header i { font-size: 2rem; }
     .service-detail-modal .service-modal-header h2 { font-size: 1.5rem; }
@@ -1724,20 +1724,8 @@ nav .container {
 
 /* MODAL Z-INDEX HIERARCHY & DISPLAY FIXES */
 
-.service-detail-modal.modal--is-open, /* Ensure higher z-index when open */
-.portfolio-modal.modal--is-open,
-.team-modal.modal--is-open,
-.blog-modal.modal--is-open,
-.job-modal.modal--is-open {
-    /* display: flex !important;  Already handled by .modal--is-open */
-    /* align-items: center !important; */
-    /* justify-content: center !important; */
-    /* opacity: 1 !important; */
-    /* visibility: visible !important; */
-}
-
-.service-detail-modal { /* Base z-index, open state will be higher */
-    z-index: 2500;
+.service-detail-modal {
+    z-index: 2500; /* Keep !important if absolutely necessary, but try without first */
 }
 .portfolio-modal,
 .team-modal,
@@ -1747,9 +1735,9 @@ nav .container {
 }
 
 .close-service-modal,
-.close-modal, /* Generic, if used on a basic modal */
+.close-modal, 
 .close-team-modal,
 .close-blog-modal,
 .close-job-modal {
-    z-index: 2510 !important; /* Ensures close button is above its modal's content */
+    z-index: 2510 !important; /* Higher than modal content */
 }
