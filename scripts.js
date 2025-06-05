@@ -30,10 +30,20 @@ function openGalleryModal(modalId) {
         console.error('Gallery modal element not found in DOM:', modalId);
         return;
     }
+
+    // Debug before showing
+    console.log('Before showing - Modal display:', window.getComputedStyle(modal).display);
+
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+
+    // Debug after showing
+    console.log('After showing - Modal display:', window.getComputedStyle(modal).display);
     console.log('Gallery modal displayed:', modalId);
-    
+
+    // Call debug function
+    setTimeout(() => debugGalleryModal(modalId), 100);
+
     const video = modal.querySelector('video');
     if (video) {
         video.currentTime = 0;
@@ -42,7 +52,6 @@ function openGalleryModal(modalId) {
             console.log('Video playback started for gallery modal:', modalId);
         }).catch(e => {
             console.error('Video playback error for gallery modal ' + modalId + ':', e.message);
-            // Log if controls are missing, as a fallback
             if (!video.hasAttribute('controls')) {
                 console.warn('Video in modal ' + modalId + ' does not have controls. User might not be able to play manually if autoplay fails.');
             }
@@ -52,10 +61,11 @@ function openGalleryModal(modalId) {
     }
 
     if (modalId === 'gallery5') { // Specific logic for gallery5 slideshow
-        gallerySlideIndexes[modalId] = 1; 
+        gallerySlideIndexes[modalId] = 1;
         showGallerySlide(gallerySlideIndexes[modalId], modalId);
     }
 }
+
 
 function closeGalleryModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -64,7 +74,7 @@ function closeGalleryModal(modalId) {
         return;
     }
     modal.style.display = 'none';
-    
+
     const video = modal.querySelector('video');
     if (video) {
         video.pause();
@@ -74,7 +84,7 @@ function closeGalleryModal(modalId) {
     if (iframe) {
         iframe.src = 'about:blank'; // Clear iframe src to stop loading/playing
     }
-    checkAndRestoreScroll(); 
+    checkAndRestoreScroll();
 }
 
 // Slideshow specific functions
@@ -168,9 +178,9 @@ function openServiceModal(modalId) {
     if (!modal) { console.error('Service modal not found:', modalId); return; }
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    setTimeout(() => { 
+    setTimeout(() => {
        if(modal.contains(document.activeElement)) modal.blur();
-       modal.scrollTop = 0; 
+       modal.scrollTop = 0;
        const content = modal.querySelector('.service-modal-content');
        if(content) content.scrollTop = 0;
     },0);
@@ -180,6 +190,35 @@ function closeServiceModal(modalId) {
     if (modal) modal.style.display = 'none';
     checkAndRestoreScroll();
 }
+
+// NEW FUNCTION: Scroll to contact and close modal
+function scrollToContactAndCloseModal(event, modalId) {
+    event.preventDefault(); // Prevent default anchor behavior (page jump)
+
+    // Close the modal
+    if (modalId) { // Ensure modalId is provided
+        closeServiceModal(modalId);
+    }
+
+    // Scroll to contact section
+    const targetElement = document.getElementById('contact');
+    if (targetElement) {
+        const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        // The offset should account for the nav bar height and a little extra padding
+        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
+
+        // Body scroll should be restored by closeServiceModal via checkAndRestoreScroll
+        // if no other modals are open.
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    } else {
+        console.error("Contact section with ID 'contact' not found for scrolling.");
+    }
+}
+
 
 // Helper function to check if any modal is open and restore scroll if not
 function checkAndRestoreScroll() {
@@ -192,7 +231,7 @@ function checkAndRestoreScroll() {
 // Close modals when clicking outside of content
 window.addEventListener('click', function(event) {
     if (event.target.matches('.gallery-modal, .portfolio-modal, .team-modal, .job-modal, .service-detail-modal, .blog-modal')) {
-        if (event.target.style.display === 'block') { 
+        if (event.target.style.display === 'block') {
             if (event.target.classList.contains('gallery-modal')) closeGalleryModal(event.target.id);
             else if (event.target.classList.contains('portfolio-modal')) closePortfolioModal(event.target.id);
             else if (event.target.classList.contains('team-modal')) closeTeamModal(event.target.id);
@@ -235,16 +274,16 @@ if (contactForm) {
     }
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        formMessageDiv.textContent = ''; 
-        formMessageDiv.style.display = 'none'; 
-        formMessageDiv.className = 'form-submission-feedback'; 
+        formMessageDiv.textContent = '';
+        formMessageDiv.style.display = 'none';
+        formMessageDiv.className = 'form-submission-feedback';
         const submitButton = this.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.textContent;
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
         const formData = new FormData(this);
-        const data = Object.fromEntries(formData.entries()); 
-        data.formType = 'contact'; 
+        const data = Object.fromEntries(formData.entries());
+        data.formType = 'contact';
         if (!data.name || !data.email || !data.message) {
             formMessageDiv.textContent = 'Please fill in all required fields.';
             formMessageDiv.classList.add('error');
@@ -262,7 +301,7 @@ if (contactForm) {
             submitButton.disabled = false;
             return;
         }
-        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; 
+        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
         try {
             const response = await fetch(workerUrl, {
                 method: 'POST',
@@ -273,7 +312,7 @@ if (contactForm) {
             if (response.ok && result.success) {
                 formMessageDiv.textContent = result.message || 'Message sent successfully!';
                 formMessageDiv.classList.add('success');
-                this.reset(); 
+                this.reset();
             } else {
                 formMessageDiv.textContent = result.message || `Failed to send message. Server responded with ${response.status}.`;
                 formMessageDiv.classList.add('error');
@@ -305,7 +344,7 @@ if (newsletterForm) {
         e.preventDefault();
         newsletterMessageDiv.textContent = '';
         newsletterMessageDiv.style.display = 'none';
-        newsletterMessageDiv.className = 'form-submission-feedback'; 
+        newsletterMessageDiv.className = 'form-submission-feedback';
         const emailInput = this.querySelector('input[type="email"]');
         const email = emailInput.value;
         const submitButton = this.querySelector('button[type="submit"]');
@@ -329,7 +368,7 @@ if (newsletterForm) {
             submitButton.disabled = false;
             return;
         }
-        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; 
+        const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
         const data = { email: email, formType: 'newsletter' };
         try {
             const response = await fetch(workerUrl, {
@@ -341,7 +380,7 @@ if (newsletterForm) {
             if (response.ok && result.success) {
                 newsletterMessageDiv.textContent = result.message || 'Successfully subscribed!';
                 newsletterMessageDiv.classList.add('success');
-                this.reset(); 
+                this.reset();
             } else {
                 newsletterMessageDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
                 newsletterMessageDiv.classList.add('error');
@@ -377,7 +416,7 @@ if (jobAppFormMotionDesigner) {
         const feedbackDiv = document.getElementById('jobAppSubmissionMessageMotionDesigner');
         feedbackDiv.textContent = '';
         feedbackDiv.style.display = 'none';
-        feedbackDiv.className = 'form-submission-feedback'; 
+        feedbackDiv.className = 'form-submission-feedback';
         const submitButton = this.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.textContent;
         submitButton.textContent = 'Submitting...';
@@ -430,15 +469,15 @@ if (jobAppFormMotionDesigner) {
             return;
         }
         const formData = new FormData(this);
-        formData.append('formType', 'job-application-motion-designer'); 
+        formData.append('formType', 'job-application-motion-designer');
         const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
         try {
             const response = await fetch(workerUrl, { method: 'POST', body: formData });
-            const result = await response.json(); 
+            const result = await response.json();
             if (response.ok && result.success) {
                 feedbackDiv.textContent = result.message || 'Application submitted successfully!';
                 feedbackDiv.classList.add('success');
-                this.reset(); 
+                this.reset();
                 if (charCounterDisplay) charCounterDisplay.textContent = `${maxLength} characters remaining`;
             } else {
                 feedbackDiv.textContent = result.message || `Submission failed. Server responded with ${response.status}.`;
@@ -461,7 +500,7 @@ if (jobAppFormMotionDesigner) {
 document.addEventListener('DOMContentLoaded', function() {
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
-    
+
     const lazyImages = document.querySelectorAll('img[data-src]');
     if (lazyImages.length > 0) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -470,32 +509,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     const img = entry.target; img.src = img.dataset.src; img.removeAttribute('data-src'); observer.unobserve(img);
                 }
             });
-        }, { threshold: 0.1 }); 
+        }, { threshold: 0.1 });
         lazyImages.forEach(img => imageObserver.observe(img));
     }
 
     const navAnchors = document.querySelectorAll('nav .nav-links a[href*="#"], .logo[href*="#"], .cta-button[href*="#"]');
-    const mobileMenuIcon = document.querySelector('.mobile-menu'); 
-    const navLinks = document.querySelector('.nav-links'); 
+    const mobileMenuIcon = document.querySelector('.mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
 
     navAnchors.forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href'); const [path, hash] = href.split('#');
-            const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1) || "index.html";
-            const targetPath = path || (currentPath === "index.html" || currentPath === "" ? "index.html" : currentPath);
-            if (hash) {
-                if (targetPath === currentPath || (targetPath === 'index.html' && (currentPath === '' || currentPath === 'index.html'))) {
-                    e.preventDefault(); const targetElement = document.getElementById(hash);
+        // Exclude service modal CTAs from this generic scroll handler as they have their own
+        if (!anchor.classList.contains('service-modal-cta')) {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // Check if it's purely an internal link (starts with #) or targets the current page
+                if (href.startsWith('#') || href.startsWith(window.location.pathname + '#') || (href.startsWith('index.html#') && (window.location.pathname.endsWith('/') || window.location.pathname.endsWith('index.html')))) {
+                    e.preventDefault();
+                    const hash = href.substring(href.lastIndexOf('#') + 1);
+                    const targetElement = document.getElementById(hash);
+
                     if (targetElement) {
-                        if (navLinks && navLinks.classList.contains('nav-links--active')) { navLinks.classList.remove('nav-links--active'); if (mobileMenuIcon) mobileMenuIcon.classList.remove('active'); }
+                        if (navLinks && navLinks.classList.contains('nav-links--active')) {
+                            navLinks.classList.remove('nav-links--active');
+                            if (mobileMenuIcon) mobileMenuIcon.classList.remove('active');
+                        }
                         const navHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
                         const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; 
+                        const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
                         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
                     }
                 }
-            }
-        });
+                // If it's a link to a different page (e.g., services.html) or index.html#contact from another page, let the browser handle it.
+            });
+        }
     });
 
     if (mobileMenuIcon && navLinks) {
@@ -515,39 +561,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     const elementsToObserve = document.querySelectorAll(
-        '.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, ' + 
+        '.portfolio-card, .service-card, .about-text > *, .client-logos, .gallery-item, ' +
         '.contact-info > *, .contact-form > *, .team-member-card, .award-item, .job-posting, .mission-content'
     );
     elementsToObserve.forEach(el => {
-        // Exclude blog cards on index.html if they should be handled by blog-scripts.js on blog.html
-        // This logic assumes #blog.services is the "Latest Insights" section on index.html using .service-card
-        // and .blog-card is specific to blog.html (handled by blog-scripts.js)
-        if (!(el.classList.contains('blog-card') && el.closest('#blog-posts'))) { // if it's not a blog-card inside main blog grid
+        if (!(el.classList.contains('blog-card') && el.closest('#blog-posts'))) { 
              animatedElementsObserver.observe(el);
         }
     });
 });
 
-// Animate stat numbers 
+// Animate stat numbers
 function animateValue(element) {
-    if (!element) return; 
+    if (!element) return;
     const finalValueText = element.textContent;
-    let numericPart = finalValueText.replace(/[^\d.-]/g, ''); 
-    if (numericPart === '') return; 
+    let numericPart = finalValueText.replace(/[^\d.-]/g, '');
+    if (numericPart === '') return;
     const numericValue = parseFloat(numericPart);
     if (isNaN(numericValue)) return;
-    const suffix = finalValueText.substring(numericPart.length); 
-    const duration = 1500; 
-    const frameDuration = 16; 
-    const totalFrames = Math.max(1, duration / frameDuration); 
-    let increment = numericValue / totalFrames; 
+    const suffix = finalValueText.substring(numericPart.length);
+    const duration = 1500;
+    const frameDuration = 16;
+    const totalFrames = Math.max(1, duration / frameDuration);
+    let increment = numericValue / totalFrames;
 
     if (numericValue === 0) {
         element.textContent = '0' + suffix;
         return;
     }
     if (Math.abs(increment) < 0.0001 && numericValue !== 0) {
-      increment = (numericValue / Math.abs(numericValue)) * 0.001; 
+      increment = (numericValue / Math.abs(numericValue)) * 0.001;
     }
 
     let currentValue = 0;
@@ -560,20 +603,20 @@ function animateValue(element) {
         if ((increment > 0 && currentValue >= numericValue) || (increment < 0 && currentValue <= numericValue)) {
             currentValue = numericValue;
             animationComplete = true;
-        } else if (numericValue === 0) { 
+        } else if (numericValue === 0) {
             currentValue = 0;
             animationComplete = true;
         }
 
         let displayValue;
-        if (numericPart.includes('.') && !Number.isInteger(numericValue) ) { 
+        if (numericPart.includes('.') && !Number.isInteger(numericValue) ) {
             const decimalPlaces = (numericPart.split('.')[1] || '').length;
             displayValue = currentValue.toFixed(decimalPlaces);
         } else {
-            displayValue = Math.round(currentValue); 
+            displayValue = Math.round(currentValue);
         }
         element.textContent = displayValue + suffix;
-        
+
         if(animationComplete){
             clearInterval(timer);
         }
@@ -582,12 +625,12 @@ function animateValue(element) {
 
 // Image error handling
 document.querySelectorAll('img').forEach(img => {
-    if (!img.complete) { 
+    if (!img.complete) {
         img.addEventListener('error', function() {
-            this.style.display = 'none'; 
+            this.style.display = 'none';
             console.error('Failed to load image:', this.src);
         });
-    } else if (img.naturalWidth === 0 && img.src && !img.getAttribute('src').startsWith('data:image/')) { 
+    } else if (img.naturalWidth === 0 && img.src && !img.getAttribute('src').startsWith('data:image/')) {
          img.style.display = 'none';
          console.error('Image previously failed to load (naturalWidth is 0):', img.src);
     }
@@ -597,12 +640,12 @@ document.querySelectorAll('img').forEach(img => {
 function debugGalleryModal(modalId) {
     console.log('=== DEBUGGING GALLERY MODAL ===');
     const modal = document.getElementById(modalId);
-    
+
     if (!modal) {
         console.error('Modal not found:', modalId);
         return;
     }
-    
+
     console.log('Modal element:', modal);
     console.log('Modal display style:', window.getComputedStyle(modal).display);
     console.log('Modal opacity:', window.getComputedStyle(modal).opacity);
@@ -613,7 +656,7 @@ function debugGalleryModal(modalId) {
     console.log('Modal left:', window.getComputedStyle(modal).left);
     console.log('Modal width:', window.getComputedStyle(modal).width);
     console.log('Modal height:', window.getComputedStyle(modal).height);
-    
+
     const content = modal.querySelector('.gallery-modal-content');
     if (content) {
         console.log('Content element:', content);
@@ -621,7 +664,7 @@ function debugGalleryModal(modalId) {
         console.log('Content opacity:', window.getComputedStyle(content).opacity);
         console.log('Content z-index:', window.getComputedStyle(content).zIndex);
     }
-    
+
     const video = modal.querySelector('video');
     if (video) {
         console.log('Video element:', video);
@@ -629,51 +672,6 @@ function debugGalleryModal(modalId) {
         console.log('Video opacity:', window.getComputedStyle(video).opacity);
         console.log('Video z-index:', window.getComputedStyle(video).zIndex);
     }
-    
+
     console.log('=== END DEBUG ===');
-}
-
-// Modified openGalleryModal function with debug info
-function openGalleryModal(modalId) {
-    console.log('Attempting to open gallery modal:', modalId);
-    const modal = document.getElementById(modalId);
-    if (!modal) {
-        console.error('Gallery modal element not found in DOM:', modalId);
-        return;
-    }
-    
-    // Debug before showing
-    console.log('Before showing - Modal display:', window.getComputedStyle(modal).display);
-    
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    
-    // Debug after showing
-    console.log('After showing - Modal display:', window.getComputedStyle(modal).display);
-    console.log('Gallery modal displayed:', modalId);
-    
-    // Call debug function
-    setTimeout(() => debugGalleryModal(modalId), 100);
-    
-    const video = modal.querySelector('video');
-    if (video) {
-        video.currentTime = 0;
-        console.log('Attempting to play video in gallery modal:', video.src);
-        video.play().then(() => {
-            console.log('Video playback started for gallery modal:', modalId);
-        }).catch(e => {
-            console.error('Video playback error for gallery modal ' + modalId + ':', e.message);
-            // Log if controls are missing, as a fallback
-            if (!video.hasAttribute('controls')) {
-                console.warn('Video in modal ' + modalId + ' does not have controls. User might not be able to play manually if autoplay fails.');
-            }
-        });
-    } else {
-        console.log('No video element found in gallery modal:', modalId);
-    }
-
-    if (modalId === 'gallery5') { // Specific logic for gallery5 slideshow
-        gallerySlideIndexes[modalId] = 1; 
-        showGallerySlide(gallerySlideIndexes[modalId], modalId);
-    }
 }
