@@ -1646,7 +1646,7 @@ nav .container {
         font-size: 1.8rem; /* Adjusted icon size for mobile */
     } 
     .service-detail-modal .service-modal-header h2 { 
-        font-size: 1.2rem; /* Adjusted title size for mobile */
+        font-size: 0.9rem; /* Adjusted title size to 0.9rem for mobile */
     } 
 
     .job-modal .job-modal-body h2 { font-size: 1.5rem; } 
