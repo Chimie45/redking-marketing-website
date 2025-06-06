@@ -191,13 +191,14 @@
                     <h2>Stay Informed</h2>
                     <p>Subscribe to our newsletter and never miss the latest gaming marketing insights, industry analysis, and strategic guidance.</p>
                 </div>
-
-                <form class="contact-form newsletter-signup-form" id="blogPageNewsletterForm"> <!-- Unique ID for this form -->
+                <!-- MODIFICATION: Added data-form-type, updated ID, and feedback div -->
+                <form class="contact-form newsletter-signup-form" id="blogPageNewsletterForm" data-form-type="newsletter-blog-body">
                     <div class="form-group">
-                        <label for="blog-page-email">Email Address *</label> <!-- Unique ID for input -->
+                        <label for="blog-page-email">Email Address *</label>
                         <input type="email" id="blog-page-email" name="email" placeholder="Enter your email address" required>
                     </div>
                     <button type="submit" class="submit-btn">Subscribe to Newsletter</button>
+                    <div class="form-submission-feedback" style="display:none; margin-top: 15px;"></div>
                 </form>
             </div>
         </div>
@@ -238,8 +239,11 @@
                 <div class="footer-column footer-newsletter">
                     <h4>Stay Updated</h4>
                     <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-                    <form id="footerNewsletterFormBlogPage" class="newsletter-form"> <!-- Unique ID for this form -->
-                        <input type="email" name="email" placeholder="Enter your email" required><button type="submit">Subscribe</button>
+                    <!-- MODIFICATION: Added data-form-type, updated ID, and feedback div -->
+                    <form id="footerNewsletterFormBlogPage" class="newsletter-form" data-form-type="newsletter-footer-blog">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                        <div class="form-submission-feedback" style="display:none; font-size: 0.9em; margin-top: 10px;"></div>
                     </form>
                 </div>
             </div>
@@ -406,155 +410,6 @@
 
     <script src="scripts.js"></script>
     <script src="blog-scripts.js"></script>
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // Newsletter Form Handler for Blog Page (Body Section)
-        const blogPageNewsletterForm = document.getElementById('blogPageNewsletterForm');
-        if (blogPageNewsletterForm) {
-            let blogPageFeedbackDiv = document.getElementById('blog-page-newsletter-feedback');
-            if (!blogPageFeedbackDiv) {
-                blogPageFeedbackDiv = document.createElement('div');
-                blogPageFeedbackDiv.id = 'blog-page-newsletter-feedback';
-                blogPageFeedbackDiv.className = 'form-submission-feedback';
-                blogPageFeedbackDiv.style.cssText = 'margin-top: 15px; padding: 10px; border-radius: 5px; text-align: center; display: none;';
-                blogPageNewsletterForm.parentNode.insertBefore(blogPageFeedbackDiv, blogPageNewsletterForm.nextSibling);
-            }
-
-            blogPageNewsletterForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                blogPageFeedbackDiv.textContent = '';
-                blogPageFeedbackDiv.style.display = 'none';
-                blogPageFeedbackDiv.className = 'form-submission-feedback'; 
-
-                const submitButton = this.querySelector('button[type="submit"]');
-                const originalButtonText = submitButton.textContent;
-                submitButton.textContent = 'Subscribing...';
-                submitButton.disabled = true;
-
-                const emailInput = this.querySelector('input[type="email"]');
-                const email = emailInput.value;
-                
-                if (!email) {
-                    blogPageFeedbackDiv.textContent = 'Please enter your email address.';
-                    blogPageFeedbackDiv.classList.add('error');
-                    blogPageFeedbackDiv.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    blogPageFeedbackDiv.textContent = 'Please enter a valid email address.';
-                    blogPageFeedbackDiv.classList.add('error');
-                    blogPageFeedbackDiv.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-
-                const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
-                const data = { email: email, formType: 'blog-page-newsletter' }; 
-
-                try {
-                    const response = await fetch(workerUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', },
-                        body: JSON.stringify(data),
-                    });
-                    const result = await response.json();
-                    if (response.ok && result.success) {
-                        blogPageFeedbackDiv.textContent = result.message || 'Successfully subscribed!';
-                        blogPageFeedbackDiv.classList.add('success');
-                        this.reset(); 
-                    } else {
-                        blogPageFeedbackDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
-                        blogPageFeedbackDiv.classList.add('error');
-                    }
-                } catch (error) {
-                    console.error('Error submitting blog page newsletter form:', error);
-                    blogPageFeedbackDiv.textContent = 'An error occurred. Please try again later.';
-                    blogPageFeedbackDiv.classList.add('error');
-                } finally {
-                    blogPageFeedbackDiv.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                }
-            });
-        }
-
-        // Newsletter Form Handler for Footer on Blog Page
-        const footerNewsletterFormBlogPage = document.getElementById('footerNewsletterFormBlogPage');
-        if (footerNewsletterFormBlogPage) {
-            let footerFeedbackDiv = document.getElementById('footer-newsletter-feedback-blog');
-            if (!footerFeedbackDiv) {
-                footerFeedbackDiv = document.createElement('div');
-                footerFeedbackDiv.id = 'footer-newsletter-feedback-blog';
-                footerFeedbackDiv.className = 'form-submission-feedback';
-                footerFeedbackDiv.style.cssText = 'margin-top: 10px; padding: 8px; border-radius: 4px; text-align: center; font-size: 0.9em; display: none;';
-                footerNewsletterFormBlogPage.parentNode.insertBefore(footerFeedbackDiv, footerNewsletterFormBlogPage.nextSibling);
-            }
-
-            footerNewsletterFormBlogPage.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                footerFeedbackDiv.textContent = '';
-                footerFeedbackDiv.style.display = 'none';
-                footerFeedbackDiv.className = 'form-submission-feedback';
-
-                const emailInput = this.querySelector('input[type="email"]');
-                const email = emailInput.value;
-                const submitButton = this.querySelector('button[type="submit"]');
-                const originalButtonText = submitButton.textContent;
-                submitButton.textContent = 'Subscribing...';
-                submitButton.disabled = true;
-
-                if (!email) {
-                    footerFeedbackDiv.textContent = 'Please enter your email address.';
-                    footerFeedbackDiv.classList.add('error');
-                    footerFeedbackDiv.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    footerFeedbackDiv.textContent = 'Please enter a valid email address.';
-                    footerFeedbackDiv.classList.add('error');
-                    footerFeedbackDiv.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-
-                const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
-                const data = { email: email, formType: 'footer-newsletter-blog-page' }; 
-                try {
-                    const response = await fetch(workerUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', },
-                        body: JSON.stringify(data),
-                    });
-                    const result = await response.json();
-                    if (response.ok && result.success) {
-                        footerFeedbackDiv.textContent = result.message || 'Successfully subscribed!';
-                        footerFeedbackDiv.classList.add('success');
-                        this.reset();
-                    } else {
-                        footerFeedbackDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
-                        footerFeedbackDiv.classList.add('error');
-                    }
-                } catch (error) {
-                    console.error('Error submitting footer newsletter form on blog page:', error);
-                    footerFeedbackDiv.textContent = 'An error occurred. Please try again later.';
-                    footerFeedbackDiv.classList.add('error');
-                } finally {
-                    footerFeedbackDiv.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                }
-            });
-        }
-    </script>
+    <!-- MODIFICATION: Removed all inline script tags for form handling and current year -->
 </body>
 </html>
