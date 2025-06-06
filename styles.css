@@ -192,7 +192,7 @@ nav .container {
 
 /* Page Header for sub-pages (Team, Blog, Services) */
 .page-header.hero { /* More specific selector for sub-page headers */
-    min-height: 60vh; /* Default min-height for sub-page headers */
+    min-height: 100vh; /* Default min-height for sub-page headers */
 }
 
 #team-header.page-header.hero {
@@ -1696,7 +1696,7 @@ nav .container {
 
     /* Our Team Page Responsive Adjustments */
     .page-header#team-header {
-        min-height: 60vh;
+        min-height: 100vh;
     }
     .mission-statement-header p {
         font-size: 1rem;
