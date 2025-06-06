@@ -56,6 +56,39 @@ const blogArticles = [
                 <p>Many Western developers fail by simply translating their game. True localization involves adapting art styles, themes, monetization strategies, and community management to fit local expectations. Ignoring cultural nuances or failing to understand the regulatory environment can lead to costly mistakes.</p>
             </div>
         `
+    },
+    {
+        id: 'igaming-marketing-strategies',
+        title: 'iGaming Marketing Strategies',
+        date: '2025-02-28',
+        author: 'David Thompson',
+        tags: ['iGaming', 'Strategy', 'User Acquisition'],
+        excerpt: 'Advanced strategies for marketing in highly regulated iGaming environments while maximizing player acquisition and retention.',
+        heroImage: 'images/blog/blog-3.jpg',
+        featured: false,
+        fullContent: `<p>Content for iGaming Marketing Strategies coming soon.</p>`
+    },
+    {
+        id: 'social-media-gaming-brands',
+        title: 'Social Media for Gaming Brands',
+        date: '2025-02-20',
+        author: 'Emily Rodriguez',
+        tags: ['Social Media', 'Community', 'Engagement'],
+        excerpt: 'Building authentic communities and driving engagement through strategic social media marketing in the gaming industry.',
+        heroImage: 'images/blog/blog-4.jpg',
+        featured: false,
+        fullContent: `<p>Content for Social Media for Gaming Brands coming soon.</p>`
+    },
+    {
+        id: 'user-acquisition-best-practices',
+        title: 'User Acquisition Best Practices',
+        date: '2025-02-12',
+        author: 'James Wilson',
+        tags: ['User Acquisition', 'Mobile Gaming', 'Performance Marketing'],
+        excerpt: 'Data-driven approaches to mobile game user acquisition that maximize ROI and long-term player value.',
+        heroImage: 'images/blog/blog-5.jpg',
+        featured: false,
+        fullContent: `<p>Content for User Acquisition Best Practices coming soon.</p>`
     }
 ];
 
@@ -158,9 +191,19 @@ function openBlogArticle(articleId) {
     const modalImage = document.getElementById('modal-hero-image');
     const contentContainer = document.getElementById('blog-article-content');
     
-    // Set hero image
+    // Set hero image and add an error handler
     modalImage.src = article.heroImage;
     modalImage.alt = article.title;
+    modalImage.onerror = () => { 
+        modalImage.src = 'https://placehold.co/900x350/1a1a1a/c9b037?text=Image+Not+Found';
+    };
+
+    // Add or remove a class to the modal for specific styling
+    if (article.featured) {
+        modal.classList.add('featured-article-modal');
+    } else {
+        modal.classList.remove('featured-article-modal');
+    }
     
     // Display article with metadata from the JS object
     contentContainer.innerHTML = `
@@ -203,4 +246,3 @@ function formatDate(dateString) {
 // Note: The global event listeners for closing the modal via Escape key or
 // clicking the overlay are already present in your main 'scripts.js' file
 // and should now work correctly with closeBlogModal().
-
