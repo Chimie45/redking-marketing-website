@@ -1698,7 +1698,7 @@ nav .container {
     .page-header#team-header,
     #services-page-header.page-header.hero, /* ADDED: Services page mobile header height */
     #blog-header.page-header.hero { 
-        min-height: 60vh; 
+        min-height: 100vh; 
     }
     .mission-statement-header p {
         font-size: 1rem;
