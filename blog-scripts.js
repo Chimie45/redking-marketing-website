@@ -8,7 +8,7 @@ const blogArticles = [
         excerpt: 'Discover the latest trends shaping the gaming industry and how to capitalize on emerging opportunities in global markets.',
         thumbnail: 'images/blog/blog-1.jpg',
         heroImage: 'images/blog/blog-1.jpg',
-        contentUrl: '/blogs/articles/gaming-trends-2025.html'
+        contentUrl: 'blogs/articles/gaming-trends-2025.html'
     },
     {
         id: 'asian-gaming-markets',
@@ -17,7 +17,7 @@ const blogArticles = [
         excerpt: 'Unlock the potential of the world\'s largest gaming region. This guide breaks down the key differences between markets like Japan, South Korea, and Southeast Asia.',
         thumbnail: 'images/blog/blog-2.jpg',
         heroImage: 'images/blog/blog-2.jpg',
-        contentUrl: '/blogs/articles/asian-gaming-markets.html'
+        contentUrl: 'blogs/articles/asian-gaming-markets.html'
     },
     {
         id: 'igaming-strategies',
