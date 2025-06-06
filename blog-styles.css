@@ -6,9 +6,9 @@
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
         url('images/blog/blogheader.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: bottom;
     background-attachment: fixed;
-    min-height: 60vh; /* Reduced from 100vh */
+    min-height: 70vh; /* Reduced from 100vh */
 }
 
 #blog-header .hero-content h1 {
@@ -236,13 +236,16 @@
 
 
 /* Blog Modal Styles (Using classes from styles.css) */
-.blog-modal .blog-modal-content {
-    /* Uses common modal styles from styles.css */
+
+/* Default modal content width is 900px, set in styles.css */
+/* This new rule specifically targets the featured article modal */
+.blog-modal.featured-article-modal .blog-modal-content {
+    max-width: 720px;
 }
+
 
 .close-blog-modal {
     /* Uses .close-modal styles from styles.css */
-    /* Ensure it is aliased in styles.css or add properties here */
     position: absolute;
     top: 15px;
     right: 20px;
@@ -341,6 +344,12 @@
     .blog-grid {
         grid-template-columns: 1fr;
     }
+    
+    /* Make all modals take up more width on mobile */
+    .blog-modal .blog-modal-content {
+        max-width: 95vw;
+    }
+
     .blog-modal-header {
         height: 250px;
     }
