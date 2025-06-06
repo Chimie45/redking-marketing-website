@@ -1,136 +1,186 @@
+// --- Blog Content Management ---
+// Using a simple array of objects to store article data.
 const blogArticles = [
-  {
-    id: 'gaming-trends-2025',
-    title: 'Gaming Market Trends 2025',
-    date: '2025-03-15',
-    author: 'Sarah Chen',
-    tags: ['Industry Trends', 'Market Analysis', 'Gaming'],
-    excerpt: 'Discover the latest trends shaping the gaming industry and how to capitalize on emerging opportunities in global markets.',
-    heroImage: 'images/blog/blog-1.jpg',
-    featured: true,
-    fullContent: `
-      <div class="article-content">
-        <h2>The Convergence of Technology and Entertainment</h2>
-        <p>The gaming landscape in 2025 is defined by unprecedented technological fusion...</p>
-      </div>
-    `
-  },
-  {
-    id: 'asian-gaming-markets',
-    title: 'Asian Gaming Markets Guide',
-    date: '2025-03-08',
-    author: 'Michael Park',
-    tags: ['Asia', 'Market Entry', 'Localization'],
-    excerpt: 'Navigate the complexities of marketing gaming products across diverse Asian markets...',
-    heroImage: 'images/blog/blog-2.jpg',
-    featured: false,
-    fullContent: `
-      <div class="article-content">
-        <h2>A Continent of Gamers</h2>
-        <p>Asia is not a monolithic market...</p>
-      </div>
-    `
-  },
-  // Add more articles as needed
-]
+    {
+        id: 'featured-gaming-trends-2025',
+        isFeatured: true,
+        title: 'Top 5 Gaming Market Trends to Watch in 2025',
+        author: 'Sarah Chen',
+        date: 'June 5, 2025',
+        excerpt: 'From the rise of cloud gaming to the impact of Web3, discover the key trends shaping the future of the gaming industry and how your marketing can adapt.',
+        thumbnail: 'images/blog/blog-1.jpg',
+        heroImage: 'images/blog/blog-1.jpg',
+        content: `
+            <p>The gaming landscape is in a perpetual state of evolution, and 2025 is shaping up to be a landmark year. As technology advances and player expectations shift, marketers must stay ahead of the curve to remain effective. Here are the five most critical trends to watch.</p>
+            
+            <h2>1. Cloud Gaming Goes Mainstream</h2>
+            <p>Services like Xbox Cloud Gaming and GeForce NOW are maturing rapidly, removing the hardware barrier for millions of potential players. This democratizes access to high-fidelity games, but it also means marketing needs to target a much broader demographic who may not identify as "traditional" gamers.</p>
 
-document.addEventListener('DOMContentLoaded', () => {
-  blogArticles.sort((a, b) => new Date(b.date) - new Date(a.date))
-  displayFeaturedBlog()
-  loadBlogPosts()
-})
+            <h2>2. The "AAA" Mobile Experience</h2>
+            <p>Mobile gaming is no longer just about hyper-casual titles. We're seeing a surge in high-budget, graphically intensive games on mobile that rival their console counterparts. Marketing for these titles requires a focus on quality, storytelling, and community-building, much like a traditional AAA launch.</p>
 
-function displayFeaturedBlog() {
-  const featured = blogArticles.find(article => article.featured)
-  const container = document.getElementById('featured-blog-container')
-  if (!featured || !container) return
+            <h2>3. AI-Driven Personalization</h2>
+            <p>Artificial intelligence is set to revolutionize in-game experiences and marketing. From dynamically adjusting difficulty to offering personalized in-game store promotions, AI allows for a level of individualized engagement that was previously impossible. Marketers who leverage player data ethically will build deeper, more loyal communities.</p>
 
-  container.innerHTML = `
-    <div class="featured-blog-card" onclick="openBlogArticle('${featured.id}')">
-      <div class="featured-blog-image">
-        <img src="${featured.heroImage}" alt="${featured.title}">
-        <div class="featured-blog-overlay">
-          <div class="featured-blog-info">
-            <span class="featured-label">Featured Article</span>
-            <h3>${featured.title}</h3>
-            <p class="blog-meta">
-              <span class="blog-date">${formatDate(featured.date)}</span>
-              <span class="blog-author">by ${featured.author}</span>
-            </p>
-            <p class="blog-excerpt">${featured.excerpt}</p>
-            <span class="view-details">Read Full Article →</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
-}
-
-function loadBlogPosts() {
-  const grid = document.getElementById('blog-grid')
-  if (!grid) return
-
-  const posts = blogArticles.filter(article => !article.featured)
-  grid.innerHTML = posts.map(article => `
-    <div class="blog-card" onclick="openBlogArticle('${article.id}')">
-      <div class="blog-image">
-        <img src="${article.heroImage}" alt="${article.title}">
-        <div class="blog-overlay">
-          <h3>${article.title}</h3>
-          <span class="blog-date">${formatDate(article.date)}</span>
-          <p class="blog-excerpt">${article.excerpt}</p>
-          <span class="view-details">Read More →</span>
-        </div>
-      </div>
-    </div>
-  `).join('')
-}
-
-function openBlogArticle(id) {
-  const article = blogArticles.find(a => a.id === id)
-  if (!article) return
-
-  const modal = document.getElementById('blogModal')
-  const hero = document.getElementById('modal-hero-image')
-  const content = document.getElementById('blog-article-content')
-
-  if (modal && hero && content) {
-    hero.src = article.heroImage
-    hero.alt = article.title
-    content.innerHTML = `
-      <h2>${article.title}</h2>
-      <p class="blog-meta">
-        <strong>${formatDate(article.date)}</strong> • by ${article.author}
-      </p>
-      ${article.fullContent}
-    `
-    modal.classList.add('modal--is-open')
-    document.body.style.overflow = 'hidden'
-
-    // Optional: GTM event hook
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'blogArticleOpened',
-        articleId: article.id,
-        title: article.title
-      })
+            <h2>4. Web3 and Digital Ownership</h2>
+            <p>While still controversial, the concepts of NFTs and blockchain technology are finding their footing. The core idea of "true digital ownership" resonates with players. Successful marketing in this space will prioritize transparency, community governance, and providing real, tangible value to players who invest in the ecosystem.</p>
+            
+            <h2>5. The Creator Economy Matures</h2>
+            <p>Influencer marketing is evolving into a more integrated creator economy. Rather than one-off sponsorships, brands are building long-term partnerships with creators, co-creating content, and even integrating them into the game world itself. Authenticity is paramount, and the most successful campaigns will empower creators rather than just using them as billboards.</p>
+        `
+    },
+    {
+        id: 'asia-market-guide',
+        isFeatured: false,
+        title: 'A Marketer\'s Guide to Asian Gaming Markets',
+        author: 'Michael Park',
+        date: 'May 28, 2025',
+        excerpt: 'Unlock the potential of the world\'s largest gaming region. This guide breaks down the key differences between markets like Japan, South Korea, and Southeast Asia.',
+        thumbnail: 'images/blog/blog-2.jpg',
+        heroImage: 'images/blog/blog-2.jpg',
+        content: '<p>Content for A Marketer\'s Guide to Asian Gaming Markets is coming soon.</p>'
+    },
+    {
+        id: 'igaming-strategies',
+        isFeatured: false,
+        title: 'Effective Marketing in Regulated iGaming Sectors',
+        author: 'David Thompson',
+        date: 'May 15, 2025',
+        excerpt: 'Navigating the complex regulations of iGaming requires a specialized approach. Learn advanced strategies for player acquisition and retention while ensuring compliance.',
+        thumbnail: 'images/blog/blog-3.jpg',
+        heroImage: 'images/blog/blog-3.jpg',
+        content: '<p>Content for Effective Marketing in Regulated iGaming Sectors is coming soon.</p>'
+    },
+    {
+        id: 'community-management-power',
+        isFeatured: false,
+        title: 'The Power of Community: Building a Brand Beyond the Game',
+        author: 'Emily Rodriguez',
+        date: 'May 1, 2025',
+        excerpt: 'Your game is just the beginning. Discover how strategic community management on platforms like Discord and Reddit can build lasting player loyalty and drive organic growth.',
+        thumbnail: 'images/blog/blog-4.jpg',
+        heroImage: 'images/blog/blog-4.jpg',
+        content: '<p>Content for The Power of Community is coming soon.</p>'
+    },
+    {
+        id: 'user-acquisition-roi',
+        isFeatured: false,
+        title: 'Maximizing ROI in Mobile User Acquisition Campaigns',
+        author: 'James Wilson',
+        date: 'April 22, 2025',
+        excerpt: 'Don\'t just acquire users—acquire valuable players. We dive into data-driven techniques for optimizing your UA spend and increasing long-term player value.',
+        thumbnail: 'images/blog/blog-5.jpg',
+        heroImage: 'images/blog/blog-5.jpg',
+        content: '<p>Content for Maximizing ROI in Mobile User Acquisition is coming soon.</p>'
     }
-  }
+];
+
+// --- Page Initialization ---
+document.addEventListener('DOMContentLoaded', () => {
+    displayFeaturedArticle();
+    displayLatestArticles();
+});
+
+// --- Dynamic Content Functions ---
+
+/**
+ * Finds the featured article and injects its HTML into the page.
+ */
+function displayFeaturedArticle() {
+    const featuredContainer = document.getElementById('featured-article-container');
+    const featuredArticle = blogArticles.find(article => article.isFeatured);
+
+    if (!featuredContainer || !featuredArticle) return;
+
+    const articleHTML = `
+        <div class="featured-article-card" onclick="openBlogModal('${featuredArticle.id}')">
+            <div class="featured-article-image">
+                <img src="${featuredArticle.heroImage}" alt="${featuredArticle.title}">
+            </div>
+            <div class="featured-article-content">
+                <span class="featured-tag">Featured Article</span>
+                <h2>${featuredArticle.title}</h2>
+                <p class="article-excerpt">${featuredArticle.excerpt}</p>
+                <span class="read-more-link">Read Full Story &rarr;</span>
+            </div>
+        </div>
+    `;
+    featuredContainer.innerHTML = articleHTML;
 }
 
+/**
+ * Finds all non-featured articles and injects them into the blog grid.
+ */
+function displayLatestArticles() {
+    const gridContainer = document.getElementById('blog-grid-container');
+    const latestArticles = blogArticles.filter(article => !article.isFeatured);
+
+    if (!gridContainer) return;
+
+    let articlesHTML = '';
+    latestArticles.forEach(article => {
+        articlesHTML += `
+            <div class="blog-card" onclick="openBlogModal('${article.id}')">
+                <div class="blog-card-thumbnail">
+                    <img src="${article.thumbnail}" alt="${article.title}">
+                </div>
+                <div class="blog-card-content">
+                    <h3>${article.title}</h3>
+                    <p class="article-excerpt">${article.excerpt}</p>
+                    <span class="read-more-link">Read More &rarr;</span>
+                </div>
+            </div>
+        `;
+    });
+    gridContainer.innerHTML = articlesHTML;
+}
+
+
+// --- Modal Functionality ---
+
+/**
+ * Opens the blog modal and populates it with content from the selected article.
+ * @param {string} articleId - The ID of the article to display.
+ */
+function openBlogModal(articleId) {
+    const article = blogArticles.find(a => a.id === articleId);
+    const modal = document.getElementById('blog-modal');
+
+    if (!article || !modal) {
+        console.error('Article or modal not found.');
+        return;
+    }
+
+    // Populate Modal Content
+    document.getElementById('modal-hero-image').src = article.heroImage;
+    document.getElementById('modal-hero-image').alt = article.title;
+    document.getElementById('modal-title').textContent = article.title;
+    document.getElementById('modal-meta').innerHTML = `
+        <span><strong>By:</strong> ${article.author}</span>
+        <span><strong>Date:</strong> ${article.date}</span>
+    `;
+    document.getElementById('modal-content').innerHTML = article.content;
+
+    // Show Modal
+    modal.classList.add('modal--is-open');
+    document.body.style.overflow = 'hidden';
+
+    // Scroll to top of modal content on open
+    modal.querySelector('.blog-modal-content').scrollTop = 0;
+}
+
+/**
+ * Closes the blog modal.
+ */
 function closeBlogModal() {
-  const modal = document.getElementById('blogModal')
-  if (modal) {
-    modal.classList.remove('modal--is-open')
-    document.body.style.overflow = 'auto'
-  }
+    const modal = document.getElementById('blog-modal');
+    if (modal) {
+        modal.classList.remove('modal--is-open');
+    }
+    // The main scripts.js file listens for modal closures and will restore body scroll.
+    // However, we can add it here for robustness.
+    checkAndRestoreScroll();
 }
 
-function formatDate(dateStr) {
-  const date = new Date(dateStr)
-  return date.toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-}
+// NOTE: The main `scripts.js` file handles closing the modal via Escape key
+// and clicking the overlay, as long as the modal has the class `modal--is-open`.
