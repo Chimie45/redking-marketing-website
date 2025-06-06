@@ -5,7 +5,7 @@
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
         url('images/services/servicesheader.jpg'); /* Path for services page header image */
-    min-height: 70vh; 
+    /* min-height: 70vh;  REMOVED - This will now be controlled by styles.css (100vh desktop / 60vh mobile) */
     background-attachment: fixed; 
 }
 
@@ -114,7 +114,7 @@
 /* Responsive adjustments for service modals and page */
 @media (max-width: 768px) {
     #services-page-header.page-header.hero {
-        min-height: 50vh;
+        /* min-height: 50vh; REMOVED - This will now be controlled by styles.css (60vh mobile) */
     }
     #services-page-header .hero-content h1 {
         font-size: 2.2rem; 
