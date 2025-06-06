@@ -20,22 +20,23 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M56HMGXR"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <!-- Navigation (Updated to match index.html structure with adjusted links) -->
+
+    <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="nav-content">
                 <div class="nav-left">
-                    <a href="index.html#home" class="logo"> <!-- Link to homepage -->
+                    <a href="index.html#home" class="logo">
                         <img src="images/home/logo.png" alt="RedKing Marketing">
                     </a>
                     <ul class="nav-links">
                         <li><a href="index.html#home">Home</a></li>
-                        <li><a href="services.html">Services</a></li> 
+                        <li><a href="services.html">Services</a></li>
                         <li><a href="index.html#about">About</a></li>
                         <li><a href="our-team.html">Our Team</a></li>
                         <li><a href="index.html#portfolio">Portfolio</a></li>
-                        <li><a href="blog.html">Blog</a></li> <!-- Current page -->
-                        <li><a href="index.html#contact">Contact</a></li> <!-- Link to contact section on index.html -->
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="nav-right">
@@ -58,9 +59,9 @@
     </nav>
 
     <!-- Page Header Section -->
-    <section id="blog-header" class="page-header hero"> 
+    <section id="blog-header" class="page-header hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('images/blog/blogheader.jpg');">
         <div class="container">
-            <div class="hero-content" style="padding-top: 100px; padding-bottom: 40px;"> 
+            <div class="hero-content" style="padding-top: 100px; padding-bottom: 40px;">
                 <h1>Gaming Marketing Insights</h1>
                 <p class="subtitle">Expert Analysis, Trends, and Strategies for Gaming Success</p>
                 <div class="blog-intro">
@@ -71,116 +72,27 @@
     </section>
 
     <!-- Blog Posts Section -->
-    <section id="blog-posts" class="blog-section services"> 
+    <section id="blog-posts" class="blog-section services">
         <div class="container">
-            <h2 class="section-title">Latest Articles</h2>
-            <div class="blog-grid">
-                <!-- Blog Post 1 -->
-                <div class="blog-card" onclick="openBlogModal('blog1')">
-                    <div class="blog-image">
-                        <img src="images/blog/blog-1.jpg" alt="Gaming Market Trends 2025">
-                        <div class="blog-overlay">
-                            <div class="blog-info">
-                                <div class="blog-text">
-                                    <h3>Gaming Market Trends 2025</h3>
-                                    <p class="blog-date">March 15, 2025</p>
-                                    <p class="blog-excerpt">Discover the latest trends shaping the gaming industry and how to capitalize on emerging opportunities in global markets.</p>
-                                </div>
-                                <span class="view-details">Read More →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Featured Blog Section -->
+            <h2 class="section-title">Featured Post</h2>
+            <div id="featured-post-container" class="featured-post-wrapper">
+                <!-- Featured post will be injected here by JavaScript -->
+            </div>
 
-                <!-- Blog Post 2 -->
-                <div class="blog-card" onclick="openBlogModal('blog2')">
-                    <div class="blog-image">
-                        <img src="images/blog/blog-2.jpg" alt="Asian Gaming Markets Guide">
-                        <div class="blog-overlay">
-                            <div class="blog-info">
-                                <div class="blog-text">
-                                    <h3>Asian Gaming Markets Guide</h3>
-                                    <p class="blog-date">March 8, 2025</p>
-                                    <p class="blog-excerpt">Navigate the complexities of marketing gaming products across diverse Asian markets with cultural insights and regulatory guidance.</p>
-                                </div>
-                                <span class="view-details">Read More →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Blog Post 3 -->
-                <div class="blog-card" onclick="openBlogModal('blog3')">
-                    <div class="blog-image">
-                        <img src="images/blog/blog-3.jpg" alt="iGaming Marketing Strategies">
-                        <div class="blog-overlay">
-                            <div class="blog-info">
-                                <div class="blog-text">
-                                    <h3>iGaming Marketing Strategies</h3>
-                                    <p class="blog-date">February 28, 2025</p>
-                                    <p class="blog-excerpt">Advanced strategies for marketing in highly regulated iGaming environments while maximizing player acquisition and retention.</p>
-                                </div>
-                                <span class="view-details">Read More →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Blog Post 4 -->
-                <div class="blog-card" onclick="openBlogModal('blog4')">
-                    <div class="blog-image">
-                        <img src="images/blog/blog-4.jpg" alt="Social Media for Gaming Brands">
-                        <div class="blog-overlay">
-                            <div class="blog-info">
-                                <div class="blog-text">
-                                    <h3>Social Media for Gaming Brands</h3>
-                                    <p class="blog-date">February 20, 2025</p>
-                                    <p class="blog-excerpt">Building authentic communities and driving engagement through strategic social media marketing in the gaming industry.</p>
-                                </div>
-                                <span class="view-details">Read More →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Blog Post 5 -->
-                <div class="blog-card" onclick="openBlogModal('blog5')">
-                    <div class="blog-image">
-                        <img src="images/blog/blog-5.jpg" alt="User Acquisition Best Practices">
-                        <div class="blog-overlay">
-                            <div class="blog-info">
-                                <div class="blog-text">
-                                    <h3>User Acquisition Best Practices</h3>
-                                    <p class="blog-date">February 12, 2025</p>
-                                    <p class="blog-excerpt">Data-driven approaches to mobile game user acquisition that maximize ROI and long-term player value.</p>
-                                </div>
-                                <span class="view-details">Read More →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Blog Post 6 -->
-                <div class="blog-card" onclick="openBlogModal('blog6')">
-                    <div class="blog-image">
-                        <img src="images/blog/blog-6.jpg" alt="Gaming Localization Strategies">
-                        <div class="blog-overlay">
-                            <div class="blog-info">
-                                <div class="blog-text">
-                                    <h3>Gaming Localization Strategies</h3>
-                                    <p class="blog-date">February 5, 2025</p>
-                                    <p class="blog-excerpt">Essential strategies for localizing gaming content and marketing campaigns for global audiences while maintaining brand authenticity.</p>
-                                </div>
-                                <span class="view-details">Read More →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Latest Articles Section -->
+            <h2 class="section-title" style="margin-top: 4rem;">Latest Articles</h2>
+            <div id="blog-grid-container" class="blog-grid">
+                <!-- Blog cards will be injected here by JavaScript -->
             </div>
         </div>
     </section>
 
-    <!-- Footer (Updated to match index.html structure with adjusted links) -->
+    <!-- This container will hold all the modals generated by JavaScript -->
+    <div id="modal-container"></div>
+
+
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-main">
@@ -199,12 +111,12 @@
                             <li><a href="index.html#home">Home</a></li>
                             <li><a href="services.html">Services</a></li>
                             <li><a href="index.html#about">About Us</a></li>
-                            <li><a href="our-team.html">Our Team</a></li> 
+                            <li><a href="our-team.html">Our Team</a></li>
                         </ul>
                         <ul class="footer-links-col-2">
                             <li><a href="index.html#portfolio">Portfolio</a></li>
-                            <li><a href="blog.html">Blog</a></li> 
-                            <li><a href="index.html#contact">Contact Us</a></li> <!-- Link to contact section on index.html -->
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="index.html#contact">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -215,7 +127,6 @@
                 <div class="footer-column footer-newsletter">
                     <h4>Stay Updated</h4>
                     <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-                    <!-- MODIFICATION: Added data-form-type, updated ID, and feedback div -->
                     <form id="footerNewsletterFormBlogPage" class="newsletter-form" data-form-type="newsletter-footer-blog">
                         <input type="email" name="email" placeholder="Enter your email" required>
                         <button type="submit">Subscribe</button>
@@ -223,7 +134,6 @@
                     </form>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear"></span> RedKing Marketing. All Rights Reserved.</p>
                 <div class="footer-legal-links">
@@ -234,8 +144,9 @@
         </div>
     </footer>
 
+    <!-- General site scripts -->
     <script src="scripts.js"></script>
+    <!-- Blog-specific scripts -->
     <script src="blog-scripts.js"></script>
-    <!-- MODIFICATION: Removed all inline script tags for form handling and current year -->
 </body>
 </html>
