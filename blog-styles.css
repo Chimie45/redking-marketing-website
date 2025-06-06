@@ -1,6 +1,6 @@
 /* Blog Page Specific Styles */
 
-/* Page Header for Blog Page */
+/* Page Header for Blog Page - Reduced height */
 #blog-header.page-header.hero {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
@@ -8,7 +8,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    min-height: 100vh;
+    min-height: 60vh; /* Reduced from 100vh */
 }
 
 #blog-header .hero-content h1 {
@@ -63,7 +63,7 @@
 .featured-blog-image {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 450px; /* Reduced from 500px */
     overflow: hidden;
 }
 
@@ -160,4 +160,197 @@
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s ease, box
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--black);
+    border: 2px solid transparent;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    border-color: var(--muted-gold);
+}
+
+.blog-card .blog-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.blog-card .blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.1);
+}
+
+.blog-card .blog-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 1.5rem;
+    color: white;
+}
+
+.blog-card h3 {
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.blog-card .blog-date {
+    font-size: 0.85rem;
+    color: #ccc;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.blog-card .blog-excerpt {
+    font-size: 0.95rem;
+    color: #ddd;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.blog-card .view-details {
+    color: var(--muted-gold);
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.blog-card:hover .view-details {
+    color: var(--gold);
+}
+
+
+/* Blog Modal Styles (Using classes from styles.css) */
+.blog-modal .blog-modal-content {
+    /* Uses common modal styles from styles.css */
+}
+
+.close-blog-modal {
+    /* Uses .close-modal styles from styles.css */
+    /* Ensure it is aliased in styles.css or add properties here */
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2010;
+    line-height: 1;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.close-blog-modal:hover {
+    transform: rotate(90deg);
+    color: var(--muted-gold);
+}
+
+
+.blog-modal-header {
+    height: 350px;
+}
+
+.blog-modal-body {
+    padding: 2rem 2.5rem;
+}
+
+#blog-article-content h1 {
+    font-size: 2rem;
+    color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+}
+
+#blog-article-content .blog-meta {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+#blog-article-content .blog-meta .blog-author {
+    margin-left: 1rem;
+}
+
+#blog-article-content .blog-tags {
+    margin-bottom: 2rem;
+}
+
+#blog-article-content .blog-tag {
+    display: inline-block;
+    background: var(--dark-gray);
+    color: var(--muted-gold);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#blog-article-content .blog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+}
+
+#blog-article-content .blog-content h2 {
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#blog-article-content .blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+#blog-article-content .blog-content ul {
+    list-style-position: inside;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#blog-article-content .blog-content li {
+    margin-bottom: 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #blog-header.page-header.hero {
+        min-height: 50vh;
+    }
+    .featured-blog-image {
+        height: 300px;
+    }
+    .featured-blog-info h3 {
+        font-size: 1.5rem;
+    }
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    .blog-modal-header {
+        height: 250px;
+    }
+    .blog-modal-body {
+        padding: 1.5rem;
+    }
+    #blog-article-content h1 {
+        font-size: 1.5rem;
+    }
+    #blog-article-content .blog-content {
+        font-size: 1rem;
+    }
+}
