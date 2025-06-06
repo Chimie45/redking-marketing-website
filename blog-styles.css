@@ -2,13 +2,13 @@
 
 /* Page Header for Blog Page */
 #blog-header.page-header.hero {
-    /* Background image and min-height are now primarily controlled by styles.css */
-    /* You can add specific tweaks here if needed, but avoid overriding min-height if you want 100vh from styles.css */
-    background-attachment: fixed; /* Example: keep parallax if desired */
+    /* The background image is now set inline in the HTML for clarity,
+       but this rule ensures the parallax effect is maintained. */
+    background-attachment: fixed;
 }
 
 #blog-header .hero-content h1 {
-    font-size: 3rem; 
+    font-size: 3rem;
     color: var(--muted-gold);
     margin-bottom: 0.5rem;
 }
@@ -17,7 +17,7 @@
     font-size: 1.4rem;
     color: var(--white);
     font-weight: 300;
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.5rem;
 }
 
 .blog-intro {
@@ -30,20 +30,95 @@
 }
 
 /* Blog Posts Section */
-.blog-section { /* This is the <section id="blog-posts" class="blog-section services"> */
+.blog-section {
     padding: 80px 0;
-    background-color: var(--dark-gray); /* Consistent with .services from styles.css */
+    background-color: var(--dark-gray);
 }
 
 .blog-section .section-title {
     margin-bottom: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--muted-gold);
 }
 
+/* Featured Blog Post Styles */
+.featured-post-wrapper {
+    margin-bottom: 4rem;
+}
+
+.featured-blog-card {
+    display: flex;
+    gap: 2rem;
+    background: var(--black);
+    border: 2px solid var(--muted-gold);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+}
+
+.featured-blog-image {
+    flex: 1 1 50%;
+    min-height: 350px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+.featured-blog-card:hover .featured-blog-image {
+    transform: scale(1.05);
+}
+
+.featured-blog-content {
+    flex: 1 1 50%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featured-blog-content h3 {
+    font-size: 2rem;
+    color: var(--muted-gold);
+    margin-bottom: 1rem;
+}
+
+.featured-blog-content .blog-date {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 1rem;
+}
+
+.featured-blog-content .blog-excerpt {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.featured-blog-content .view-details {
+    color: var(--muted-gold);
+    font-weight: bold;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: color 0.3s ease;
+}
+
+.featured-blog-card:hover .view-details {
+    color: var(--gold);
+}
+
+/* Blog Grid Styles */
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Same as portfolio */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
 }
 
 .blog-card {
@@ -53,221 +128,254 @@
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     background: var(--black);
-    border: 2px solid var(--primary-red); /* Matches portfolio-card */
+    border: 2px solid var(--primary-red);
+    min-height: 250px; /* Ensure cards have a minimum height */
 }
 
 .blog-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3); /* Matches portfolio-card hover */
-    border-color: var(--muted-gold); /* Matches portfolio-card hover */
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+    border-color: var(--muted-gold);
 }
 
-.blog-image { /* Container for image and overlay */
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio, same as portfolio */
-    overflow: hidden;
-    background-color: var(--dark-gray); /* Placeholder background */
-}
-
-.blog-image img {
+.blog-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: var(--dark-gray);
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Same as portfolio */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .blog-card:hover .blog-image img {
-    transform: scale(1.08); /* Same as portfolio */
+    transform: scale(1.08);
 }
 
-.blog-overlay { /* Similar to portfolio-overlay */
+.blog-card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-    padding: 1rem;
-    height: auto; /* Adjust height as needed, or min-height */
-    min-height: 100px; /* Example min-height */
+    padding: 1.5rem 1rem 1rem 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%);
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    transition: background 0.3s ease;
-}
-.blog-card:hover .blog-overlay {
-    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,1) 100%);
+    align-items: flex-end;
 }
 
-
-.blog-info { /* Container for text and "Read More" button inside overlay */
-    display: flex;
-    flex-direction: column; /* Stack text and button */
-    justify-content: space-between; /* Pushes button to bottom if overlay has enough height */
-    height: 100%; /* Make info take full height of overlay for better button positioning */
-}
-
-.blog-text {
-    flex-grow: 1; /* Allows text to take available space */
-}
-
-.blog-info h3 {
+.blog-card-overlay h3 {
     color: var(--muted-gold);
-    font-size: 1.1rem; /* Slightly larger than portfolio for blog title */
-    margin-bottom: 0.25rem;
+    font-size: 1.2rem;
     line-height: 1.3;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
 
-.blog-date {
-    font-size: 0.8rem;
-    color: #aaa;
-    margin-bottom: 0.5rem;
-    display: block;
+
+/* Blog Modal Styles (inherits from .modal styles in styles.css) */
+.blog-modal .blog-modal-content {
+    max-width: 900px;
 }
 
-.blog-excerpt {
-    color: #ccc;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin-bottom: 0.75rem; /* Space before "Read More" */
-    /* Limit excerpt lines if desired, e.g., with -webkit-line-clamp */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Show 2 lines of excerpt */
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-
+.blog-modal .blog-modal-header {
+    height: 350px;
 }
 
-.blog-card .view-details { /* "Read More →" */
-    color: var(--muted-gold);
+/* Close button inherits from .close-modal in styles.css */
+.close-blog-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--white);
+    font-size: 2rem;
     font-weight: bold;
-    font-size: 0.85rem;
-    text-decoration: none;
-    align-self: flex-start; /* Align to the left */
-    margin-top: auto; /* Push to bottom of flex container if using flex on blog-info */
-    transition: color 0.3s ease;
+    cursor: pointer;
+    background: rgba(0,0,0,0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 2510 !important;
+    line-height: 1;
 }
 
-.blog-card:hover .view-details {
-    color: var(--gold);
+.close-blog-modal:hover {
+    background: var(--muted-gold);
+    color: var(--black);
+    transform: rotate(90deg);
 }
 
-
-/* Blog Modal Styles */
-.blog-modal { /* Overlay styling is in styles.css */
-}
-
-.blog-modal-content { /* Content box styling is in styles.css, max-width override here */
-    max-width: 900px; 
-}
-
-.blog-modal-header { /* Header with image, styling in styles.css, height override here */
-    height: 300px; /* Or adjust as needed */
-    /* background-image and blur effect come from styles.css and JS */
-}
-
-.blog-modal-header img { /* Image inside header, styling in styles.css */
-}
-
-.close-blog-modal { /* Close button styling in styles.css */
-}
-
-.blog-modal-body { /* Padding from common modal styles */
+.blog-modal .blog-modal-body {
+    padding: 2.5rem;
     color: #ccc;
     line-height: 1.7;
 }
 
-.blog-meta {
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    color: #aaa;
-}
-
-.blog-meta .blog-date {
-    margin-right: 15px;
-}
-.blog-meta .blog-category {
-    font-style: italic;
-    color: var(--light-gold);
-}
-
-.blog-modal-body h1 { /* Main article title in modal */
-    font-size: 2.2rem;
+.blog-modal-body h1 {
+    font-size: 2.5rem;
     color: var(--muted-gold);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     line-height: 1.3;
 }
 
-.blog-content {
-    font-size: 1rem;
+.blog-byline {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 1.5rem;
 }
 
-.blog-content h3 { /* Subheadings within blog article */
-    font-size: 1.5rem;
+.blog-byline .author {
+    font-weight: bold;
+    color: var(--light-gold);
+}
+
+.blog-byline .date {
+    margin-left: 15px;
+}
+
+.blog-tags {
+    margin-bottom: 2rem;
+}
+
+.blog-tags .tag {
+    display: inline-block;
+    background: var(--dark-gray);
+    color: var(--light-gold);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #444;
+}
+
+.blog-article-content {
+    font-size: 1.05rem;
+    color: #ddd;
+}
+
+.blog-article-content h3 {
+    font-size: 1.6rem;
     color: var(--gold);
-    margin-top: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.blog-article-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-article-content ul, .blog-article-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 30px;
+}
+
+.blog-article-content li {
     margin-bottom: 0.75rem;
 }
 
-.blog-content p {
-    margin-bottom: 1.25rem;
-}
-.blog-content ul, .blog-content ol {
-    margin-bottom: 1.25rem;
-    padding-left: 25px;
-}
-.blog-content li {
-    margin-bottom: 0.5rem;
-}
-.blog-content strong {
-    color: var(--white);
-}
-.blog-content a {
+.blog-article-content a {
     color: var(--light-gold);
     text-decoration: underline;
 }
-.blog-content a:hover {
+
+.blog-article-content a:hover {
     color: var(--gold);
 }
 
-/* Newsletter Signup Section on Blog Page */
-#blog-newsletter.contact { /* Uses .contact styles from styles.css */
-    padding: 60px 0; /* Slightly less padding if desired */
+.blog-comments-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--dark-gray);
 }
 
-#blog-newsletter .contact-icon-wrapper .fas.fa-envelope {
-    /* Styles inherited */
-}
-#blog-newsletter .contact-info h2 {
-    /* Styles inherited */
-}
-#blog-newsletter .contact-info p {
-    /* Styles inherited */
+.blog-comments-section h3 {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
 }
 
-#blog-newsletter .newsletter-signup-form {
-    max-width: 500px; /* Center the form a bit more */
-    margin-left: auto;
-    margin-right: auto;
-    /* Other form styles are inherited from .contact-form */
+.comment-form {
+    margin-bottom: 2rem;
 }
-#blog-newsletter .newsletter-signup-form .form-group {
-    margin-bottom: 1.5rem; /* Add some space below the email input */
+.comment-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    background: var(--dark-gray);
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: var(--white);
+    margin-bottom: 10px;
+    resize: vertical;
 }
-#blog-newsletter .newsletter-signup-form .submit-btn {
-    /* Styles inherited */
+.comment-form textarea:focus {
+    outline: none;
+    border-color: var(--muted-gold);
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    background: var(--muted-gold);
+    color: var(--black);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.comment-form button:hover {
+    background: var(--gold);
+}
+
+.comment-list .comment {
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+}
+.comment-list .comment:last-child {
+    border-bottom: none;
+}
+.comment-list .comment-author {
+    font-weight: bold;
+    color: var(--light-gold);
+}
+.comment-list .comment-date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 10px;
+}
+.comment-list .comment-text {
+    margin-top: 0.5rem;
+    color: #ccc;
+}
+.no-comments {
+    color: #888;
+    font-style: italic;
 }
 
 
-/* Responsive Adjustments for Blog Page */
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .featured-blog-card {
+        flex-direction: column;
+    }
+    .featured-blog-image {
+        min-height: 300px;
+    }
+}
+
 @media (max-width: 768px) {
     #blog-header.page-header.hero {
-        /* min-height will be 60vh from styles.css mobile rules */
+        min-height: 60vh;
     }
     #blog-header .hero-content h1 {
         font-size: 2.2rem;
@@ -280,20 +388,26 @@
     }
 
     .blog-grid {
-        grid-template-columns: 1fr; /* Stack cards on mobile */
+        grid-template-columns: 1fr;
+    }
+
+    .featured-blog-content {
+        padding: 1.5rem;
+    }
+    .featured-blog-content h3 {
+        font-size: 1.5rem;
+    }
+    .featured-blog-content .blog-excerpt {
+        font-size: 1rem;
     }
 
     .blog-modal-body h1 {
         font-size: 1.8rem;
     }
-    .blog-content h3 {
+    .blog-article-content h3 {
         font-size: 1.3rem;
     }
-    .blog-content {
+    .blog-article-content {
         font-size: 0.95rem;
-    }
-
-    #blog-newsletter.contact {
-        padding: 40px 0;
     }
 }
