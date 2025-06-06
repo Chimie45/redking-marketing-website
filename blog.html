@@ -192,14 +192,11 @@
                     <p>Subscribe to our newsletter and never miss the latest gaming marketing insights, industry analysis, and strategic guidance.</p>
                 </div>
                 <!-- MODIFICATION: Added data-form-type, updated ID, and feedback div -->
-                <form class="contact-form newsletter-form" id="blogPageNewsletterForm" data-form-type="newsletter-footer-index">
-                    <div class="form-group">
-                        <label for="blog-page-email">Email Address *</label>
+                <form id="newsletterForm" class="newsletter-form" data-form-type="newsletter-footer-index">
                         <input type="email" name="email" placeholder="Enter your email" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Subscribe to Newsletter</button>
-                    <div class="form-submission-feedback" style="display:none; margin-top: 15px;"></div>
-                </form>
+                        <button type="submit">Subscribe</button>
+                        <div class="form-submission-feedback" style="display:none; font-size: 0.9em; margin-top: 10px;"></div>
+                    </form>
             </div>
         </div>
     </section>
@@ -257,156 +254,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Blog Modals -->
-    <div id="blog1" class="blog-modal">
-        <div class="blog-modal-content">
-            <div class="blog-modal-header">
-                <img src="images/blog/blog-1.jpg" alt="Gaming Market Trends 2025">
-                <span class="close-blog-modal" onclick="closeBlogModal('blog1')">&times;</span>
-            </div>
-            <div class="blog-modal-body">
-                <div class="blog-meta">
-                    <span class="blog-date">March 15, 2025</span>
-                    <span class="blog-category">Industry Trends</span>
-                </div>
-                <h1>Gaming Market Trends 2025: What's Shaping the Future</h1>
-                <div class="blog-content">
-                    <p>The gaming industry continues to evolve at breakneck speed, with 2025 bringing unprecedented opportunities and challenges for marketers. As we analyze the current landscape, several key trends are emerging that will define success in the coming years.</p>
-                    
-                    <h3>Mobile Gaming Dominance</h3>
-                    <p>Mobile gaming now accounts for over 50% of global gaming revenue, driven by improved hardware capabilities and 5G adoption. Marketing strategies must prioritize mobile-first approaches, with emphasis on short-form video content and social media integration.</p>
-                    
-                    <h3>AI-Powered Personalization</h3>
-                    <p>Artificial intelligence is revolutionizing how we understand and engage players. From dynamic ad targeting to personalized in-game experiences, AI enables unprecedented levels of customization that drive higher engagement and retention rates.</p>
-                    
-                    <h3>Cross-Platform Integration</h3>
-                    <p>Players expect seamless experiences across devices. Successful marketing campaigns now span multiple platforms, creating cohesive narratives that follow players from mobile to PC to console, maintaining engagement throughout their gaming journey.</p>
-                    
-                    <h3>Emerging Markets Focus</h3>
-                    <p>Asia-Pacific, Latin America, and Africa represent the fastest-growing gaming markets. Localization goes beyond translation – it requires deep cultural understanding and market-specific strategies that resonate with local gaming communities.</p>
-                    
-                    <h3>Community-Driven Marketing</h3>
-                    <p>Gaming communities have become powerful marketing channels. Successful brands focus on authentic engagement, supporting content creators, and fostering organic word-of-mouth marketing through exceptional player experiences.</p>
-                    
-                    <p><strong>Looking ahead,</strong> the most successful gaming marketing strategies will combine cutting-edge technology with authentic human connection, creating experiences that not only attract players but turn them into passionate brand advocates.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div id="blog2" class="blog-modal">
-        <div class="blog-modal-content">
-            <div class="blog-modal-header">
-                <img src="images/blog/blog-2.jpg" alt="Asian Gaming Markets Guide">
-                <span class="close-blog-modal" onclick="closeBlogModal('blog2')">&times;</span>
-            </div>
-            <div class="blog-modal-body">
-                <div class="blog-meta">
-                    <span class="blog-date">March 8, 2025</span>
-                    <span class="blog-category">Regional Strategy</span>
-                </div>
-                <h1>The Complete Guide to Asian Gaming Markets</h1>
-                <div class="blog-content">
-                    <p>Asia represents the world's largest and most diverse gaming market, accounting for nearly 50% of global gaming revenue. Success in this region requires nuanced understanding of cultural preferences, regulatory environments, and player behaviors across different countries.</p>
-                    
-                    <h3>Market Overview</h3>
-                    <p>The Asian gaming market is dominated by mobile gaming, with countries like China, Japan, and South Korea leading in both revenue and innovation. Each market has unique characteristics that demand tailored marketing approaches.</p>
-                    
-                    <h3>Key Success Factors</h3>
-                    <ul>
-                        <li><strong>Cultural Sensitivity:</strong> Understanding local customs, values, and gaming preferences</li>
-                        <li><strong>Platform Preferences:</strong> Mobile-first strategies with platform-specific optimizations</li>
-                        <li><strong>Payment Methods:</strong> Integration with local payment systems and digital wallets</li>
-                        <li><strong>Social Features:</strong> Emphasis on community and social interaction within games</li>
-                    </ul>
-                    
-                    <h3>Regional Insights</h3>
-                    <p><strong>China:</strong> Requires local partnerships and regulatory compliance. Focus on social features and competitive gameplay.</p>
-                    <p><strong>Japan:</strong> Gacha mechanics and character-driven narratives perform well. High value per user but requires quality content.</p>
-                    <p><strong>South Korea:</strong> PC gaming remains strong alongside mobile. Esports integration is crucial for marketing success.</p>
-                    
-                    <p>Success in Asian markets requires patience, cultural understanding, and willingness to adapt strategies based on local feedback and market conditions.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="blog3" class="blog-modal">
-        <div class="blog-modal-content">
-            <div class="blog-modal-header">
-                <img src="images/blog/blog-3.jpg" alt="iGaming Marketing Strategies">
-                <span class="close-blog-modal" onclick="closeBlogModal('blog3')">&times;</span>
-            </div>
-            <div class="blog-modal-body">
-                <div class="blog-meta">
-                    <span class="blog-date">February 28, 2025</span>
-                    <span class="blog-category">iGaming</span>
-                </div>
-                <h1>iGaming Marketing Strategies</h1>
-                <div class="blog-content">
-                    <p>Content for iGaming marketing strategies article goes here...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="blog4" class="blog-modal">
-        <div class="blog-modal-content">
-            <div class="blog-modal-header">
-                <img src="images/blog/blog-4.jpg" alt="Social Media for Gaming Brands">
-                <span class="close-blog-modal" onclick="closeBlogModal('blog4')">&times;</span>
-            </div>
-            <div class="blog-modal-body">
-                <div class="blog-meta">
-                    <span class="blog-date">February 20, 2025</span>
-                    <span class="blog-category">Social Media</span>
-                </div>
-                <h1>Social Media for Gaming Brands</h1>
-                <div class="blog-content">
-                    <p>Content for social media gaming strategies article goes here...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="blog5" class="blog-modal">
-        <div class="blog-modal-content">
-            <div class="blog-modal-header">
-                <img src="images/blog/blog-5.jpg" alt="User Acquisition Best Practices">
-                <span class="close-blog-modal" onclick="closeBlogModal('blog5')">&times;</span>
-            </div>
-            <div class="blog-modal-body">
-                <div class="blog-meta">
-                    <span class="blog-date">February 12, 2025</span>
-                    <span class="blog-category">User Acquisition</span>
-                </div>
-                <h1>User Acquisition Best Practices</h1>
-                <div class="blog-content">
-                    <p>Content for user acquisition best practices article goes here...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="blog6" class="blog-modal">
-        <div class="blog-modal-content">
-            <div class="blog-modal-header">
-                <img src="images/blog/blog-6.jpg" alt="Gaming Localization Strategies">
-                <span class="close-blog-modal" onclick="closeBlogModal('blog6')">&times;</span>
-            </div>
-            <div class="blog-modal-body">
-                <div class="blog-meta">
-                    <span class="blog-date">February 5, 2025</span>
-                    <span class="blog-category">Localization</span>
-                </div>
-                <h1>Gaming Localization Strategies</h1>
-                <div class="blog-content">
-                    <p>Content for gaming localization strategies article goes here...</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="scripts.js"></script>
     <script src="blog-scripts.js"></script>
