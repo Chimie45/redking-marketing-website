@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - RedKing Marketing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- IMPORTANT: Make sure 'styles.css' is linked correctly -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="blog-styles.css">
 </head>
@@ -27,7 +28,8 @@
             <div class="nav-content">
                 <div class="nav-left">
                     <a href="index.html#home" class="logo">
-                        <img src="images/home/logo.png" alt="RedKing Marketing">
+                        <!-- Make sure logo path is correct -->
+                        <img src="images/home/logo.png" alt="RedKing Marketing" onerror="this.style.display='none'">
                     </a>
                     <ul class="nav-links">
                         <li><a href="index.html#home">Home</a></li>
@@ -88,11 +90,6 @@
             <div id="blog-grid" class="blog-grid">
                 <!-- Blog posts will be dynamically inserted here by JavaScript -->
             </div>
-            
-            <!-- Load More Button -->
-            <div class="load-more-container">
-                <button id="load-more-btn" class="cta-button" style="display: none;">Load More Articles</button>
-            </div>
         </div>
     </section>
 
@@ -107,44 +104,16 @@
                 <div id="blog-article-content">
                     <!-- Article content will be loaded here -->
                 </div>
-                
-                <!-- Comments Section -->
-                <div class="blog-comments-section">
-                    <h3>Comments</h3>
-                    <div id="comments-container">
-                        <!-- Comments will be loaded here -->
-                        <p class="no-comments">Comments are coming soon! Check back later to join the discussion.</p>
-                    </div>
-                    
-                    <!-- Comment Form (for future implementation) -->
-                    <div class="comment-form" style="display: none;">
-                        <h4>Leave a Comment</h4>
-                        <form id="comment-form">
-                            <div class="form-group">
-                                <input type="text" name="name" placeholder="Your Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" placeholder="Your Email" required>
-                            </div>
-                            <div class="form-group">
-                                <textarea name="comment" placeholder="Your Comment" rows="4" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">Post Comment</button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-
-
-    <!-- Footer (Same as index.html) -->
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-main">
                 <div class="footer-column footer-about">
-                    <img src="images/home/logo.png" alt="RedKing Marketing" class="footer-logo">
+                    <img src="images/home/logo.png" alt="RedKing Marketing" class="footer-logo" onerror="this.style.display='none'">
                     <p>Global gaming marketing experts specializing in Asia, Americas, and beyond. We turn gaming brands into market leaders through data-driven strategies and cultural expertise.</p>
                     <div class="footer-social-icons">
                         <a href="https://linkedin.com/company/red-king-marketing" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -172,15 +141,6 @@
                     <p><a href="tel:+16148228696">P: +1 (614) 822-8696</a></p>
                     <p><a href="mailto:info@redkingmarketing.com">E: info@redkingmarketing.com</a></p>
                 </div>
-                <div class="footer-column footer-newsletter">
-                    <h4>Stay Updated</h4>
-                    <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-                    <form id="footerNewsletterFormBlogPage" class="newsletter-form" data-form-type="newsletter-footer-blog">
-                        <input type="email" name="email" placeholder="Enter your email" required>
-                        <button type="submit">Subscribe</button>
-                        <div class="form-submission-feedback" style="display:none; font-size: 0.9em; margin-top: 10px;"></div>
-                    </form>
-                </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear"></span> RedKing Marketing. All Rights Reserved.</p>
@@ -192,6 +152,7 @@
         </div>
     </footer>
 
+    <!-- IMPORTANT: Make sure 'scripts.js' is linked correctly -->
     <script src="scripts.js"></script>
     <script src="blog-scripts.js"></script>
 </body>
