@@ -1,66 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-M56HMGXR');</script>
-  <!-- End Google Tag Manager -->
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog - RedKing Marketing</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="blog-styles.css" />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="blog-styles.css">
 </head>
-
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M56HMGXR"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
-  <!-- Navigation -->
   <nav>
-    <div class="container">
-      <div class="nav-content">
-        <div class="nav-left">
-          <a href="index.html#home" class="logo">
-            <img src="images/home/logo.png" alt="RedKing Marketing" onerror="this.style.display='none'" />
-          </a>
-          <ul class="nav-links">
-            <li><a href="index.html#home">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="our-team.html">Our Team</a></li>
-            <li><a href="index.html#portfolio">Portfolio</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="nav-right">
-          <div class="social-icons">
-            <a href="https://linkedin.com/company/red-king-marketing" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://instagram.com/Red_King_Marketing" target="_blank"><i class="fab fa-instagram"></i></a>
-          </div>
-          <div class="mobile-menu">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Include the same nav structure as index.html -->
   </nav>
 
-  <!-- Page Header -->
   <section id="blog-header" class="page-header hero">
     <div class="container">
-      <div class="hero-content" style="padding-top: 100px; padding-bottom: 40px;">
+      <div class="hero-content" style="padding-top: 100px">
         <h1>Gaming Marketing Insights</h1>
         <p class="subtitle">Expert Analysis, Trends, and Strategies for Gaming Success</p>
         <div class="blog-intro">
@@ -70,96 +24,36 @@
     </div>
   </section>
 
-  <!-- Featured Blog -->
   <section id="featured-blog" class="featured-blog-section">
     <div class="container">
       <h2 class="section-title">Featured Article</h2>
-      <div id="featured-blog-container" class="featured-blog-container">
-        <!-- Dynamically injected -->
-      </div>
+      <div id="featured-blog-container" class="featured-blog-container"></div>
     </div>
   </section>
 
-  <!-- Latest Articles -->
   <section id="blog-posts" class="blog-section services">
     <div class="container">
       <h2 class="section-title">Latest Articles</h2>
-      <div id="blog-grid" class="blog-grid">
-        <!-- Dynamically injected -->
-      </div>
+      <div id="blog-grid" class="blog-grid"></div>
     </div>
   </section>
 
-  <!-- Modal -->
   <div id="blogModal" class="blog-modal">
     <div class="blog-modal-content">
       <span class="close-blog-modal" onclick="closeBlogModal()">&times;</span>
       <div class="blog-modal-header">
-        <img id="modal-hero-image" src="" alt="" />
+        <img id="modal-hero-image" src="" alt="">
       </div>
       <div class="blog-modal-body">
-        <div id="blog-article-content">
-          <!-- Content inserted by JS -->
-        </div>
+        <div id="blog-article-content"></div>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-main">
-        <div class="footer-column footer-about">
-          <img src="images/home/logo.png" alt="RedKing Marketing" class="footer-logo" onerror="this.style.display='none'" />
-          <p>Global gaming marketing experts specializing in Asia, Americas, and beyond. We turn gaming brands into market leaders through data-driven strategies and cultural expertise.</p>
-          <div class="footer-social-icons">
-            <a href="https://linkedin.com/company/red-king-marketing" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://instagram.com/Red_King_Marketing" target="_blank"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-        <div class="footer-column footer-links-wrapper">
-          <h4>Quick Links</h4>
-          <div class="footer-links-columns">
-            <ul class="footer-links-col-1">
-              <li><a href="index.html#home">Home</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="index.html#about">About Us</a></li>
-              <li><a href="our-team.html">Our Team</a></li>
-            </ul>
-            <ul class="footer-links-col-2">
-              <li><a href="index.html#portfolio">Portfolio</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="index.html#contact">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-column footer-contact">
-          <h4>Contact Info</h4>
-          <p><a href="tel:+16148228696">P: +1 (614) 822-8696</a></p>
-          <p><a href="mailto:info@redkingmarketing.com">E: info@redkingmarketing.com</a></p>
-        </div>
-        <div class="footer-column footer-newsletter">
-          <h4>Stay Updated</h4>
-          <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-          <form id="newsletterForm" class="newsletter-form" data-form-type="newsletter-footer-index">
-            <input type="email" name="email" placeholder="Enter your email" required />
-            <button type="submit">Subscribe</button>
-            <div class="form-submission-feedback" style="display:none; font-size: 0.9em; margin-top: 10px;"></div>
-          </form>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; <span id="currentYear"></span> RedKing Marketing. All Rights Reserved.</p>
-        <div class="footer-legal-links">
-          <a href="terms.html">Terms and Conditions</a>
-          <a href="privacy.html">Privacy Policy</a>
-        </div>
-      </div>
-    </div>
+    <!-- Include the same footer structure as index.html -->
   </footer>
 
-  <!-- Scripts -->
-    <script src="scripts.js"></script>
-    <script src="blog-scripts.js"></script>
+  <script src="blog-scripts.js"></script>
 </body>
 </html>
