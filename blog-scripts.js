@@ -1,25 +1,60 @@
 // --- Blog Content Management ---
-// FINAL CORRECTION: Changed paths to be relative (removed the leading "/")
-// This is the most common fix for 404 errors in this context.
+// UPDATED: Changed placeholder image names for two articles to be more descriptive.
 const blogArticles = [
     {
         id: 'effective-igaming-marketing',
         isFeatured: true,
         title: 'Effective Marketing in Regulated iGaming Sectors',
         excerpt: 'A deep dive into the high-risk, high-reward iGaming markets of Japan and South Korea, analyzing the Ohtani scandal and the strategies for navigating these regulatory minefields.',
-        thumbnail: 'images/blog/blog-1.jpg',
-        heroImage: 'images/blog/blog-1.jpg',
+        thumbnail: 'images/blog/igaming-article-hero.jpg',
+        heroImage: 'images/blog/igaming-article-hero.jpg',
         contentUrl: 'blogs/articles/effective-igaming-marketing'
+    },
+    {
+        id: 'latam-cultural-credibility',
+        isFeatured: false,
+        title: 'Cultural Credibility: What iGaming Brands Get Wrong in LATAM',
+        excerpt: 'An honest look at why many global iGaming campaigns fall flat in Latin America and how to fix it through regional teams, slang fluency, and local content creation.',
+        thumbnail: 'images/blog/latam-cultural-thumb.jpg',
+        heroImage: 'images/blog/latam-cultural-hero.jpg',
+        contentUrl: 'blogs/articles/latam-cultural-credibility'
+    },
+    {
+        id: 'korea-igaming-potential',
+        isFeatured: false,
+        title: 'The Untapped Potential of Korea\'s iGaming Audience—And What\'s Holding It Back',
+        excerpt: 'A deep dive into Korea\'s unique legal and cultural challenges around iGaming, why local interest still exists despite restrictions, and how global brands can engage Korean users responsibly.',
+        thumbnail: 'images/blog/korea-igaming-thumb.jpg',
+        heroImage: 'images/blog/korea-igaming-hero.jpg',
+        contentUrl: 'blogs/articles/korea-igaming-potential'
+    },
+    {
+        id: 'latam-learns-from-asia',
+        isFeatured: false,
+        title: 'What LATAM Gaming Companies Can Learn from Asia\'s Mobile Gaming Boom',
+        excerpt: 'Latin America\'s booming mobile market can unlock its potential by adapting proven strategies from Asia\'s $40+ billion ecosystem on cultural integration, monetization, and community design.',
+        thumbnail: 'images/blog/latam-asia-hero.jpg',
+        heroImage: 'images/blog/latam-asia-hero.jpg',
+        contentUrl: 'blogs/articles/latam-learns-from-asia'
+    },
+    {
+        id: 'gaming-trends-2025',
+        isFeatured: false,
+        title: 'Gaming Market Trends 2025',
+        excerpt: 'Discover the latest trends shaping the gaming industry and how to capitalize on emerging opportunities in global markets.',
+        thumbnail: 'images/blog/gaming-trends-2025.jpg',
+        heroImage: 'images/blog/gaming-trends-2025.jpg',
+        contentUrl: 'blogs/articles/gaming-trends-2025'
     },
     {
         id: 'asian-gaming-markets',
         isFeatured: false,
         title: 'Asian Gaming Markets Guide',
         excerpt: 'Unlock the potential of the world\'s largest gaming region. This guide breaks down the key differences between markets like Japan, South Korea, and Southeast Asia.',
-        thumbnail: 'images/blog/blog-2.jpg',
-        heroImage: 'images/blog/blog-2.jpg',
+        thumbnail: 'images/blog/asian-gaming-markets.jpg',
+        heroImage: 'images/blog/asian-gaming-markets.jpg',
         contentUrl: 'blogs/articles/asian-gaming-markets'
-    },
+    }
 ];
 
 // --- Page Initialization ---
@@ -140,7 +175,7 @@ async function openBlogModal(articleId) {
             displayDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
         }
 
-        const articleBody = doc.querySelector('.article-content')?.innerHTML || '<p>Could not find article content.</p>';
+        const articleBody = doc.querySelector('.article-content .article-body')?.innerHTML || doc.querySelector('.article-content')?.innerHTML || '<p>Could not find article content.</p>';
 
         modalTitle.textContent = doc.querySelector('title')?.textContent || articleData.title;
         modalMeta.innerHTML = `
