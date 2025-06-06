@@ -1,5 +1,4 @@
 // --- Blog Content Management ---
-// Using a simple array of objects to store article data.
 const blogArticles = [
     {
         id: 'featured-gaming-trends-2025',
@@ -12,19 +11,14 @@ const blogArticles = [
         heroImage: 'images/blog/blog-1.jpg',
         content: `
             <p>The gaming landscape is in a perpetual state of evolution, and 2025 is shaping up to be a landmark year. As technology advances and player expectations shift, marketers must stay ahead of the curve to remain effective. Here are the five most critical trends to watch.</p>
-            
             <h2>1. Cloud Gaming Goes Mainstream</h2>
             <p>Services like Xbox Cloud Gaming and GeForce NOW are maturing rapidly, removing the hardware barrier for millions of potential players. This democratizes access to high-fidelity games, but it also means marketing needs to target a much broader demographic who may not identify as "traditional" gamers.</p>
-
             <h2>2. The "AAA" Mobile Experience</h2>
             <p>Mobile gaming is no longer just about hyper-casual titles. We're seeing a surge in high-budget, graphically intensive games on mobile that rival their console counterparts. Marketing for these titles requires a focus on quality, storytelling, and community-building, much like a traditional AAA launch.</p>
-
             <h2>3. AI-Driven Personalization</h2>
             <p>Artificial intelligence is set to revolutionize in-game experiences and marketing. From dynamically adjusting difficulty to offering personalized in-game store promotions, AI allows for a level of individualized engagement that was previously impossible. Marketers who leverage player data ethically will build deeper, more loyal communities.</p>
-
             <h2>4. Web3 and Digital Ownership</h2>
             <p>While still controversial, the concepts of NFTs and blockchain technology are finding their footing. The core idea of "true digital ownership" resonates with players. Successful marketing in this space will prioritize transparency, community governance, and providing real, tangible value to players who invest in the ecosystem.</p>
-            
             <h2>5. The Creator Economy Matures</h2>
             <p>Influencer marketing is evolving into a more integrated creator economy. Rather than one-off sponsorships, brands are building long-term partnerships with creators, co-creating content, and even integrating them into the game world itself. Authenticity is paramount, and the most successful campaigns will empower creators rather than just using them as billboards.</p>
         `
@@ -83,9 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Dynamic Content Functions ---
 
-/**
- * Finds the featured article and injects its HTML into the page.
- */
 function displayFeaturedArticle() {
     const featuredContainer = document.getElementById('featured-article-container');
     const featuredArticle = blogArticles.find(article => article.isFeatured);
@@ -106,11 +97,18 @@ function displayFeaturedArticle() {
         </div>
     `;
     featuredContainer.innerHTML = articleHTML;
+    
+    // **FIX ADDED**: After adding the card, tell the observer to watch it.
+    if (typeof animatedElementsObserver !== 'undefined') {
+        const cardElement = featuredContainer.querySelector('.featured-article-card');
+        if(cardElement) {
+            // We give it the .blog-card class temporarily for the animation system to work
+            cardElement.classList.add('blog-card'); 
+            animatedElementsObserver.observe(cardElement);
+        }
+    }
 }
 
-/**
- * Finds all non-featured articles and injects them into the blog grid.
- */
 function displayLatestArticles() {
     const gridContainer = document.getElementById('blog-grid-container');
     const latestArticles = blogArticles.filter(article => !article.isFeatured);
@@ -133,15 +131,18 @@ function displayLatestArticles() {
         `;
     });
     gridContainer.innerHTML = articlesHTML;
+
+    // **FIX ADDED**: After adding all the cards, tell the observer to watch them.
+    if (typeof animatedElementsObserver !== 'undefined') {
+        gridContainer.querySelectorAll('.blog-card').forEach(card => {
+            animatedElementsObserver.observe(card);
+        });
+    }
 }
 
 
 // --- Modal Functionality ---
 
-/**
- * Opens the blog modal and populates it with content from the selected article.
- * @param {string} articleId - The ID of the article to display.
- */
 function openBlogModal(articleId) {
     const article = blogArticles.find(a => a.id === articleId);
     const modal = document.getElementById('blog-modal');
@@ -165,22 +166,13 @@ function openBlogModal(articleId) {
     modal.classList.add('modal--is-open');
     document.body.style.overflow = 'hidden';
 
-    // Scroll to top of modal content on open
     modal.querySelector('.blog-modal-content').scrollTop = 0;
 }
 
-/**
- * Closes the blog modal.
- */
 function closeBlogModal() {
     const modal = document.getElementById('blog-modal');
     if (modal) {
         modal.classList.remove('modal--is-open');
     }
-    // The main scripts.js file listens for modal closures and will restore body scroll.
-    // However, we can add it here for robustness.
     checkAndRestoreScroll();
 }
-
-// NOTE: The main `scripts.js` file handles closing the modal via Escape key
-// and clicking the overlay, as long as the modal has the class `modal--is-open`.
