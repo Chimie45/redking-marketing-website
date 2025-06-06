@@ -1,37 +1,47 @@
 /* Blog Page Specific Styles */
 
-/* Page Header for Blog Page (if a specific one is used, e.g., #blog-header) */
+/* Page Header for Blog Page */
 #blog-header.page-header.hero {
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
-        url('images/blog/blogheader.jpg'); /* Assumes blogheader.jpg is in images/blog/ */
-    min-height: 70vh; /* Example height */
+    /* Background image and min-height are now primarily controlled by styles.css */
+    /* You can add specific tweaks here if needed, but avoid overriding min-height if you want 100vh from styles.css */
+    background-attachment: fixed; /* Example: keep parallax if desired */
 }
 
+#blog-header .hero-content h1 {
+    font-size: 3rem; 
+    color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+}
+
+#blog-header .hero-content .subtitle {
+    font-size: 1.4rem;
+    color: var(--white);
+    font-weight: 300;
+    margin-bottom: 1.5rem; 
+}
 
 .blog-intro {
-    margin-top: 2rem;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.blog-intro p {
+    margin: 1rem auto 0 auto;
     font-size: 1.1rem;
-    line-height: 1.7;
     color: #e0e0e0;
-    margin-bottom: 0;
+    line-height: 1.7;
+    text-align: center;
 }
 
-/* Blog Section */
-.blog-section { /* This class is used on blog.html for the main posts area */
+/* Blog Posts Section */
+.blog-section { /* This is the <section id="blog-posts" class="blog-section services"> */
     padding: 80px 0;
-    background-color: var(--dark-gray);
+    background-color: var(--dark-gray); /* Consistent with .services from styles.css */
+}
+
+.blog-section .section-title {
+    margin-bottom: 3rem;
 }
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Same as portfolio */
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -43,22 +53,22 @@
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     background: var(--black);
-    border: 2px solid var(--primary-red);
+    border: 2px solid var(--primary-red); /* Matches portfolio-card */
 }
 
 .blog-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
-    border-color: var(--muted-gold);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3); /* Matches portfolio-card hover */
+    border-color: var(--muted-gold); /* Matches portfolio-card hover */
 }
 
-.blog-image {
+.blog-image { /* Container for image and overlay */
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio, same as portfolio */
     overflow: hidden;
-    background-color: var(--dark-gray);
+    background-color: var(--dark-gray); /* Placeholder background */
 }
 
 .blog-image img {
@@ -68,74 +78,78 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Same as portfolio */
 }
 
 .blog-card:hover .blog-image img {
-    transform: scale(1.08);
+    transform: scale(1.08); /* Same as portfolio */
 }
 
-.blog-overlay {
+.blog-overlay { /* Similar to portfolio-overlay */
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,1) 100%);
-    padding: 1.5rem;
-    height: auto;
-    min-height: 120px;
+    padding: 1rem;
+    height: auto; /* Adjust height as needed, or min-height */
+    min-height: 100px; /* Example min-height */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     transition: background 0.3s ease;
 }
-
 .blog-card:hover .blog-overlay {
     background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,1) 100%);
 }
 
-.blog-info {
+
+.blog-info { /* Container for text and "Read More" button inside overlay */
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    flex-direction: column; /* Stack text and button */
+    justify-content: space-between; /* Pushes button to bottom if overlay has enough height */
+    height: 100%; /* Make info take full height of overlay for better button positioning */
 }
 
 .blog-text {
-    flex: 1;
-    margin-right: 0.5rem;
+    flex-grow: 1; /* Allows text to take available space */
 }
 
 .blog-info h3 {
     color: var(--muted-gold);
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+    font-size: 1.1rem; /* Slightly larger than portfolio for blog title */
+    margin-bottom: 0.25rem;
     line-height: 1.3;
 }
 
 .blog-date {
-    color: #888;
     font-size: 0.8rem;
+    color: #aaa;
     margin-bottom: 0.5rem;
     display: block;
-    font-style: italic;
 }
 
 .blog-excerpt {
     color: #ccc;
     font-size: 0.85rem;
-    margin-bottom: 0;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    line-height: 1.5;
+    margin-bottom: 0.75rem; /* Space before "Read More" */
+    /* Limit excerpt lines if desired, e.g., with -webkit-line-clamp */
     overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show 2 lines of excerpt */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+
 }
 
-.blog-card .view-details { /* Re-using .view-details style if needed */
+.blog-card .view-details { /* "Read More →" */
     color: var(--muted-gold);
     font-weight: bold;
-    font-size: 0.8rem;
-    white-space: nowrap;
+    font-size: 0.85rem;
+    text-decoration: none;
+    align-self: flex-start; /* Align to the left */
+    margin-top: auto; /* Push to bottom of flex container if using flex on blog-info */
     transition: color 0.3s ease;
 }
 
@@ -143,100 +157,143 @@
     color: var(--gold);
 }
 
-/* Blog Modal Styles (already in styles.css as part of common modal styles) */
-/* .blog-modal, .blog-modal-content, .close-blog-modal, .blog-modal-header, .blog-modal-body */
-/* However, specific content styling within .blog-modal-body can remain here */
 
-.blog-modal-body .blog-meta {
-    display: flex;
-    gap: 1rem;
+/* Blog Modal Styles */
+.blog-modal { /* Overlay styling is in styles.css */
+}
+
+.blog-modal-content { /* Content box styling is in styles.css, max-width override here */
+    max-width: 900px; 
+}
+
+.blog-modal-header { /* Header with image, styling in styles.css, height override here */
+    height: 300px; /* Or adjust as needed */
+    /* background-image and blur effect come from styles.css and JS */
+}
+
+.blog-modal-header img { /* Image inside header, styling in styles.css */
+}
+
+.close-blog-modal { /* Close button styling in styles.css */
+}
+
+.blog-modal-body { /* Padding from common modal styles */
+    color: #ccc;
+    line-height: 1.7;
+}
+
+.blog-meta {
     margin-bottom: 1.5rem;
     font-size: 0.9rem;
+    color: #aaa;
 }
 
-.blog-modal-body .blog-meta .blog-date { /* .blog-date is already styled, this ensures it's applied if needed inside meta */
-    color: #888;
+.blog-meta .blog-date {
+    margin-right: 15px;
+}
+.blog-meta .blog-category {
     font-style: italic;
+    color: var(--light-gold);
 }
 
-.blog-category {
-    background: var(--muted-gold);
-    color: var(--black);
-    padding: 0.2rem 0.6rem;
-    border-radius: 3px;
-    font-weight: 500;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.blog-modal-body h1 { /* This is the main title inside the modal */
-    color: var(--muted-gold);
+.blog-modal-body h1 { /* Main article title in modal */
     font-size: 2.2rem;
-    margin-bottom: 2rem;
+    color: var(--muted-gold);
+    margin-bottom: 1rem;
     line-height: 1.3;
-    text-align: left; /* Override if centered by a more general modal h2 style */
 }
 
 .blog-content {
-    color: #ccc;
-    line-height: 1.8;
-    font-size: 1.05rem;
-    text-align: left;
+    font-size: 1rem;
 }
 
-.blog-content h2 {
-    color: var(--white);
-    font-size: 1.6rem;
+.blog-content h3 { /* Subheadings within blog article */
+    font-size: 1.5rem;
+    color: var(--gold);
     margin-top: 2rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--muted-gold);
-    padding-bottom: 0.5rem;
-}
-
-.blog-content h3 {
-    color: var(--muted-gold);
-    font-size: 1.3rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.8rem;
-}
-
-.blog-content h4 {
-    color: var(--white);
-    font-size: 1.1rem;
-    margin-top: 1.2rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.75rem;
 }
 
 .blog-content p {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.25rem;
 }
-
-.blog-content ul,
-.blog-content ol {
-    margin-bottom: 1.2rem;
-    padding-left: 1.5rem; /* Standard list indent */
+.blog-content ul, .blog-content ol {
+    margin-bottom: 1.25rem;
+    padding-left: 25px;
 }
-.blog-content ul li,
-.blog-content ol li {
+.blog-content li {
     margin-bottom: 0.5rem;
 }
-
 .blog-content strong {
     color: var(--white);
-    font-weight: 600;
+}
+.blog-content a {
+    color: var(--light-gold);
+    text-decoration: underline;
+}
+.blog-content a:hover {
+    color: var(--gold);
 }
 
-.blog-content blockquote {
-    border-left: 4px solid var(--muted-gold);
-    padding-left: 1.5rem;
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: #ddd;
-    background: rgba(212, 175, 55, 0.05); /* Subtle background */
-    padding: 1rem 1.5rem;
-    border-radius: 0 5px 5px 0;
+/* Newsletter Signup Section on Blog Page */
+#blog-newsletter.contact { /* Uses .contact styles from styles.css */
+    padding: 60px 0; /* Slightly less padding if desired */
 }
 
-/* Blog Newsletter Section (already styled by .contact class in styles.css) */
-/* #blog-newsletter.contact {} */
+#blog-newsletter .contact-icon-wrapper .fas.fa-envelope {
+    /* Styles inherited */
+}
+#blog-newsletter .contact-info h2 {
+    /* Styles inherited */
+}
+#blog-newsletter .contact-info p {
+    /* Styles inherited */
+}
+
+#blog-newsletter .newsletter-signup-form {
+    max-width: 500px; /* Center the form a bit more */
+    margin-left: auto;
+    margin-right: auto;
+    /* Other form styles are inherited from .contact-form */
+}
+#blog-newsletter .newsletter-signup-form .form-group {
+    margin-bottom: 1.5rem; /* Add some space below the email input */
+}
+#blog-newsletter .newsletter-signup-form .submit-btn {
+    /* Styles inherited */
+}
+
+
+/* Responsive Adjustments for Blog Page */
+@media (max-width: 768px) {
+    #blog-header.page-header.hero {
+        /* min-height will be 60vh from styles.css mobile rules */
+    }
+    #blog-header .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    #blog-header .hero-content .subtitle {
+        font-size: 1.1rem;
+    }
+    .blog-intro {
+        font-size: 1rem;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr; /* Stack cards on mobile */
+    }
+
+    .blog-modal-body h1 {
+        font-size: 1.8rem;
+    }
+    .blog-content h3 {
+        font-size: 1.3rem;
+    }
+    .blog-content {
+        font-size: 0.95rem;
+    }
+
+    #blog-newsletter.contact {
+        padding: 40px 0;
+    }
+}
