@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const headings = articleBody.querySelectorAll('h2, h3');
     if (headings.length < 2) {
-        // Don't generate a TOC if there are fewer than 2 headings
         return;
     }
 
@@ -21,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     headings.forEach((heading, index) => {
         const level = heading.tagName.toLowerCase() === 'h2' ? '1' : '2';
         const text = heading.textContent;
-        const id = 'toc-heading-' + index;
+        // Create a URL-friendly ID from the heading text
+        const id = text.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
 
         heading.id = id;
 
