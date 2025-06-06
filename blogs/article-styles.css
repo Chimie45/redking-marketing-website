@@ -1,6 +1,6 @@
 /*
  * ARTICLE STYLESHEET
- * Provides formatting for blog article content.
+ * Provides enhanced formatting for blog article content.
  */
 
 /* Main article container for consistent width and spacing */
@@ -16,7 +16,7 @@
 
 /* Table of Contents Styling */
 .toc-container {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(30, 30, 30, 0.7);
     border-left: 4px solid var(--muted-gold);
     padding: 20px 30px;
     margin: 40px 0;
@@ -53,10 +53,10 @@
 }
 
 .toc-container .toc-level-2 {
-    padding-left: 20px;
+    padding-left: 20px; /* Indent sub-headings */
 }
 
-/* Article Heading Styles */
+/* Standout Article Headings */
 .article-body h2, .article-body h3, .article-body h4 {
     font-family: 'Arial', sans-serif;
     font-weight: bold;
@@ -64,7 +64,7 @@
     line-height: 1.3;
     margin-top: 2.5em;
     margin-bottom: 1em;
-    scroll-margin-top: 100px; /* Offset for fixed nav */
+    scroll-margin-top: 100px; /* Offset for fixed nav when jumping to ID */
 }
 
 .article-body h2 {
@@ -81,6 +81,8 @@
 .article-body h4 {
     font-size: 1.3rem;
     color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 
@@ -101,13 +103,14 @@
     border-bottom-color: var(--gold);
 }
 
-/* List Styling */
+/* List Styling with more padding */
 .article-body ul, .article-body ol {
-    padding-left: 25px;
-    margin-bottom: 1.5em;
+    padding-left: 30px;
+    margin: 1.5em 0;
 }
 
 .article-body li {
+    padding-left: 10px;
     margin-bottom: 0.75em;
 }
 
@@ -115,12 +118,13 @@
 .article-body blockquote {
     margin: 2em 0;
     padding: 1.5em 2em;
-    background: rgba(0,0,0,0.2);
+    background: #111; /* Darker background to stand out */
     border-left: 5px solid var(--muted-gold);
     font-style: italic;
     font-size: 1.2rem;
     color: #fff;
     position: relative;
+    border-radius: 8px;
 }
 
 .article-body blockquote p {
@@ -139,9 +143,10 @@
 }
 
 
-/* Image and Figure Styling */
+/* Image and Caption Styling */
 .article-image-container {
     margin: 3em 0;
+    padding: 0;
 }
 
 .article-image-container img {
@@ -154,8 +159,8 @@
 .article-image-container figcaption {
     margin-top: 0.75em;
     text-align: center;
-    font-size: 14px;
-    color: #999;
+    font-size: 15px; /* Smaller text */
+    color: #999; /* Greyer color */
     font-family: 'Arial', sans-serif;
     font-style: italic;
 }
