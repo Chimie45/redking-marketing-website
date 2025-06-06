@@ -30,7 +30,7 @@
     border: 1px solid #333;
     border-radius: 10px;
     overflow: hidden;
-    max-width: 1000px; /* Prevents card from being excessively wide */
+    max-width: 720px; /* CHANGED: Max-width set to 720px */
     margin: 0 auto;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     cursor: pointer;
@@ -234,7 +234,7 @@
 @media (max-width: 992px) {
     .featured-article-card {
         flex-direction: column;
-        max-width: 600px;
+        max-width: 600px; /* Adjusted width for tablets */
     }
     .featured-article-image {
         width: 100%;
@@ -249,6 +249,9 @@
 @media (max-width: 768px) {
     #blog-header.page-header.hero {
         min-height: 40vh;
+    }
+    .featured-article-card {
+        max-width: 100%; /* Full width on mobile */
     }
     .featured-article-section, .latest-articles-section {
         padding: 60px 0;
