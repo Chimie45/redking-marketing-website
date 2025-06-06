@@ -136,7 +136,8 @@
                     <p>Let's discuss how RedKing Marketing can elevate your gaming brand to the next level. With our global expertise and proven track record, we'll create campaigns that turn players into profits.</p>
                     <p>Maximize your impact in Asia with our specialized strategies for Japan and Korea. We also fuel significant growth across North America (US & Canada) and champion your expansion into the vibrant Latin American gaming markets.</p>
                 </div>
-                <form class="contact-form" id="contactFormServicesPage"> <!-- Updated ID for this specific form -->
+                <!-- MODIFICATION: Added data-form-type, updated ID, and feedback div -->
+                <form class="contact-form" id="contactFormServicesPage" data-form-type="contact-services">
                     <div class="form-columns">
                         <div class="form-column-left">
                             <div class="form-group"><label for="name-services">Name *</label><input type="text" id="name-services" name="name" required></div>
@@ -157,6 +158,7 @@
                         </div>
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
+                    <div class="form-submission-feedback" style="display:none;"></div>
                 </form>
             </div>
         </div>
@@ -197,8 +199,11 @@
                 <div class="footer-column footer-newsletter">
                     <h4>Stay Updated</h4>
                     <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-                    <form id="newsletterFormServicesPage" class="newsletter-form"> <!-- Updated ID for this specific form -->
-                        <input type="email" name="email" placeholder="Enter your email" required><button type="submit">Subscribe</button>
+                    <!-- MODIFICATION: Added data-form-type, updated ID, and feedback div -->
+                    <form id="newsletterFormServicesPage" class="newsletter-form" data-form-type="newsletter-footer-services">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                        <div class="form-submission-feedback" style="display:none; font-size: 0.9em; margin-top: 10px;"></div>
                     </form>
                 </div>
             </div>
@@ -299,158 +304,6 @@
     <!-- End Service Modals -->
 
     <script src="scripts.js"></script>
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // Contact Form Handler for Services Page (if different IDs are used)
-        const contactFormServicesPage = document.getElementById('contactFormServicesPage');
-        if (contactFormServicesPage) {
-            // Create or get the feedback div for this form
-            let formMessageDivServices = document.getElementById('form-submission-message-services');
-            if (!formMessageDivServices) {
-                formMessageDivServices = document.createElement('div');
-                formMessageDivServices.id = 'form-submission-message-services';
-                formMessageDivServices.className = 'form-submission-feedback';
-                formMessageDivServices.style.cssText = 'margin-top: 15px; padding: 10px; border-radius: 5px; text-align: center; display: none;';
-                contactFormServicesPage.parentNode.insertBefore(formMessageDivServices, contactFormServicesPage.nextSibling);
-            }
-
-            contactFormServicesPage.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                formMessageDivServices.textContent = '';
-                formMessageDivServices.style.display = 'none';
-                formMessageDivServices.className = 'form-submission-feedback'; 
-
-                const submitButton = this.querySelector('button[type="submit"]');
-                const originalButtonText = submitButton.textContent;
-                submitButton.textContent = 'Sending...';
-                submitButton.disabled = true;
-
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData.entries());
-                data.formType = 'contact-services-page'; // Differentiate from other contact forms if needed
-
-                // Basic validation (can be enhanced)
-                if (!data.name || !data.email || !data.message) {
-                    formMessageDivServices.textContent = 'Please fill in all required fields.';
-                    formMessageDivServices.classList.add('error');
-                    formMessageDivServices.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(data.email)) {
-                    formMessageDivServices.textContent = 'Please enter a valid email address.';
-                    formMessageDivServices.classList.add('error');
-                    formMessageDivServices.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-
-                const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/'; 
-                try {
-                    const response = await fetch(workerUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', },
-                        body: JSON.stringify(data),
-                    });
-                    const result = await response.json();
-                    if (response.ok && result.success) {
-                        formMessageDivServices.textContent = result.message || 'Message sent successfully!';
-                        formMessageDivServices.classList.add('success');
-                        this.reset(); 
-                    } else {
-                        formMessageDivServices.textContent = result.message || `Failed to send message. Server responded with ${response.status}.`;
-                        formMessageDivServices.classList.add('error');
-                    }
-                } catch (error) {
-                    console.error('Error submitting contact form on services page:', error);
-                    formMessageDivServices.textContent = 'An error occurred. Please try again later.';
-                    formMessageDivServices.classList.add('error');
-                } finally {
-                    formMessageDivServices.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                }
-            });
-        }
-
-        // Newsletter Form Handler for Services Page (if different IDs are used)
-        const newsletterFormServicesPage = document.getElementById('newsletterFormServicesPage');
-        if (newsletterFormServicesPage) {
-            let newsletterMessageDivServices = document.getElementById('newsletter-submission-message-services'); // This ID seems duplicated, ensure it's unique for newsletter
-            if(!newsletterMessageDivServices){ // Check if the specific newsletter message div exists
-                newsletterMessageDivServices = document.createElement('div');
-                // Ensure this ID is unique if it's different from the contact form's feedback div
-                newsletterMessageDivServices.id = 'newsletter-feedback-services'; // Example: Unique ID
-                newsletterMessageDivServices.className = 'form-submission-feedback';
-                newsletterMessageDivServices.style.cssText = 'margin-top: 10px; padding: 8px; border-radius: 4px; text-align: center; font-size: 0.9em; display: none;';
-                newsletterFormServicesPage.parentNode.insertBefore(newsletterMessageDivServices, newsletterFormServicesPage.nextSibling);
-            }
-
-
-            newsletterFormServicesPage.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                newsletterMessageDivServices.textContent = '';
-                newsletterMessageDivServices.style.display = 'none';
-                newsletterMessageDivServices.className = 'form-submission-feedback';
-
-                const emailInput = this.querySelector('input[type="email"]');
-                const email = emailInput.value;
-                const submitButton = this.querySelector('button[type="submit"]');
-                const originalButtonText = submitButton.textContent;
-                submitButton.textContent = 'Subscribing...';
-                submitButton.disabled = true;
-
-                if (!email) {
-                    newsletterMessageDivServices.textContent = 'Please enter your email address.';
-                    newsletterMessageDivServices.classList.add('error');
-                    newsletterMessageDivServices.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    newsletterMessageDivServices.textContent = 'Please enter a valid email address.';
-                    newsletterMessageDivServices.classList.add('error');
-                    newsletterMessageDivServices.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                    return;
-                }
-
-                const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
-                const data = { email: email, formType: 'newsletter-services-page' }; 
-                try {
-                    const response = await fetch(workerUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', },
-                        body: JSON.stringify(data),
-                    });
-                    const result = await response.json();
-                    if (response.ok && result.success) {
-                        newsletterMessageDivServices.textContent = result.message || 'Successfully subscribed!';
-                        newsletterMessageDivServices.classList.add('success');
-                        this.reset();
-                    } else {
-                        newsletterMessageDivServices.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
-                        newsletterMessageDivServices.classList.add('error');
-                    }
-                } catch (error) {
-                    console.error('Error submitting newsletter form on services page:', error);
-                    newsletterMessageDivServices.textContent = 'An error occurred. Please try again later.';
-                    newsletterMessageDivServices.classList.add('error');
-                } finally {
-                    newsletterMessageDivServices.style.display = 'block';
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                }
-            });
-        }
-    </script>
+    <!-- MODIFICATION: Removed all inline script tags for form handling and current year -->
 </body>
 </html>
