@@ -83,9 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Display initial blog posts
     loadBlogPosts();
-    
-    // Initialize newsletter form
-    initializeNewsletterForm();
 });
 
 // Display featured blog
@@ -278,69 +275,3 @@ document.addEventListener('keydown', function(event) {
         closeBlogModal();
     }
 });
-
-// Newsletter form handling
-function initializeNewsletterForm() {
-    const blogNewsletterForm = document.getElementById('blogNewsletterForm');
-    if (blogNewsletterForm) {
-        blogNewsletterForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const feedbackDiv = this.querySelector('.form-submission-feedback');
-            feedbackDiv.textContent = '';
-            feedbackDiv.style.display = 'none';
-            feedbackDiv.className = 'form-submission-feedback';
-            
-            const submitButton = this.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
-            submitButton.textContent = 'Subscribing...';
-            submitButton.disabled = true;
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            data.formType = 'blog-newsletter';
-            data.source = 'blog-page';
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                feedbackDiv.textContent = 'Please enter a valid email address.';
-                feedbackDiv.classList.add('error');
-                feedbackDiv.style.display = 'block';
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
-                return;
-            }
-            
-            const workerUrl = 'https://contact-form-handler.thomas-streetman.workers.dev/';
-            
-            try {
-                const response = await fetch(workerUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-                
-                const result = await response.json();
-                
-                if (response.ok && result.success) {
-                    feedbackDiv.textContent = result.message || 'Successfully subscribed to our newsletter!';
-                    feedbackDiv.classList.add('success');
-                    this.reset();
-                } else {
-                    feedbackDiv.textContent = result.message || `Subscription failed. Server responded with ${response.status}.`;
-                    feedbackDiv.classList.add('error');
-                }
-            } catch (error) {
-                console.error('Error submitting blog newsletter form:', error);
-                feedbackDiv.textContent = 'An error occurred. Please try again later.';
-                feedbackDiv.classList.add('error');
-            } finally {
-                feedbackDiv.style.display = 'block';
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
-            }
-        });
-    }
-}
