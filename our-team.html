@@ -135,7 +135,7 @@
     </section>
 
     <!-- Jobs Board Section -->
-    <section id="careers" class="jobs-section"> <!-- Removed 'services' class if background is handled by .jobs-section directly -->
+    <section id="careers" class="jobs-section"> 
         <div class="container">
             <h2 class="section-title">Join Our Kingdom</h2>
             <p class="jobs-intro">We're always looking for passionate and talented individuals to join our quest for marketing domination. Check out our open positions below!</p>
@@ -332,7 +332,8 @@
                 <hr class="job-modal-divider">
 
                 <h3>Directly Apply</h3>
-                <form id="jobApplicationFormMotionDesigner" class="job-application-form" enctype="multipart/form-data">
+                <!-- MODIFICATION: Added data-form-type and ensured feedback div has the correct class -->
+                <form id="jobApplicationFormMotionDesigner" class="job-application-form" data-form-type="job-application-motion-designer" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="jobAppNameMotionDesigner">Full Name *</label>
                         <input type="text" id="jobAppNameMotionDesigner" name="name" required>
@@ -342,18 +343,18 @@
                         <input type="email" id="jobAppEmailMotionDesigner" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="jobAppMessageMotionDesigner">Introduction (Max 300 characters) *</label> <!-- Changed Label -->
+                        <label for="jobAppMessageMotionDesigner">Introduction (Max 300 characters) *</label>
                         <textarea id="jobAppMessageMotionDesigner" name="message" rows="4" maxlength="300" required></textarea>
                         <div id="charCounterMotionDesigner" class="char-counter">300 characters remaining</div>
                     </div>
                     <div class="form-group">
-                        <label for="jobAppResumeMotionDesigner">Attach Resume (PDF, DOC, DOCX - Max 5MB) *</label>
+                        <label for="jobAppResumeMotionDesigner">Attach Resume (PDF, DOC, DOCX, RTF, TXT - Max 5MB) *</label>
                         <input type="file" id="jobAppResumeMotionDesigner" name="resume" accept=".pdf,.doc,.docx,.rtf,.txt" required>
                     </div>
                     <div class="job-submit-cta-wrapper">
                         <button type="submit" class="submit-btn">Submit Application</button>
                     </div>
-                    <div id="jobAppSubmissionMessageMotionDesigner" class="form-submission-feedback" style="display:none;"></div>
+                    <div class="form-submission-feedback" style="display:none;"></div>
                 </form>
             </div>
         </div>
@@ -395,9 +396,11 @@
                 <div class="footer-column footer-newsletter">
                     <h4>Stay Updated</h4>
                     <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-                    <form id="newsletterForm" class="newsletter-form">
+                    <!-- MODIFICATION: Added data-form-type, updated ID, and feedback div -->
+                    <form id="newsletterFormOurTeamPage" class="newsletter-form" data-form-type="newsletter-footer-ourteam">
                         <input type="email" name="email" placeholder="Enter your email" required>
                         <button type="submit">Subscribe</button>
+                        <div class="form-submission-feedback" style="display:none; font-size: 0.9em; margin-top: 10px;"></div>
                     </form>
                 </div>
             </div>
@@ -412,9 +415,6 @@
     </footer>
 
     <script src="scripts.js"></script>
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
+    <!-- MODIFICATION: Removed inline script for currentYear -->
 </body>
 </html>
