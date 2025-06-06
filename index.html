@@ -188,7 +188,8 @@
                     <p>Let's discuss how RedKing Marketing can elevate your gaming brand to the next level. With our global expertise and proven track record, we'll create campaigns that turn players into profits.</p>
                     <p>Maximize your impact in Asia with our specialized strategies for Japan and Korea. We also fuel significant growth across North America (US & Canada) and champion your expansion into the vibrant Latin American gaming markets.</p>
                 </div>
-                <form class="contact-form" id="contactForm">
+                <!-- MODIFICATION: Added data-form-type and feedback div -->
+                <form class="contact-form" id="contactForm" data-form-type="contact">
                     <div class="form-columns">
                         <div class="form-column-left">
                             <div class="form-group"><label for="name">Name *</label><input type="text" id="name" name="name" required></div>
@@ -209,6 +210,7 @@
                         </div>
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
+                    <div class="form-submission-feedback" style="display:none;"></div>
                 </form>
             </div>
         </div>
@@ -248,8 +250,11 @@
                 <div class="footer-column footer-newsletter">
                     <h4>Stay Updated</h4>
                     <p>Subscribe to our newsletter for the latest gaming marketing insights.</p>
-                    <form id="newsletterForm" class="newsletter-form">
-                        <input type="email" name="email" placeholder="Enter your email" required><button type="submit">Subscribe</button>
+                    <!-- MODIFICATION: Added data-form-type and feedback div -->
+                    <form id="newsletterForm" class="newsletter-form" data-form-type="newsletter-footer-index">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                        <div class="form-submission-feedback" style="display:none; font-size: 0.9em; margin-top: 10px;"></div>
                     </form>
                 </div>
             </div>
@@ -348,9 +353,6 @@
         </div>
     </div>
 
-    <!-- Gallery Modals (REMOVED as per request, but their JS functions might still be called if gallery items were not fully removed from JS or other HTML pages) -->
-    <!-- It's good practice to also remove or comment out the corresponding openGalleryModal/closeGalleryModal calls in scripts.js if they are no longer needed -->
-
     <!-- Service Modals (Copied from services.html for homepage functionality) -->
     <div id="serviceModal1" class="service-detail-modal">
         <div class="service-modal-content">
@@ -438,8 +440,6 @@
     </div>
 
     <script src="scripts.js"></script>
-    <script>
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
+    <!-- MODIFICATION: Removed inline script for currentYear as it's handled in scripts.js -->
 </body>
 </html>
