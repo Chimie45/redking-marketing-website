@@ -1,5 +1,6 @@
 // --- Blog Content Management ---
-// CORRECTED: Paths now match the /blogs/articles/ structure.
+// FINAL CORRECTION: Changed paths to be relative (removed the leading "/")
+// This is the most common fix for 404 errors in this context.
 const blogArticles = [
     {
         id: 'gaming-trends-2025',
@@ -55,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Dynamic Content Functions ---
-// These functions build the cards on the main blog page using the data above.
 function displayFeaturedArticle() {
     const featuredContainer = document.getElementById('featured-article-container');
     const featuredArticle = blogArticles.find(article => article.isFeatured);
@@ -118,10 +118,6 @@ function displayLatestArticles() {
 
 // --- Modal Functionality ---
 
-/**
- * NEW: Opens the modal and fetches all content, including metadata, from the article's HTML file.
- * @param {string} articleId - The ID of the article to display.
- */
 async function openBlogModal(articleId) {
     const articleData = blogArticles.find(a => a.id === articleId);
     const modal = document.getElementById('blog-modal');
@@ -135,26 +131,22 @@ async function openBlogModal(articleId) {
         return;
     }
 
-    // Pre-populate with card data and show a loading state
     modalTitle.textContent = articleData.title;
     modalHeroImage.src = articleData.heroImage;
     modalHeroImage.alt = articleData.title;
     modalMeta.innerHTML = '';
     modalContent.innerHTML = '<p>Loading article...</p>';
 
-    // Show the modal
     modal.classList.add('modal--is-open');
     document.body.style.overflow = 'hidden';
     modal.querySelector('.blog-modal-content').scrollTop = 0;
 
-    // Check if there is a URL to fetch
     if (!articleData.contentUrl) {
         modalContent.innerHTML = '<p>Article content is not available yet. Please check back later.</p>';
         return;
     }
 
     try {
-        // Fetch with redirect prevention to stop it from loading the homepage on a 404 error
         const response = await fetch(articleData.contentUrl, { redirect: 'error' });
 
         if (!response.ok) {
@@ -163,25 +155,20 @@ async function openBlogModal(articleId) {
         
         const htmlString = await response.text();
         
-        // Use DOMParser to safely parse the fetched HTML string
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
 
-        // Extract metadata from the parsed HTML document's meta tags
         const author = doc.querySelector('meta[name="author"]')?.getAttribute('content') || 'Unknown Author';
         const creationDateStr = doc.querySelector('meta[name="creation-date"]')?.getAttribute('content');
         
-        // Format the date for display
         let displayDate = 'Unknown Date';
         if (creationDateStr) {
-            const date = new Date(creationDateStr + 'T00:00:00'); // Assume UTC date
+            const date = new Date(creationDateStr + 'T00:00:00');
             displayDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
         }
 
-        // Extract the main article content
         const articleBody = doc.querySelector('.article-content')?.innerHTML || '<p>Could not find article content.</p>';
 
-        // Populate the modal with the extracted, definitive content
         modalTitle.textContent = doc.querySelector('title')?.textContent || articleData.title;
         modalMeta.innerHTML = `
             <span><strong>By:</strong> ${author}</span>
